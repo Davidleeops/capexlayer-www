@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CapexLayer — Industrial Signal Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F8C5G2JQ8Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-F8C5G2JQ8Q');
+</script>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #080e1a;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 48px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    background: rgba(8,14,26,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; }
+  .nav-logo-text { display: flex; flex-direction: column; gap: 4px; }
+  .nav-logo-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    display: flex;
+  }
+  .nav-logo-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 300;
+    color: rgba(201,168,76,0.5);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #8a9bb5;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #c9a84c; }
+
+  /* SECTION DEFAULTS */
+  .section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 24px;
+  }
+  .section-para {
+    font-size: 17px;
+    color: #8a9bb5;
+    max-width: 720px;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 120px 48px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: #ffffff;
+    margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: #8a9bb5;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .hero-ctas { display: flex; justify-content: center; gap: 16px; margin-bottom: 48px; flex-wrap: wrap; }
+  .btn-gold {
+    display: inline-block;
+    padding: 14px 32px;
+    background: #c9a84c;
+    color: #080e1a;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn-gold:hover { opacity: 0.88; }
+  .btn-outline {
+    display: inline-block;
+    padding: 14px 32px;
+    background: transparent;
+    color: #c9a84c;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1.5px solid #c9a84c;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { background: rgba(201,168,76,0.1); }
+  .hero-proof {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #c9a84c;
+    letter-spacing: 0.06em;
+  }
+
+  /* CARDS */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .card {
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 36px 28px;
+  }
+  .card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: #c9a84c;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+  }
+  .card p { font-size: 15px; color: #8a9bb5; line-height: 1.7; }
+
+  /* LIVE PROOF */
+  .proof-section { text-align: center; }
+  .proof-section .section-para { margin: 0 auto 32px; }
+  .proof-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: #c9a84c;
+    letter-spacing: 0.12em;
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+
+  /* API */
+  .api-code {
+    background: #060c18;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 32px 0;
+    overflow-x: auto;
+  }
+  .api-code pre {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #8a9bb5;
+    white-space: pre;
+  }
+  .api-code .key { color: #c9a84c; }
+  .api-code .str { color: #7ec8a0; }
+  .api-code .num { color: #d4a0e0; }
+  .api-code .bool { color: #79b8e8; }
+  .api-code .method { color: #79b8e8; }
+  .api-code .url { color: #ffffff; }
+  .api-code .header { color: #8a9bb5; }
+  .badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: #c9a84c;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    padding: 8px 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* VERTICALS */
+  .verticals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .vtile {
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 8px;
+    padding: 24px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  /* CTA FORM */
+  .cta-section { text-align: center; }
+  .cta-form {
+    max-width: 520px;
+    margin: 40px auto 0;
+    text-align: left;
+  }
+  .cta-form label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    color: #c9a84c;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    margin-top: 20px;
+  }
+  .cta-form label:first-child { margin-top: 0; }
+  .cta-form input,
+  .cta-form select,
+  .cta-form textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: #0c1424;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .cta-form input:focus,
+  .cta-form select:focus,
+  .cta-form textarea:focus {
+    border-color: #c9a84c;
+  }
+  .cta-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23c9a84c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+  .cta-form select option { background: #0c1424; color: #ffffff; }
+  .cta-form textarea { min-height: 100px; resize: vertical; }
+  .cta-form button {
+    margin-top: 28px;
+    width: 100%;
+  }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: #c9a84c;
+    letter-spacing: 0.04em;
+  }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-center {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #8a9bb5;
+  }
+  .footer-right a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #c9a84c;
+    font-weight: 500;
+  }
+  .footer-right a:hover { text-decoration: underline; }
+  .footer-bottom {
+    width: 100%;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #8a9bb5;
+    margin-top: 16px;
+    opacity: 0.6;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .nav { padding: 14px 20px; }
+    .nav-logo-name { font-size: 26px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 13px; }
+    .hero { padding: 80px 20px 60px; }
+    .hero h1 { font-size: 48px; }
+    .hero-sub { font-size: 16px; }
+    .section { padding: 60px 20px; }
+    .section-heading { font-size: 36px; }
+    .cards { grid-template-columns: 1fr; }
+    .verticals-grid { grid-template-columns: 1fr; }
+    .footer { padding: 30px 20px; flex-direction: column; text-align: center; }
+    .hero-proof { font-size: 11px; }
+  }
+  @media (max-width: 375px) {
+    .hero h1 { font-size: 38px; }
+    .section-heading { font-size: 30px; }
+    .nav-logo-name { font-size: 22px; }
+    .nav-logo-sub { font-size: 7px; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+  }
+</style>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_PROJECT_ID_HERE");
+</script>
+<!-- RB2B Company Identification -->
+<script type="text/javascript">
+!function(){var e,t,n;e="RB2B_PIXEL_ID_HERE",
+t=window,n=document,t.__rb2b=t.__rb2b||function(){
+(t.__rb2b.q=t.__rb2b.q||[]).push(arguments)};
+var s=n.createElement("script");s.async=!0;
+s.src="https://s3-us-west-2.amazonaws.com/b2bjsstore/b/"+e+"/rb2b.js.gz";
+var r=n.getElementsByTagName("script")[0];
+r.parentNode.insertBefore(s,r)}();
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <svg width="36" height="36" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="33" stroke="#c9a84c" stroke-width="1.5" opacity="0.88"/>
+      <path d="M 55.56 24.44 A 22 22 0 1 1 24.44 24.44" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+      <circle cx="55.56" cy="24.44" r="2.8" fill="#c9a84c" opacity="0.9"/>
+      <circle cx="40" cy="40" r="11" stroke="#c9a84c" stroke-width="1" opacity="0.65"/>
+      <circle cx="40" cy="40" r="3.5" fill="#c9a84c"/>
+    </svg>
+    <div class="nav-logo-text">
+      <div class="nav-logo-name"><span style="color:#ffffff;">CAPEX</span><span style="color:#c9a84c;">LAYER</span></div>
+      <div class="nav-logo-sub">Industrial Intelligence Platform</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#api">API Access</a>
+    <a href="#cta">Request Integration</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>THE ENGINE BEHIND THE SIGNAL</h1>
+  <p class="hero-sub">CapexLayer is the AI-native data acquisition and signal intelligence platform powering predictions across industrial and construction capital markets. Not a product. The infrastructure.</p>
+  <div class="hero-ctas">
+    <a href="#api" class="btn-gold">Request API Access</a>
+    <a href="https://cranegenius.com/command-center" target="_blank" rel="noopener" class="btn-outline">See It Running</a>
+  </div>
+  <div class="hero-proof">26+ CITIES&ensp;&bull;&ensp;70+ SIGNAL CLASSES&ensp;&bull;&ensp;1,561 SCORED OPPORTUNITIES&ensp;&bull;&ensp;5,400+ VERIFIED CONTACTS</div>
+</section>
+
+<!-- WHAT CAPEXLAYER IS -->
+<section class="section">
+  <h2 class="section-heading">Not a data product. An intelligence engine.</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Signal Acquisition</h3>
+      <p>70+ signals ingested continuously. The full data trail capital projects leave behind &mdash; regulatory filings, financial disclosures, utility queues, labor patterns, procurement notices. Captured before anyone goes to bid.</p>
+    </div>
+    <div class="card">
+      <h3>Predictive Intelligence</h3>
+      <p>AI scoring layer predicts project type, equipment need, and the exact week a vendor window opens. Timing, relevance, and urgency surfaced automatically.</p>
+    </div>
+    <div class="card">
+      <h3>Revenue Execution</h3>
+      <p>Verified contacts, outreach scheduling, and deal intelligence delivered directly. Not a report. It tells you who to call, why they need you right now, and when to show up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE PROOF -->
+<section class="section proof-section">
+  <h2 class="section-heading">CraneGenius. Proven. Running.</h2>
+  <p class="section-para">CraneGenius is the first vertical built on CapexLayer. Signal intelligence for crane and heavy equipment companies across 26+ US cities. Every deal closed trains the platform.</p>
+  <a href="https://cranegenius.com/command-center" target="_blank" rel="noopener" class="btn-gold">View the Live Platform</a>
+  <div class="proof-note">CRANEGENIUS IS CAPEXLAYER VERTICAL ONE</div>
+</section>
+
+<!-- API -->
+<section class="section" id="api">
+  <h2 class="section-heading">Connect your revenue stack.</h2>
+  <p class="section-para">CapexLayer exposes a REST API for signal data, scored opportunities, verified contacts, and predictive output. Built for integration into Salesforce, HubSpot, and any CRM. Pull the signal directly into your pipeline.</p>
+  <div class="api-code">
+    <pre><span class="method">GET</span> <span class="url">/v1/signals/opportunities</span>
+<span class="header">Authorization: Bearer YOUR_API_KEY</span>
+
+{
+  <span class="key">"opportunities"</span>: [{
+    <span class="key">"project_id"</span>: <span class="str">"CHI-2026-04-8821"</span>,
+    <span class="key">"address"</span>: <span class="str">"1842 W Fulton St, Chicago IL"</span>,
+    <span class="key">"project_type"</span>: <span class="str">"industrial_warehouse"</span>,
+    <span class="key">"predicted_crane_class"</span>: <span class="str">"Hydraulic Truck Crane"</span>,
+    <span class="key">"predicted_tonnage"</span>: <span class="str">"80-150 ton"</span>,
+    <span class="key">"crane_window_opens"</span>: <span class="str">"2026-06-14"</span>,
+    <span class="key">"outreach_trigger_date"</span>: <span class="str">"2026-05-24"</span>,
+    <span class="key">"lift_confidence"</span>: <span class="str">"high"</span>,
+    <span class="key">"contact_name"</span>: <span class="str">"Marcus R."</span>,
+    <span class="key">"contact_verified"</span>: <span class="bool">true</span>,
+    <span class="key">"lift_probability_score"</span>: <span class="num">9</span>
+  }],
+  <span class="key">"total"</span>: <span class="num">142</span>,
+  <span class="key">"market"</span>: <span class="str">"chicago"</span>
+}</pre>
+  </div>
+  <div class="badges">
+    <span class="badge">Salesforce</span>
+    <span class="badge">HubSpot</span>
+    <span class="badge">Pipedrive</span>
+    <span class="badge">Custom CRM via REST</span>
+  </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="section">
+  <h2 class="section-heading">Any company selling into capital projects.</h2>
+  <div class="verticals-grid">
+    <div class="vtile">Crane and Heavy Equipment</div>
+    <div class="vtile">Equipment Financing</div>
+    <div class="vtile">Industrial Staffing</div>
+    <div class="vtile">Surety Bond Companies</div>
+    <div class="vtile">Specialty Contractors</div>
+    <div class="vtile">Construction Lenders</div>
+    <div class="vtile">Data Center Hardware Vendors</div>
+    <div class="vtile">Commercial Insurance</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="cta">
+  <h2 class="section-heading">Request API access or CRM integration.</h2>
+  <form class="cta-form" id="ctaForm" action="https://formspree.io/f/mgoldjjb" method="POST">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="company">Company Name</label>
+    <input type="text" id="company" name="company" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="crm">CRM Platform</label>
+    <select id="crm" name="crm" required>
+      <option value="" disabled selected>Select your CRM</option>
+      <option value="Salesforce">Salesforce</option>
+      <option value="HubSpot">HubSpot</option>
+      <option value="Pipedrive">Pipedrive</option>
+      <option value="Custom">Custom</option>
+    </select>
+
+    <label for="usecase">Use Case</label>
+    <textarea id="usecase" name="usecase" placeholder="How would you use signal intelligence?"></textarea>
+
+    <button type="submit" class="btn-gold">Submit Request</button>
+  </form>
+  <div class="form-success" id="formSuccess">Request received. We will be in touch within 24 hours.</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-left">
+    <svg width="28" height="28" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="33" stroke="#c9a84c" stroke-width="1.5" opacity="0.88"/>
+      <path d="M 55.56 24.44 A 22 22 0 1 1 24.44 24.44" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+      <circle cx="55.56" cy="24.44" r="2.8" fill="#c9a84c" opacity="0.9"/>
+      <circle cx="40" cy="40" r="11" stroke="#c9a84c" stroke-width="1" opacity="0.65"/>
+      <circle cx="40" cy="40" r="3.5" fill="#c9a84c"/>
+    </svg>
+  </div>
+  <div class="footer-center">Powered by CapexLayer &mdash; CraneGenius is vertical one</div>
+  <div class="footer-right"><a href="https://cranegenius.com" target="_blank" rel="noopener">cranegenius.com</a></div>
+  <div class="footer-bottom">&copy; 2026 CapexLayer &mdash; Dark 30 Ventures</div>
+</footer>
+
+<script>
+  // Form submission with success message
+  const form = document.getElementById('ctaForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(response) {
+      if (response.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
+    }).catch(function() {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+  });
+</script>
+
+</body>
+</html>
