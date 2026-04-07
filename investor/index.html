@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#080e1a">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<title>CapexLayer | Investor Brief</title>
+<meta name="description" content="CapexLayer is an industrial business intelligence platform. It identifies where major capital is being deployed before procurement begins and delivers that intelligence into enterprise workflows.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080e1a;
+  --bg2: #0d1628;
+  --bg3: #111e35;
+  --gold: #c9a84c;
+  --gold2: #e8c96a;
+  --gold-dim: rgba(201,168,76,0.15);
+  --gold-line: rgba(201,168,76,0.3);
+  --text: #e8e8e8;
+  --muted: #7a8a9a;
+  --border: rgba(255,255,255,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; min-width: 0; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(8,14,26,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+.nav-logo-mark {
+  width: 32px; height: 32px; background: var(--gold); color: var(--bg);
+  font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 1px;
+  display: flex; align-items: center; justify-content: center; border-radius: 4px;
+}
+.nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--gold); }
+.nav-sub { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.nav-links { display: flex; list-style: none; gap: 2rem; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.5px; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { display: flex; gap: 10px; }
+
+.btn {
+  display: inline-block; padding: 10px 20px; border-radius: 4px; font-size: 13px;
+  letter-spacing: 0.5px; text-decoration: none; cursor: pointer;
+  transition: all .2s; border: none;
+}
+.btn-gold { background: var(--gold); color: var(--bg); font-weight: 500; }
+.btn-gold:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold-line); }.btn-outline:hover { background: var(--gold-dim); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+.hero {
+  min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 2rem 80px;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--gold); }
+.hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 96px); letter-spacing: 3px; line-height: 0.95; color: var(--text); margin-bottom: 1.5rem; max-width: 900px; overflow-wrap: break-word; }
+.hero-h1 span { color: var(--gold); }
+.hero-sub { font-size: clamp(16px, 2vw, 20px); color: var(--muted); max-width: 580px; line-height: 1.6; margin-bottom: 2rem; overflow-wrap: break-word; }
+.hero-proof { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 2.5rem; }
+.hero-proof span { color: var(--gold); }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.sec { padding: 80px 0; }
+.sec--alt { background: var(--bg2); }
+.section-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before { content: ''; display: inline-block; width: 16px; height: 1px; background: var(--gold); }
+.section-h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 52px); letter-spacing: 2px; color: var(--text); margin-bottom: 1.5rem; }
+.section-p { color: var(--muted); max-width: 680px; line-height: 1.8; margin-bottom: 1rem; font-size: 15px; overflow-wrap: break-word; }
+
+.signal-map-flow {
+  display: flex; align-items: stretch; gap: 0; margin-top: 2rem; overflow-x: auto;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--bg3);
+}
+.signal-map-node {
+  flex: 1; min-width: 140px; padding: 1.5rem 1.2rem;
+  border-right: 1px solid var(--border);
+}
+.signal-map-node:last-child { border-right: none; }
+.signal-map-node-title { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.signal-map-node-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.signal-map-arrow { display: flex; align-items: center; padding: 0 4px; color: var(--gold); font-size: 18px; flex-shrink: 0; }
+.signal-map-callout {
+  margin-top: 1.5rem; padding: 1.2rem 1.5rem;
+  background: var(--gold-dim); border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0; font-size: 14px; color: var(--text); line-height: 1.6;
+}.signal-map-callout strong { color: var(--gold); display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+
+.card-grid--2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
+.card-grid--3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+.card-grid--4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.5rem; }
+.card {
+  background: var(--bg3); border: 1px solid var(--border); border-top: 2px solid var(--gold);
+  padding: 1.5rem; border-radius: 0 0 4px 4px;
+}
+.card-title { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.card-body { font-size: 13px; color: var(--muted); line-height: 1.6; overflow-wrap: break-word; }
+
+.sector-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 1rem 0; }
+.sector-chip {
+  padding: 6px 14px; background: var(--bg3); border: 1px solid var(--gold-line); color: var(--gold);
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; border-radius: 3px;
+}
+
+.outcome-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+.outcome-card {
+  background: linear-gradient(165deg, rgba(201,168,76,0.08) 0%, var(--bg2) 50%);
+  border: 1px solid var(--gold-line); border-top: 4px solid var(--gold);
+  padding: 2rem 1.5rem; text-align: center; border-radius: 0 4px 4px 0;
+}
+.outcome-card-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.outcome-card-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--gold); line-height: 1.1; }
+.outcome-card-desc { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.outcome-cred { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 1.5rem; max-width: 520px; }
+
+.acquirer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+.acquirer-card { background: var(--bg3); border: 1px solid var(--border); padding: 1.5rem; border-radius: 4px; }
+.acquirer-card-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.acquirer-card ul { list-style: none; }
+.acquirer-card ul li { font-size: 13px; color: var(--muted); padding: 4px 0; border-bottom: 1px solid var(--border); }
+.acquirer-card ul li:last-child { border-bottom: none; }
+
+.cta-section { padding: 100px 0; text-align: center; }
+.cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 52px); letter-spacing: 2px; margin-bottom: 1rem; }
+.cta-section p { color: var(--muted); margin-bottom: 2rem; font-size: 15px; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+footer {
+  padding: 2rem; text-align: center; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace;
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+@media (max-width: 1024px) {
+  .container { padding: 0 1.5rem; }
+  .hero { padding: 100px 1.5rem 60px; min-height: auto; }
+  .hero-h1 { font-size: clamp(40px, 7vw, 72px); }
+  .sec { padding: 60px 0; }
+  .section-h2 { font-size: clamp(28px, 4.5vw, 44px); }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 1.25rem; }
+  nav { padding: 0.75rem 1.25rem; flex-wrap: wrap; gap: 0.5rem; }
+  .nav-logo-text { font-size: 16px; }
+  .nav-logo-mark { width: 28px; height: 28px; font-size: 12px; }
+  .hero { padding: 80px 1.25rem 56px; }
+  .hero-h1 { font-size: clamp(36px, 9vw, 52px); line-height: 1.05; letter-spacing: 0.5px; margin-bottom: 1.25rem; }
+  .hero-sub { font-size: 15px; line-height: 1.65; margin-bottom: 1.75rem; }
+  .hero-proof { margin-bottom: 2rem; line-height: 1.5; }
+  .hero-ctas { gap: 12px; }
+  .btn { padding: 12px 20px; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
+  .sec { padding: 3.25rem 0; }
+  .section-eyebrow { margin-bottom: 0.5rem; }
+  .section-h2 { font-size: clamp(24px, 5.5vw, 36px); line-height: 1.12; margin-bottom: 1.25rem; }
+  .section-p { margin-bottom: 1rem; line-height: 1.7; }
+  .signal-map-flow { flex-direction: column; align-items: stretch; overflow-x: visible; }
+  .signal-map-node { min-width: 0; border-right: none; border-bottom: 1px solid var(--border); padding: 1.25rem 1.2rem; }
+  .signal-map-node:last-child { border-bottom: none; }
+  .signal-map-arrow { transform: rotate(90deg); padding: 10px 0; align-self: center; }
+  .signal-map-callout { margin-top: 1.25rem; line-height: 1.6; }
+  .card-grid--2, .card-grid--3, .card-grid--4 { grid-template-columns: 1fr; gap: 1rem; }
+  .card { padding: 1.5rem 1.25rem; }
+  .card-title { margin-bottom: 0.5rem; letter-spacing: 1.5px; }
+  .card-body { line-height: 1.65; }
+  .outcome-cards { grid-template-columns: 1fr; gap: 1rem; }
+  .outcome-card { padding: 1.75rem 1.25rem; }
+  .outcome-card-label { margin-bottom: 0.5rem; letter-spacing: 1.5px; }
+  .outcome-card-value { font-size: 26px; letter-spacing: 1px; line-height: 1.1; }
+  .outcome-card-desc { margin-top: 0.5rem; line-height: 1.55; }
+  .acquirer-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .acquirer-card { padding: 1.25rem; }
+  .cta-section { padding: 4rem 0 4.5rem; }
+  .cta-section h2 { font-size: clamp(26px, 5vw, 40px); line-height: 1.15; margin-bottom: 1rem; }
+  .cta-section p { margin-bottom: 1.75rem; line-height: 1.6; }
+  .cta-btns { flex-direction: column; align-items: stretch; gap: 12px; }
+  .cta-btns .btn { width: 100%; min-height: 48px; }
+  nav .nav-links { display: none; }
+  footer { padding: 1.5rem 1.25rem; font-size: 11px; line-height: 1.55; }
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 1rem; }
+  nav { padding: 0.75rem 1rem; }
+  .hero { padding: 56px 1rem 48px; }
+  .hero-h1 { font-size: 32px; line-height: 1.06; margin-bottom: 1.25rem; }
+  .hero-sub { font-size: 14px; line-height: 1.65; margin-bottom: 1.5rem; }
+  .hero-proof { font-size: 12px; margin-bottom: 1.75rem; line-height: 1.5; }
+  .hero-ctas { gap: 12px; }
+  .sec { padding: 2.75rem 0; }
+  .section-h2 { font-size: 22px; line-height: 1.15; margin-bottom: 1rem; }
+  .section-p { font-size: 14px; margin-bottom: 0.875rem; line-height: 1.65; }
+  .section-eyebrow { font-size: 9px; margin-bottom: 0.4rem; }
+  .signal-map-node { padding: 1.1rem 1rem; }
+  .signal-map-callout { padding: 1.1rem 1.2rem; font-size: 13px; line-height: 1.6; margin-top: 1rem; }
+  .card { padding: 1.35rem 1rem; }
+  .card-body { font-size: 13px; }
+  .outcome-cards { gap: 0.875rem; }
+  .outcome-card { padding: 1.5rem 1.1rem; }
+  .outcome-card-value { font-size: 24px; letter-spacing: 0.5px; }
+  .cta-section { padding: 3.5rem 0 4rem; }
+  .cta-section h2 { font-size: 24px; line-height: 1.2; margin-bottom: 0.875rem; }
+  .cta-section p { margin-bottom: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 1rem; }
+  nav { padding: 0.625rem 1rem; }
+  .nav-logo-text { font-size: 14px; letter-spacing: 1px; }
+  .nav-sub { font-size: 9px; }
+  .hero { padding: 44px 1rem 40px; }
+  .hero-h1 { font-size: 28px; line-height: 1.08; margin-bottom: 1rem; }
+  .hero-sub { font-size: 13px; line-height: 1.6; margin-bottom: 1.35rem; }
+  .hero-proof { margin-bottom: 1.5rem; }
+  .btn { padding: 14px 20px; min-height: 48px; font-size: 14px; }
+  .sec { padding: 2.25rem 0; }
+  .section-h2 { font-size: 20px; line-height: 1.18; margin-bottom: 0.875rem; }
+  .section-p { margin-bottom: 0.75rem; }
+  .card { padding: 1.25rem 1rem; }
+  .card-title { font-size: 10px; }
+  .card-body { font-size: 12px; line-height: 1.6; }
+  .outcome-card { padding: 1.35rem 1rem; }
+  .outcome-card-value { font-size: 22px; letter-spacing: 0.5px; }
+  .outcome-card-desc { font-size: 11px; }
+  .cta-section { padding: 3rem 0 3.5rem; }
+  .cta-section h2 { font-size: 20px; line-height: 1.22; margin-bottom: 0.75rem; }
+  .cta-section p { font-size: 14px; margin-bottom: 1.25rem; }
+  footer { padding: 1.25rem 1rem; font-size: 10px; line-height: 1.5; }
+}
+</style>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_PROJECT_ID_HERE");
+</script>
+<!-- RB2B Company Identification -->
+<script type="text/javascript">
+!function(){var e,t,n;e="RB2B_PIXEL_ID_HERE",
+t=window,n=document,t.__rb2b=t.__rb2b||function(){
+(t.__rb2b.q=t.__rb2b.q||[]).push(arguments)};
+var s=n.createElement("script");s.async=!0;
+s.src="https://s3-us-west-2.amazonaws.com/b2bjsstore/b/"+e+"/rb2b.js.gz";
+var r=n.getElementsByTagName("script")[0];
+r.parentNode.insertBefore(s,r)}();
+</script>
+</head>
+<body>
+<nav>
+  <a href="/capex-layer/" class="nav-logo" style="text-decoration:none;"><div style="display:flex;align-items:center;gap:14px;">
+  <svg width="36" height="36" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="33" stroke="#c9a84c" stroke-width="1.5" opacity="0.88"/>
+  <path d="M 55.56 24.44 A 22 22 0 1 1 24.44 24.44" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+  <circle cx="55.56" cy="24.44" r="2.8" fill="#c9a84c" opacity="0.9"/>
+  <circle cx="40" cy="40" r="11" stroke="#c9a84c" stroke-width="1" opacity="0.65"/>
+  <circle cx="40" cy="40" r="3.5" fill="#c9a84c"/>
+</svg>
+  <div style="display:flex;flex-direction:column;gap:4px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:0.05em;line-height:1;display:flex;">
+      <span style="color:#ffffff;">CAPEX</span><span style="color:#c9a84c;">LAYER</span>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:8.5px;font-weight:300;color:rgba(201,168,76,0.5);letter-spacing:0.22em;text-transform:uppercase;">
+      Industrial Intelligence Platform
+    </div>
+  </div>
+</div></a>
+  <ul class="nav-links">
+    <li><a href="/capex-layer/">Platform</a></li>
+    <li><a href="#signal-map">How it works</a></li>
+    <li><a href="#outcome">Outcome Ladder</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#cta" class="btn btn-gold">Schedule Investor Call &rarr;</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">CapexLayer | Investor Brief</div>
+    <h1 class="hero-h1">The Intelligence Layer for <span>Global Capital Deployment</span></h1>
+    <p class="hero-sub">
+      Enterprise teams discover capital projects after procurement begins, when the bid is live and every competitor is already in the room. CapexLayer moves them upstream. We detect early project signals, map the decision structure behind each one, and deliver that intelligence into the system of record (Salesforce, HubSpot, or any CRM/workflow).
+    </p>
+    <p class="hero-proof">Vertical proof case: <span>CraneGenius</span> , permit-to-lead pipeline, live in production &rarr; CapexLayer scales the model across every capital-intensive vertical.</p>
+    <div class="hero-ctas">
+      <a href="#cta" class="btn btn-gold">Schedule Investor Call</a>
+      <a href="https://cranegenius.com/capex-layer/#demo" class="btn btn-outline">View Live Demo</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="signal-map">
+  <div class="container">
+    <div class="section-eyebrow">Platform at a glance</div>
+    <h2 class="section-h2">Capital Signal Map</h2>
+    <div class="signal-map-flow">
+      <div class="signal-map-node">
+        <div class="signal-map-node-title">Signal Sources</div>
+        <div class="signal-map-node-desc">Permits, EDGAR filings, utility queues, EPA notices, procurement data</div>
+      </div>
+      <div class="signal-map-arrow">&rarr;</div>
+      <div class="signal-map-node">
+        <div class="signal-map-node-title">Signal Engine</div>
+        <div class="signal-map-node-desc">Normalizes, scores, and ranks early CapEx signals by project stage and scale</div>
+      </div>
+      <div class="signal-map-arrow">&rarr;</div>
+      <div class="signal-map-node">
+        <div class="signal-map-node-title">Decision Intelligence</div>
+        <div class="signal-map-node-desc">Maps the sponsors, developers, and budget owners behind each project</div>
+      </div>
+      <div class="signal-map-arrow">&rarr;</div>
+      <div class="signal-map-node">
+        <div class="signal-map-node-title">Money Flow Graph</div>
+        <div class="signal-map-node-desc">Traces capital from fund &rarr; holdco &rarr; opco &rarr; project &rarr; vendor</div>
+      </div>
+      <div class="signal-map-arrow">&rarr;</div>
+      <div class="signal-map-node">
+        <div class="signal-map-node-title">Simulation Layer</div>
+        <div class="signal-map-node-desc">Models procurement timing, supply constraints, and scenario outcomes</div>
+      </div>
+      <div class="signal-map-arrow">&rarr;</div>
+      <div class="signal-map-node">
+        <div class="signal-map-node-title">Enterprise Workflow</div>
+        <div class="signal-map-node-desc">Intelligence delivered into CRM/workflow before competitors see the RFP</div>
+      </div>
+    </div>
+    <p class="section-p" style="margin-top:1.5rem;">
+      Fragmented signals become a unified intelligence layer. CapexLayer tells enterprise sales teams where capital is moving, who controls it, and when to act, before procurement is visible to anyone else.
+    </p>
+    <div class="signal-map-callout">
+      <strong>The core insight</strong>
+      Most companies see a project when the bid goes live. CapexLayer surfaces it when the capital starts moving, months earlier.
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="problem">
+  <div class="container">
+    <div class="section-eyebrow">The Problem</div>
+    <h2 class="section-h2">Enterprise Sales Enters Too Late</h2>
+    <p class="section-p">
+      Major capital projects generate detectable signals months before procurement begins. Those signals exist today, scattered across permits, regulatory filings, infrastructure queues, corporate disclosures, and government procurement databases.
+    </p>
+    <p class="section-p">
+      No one is connecting them. Enterprise vendors discover opportunities after the RFP drops, when competition is already at its peak and relationships are locked. The information exists. The infrastructure to act on it does not.
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="solution">
+  <div class="container">
+    <div class="section-eyebrow">The Solution</div>
+    <h2 class="section-h2">Industrial Business Intelligence</h2>
+    <p class="section-p">
+      CapexLayer is a signal intelligence platform purpose-built for capital project markets. It monitors 52 data sources continuously, detects early project signals, and maps the full decision structure behind each one: who the sponsor is, who controls the budget, and when the project will move into execution.
+    </p>
+    <p class="section-p">
+      That intelligence is delivered into the buyer's workflow, formatted as an actionable account brief, not a raw data dump. Teams enter conversations armed with context their competitors do not have.
+    </p>
+    <p class="section-p">
+      This is a new category: <strong style="color:var(--gold);">industrial business intelligence for capital deployment.</strong> It sits upstream of construction platforms, enterprise workflow systems, and industrial analytics tools. It feeds them all.
+    </p>
+  </div>
+</section>
+<section class="sec sec--alt" id="vision">
+  <div class="container">
+    <div class="section-eyebrow">Long-term vision</div>
+    <h2 class="section-h2">The Intelligence Network for Capital Deployment</h2>
+    <p class="section-p">
+      Infrastructure, energy, data centers, advanced manufacturing, and industrial construction collectively represent tens of trillions in annual global capital spending. Every dollar of that capital leaves a signal trail before it moves.
+    </p>
+    <p class="section-p">
+      CapexLayer's long-term goal is to be the canonical intelligence layer for that capital, the system of record for where industrial money is going, who controls it, and what it will fund. The vertical wedge is cranes and construction. The platform ceiling is the global industrial economy.
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="product">
+  <div class="container">
+    <div class="section-eyebrow">Build</div>
+    <h2 class="section-h2">Product Architecture</h2>
+    <div class="card-grid--4">
+      <div class="card">
+        <div class="card-title">Signal Engine</div>
+        <div class="card-body">Continuously monitors 52 data sources, permits, regulatory filings, EDGAR disclosures, utility queues, and procurement notices, and scores each signal by project stage and capital scale.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Decision Intelligence</div>
+        <div class="card-body">Identifies the investors, developers, and executives who control each project. Maps org structure, budget authority, and procurement timeline into a single account profile.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Money Flow Graph</div>
+        <div class="card-body">Traces how capital moves from fund to developer to general contractor to vendor. Reveals who gets paid, when, and what relationships to prioritize first.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Simulation Layer</div>
+        <div class="card-body">Models how projects evolve across procurement cycles and supply chain constraints. Surfaces the optimal entry point for each enterprise account.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="market">
+  <div class="container">
+    <div class="section-eyebrow">TAM</div>
+    <h2 class="section-h2">Market Opportunity</h2>
+    <p class="section-p">
+      CapexLayer's immediate market is the enterprise sales teams that sell into capital-intensive industries. Any company whose customers spend capital on projects is a potential subscriber.
+    </p>
+    <div class="sector-chips">
+      <span class="sector-chip">Data Centers</span>
+      <span class="sector-chip">Infrastructure</span>
+      <span class="sector-chip">Energy &amp; Utilities</span>
+      <span class="sector-chip">Industrial Construction</span>
+      <span class="sector-chip">Advanced Manufacturing</span>
+    </div>
+    <p class="section-p">
+      The platform operates upstream of the entire capital project ecosystem. It is not a construction tool or a CRM. It is the layer that tells enterprise vendors where to look before anyone else knows a project exists. The serviceable market includes equipment vendors, staffing firms, specialty contractors, project finance institutions, surety bond companies, and industrial software providers, each of which pays to acquire project-level intelligence today through slower, more expensive means.
+    </p>
+  </div>
+</section>
+<section class="sec" id="revenue">
+  <div class="container">
+    <div class="section-eyebrow">Revenue</div>
+    <h2 class="section-h2">Business Model</h2>
+    <div class="card-grid--3">
+      <div class="card">
+        <div class="card-title">Signal + Intelligence Retainer</div>
+        <div class="card-body">$2,500&ndash;$5,000/month. CapexLayer delivers a continuous feed of scored signals, money flow maps, and executive alignment briefs. Done-for-you. No internal data team required.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Signal + RevOps</div>
+        <div class="card-body">$5,000&ndash;$10,000/month. Includes Salesforce org management, sequence installation, and pipeline hygiene. CapexLayer functions as a fractional revenue operations partner.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Full GTM Orchestration</div>
+        <div class="card-body">$10,000&ndash;$25,000/month. Full-stack engagement: signal intelligence, Salesforce management, outbound execution, and pipeline reporting. One vendor for the entire top-of-funnel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--alt" id="outcome">
+  <div class="container">
+    <div class="section-eyebrow">Outcomes</div>
+    <h2 class="section-h2">Outcome Ladder</h2>
+    <div class="outcome-cards">
+      <div class="outcome-card">
+        <div class="outcome-card-label">Stage 1 , Vertical Platform</div>
+        <div class="outcome-card-value">$100M &ndash; $300M</div>
+        <div class="outcome-card-desc">Dominant intelligence layer for construction-adjacent industrial verticals. Early enterprise subscriber base. Potential exit to construction-tech or industrial software incumbents.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-label">Stage 2 , Category Platform</div>
+        <div class="outcome-card-value">$500M &ndash; $1B+</div>
+        <div class="outcome-card-desc">Multi-vertical expansion across energy, data centers, and infrastructure. Potential distribution via partner ecosystems and marketplace channels.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-card-label">Stage 3 , Global Intelligence Network</div>
+        <div class="outcome-card-value">$1B &ndash; $10B+</div>
+        <div class="outcome-card-desc">Canonical intelligence layer for global capital deployment. Network effects across signals, accounts, and buyers create a defensible data moat at platform scale.</div>
+      </div>
+    </div>
+    <p class="outcome-cred">The wedge is narrow enough to win quickly. The category is large enough to matter to a top-tier fund at any stage.</p>
+  </div>
+</section>
+<section class="sec" id="acquirers">
+  <div class="container">
+    <div class="section-eyebrow">Strategic fit</div>
+    <h2 class="section-h2">Strategic Acquirers</h2>
+    <div class="acquirer-grid">
+      <div class="acquirer-card">
+        <div class="acquirer-card-title">Enterprise Workflow</div>
+        <ul>
+          <li>Salesforce</li>
+          <li>ServiceNow</li>
+        </ul>
+      </div>
+      <div class="acquirer-card">
+        <div class="acquirer-card-title">Construction Technology</div>
+        <ul>
+          <li>Procore</li>
+          <li>Trimble</li>
+          <li>Autodesk</li>
+        </ul>
+      </div>
+      <div class="acquirer-card">
+        <div class="acquirer-card-title">Industrial Intelligence &amp; PE</div>
+        <ul>
+          <li>Palantir</li>
+          <li>Industrial analytics platforms</li>
+          <li>Infrastructure PE funds</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="cta">
+  <div class="container">
+    <h2>The next category in industrial intelligence<br>starts upstream.</h2>
+    <p>CapexLayer is building the signal, graph, and simulation layer for capital deployment.<br>CraneGenius is the proof case. The platform is ready to scale.</p>
+    <div class="cta-btns">
+      <a href="mailto:david@cranegenius.com?subject=CapexLayer%20Investor%20Call" class="btn btn-gold">Schedule Investor Call</a>
+      <a href="mailto:david@cranegenius.com" class="btn btn-outline">Email David Directly</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  CapexLayer | by CraneGenius / Dark 30 Ventures | <a href="https://cranegenius.com/">cranegenius.com</a><br>
+  David Lee, PMP&reg; | david@cranegenius.com
+</footer>
+
+</body>
+</html>
