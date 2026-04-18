@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CapEx Layer. See which accounts in your territory are about to buy.</title>
+  <meta name="description" content="CapEx Layer surfaces capital project signals 14 to 45 days before RFPs go public, natively in your Salesforce map." />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <nav class="top">
+    <div class="container">
+      <div class="brand">CapEx<span class="dot">.</span>Layer</div>
+      <div><a href="#book">Book a walkthrough</a></div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1>See which accounts in your territory are about to buy</h1>
+      <p class="subhead">
+        CapEx Layer surfaces capital project signals 14 to 45 days before RFPs go public, natively in your Salesforce map.
+      </p>
+      <div class="cta-row">
+        <a href="#book" class="btn btn-primary">Book a 20-minute territory walkthrough</a>
+      </div>
+      <p class="cta-caption">
+        We pull your territory live on the call. Bring one account you want to see.
+      </p>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="container">
+      <div class="proof-row">
+        <div class="proof-item">
+          <span class="label">Timing</span>
+          14 to 45 days before RFP
+        </div>
+        <div class="proof-item">
+          <span class="label">Surface</span>
+          Native to Salesforce Maps
+        </div>
+        <div class="proof-item">
+          <span class="label">Adoption</span>
+          No rep retraining required
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="how-cards">
+        <div class="card">
+          <h3>Signal sources</h3>
+          <p>Permits, pre-bid meetings, SEC filings, construction loans, utility approvals. Real sources, public data, no guessing.</p>
+        </div>
+        <div class="card">
+          <h3>Salesforce-native</h3>
+          <p>Signals appear inside your existing Salesforce Maps as an overlay. Your reps see them in the tool they already use.</p>
+        </div>
+        <div class="card">
+          <h3>Territory-routed</h3>
+          <p>Each account routes to the rep who owns the territory. Built on Enterprise Territory Management standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking" id="book">
+    <div class="container">
+      <h2>Book a 20-minute territory walkthrough</h2>
+      <p class="lead">
+        We'll pull your territory live and walk through what's active right now. Bring one account you want to see.
+      </p>
+      <form class="booking-form" id="booking-form" method="post" action="">
+        <div>
+          <label for="first_name">First name</label>
+          <input type="text" id="first_name" name="first_name" required autocomplete="given-name" />
+        </div>
+        <div>
+          <label for="last_name">Last name</label>
+          <input type="text" id="last_name" name="last_name" required autocomplete="family-name" />
+        </div>
+        <div>
+          <label for="work_email">Work email</label>
+          <input type="email" id="work_email" name="work_email" required autocomplete="email" />
+        </div>
+        <div>
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" required autocomplete="organization" />
+        </div>
+        <div>
+          <label for="title">Title</label>
+          <select id="title" name="title" required>
+            <option value="">Select</option>
+            <option>VP Sales</option>
+            <option>Director Sales</option>
+            <option>Regional Director</option>
+            <option>Head of Sales</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="territory">Territory</label>
+          <input type="text" id="territory" name="territory" required placeholder="Texas, DFW, Midwest, etc." />
+        </div>
+        <div class="full">
+          <label for="one_account">One account you'd want us to show you intelligence on</label>
+          <input type="text" id="one_account" name="one_account" required placeholder="Account name" />
+        </div>
+        <div class="full submit-row">
+          <button type="submit" class="btn btn-primary">Book my call</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div>CapEx Layer. (c) 2026.</div>
+      <div><a href="mailto:david@capexlayer.com">david@capexlayer.com</a></div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var form = document.getElementById('booking-form');
+      if (!form) return;
+
+      var FREE_DOMAINS = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'icloud.com', 'proton.me', 'protonmail.com'];
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var email = (document.getElementById('work_email').value || '').toLowerCase().trim();
+        var domain = email.split('@')[1] || '';
+        if (FREE_DOMAINS.indexOf(domain) !== -1) {
+          alert('Please use your work email address.');
+          return;
+        }
+
+        var endpoint = form.getAttribute('action');
+        if (!endpoint) {
+          window.location.href = 'thanks.html?email=' + encodeURIComponent(email);
+          return;
+        }
+
+        var fd = new FormData(form);
+        fetch(endpoint, { method: 'POST', body: fd })
+          .then(function () {
+            window.location.href = 'thanks.html?email=' + encodeURIComponent(email);
+          })
+          .catch(function () {
+            window.location.href = 'thanks.html?email=' + encodeURIComponent(email);
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thanks. CapEx Layer.</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <nav class="top">
+    <div class="container">
+      <div class="brand">CapEx<span class="dot">.</span>Layer</div>
+      <div><a href="index.html">Home</a></div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Thanks. You're on.</h1>
+      <p class="subhead" id="confirm-line">
+        David will send a calendar link to your inbox within the next few hours. If you don't see it, check spam.
+      </p>
+      <p class="cta-caption">
+        If you want to move faster, reply to his email with a time that works.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div>CapEx Layer. (c) 2026.</div>
+      <div><a href="mailto:david@capexlayer.com">david@capexlayer.com</a></div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var email = params.get('email');
+      if (email) {
+        var line = document.getElementById('confirm-line');
+        line.textContent = 'David will send a calendar link to ' + email + ' within the next few hours. If you don\u2019t see it, check spam.';
+      }
+    })();
+  </script>
+</body>
+</html>
