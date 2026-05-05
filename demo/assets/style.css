@@ -296,6 +296,44 @@ section.pipeline-stats h2 {
   line-height: 1.5;
 }
 
+section.faq {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+section.faq h2 {
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  margin: 0 0 32px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 16px;
+  max-width: 880px;
+}
+
+.faq-item {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+
+.faq-item h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.faq-item p {
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
 section.how {
   padding: 80px 0;
   border-bottom: 1px solid var(--border);
@@ -414,7 +452,7 @@ footer .container {
 @media (max-width: 760px) {
   h1 { font-size: 36px; }
   section.hero { padding: 56px 0 40px; }
-  section.how, section.booking, section.show-section, section.pipeline-stats { padding: 56px 0; }
+  section.how, section.booking, section.show-section, section.pipeline-stats, section.faq { padding: 56px 0; }
   .proof-row, .how-cards { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: 1fr; }
   form.booking-form { grid-template-columns: 1fr; }

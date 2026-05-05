@@ -23,7 +23,7 @@
         Your reps see capital projects 14 to 45 days before competitors do, inside the CRM or dashboard they already open every morning.
       </p>
       <div class="cta-row">
-        <a href="#book" class="btn btn-primary">Book a 20 minute territory walkthrough</a>
+        <a href="#book" class="btn btn-primary">Book a 15 minute territory walkthrough</a>
       </div>
       <p class="cta-caption">
         We pull your territory live on the call. Bring one account you want to see.
@@ -109,6 +109,38 @@
     </div>
   </section>
 
+  <section class="faq">
+    <div class="container">
+      <h2>Common questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>How is this different from Dodge or ConstructConnect?</h3>
+          <p>Dodge and ConstructConnect surface projects after they hit a public bid board. We surface the same projects 14 to 45 days earlier, when the SEC filing, the permit, the capex disclosure, or the prebid attendance list first appears. Same projects, weeks of head start.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How fresh is the data?</h3>
+          <p>Most sources refresh nightly. SEC filings and FERC certificates land in the pipeline within hours of publication. Building permits and state DOT capital plans refresh daily. Every signal includes a source URL so your reps can verify directly with the issuing agency.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What does it cost?</h3>
+          <p>Pricing depends on territory size and integration depth. Cohort starts at $2,500 per month per territory, month to month after a 90 day onboarding window. We share the full sheet on the call so you can see exactly what your team gets.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What CRMs do you support?</h3>
+          <p>Salesforce (including Salesforce Maps and Enterprise Territory Management), HubSpot, Outreach, and Pipedrive. If you are not on one of those, your reps work directly in our standalone dashboard. Either way, no new tool to learn.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is this just permit data?</h3>
+          <p>No. Permits are one of 24 signal types we track. The pipeline also pulls SEC capex disclosures, capital improvement plans, FERC certificates, USAspending IIJA awards, prebid attendance lists, oversize and overweight load permits, FAA obstruction notices, and more. Permits alone do not give you the full picture.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What happens after the walkthrough?</h3>
+          <p>If your team is a fit, we onboard your territory in 7 to 10 days. If we are not the right tool right now, you keep the territory intel we pulled for the call. No hard sell, no commitment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="how">
     <div class="container">
       <h2>How it works</h2>
@@ -131,7 +163,7 @@
 
   <section class="booking" id="book">
     <div class="container">
-      <h2>Book a 20 minute territory walkthrough</h2>
+      <h2>Book a 15 minute territory walkthrough</h2>
       <p class="lead">
         We'll pull your territory live and walk through what's active right now. Bring one account you want to see.
       </p>
@@ -147,7 +179,7 @@
       <!-- Divider between Calendly and form. -->
       <div style="display:flex;align-items:center;gap:16px;margin:32px 0 24px;color:var(--fg-muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;">
         <div style="flex:1;height:1px;background:var(--border);"></div>
-        <div>Or share your territory in advance</div>
+        <div>Or send your territory now and I will email a few hot signals before we even talk</div>
         <div style="flex:1;height:1px;background:var(--border);"></div>
       </div>
 
@@ -170,14 +202,7 @@
         </div>
         <div>
           <label for="title">Title</label>
-          <select id="title" name="title" required>
-            <option value="">Select</option>
-            <option>VP Sales</option>
-            <option>Director Sales</option>
-            <option>Regional Director</option>
-            <option>Head of Sales</option>
-            <option>Other</option>
-          </select>
+          <input type="text" id="title" name="title" required placeholder="VP Sales, Owner, GM, Founder, etc." autocomplete="organization-title" />
         </div>
         <div>
           <label for="territory">Territory</label>
@@ -188,7 +213,7 @@
           <input type="text" id="one_account" name="one_account" required placeholder="Account name" />
         </div>
         <div class="full submit-row">
-          <button type="submit" class="btn btn-primary">Book my call</button>
+          <button type="submit" class="btn btn-primary">Send my territory</button>
         </div>
       </form>
     </div>
