@@ -182,6 +182,16 @@ section.show-section p.lead {
   background: var(--bg-elevated);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
   margin: 0 0 28px;
+  padding: 0;
+}
+
+.show-image-wrap figcaption {
+  padding: 14px 18px;
+  font-size: 14px;
+  color: var(--fg-muted);
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+  line-height: 1.55;
 }
 
 .show-image {
