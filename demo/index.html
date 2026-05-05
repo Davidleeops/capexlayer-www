@@ -53,8 +53,8 @@
   <section class="cohort" style="padding:28px 0;background:var(--bg-elevated);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
     <div class="container" style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;">
       <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;"></span>
-      <strong style="font-size:15px;letter-spacing:0.01em;">June 1 intake.</strong>
-      <span style="color:var(--fg-muted);font-size:15px;">10 territories per month. Five accounted for.</span>
+      <strong data-intake-date style="font-size:15px;letter-spacing:0.01em;">June 1 intake.</strong>
+      <span data-intake-seats style="color:var(--fg-muted);font-size:15px;">10 territories per month. Five accounted for.</span>
     </div>
   </section>
 
@@ -126,8 +126,8 @@
           <p>Pricing depends on territory size, integration depth, and tier. Our flagship tier locks territory exclusivity, so no two customers compete for the same signals in the same metro. We share the full sheet on the call so you can see exactly what your team gets.</p>
         </div>
         <div class="faq-item">
-          <h3>Why limit each intake to 10 territories?</h3>
-          <p>Each onboarding includes territory-specific signal modeling, CRM integration, and rep training. Past 10 per month, quality slips. We would rather onboard fewer customers right than rush. If the June 1 intake fills, the next one is July 1.</p>
+          <h3>Why limit each intake to <span data-intake-capacity>10</span> territories?</h3>
+          <p>Each onboarding includes territory-specific signal modeling, CRM integration, and rep training. Past <span data-intake-capacity>10</span> per month, quality slips. We would rather onboard fewer customers right than rush. If the <span data-intake-date-inline>June 1</span> intake fills, the next one is <span data-intake-next-date-inline>July 1</span>.</p>
         </div>
         <div class="faq-item">
           <h3>What CRMs do you support?</h3>
@@ -171,7 +171,7 @@
       <p class="lead">
         We'll pull your territory live and walk through what's active right now. Bring one account you want to see.
       </p>
-      <p class="cta-caption" style="color:var(--accent);margin-top:-6px;margin-bottom:20px;">June 1 intake. 10 territories per month. Five accounted for.</p>
+      <p class="cta-caption" style="color:var(--accent);margin-top:-6px;margin-bottom:20px;"><span data-intake-date>June 1 intake.</span> <span data-intake-seats>10 territories per month. Five accounted for.</span></p>
 
       <!-- Calendly inline widget. Direct booking path. -->
       <div style="margin-bottom:32px;">
@@ -231,6 +231,66 @@
   </footer>
 
   <script>
+    // =============================================================
+    // INTAKE BADGE CONFIG
+    // Bump INTAKE_ACCOUNTED_FOR when you close a new customer.
+    // Set INTAKE_CAPACITY if you want to change the per-month cap.
+    // The date auto-rolls each month. No manual date edits needed.
+    // =============================================================
+    var INTAKE_CAPACITY = 10;
+    var INTAKE_ACCOUNTED_FOR = 5;
+
+    (function () {
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var wordNumbers = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'];
+
+      var today = new Date();
+      var dayOfMonth = today.getDate();
+      var thisMonth = today.getMonth();
+      // If today is the 1st, the intake is happening today. Otherwise next 1st.
+      var intakeMonthIdx = (dayOfMonth === 1) ? thisMonth : (thisMonth + 1) % 12;
+      var nextMonthIdx = (intakeMonthIdx + 1) % 12;
+
+      var intakeMonthName = months[intakeMonthIdx];
+      var nextMonthName = months[nextMonthIdx];
+      var intakeShortDate = intakeMonthName + ' 1';
+      var nextShortDate = nextMonthName + ' 1';
+
+      var soldOut = INTAKE_ACCOUNTED_FOR >= INTAKE_CAPACITY;
+
+      var dateEls = document.querySelectorAll('[data-intake-date]');
+      for (var i = 0; i < dateEls.length; i++) {
+        dateEls[i].textContent = soldOut
+          ? 'Next intake: ' + nextShortDate + '.'
+          : intakeShortDate + ' intake.';
+      }
+
+      var seatsEls = document.querySelectorAll('[data-intake-seats]');
+      var word = (typeof wordNumbers[INTAKE_ACCOUNTED_FOR] !== 'undefined')
+        ? wordNumbers[INTAKE_ACCOUNTED_FOR]
+        : String(INTAKE_ACCOUNTED_FOR);
+      for (var j = 0; j < seatsEls.length; j++) {
+        seatsEls[j].textContent = soldOut
+          ? INTAKE_CAPACITY + ' territories per month. ' + intakeMonthName + ' is full.'
+          : INTAKE_CAPACITY + ' territories per month. ' + word + ' accounted for.';
+      }
+
+      var inlineEls = document.querySelectorAll('[data-intake-date-inline]');
+      for (var k = 0; k < inlineEls.length; k++) {
+        inlineEls[k].textContent = intakeShortDate;
+      }
+
+      var nextInlineEls = document.querySelectorAll('[data-intake-next-date-inline]');
+      for (var m = 0; m < nextInlineEls.length; m++) {
+        nextInlineEls[m].textContent = nextShortDate;
+      }
+
+      var capEls = document.querySelectorAll('[data-intake-capacity]');
+      for (var n = 0; n < capEls.length; n++) {
+        capEls[n].textContent = String(INTAKE_CAPACITY);
+      }
+    })();
+
     (function () {
       var form = document.getElementById('booking-form');
       if (!form) return;
