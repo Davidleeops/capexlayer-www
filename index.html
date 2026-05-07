@@ -25,6 +25,47 @@
     font-weight: 400;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+  body::before {
+    z-index: 0;
+    background:
+      linear-gradient(90deg, rgba(201,168,76,0.055) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(201,168,76,0.04) 1px, transparent 1px),
+      radial-gradient(circle at 18% 22%, rgba(201,168,76,0.12), transparent 34%),
+      radial-gradient(circle at 78% 8%, rgba(109,166,255,0.10), transparent 32%);
+    background-size: 82px 82px, 82px 82px, auto, auto;
+    opacity: 0.42;
+    mix-blend-mode: screen;
+  }
+  body::after {
+    z-index: 0;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(201,168,76,0.05) 42%, rgba(255,232,160,0.22) 50%, rgba(201,168,76,0.06) 58%, transparent 100%),
+      linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.10) 50%, transparent 100%);
+    height: 42vh;
+    top: -48vh;
+    filter: blur(0.5px);
+    opacity: 0.9;
+    animation: capexBeamSweep 6.8s linear infinite;
+  }
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes capexBeamSweep {
+    0% { transform: translateY(-18vh); opacity: 0; }
+    10% { opacity: 0.88; }
+    72% { opacity: 0.88; }
+    100% { transform: translateY(156vh); opacity: 0; }
   }
   a { color: inherit; text-decoration: none; }
 
@@ -293,6 +334,170 @@
     letter-spacing: 0.04em;
   }
 
+  /* FLOATING SIGNAL SEARCH */
+  .signal-search {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 1500;
+    width: min(460px, calc(100vw - 44px));
+    border: 1px solid rgba(201,168,76,0.34);
+    border-radius: 8px;
+    background: rgba(6,12,24,0.92);
+    box-shadow: 0 20px 70px rgba(0,0,0,0.52), 0 0 0 1px rgba(255,255,255,0.035) inset;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    overflow: visible;
+  }
+  .signal-search::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent, rgba(201,168,76,0.12), transparent);
+    opacity: 0.7;
+  }
+  .signal-search-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 13px 8px;
+    border-bottom: 1px solid rgba(201,168,76,0.16);
+    position: relative;
+  }
+  .signal-search-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #c9a84c;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+  }
+  .signal-search-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #74dc87;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+  .signal-search-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 13px 13px;
+    position: relative;
+  }
+  .signal-search-icon {
+    color: #c9a84c;
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+  }
+  .signal-search-input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: rgba(12,20,36,0.88);
+    color: #ffffff;
+    border: 1px solid rgba(201,168,76,0.24);
+    border-radius: 6px;
+    padding: 11px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+  }
+  .signal-search-input::placeholder { color: rgba(138,155,181,0.78); }
+  .signal-search-input:focus {
+    border-color: rgba(201,168,76,0.72);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.11);
+  }
+  .signal-results {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 10px);
+    display: none;
+    max-height: min(460px, calc(100vh - 180px));
+    overflow: auto;
+    border: 1px solid rgba(201,168,76,0.28);
+    border-radius: 8px;
+    background: rgba(6,12,24,0.96);
+    box-shadow: 0 18px 70px rgba(0,0,0,0.55);
+  }
+  .signal-search.is-open .signal-results { display: block; }
+  .signal-result {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid rgba(201,168,76,0.11);
+    background: transparent;
+    color: inherit;
+    padding: 14px 15px;
+    cursor: pointer;
+  }
+  .signal-result:hover,
+  .signal-result:focus {
+    outline: 0;
+    background: rgba(201,168,76,0.08);
+  }
+  .signal-result-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+  }
+  .signal-result-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .signal-result-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #74dc87;
+  }
+  .signal-result-meta,
+  .signal-result-detail {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #8a9bb5;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .signal-result-detail {
+    margin-top: 7px;
+    color: rgba(255,255,255,0.76);
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.45;
+  }
+  .signal-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 0 13px 13px;
+    position: relative;
+  }
+  .signal-chip {
+    border: 1px solid rgba(201,168,76,0.24);
+    background: rgba(201,168,76,0.06);
+    color: #c9a84c;
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .signal-empty {
+    padding: 18px 16px;
+    color: #8a9bb5;
+    font-size: 13px;
+  }
+
   /* FOOTER */
   .footer {
     border-top: 1px solid rgba(201,168,76,0.15);
@@ -340,6 +545,12 @@
     .verticals-grid { grid-template-columns: 1fr; }
     .footer { padding: 30px 20px; flex-direction: column; text-align: center; }
     .hero-proof { font-size: 11px; }
+    .signal-search {
+      right: 14px;
+      bottom: 14px;
+      width: calc(100vw - 28px);
+    }
+    .signal-chip-row { display: none; }
   }
   @media (max-width: 375px) {
     .hero h1 { font-size: 38px; }
@@ -347,6 +558,9 @@
     .nav-logo-name { font-size: 22px; }
     .nav-logo-sub { font-size: 7px; }
     .hero-ctas { flex-direction: column; align-items: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body::after { animation: none; top: 20vh; opacity: 0.25; }
   }
 </style>
 <!-- Microsoft Clarity -->
@@ -369,6 +583,24 @@ r.parentNode.insertBefore(s,r)}();
 </script>
 </head>
 <body>
+
+<aside class="signal-search" id="signalSearch" aria-label="Live signal search">
+  <div class="signal-results" id="signalResults" role="listbox" aria-label="Signal search results"></div>
+  <div class="signal-search-head">
+    <div class="signal-search-kicker">Live Signal Search</div>
+    <div class="signal-search-status">705 Mapped</div>
+  </div>
+  <div class="signal-search-row">
+    <div class="signal-search-icon">⌕</div>
+    <input class="signal-search-input" id="signalSearchInput" type="search" autocomplete="off" placeholder="Search TRIC, Thacker Pass, Dallas, crane, contacts..." aria-label="Search CapExLayer signals">
+  </div>
+  <div class="signal-chip-row" aria-label="Suggested searches">
+    <button class="signal-chip" type="button" data-query="TRIC">TRIC</button>
+    <button class="signal-chip" type="button" data-query="Thacker Pass">Thacker Pass</button>
+    <button class="signal-chip" type="button" data-query="Dallas">Dallas</button>
+    <button class="signal-chip" type="button" data-query="WSDOT">WSDOT</button>
+  </div>
+</aside>
 
 <!-- NAV -->
 <nav class="nav">
@@ -525,6 +757,169 @@ r.parentNode.insertBefore(s,r)}();
 </footer>
 
 <script>
+  const signalRecords = [
+    {
+      title: 'I-5 Interstate Bridge Replacement',
+      market: 'Vancouver WA / Portland OR',
+      type: 'In-territory infrastructure',
+      score: '9.4',
+      detail: '$13.5B+ program. 2026 bid packages and 2027 approaches package. Signals: federal approvals, procurement calendar, executive steering group.',
+      contacts: 'Julie Meredith, Lisa Sumption, Anne McEnerny-Ogle'
+    },
+    {
+      title: 'SR 519 Colman Dock Terminal Electrification',
+      market: 'Seattle, WA',
+      type: 'In-territory procurement',
+      score: '9.1',
+      detail: '$80M-$120M WSDOT electrification phase. Contractor not yet picked. Public contracting officer route available.',
+      contacts: 'Tammy Binschus, WSDOT contracting'
+    },
+    {
+      title: 'Boeing Industrial Building',
+      market: 'Seattle, WA',
+      type: 'In-territory industrial',
+      score: '8.8',
+      detail: 'Active industrial building permit with mechanical scope. Good facilities-team search target for early equipment planning.',
+      contacts: 'Boeing facilities and construction management'
+    },
+    {
+      title: 'Kay Bailey Hutchison Convention Center Expansion',
+      market: 'Dallas, TX',
+      type: 'Busy-city out-of-territory',
+      score: '9.3',
+      detail: '$3.7B active expansion through 2029. CMAR: Trinity Alliance JV, AECOM Hunt and Turner. Strong local support ecosystem.',
+      contacts: 'Trinity Alliance JV, Rosa Fleming, HKS / SOM leads'
+    },
+    {
+      title: 'Meta Lebanon Data Center Campus',
+      market: 'Lebanon, IN',
+      type: 'Busy-city data center',
+      score: '9.2',
+      detail: '$10B, 1GW campus. Turner and Mortenson contractor path. Late 2027 / early 2028 operational window.',
+      contacts: 'Rachel Peterson, Ben Kaplan, Matt Gentry'
+    },
+    {
+      title: 'OxyChem Project Redstone',
+      market: 'Deer Park, TX',
+      type: 'Busy-city industrial',
+      score: '8.9',
+      detail: '$1.1B chlor-alkali overhaul. Technip Energies engineering and thyssenkrupp nucera technology route.',
+      contacts: 'Wade Alleman, Technip Energies Houston project leads'
+    },
+    {
+      title: 'Lithium Nevada Thacker Pass',
+      market: 'Winnemucca, NV',
+      type: 'Underserved rural infrastructure',
+      score: '9.5',
+      detail: 'Active multi-year lithium buildout with 900 workers on site. EPCM Bechtel, CB&I tanks, Sawtooth Mining.',
+      contacts: 'Dan Dawson, Ailie MacAdam, Mark Butts'
+    },
+    {
+      title: 'Panasonic Energy / Tesla Gigafactory Expansion',
+      market: 'Sparks, NV / TRIC',
+      type: 'Underserved expansion signal',
+      score: '9.0',
+      detail: '$3.6B Tesla investment and Semi production activity. Hidden process-line and ancillary mini-crane scope inside known campus.',
+      contacts: 'Allan Swan, PENA Sparks plant leadership'
+    },
+    {
+      title: 'Coeur Rochester Mine Expansion',
+      market: 'Pershing County, NV',
+      type: 'Underserved rural industrial',
+      score: '8.7',
+      detail: 'Active silver mine expansion. Process plant, water, and infrastructure scopes create carry deck and mini-crane demand.',
+      contacts: 'Mitchell J. Krebs, Aoife McGrath'
+    },
+    {
+      title: 'Utility Queue Movement',
+      market: 'Signal class',
+      type: 'Predictive input',
+      score: '8.6',
+      detail: 'Shows power demand before visible construction activity. Useful for data centers, manufacturing, battery, and industrial expansions.',
+      contacts: 'Maps to owner, utility, EPC, and facilities teams'
+    },
+    {
+      title: 'Procurement Notice',
+      market: 'Signal class',
+      type: 'Timing input',
+      score: '8.8',
+      detail: 'Finds bid windows, pre-bid meetings, planholder lists, and contracting officers before the field team is shopping quotes.',
+      contacts: 'Public buyer, procurement officer, planholder companies'
+    },
+    {
+      title: 'Hiring Surge',
+      market: 'Signal class',
+      type: 'Labor input',
+      score: '8.4',
+      detail: 'Construction managers, process engineers, crane operators, welders, and commissioning roles reveal mobilization windows.',
+      contacts: 'Hiring managers, project executives, operations leaders'
+    }
+  ];
+
+  const signalSearch = document.getElementById('signalSearch');
+  const signalSearchInput = document.getElementById('signalSearchInput');
+  const signalResults = document.getElementById('signalResults');
+
+  function signalHaystack(record) {
+    return Object.values(record).join(' ').toLowerCase();
+  }
+
+  function renderSignalResults(query) {
+    const normalized = query.trim().toLowerCase();
+    const matches = signalRecords
+      .map((record) => {
+        const haystack = signalHaystack(record);
+        const titleHit = record.title.toLowerCase().includes(normalized);
+        const score = normalized ? (titleHit ? 2 : 0) + (haystack.includes(normalized) ? 1 : 0) : 1;
+        return { record, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score || Number(b.record.score) - Number(a.record.score))
+      .slice(0, normalized ? 7 : 5);
+
+    if (!matches.length) {
+      signalResults.innerHTML = '<div class="signal-empty">No exact match yet. Try TRIC, WSDOT, Dallas, lithium, crane, procurement, or contacts.</div>';
+      signalSearch.classList.add('is-open');
+      return;
+    }
+
+    signalResults.innerHTML = matches.map(({ record }) => `
+      <button class="signal-result" type="button" data-title="${record.title.replace(/"/g, '&quot;')}">
+        <div class="signal-result-top">
+          <div class="signal-result-title">${record.title}</div>
+          <div class="signal-result-score">${record.score}</div>
+        </div>
+        <div class="signal-result-meta">${record.market} · ${record.type}</div>
+        <div class="signal-result-detail">${record.detail}</div>
+        <div class="signal-result-detail">Contacts: ${record.contacts}. Phone numbers can be pulled from the same contact waterfall.</div>
+      </button>
+    `).join('');
+    signalSearch.classList.add('is-open');
+  }
+
+  if (signalSearchInput) {
+    renderSignalResults('');
+    signalSearchInput.addEventListener('focus', () => renderSignalResults(signalSearchInput.value));
+    signalSearchInput.addEventListener('input', () => renderSignalResults(signalSearchInput.value));
+    signalResults.addEventListener('click', (event) => {
+      const button = event.target.closest('.signal-result');
+      if (!button) return;
+      signalSearchInput.value = button.dataset.title;
+      renderSignalResults(button.dataset.title);
+    });
+    document.querySelectorAll('.signal-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        signalSearchInput.value = chip.dataset.query;
+        signalSearchInput.focus();
+        renderSignalResults(chip.dataset.query);
+      });
+    });
+    document.addEventListener('click', (event) => {
+      if (!signalSearch.contains(event.target)) signalSearch.classList.remove('is-open');
+    });
+    console.info('CapExLayer homepage beam and floating signal search mounted');
+  }
+
   // Form submission with success message
   const form = document.getElementById('ctaForm');
   const success = document.getElementById('formSuccess');
