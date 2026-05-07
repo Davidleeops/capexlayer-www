@@ -67,6 +67,41 @@
     pointer-events: none;
     overflow: hidden;
   }
+  .platform-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(8,14,26,0.82), rgba(8,14,26,0.38) 42%, rgba(8,14,26,0.50) 72%, rgba(8,14,26,0.88)),
+      linear-gradient(180deg, rgba(8,14,26,0.30), rgba(8,14,26,0.58) 62%, rgba(8,14,26,0.92)),
+      url("assets/platform-map-backdrop.jpg") center top / cover no-repeat;
+    opacity: 0.72;
+    filter: saturate(0.78) contrast(1.06) brightness(0.72);
+  }
+  .platform-backdrop::before,
+  .platform-backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .platform-backdrop::before {
+    background:
+      radial-gradient(circle at 50% 18%, rgba(201,168,76,0.16), transparent 32%),
+      radial-gradient(circle at 78% 44%, rgba(116,220,135,0.08), transparent 20%),
+      linear-gradient(180deg, rgba(8,14,26,0.18), rgba(8,14,26,0.66));
+    mix-blend-mode: screen;
+  }
+  .platform-backdrop::after {
+    background:
+      linear-gradient(rgba(201,168,76,0.11) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.09) 1px, transparent 1px);
+    background-size: 96px 96px;
+    opacity: 0.16;
+    mask-image: linear-gradient(180deg, #000, rgba(0,0,0,0.55) 58%, transparent);
+  }
   .site-atmosphere::before {
     content: "";
     position: absolute;
@@ -175,7 +210,7 @@
     margin: 0 auto;
     isolation: isolate;
   }
-  .hero > :not(.hero-stack) {
+  .hero > * {
     position: relative;
     z-index: 2;
   }
@@ -208,128 +243,6 @@
     border-top: 1px solid rgba(201,168,76,0.30);
     border-bottom: 1px solid rgba(201,168,76,0.14);
     background: linear-gradient(90deg, transparent, rgba(6,12,24,0.68), transparent);
-  }
-  .hero-stack {
-    position: absolute;
-    left: 50%;
-    top: 52px;
-    width: min(1120px, 94vw);
-    height: 430px;
-    transform: translateX(-50%);
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.88;
-    mask-image: radial-gradient(ellipse at center, #000 0%, #000 54%, transparent 82%);
-  }
-  .hero-map-grid,
-  .hero-map-grid::before,
-  .hero-map-grid::after {
-    position: absolute;
-    inset: 0;
-    content: "";
-  }
-  .hero-map-grid {
-    border: 1px solid rgba(201,168,76,0.08);
-    border-radius: 12px;
-    background:
-      linear-gradient(90deg, rgba(201,168,76,0.08) 1px, transparent 1px),
-      linear-gradient(0deg, rgba(201,168,76,0.06) 1px, transparent 1px),
-      radial-gradient(circle at 32% 54%, rgba(201,168,76,0.08), transparent 28%),
-      radial-gradient(circle at 73% 36%, rgba(99,151,210,0.08), transparent 28%);
-    background-size: 96px 96px, 96px 96px, auto, auto;
-  }
-  .hero-map-grid::before {
-    background:
-      linear-gradient(18deg, transparent 10%, rgba(138,155,181,0.16) 10.2%, transparent 10.6%),
-      linear-gradient(160deg, transparent 39%, rgba(138,155,181,0.12) 39.2%, transparent 39.7%),
-      linear-gradient(128deg, transparent 66%, rgba(201,168,76,0.15) 66.2%, transparent 66.7%);
-    opacity: 0.72;
-  }
-  .hero-map-grid::after {
-    background:
-      radial-gradient(circle at 16% 68%, #74dc87 0 3px, transparent 4px),
-      radial-gradient(circle at 22% 70%, #c9a84c 0 2px, transparent 3px),
-      radial-gradient(circle at 29% 63%, #d35d52 0 3px, transparent 4px),
-      radial-gradient(circle at 76% 57%, #74dc87 0 3px, transparent 4px),
-      radial-gradient(circle at 81% 49%, #c9a84c 0 2px, transparent 3px),
-      radial-gradient(circle at 68% 63%, #ffffff 0 2px, transparent 3px);
-    filter: drop-shadow(0 0 7px rgba(201,168,76,0.32));
-    opacity: 0.72;
-  }
-  .hero-ghost-panel {
-    position: absolute;
-    width: 260px;
-    min-height: 112px;
-    border: 1px solid rgba(201,168,76,0.18);
-    border-radius: 8px;
-    background: rgba(6,12,24,0.74);
-    box-shadow: 0 18px 60px rgba(0,0,0,0.34), 0 0 38px rgba(201,168,76,0.07) inset;
-    padding: 13px 14px;
-    text-align: left;
-    backdrop-filter: blur(3px);
-  }
-  .hero-ghost-panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(110deg, transparent, rgba(255,255,255,0.05), transparent);
-    opacity: 0.7;
-  }
-  .hero-panel-kicker {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    color: #c9a84c;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 9px;
-    position: relative;
-  }
-  .hero-panel-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    border-top: 1px solid rgba(201,168,76,0.10);
-    padding-top: 8px;
-    margin-top: 8px;
-    color: rgba(255,255,255,0.74);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    line-height: 1.35;
-    position: relative;
-  }
-  .hero-panel-row strong {
-    color: #74dc87;
-    font-weight: 500;
-  }
-  .hero-ghost-panel.one { left: 0; top: 24px; }
-  .hero-ghost-panel.two { right: 12px; top: 64px; width: 278px; }
-  .hero-ghost-panel.three { left: 72px; bottom: 24px; width: 300px; }
-  .hero-trace {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 520px;
-    height: 220px;
-    transform: translate(-50%, -44%);
-    border: 1px solid rgba(201,168,76,0.11);
-    border-radius: 999px;
-    background:
-      radial-gradient(circle at 50% 50%, rgba(201,168,76,0.14) 0 2px, transparent 3px),
-      radial-gradient(circle at 20% 40%, rgba(116,220,135,0.42) 0 3px, transparent 4px),
-      radial-gradient(circle at 82% 58%, rgba(211,93,82,0.42) 0 3px, transparent 4px);
-    opacity: 0.44;
-  }
-  .hero-trace::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 72%;
-    height: 52%;
-    transform: translate(-50%, -50%);
-    border: 1px dashed rgba(201,168,76,0.16);
-    border-radius: inherit;
   }
   .hero h1 {
     font-family: 'Bebas Neue', sans-serif;
@@ -790,29 +703,11 @@
     .nav-links { gap: 16px; }
     .nav-links a { font-size: 13px; }
     .hero { padding: 80px 20px 60px; }
-    .hero-stack {
-      top: 46px;
-      height: 330px;
-      opacity: 0.64;
-    }
-    .hero-ghost-panel {
-      display: block;
-      transform: scale(0.72);
-    }
-    .hero-ghost-panel.one {
-      left: -54px;
-      top: 20px;
-      transform-origin: top left;
-    }
-    .hero-ghost-panel.two {
-      right: -62px;
-      top: 92px;
-      transform-origin: top right;
-    }
-    .hero-ghost-panel.three { display: none; }
-    .hero-trace {
-      width: 82vw;
-      height: 150px;
+    .platform-backdrop {
+      background-position: center top;
+      background-size: auto 100vh;
+      opacity: 0.54;
+      filter: saturate(0.72) contrast(1.08) brightness(0.62);
     }
     .hero h1 { font-size: 48px; }
     .hero-sub { font-size: 16px; }
@@ -835,7 +730,7 @@
     .nav-logo-name { font-size: 22px; }
     .nav-logo-sub { font-size: 7px; }
     .hero-ctas { flex-direction: column; align-items: center; }
-    .hero-ghost-panel { display: none; }
+    .platform-backdrop { opacity: 0.44; }
   }
   @media (prefers-reduced-motion: reduce) {
     body::after { animation: none; top: 20vh; opacity: 0.25; }
@@ -862,6 +757,7 @@ r.parentNode.insertBefore(s,r)}();
 </head>
 <body>
 
+<div class="platform-backdrop" aria-hidden="true"></div>
 <div class="site-atmosphere" aria-hidden="true"></div>
 
 <aside class="signal-search" id="signalSearch" aria-label="Live signal search">
@@ -905,28 +801,6 @@ r.parentNode.insertBefore(s,r)}();
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-stack" aria-hidden="true">
-    <div class="hero-map-grid"></div>
-    <div class="hero-trace"></div>
-    <div class="hero-ghost-panel one">
-      <div class="hero-panel-kicker">Signal Stack</div>
-      <div class="hero-panel-row"><span>Permits</span><strong>1,363</strong></div>
-      <div class="hero-panel-row"><span>Utility queues</span><strong>Live</strong></div>
-      <div class="hero-panel-row"><span>Hiring surge</span><strong>+9.0</strong></div>
-    </div>
-    <div class="hero-ghost-panel two">
-      <div class="hero-panel-kicker">Opportunity Brief</div>
-      <div class="hero-panel-row"><span>Predicted window</span><strong>52 /100</strong></div>
-      <div class="hero-panel-row"><span>Capex fit</span><strong>88 /100</strong></div>
-      <div class="hero-panel-row"><span>Contacts mapped</span><strong>Ready</strong></div>
-    </div>
-    <div class="hero-ghost-panel three">
-      <div class="hero-panel-kicker">Capital Queue</div>
-      <div class="hero-panel-row"><span>Primary signals</span><strong>29</strong></div>
-      <div class="hero-panel-row"><span>Verified contacts</span><strong>7,800+</strong></div>
-      <div class="hero-panel-row"><span>Avg severity</span><strong>9.0</strong></div>
-    </div>
-  </div>
   <h1>THE ENGINE BEHIND THE SIGNAL</h1>
   <p class="hero-sub">CapexLayer is the AI-native data acquisition and signal intelligence platform powering predictions across industrial and construction capital markets. Not a product. The infrastructure.</p>
   <div class="hero-ctas">
