@@ -78,7 +78,8 @@
       linear-gradient(180deg, rgba(8,14,26,0.14), rgba(8,14,26,0.42) 62%, rgba(8,14,26,0.82)),
       url("assets/platform-map-backdrop.jpg") center top / cover no-repeat;
     opacity: 0.92;
-    filter: saturate(0.92) contrast(1.08) brightness(1.24);
+    filter: blur(0.7px) saturate(0.88) contrast(1.04) brightness(1.10);
+    transform: scale(1.008);
   }
   .platform-backdrop::before,
   .platform-backdrop::after {
@@ -194,12 +195,28 @@
     color: #ffffff;
     margin-bottom: 24px;
     text-shadow: 0 0 34px rgba(201,168,76,0.12);
+    display: inline-block;
+    max-width: 940px;
+    padding: 16px 22px 13px;
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 8px;
+    background: rgba(6,12,24,0.78);
+    box-shadow: 0 18px 52px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.035) inset;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
   .section-para {
     font-size: 17px;
     color: #8a9bb5;
     max-width: 720px;
     line-height: 1.7;
+    padding: 18px 22px;
+    border: 1px solid rgba(201,168,76,0.13);
+    border-radius: 8px;
+    background: rgba(6,12,24,0.76);
+    box-shadow: 0 18px 52px rgba(0,0,0,0.22), 0 0 0 1px rgba(255,255,255,0.028) inset;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   /* HERO */
@@ -243,6 +260,19 @@
     border-top: 1px solid rgba(201,168,76,0.30);
     border-bottom: 1px solid rgba(201,168,76,0.14);
     background: linear-gradient(90deg, transparent, rgba(6,12,24,0.68), transparent);
+  }
+  .hero-copy-panel {
+    width: min(880px, 100%);
+    margin: 0 auto;
+    padding: 46px 48px 36px;
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 10px;
+    background:
+      linear-gradient(115deg, rgba(255,255,255,0.045), transparent 34%, rgba(201,168,76,0.045)),
+      rgba(6,12,24,0.78);
+    box-shadow: 0 28px 90px rgba(0,0,0,0.42), 0 0 0 1px rgba(255,255,255,0.04) inset;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
   .hero h1 {
     font-family: 'Bebas Neue', sans-serif;
@@ -320,18 +350,21 @@
     font-size: 13px;
     color: #c9a84c;
     letter-spacing: 0.06em;
+    text-shadow: 0 0 18px rgba(0,0,0,0.72);
   }
 
   /* CARDS */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
   .card {
-    background: rgba(201,168,76,0.04);
-    border: 1px solid rgba(201,168,76,0.15);
+    background: rgba(6,12,24,0.80);
+    border: 1px solid rgba(201,168,76,0.18);
     border-radius: 10px;
     padding: 36px 28px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+    box-shadow: 0 18px 52px rgba(0,0,0,0.30);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     transition: border-color 0.2s, transform 0.2s, background 0.2s;
   }
   .card::before,
@@ -420,8 +453,8 @@
     margin-top: 40px;
   }
   .vtile {
-    background: rgba(201,168,76,0.04);
-    border: 1px solid rgba(201,168,76,0.12);
+    background: rgba(6,12,24,0.80);
+    border: 1px solid rgba(201,168,76,0.16);
     border-radius: 8px;
     padding: 24px 28px;
     font-family: 'DM Sans', sans-serif;
@@ -430,6 +463,8 @@
     color: #ffffff;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     transition: border-color 0.2s, transform 0.2s, background 0.2s;
   }
   .vtile:hover {
@@ -702,21 +737,28 @@
     .nav-logo-name { font-size: 26px; }
     .nav-links { gap: 16px; }
     .nav-links a { font-size: 13px; }
-    .hero { padding: 80px 20px 60px; }
+    .hero { padding: 80px 20px 160px; }
     .platform-backdrop {
       background-position: center top;
       background-size: auto 100vh;
       opacity: 0.72;
-      filter: saturate(0.84) contrast(1.08) brightness(0.96);
+      filter: blur(0.7px) saturate(0.82) contrast(1.04) brightness(0.92);
     }
     .hero h1 { font-size: 48px; }
+    .hero-copy-panel { padding: 36px 20px 30px; }
     .hero-sub { font-size: 16px; }
     .section { padding: 60px 20px; }
     .section-heading { font-size: 36px; }
+    .section-heading,
+    .section-para {
+      width: 100%;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
     .cards { grid-template-columns: 1fr; }
     .verticals-grid { grid-template-columns: 1fr; }
     .footer { padding: 30px 20px; flex-direction: column; text-align: center; }
-    .hero-proof { font-size: 11px; }
+    .hero-proof { display: none; }
     .signal-search {
       right: 14px;
       bottom: 14px;
@@ -801,13 +843,15 @@ r.parentNode.insertBefore(s,r)}();
 
 <!-- HERO -->
 <section class="hero">
-  <h1>THE ENGINE BEHIND THE SIGNAL</h1>
-  <p class="hero-sub">CapexLayer is the AI-native data acquisition and signal intelligence platform powering predictions across industrial and construction capital markets. Not a product. The infrastructure.</p>
-  <div class="hero-ctas">
-    <a href="#api" class="btn-gold">Request API Access</a>
-    <a href="/platform" target="_blank" rel="noopener" class="btn-outline">See It Running</a>
+  <div class="hero-copy-panel">
+    <h1>THE ENGINE BEHIND THE SIGNAL</h1>
+    <p class="hero-sub">CapexLayer is the AI-native data acquisition and signal intelligence platform powering predictions across industrial and construction capital markets. Not a product. The infrastructure.</p>
+    <div class="hero-ctas">
+      <a href="#api" class="btn-gold">Request API Access</a>
+      <a href="/platform" target="_blank" rel="noopener" class="btn-outline">See It Running</a>
+    </div>
+    <div class="hero-proof">30+ CITIES ACROSS 4 COUNTRIES&ensp;&bull;&ensp;70+ SIGNAL CLASSES&ensp;&bull;&ensp;3,683 LIVE PROJECT SIGNALS&ensp;&bull;&ensp;7,800+ VERIFIED CONTACTS</div>
   </div>
-  <div class="hero-proof">30+ CITIES ACROSS 4 COUNTRIES&ensp;&bull;&ensp;70+ SIGNAL CLASSES&ensp;&bull;&ensp;3,683 LIVE PROJECT SIGNALS&ensp;&bull;&ensp;7,800+ VERIFIED CONTACTS</div>
 </section>
 
 <!-- WHAT CAPEXLAYER IS -->
