@@ -668,6 +668,17 @@
     letter-spacing: 0;
     line-height: 1.45;
   }
+  .signal-result-lock {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 9px;
+    color: #c9a84c;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
   .signal-chip-row {
     display: flex;
     flex-wrap: wrap;
@@ -1080,6 +1091,15 @@ r.parentNode.insertBefore(s,r)}();
     return Object.values(record).join(' ').toLowerCase();
   }
 
+  function platformSearchUrl(record) {
+    const redirect = `/dashboard?signal=${encodeURIComponent(record.title)}`;
+    return `https://cg-platform-v2.vercel.app/?redirect=${encodeURIComponent(redirect)}&force_gate=1`;
+  }
+
+  function maskedDetail(record) {
+    return `${record.detail.split('.').slice(0, 2).join('.')}. Contacts, emails, phone waterfall, and timing notes unlock inside the platform.`;
+  }
+
   function renderSignalResults(query) {
     const normalized = query.trim().toLowerCase();
     const matches = signalRecords
@@ -1100,15 +1120,16 @@ r.parentNode.insertBefore(s,r)}();
     }
 
     signalResults.innerHTML = matches.map(({ record }) => `
-      <button class="signal-result" type="button" data-title="${record.title.replace(/"/g, '&quot;')}">
+      <a class="signal-result" href="${platformSearchUrl(record)}" data-title="${record.title.replace(/"/g, '&quot;')}" aria-label="Open gated platform record for ${record.title.replace(/"/g, '&quot;')}">
         <div class="signal-result-top">
           <div class="signal-result-title">${record.title}</div>
           <div class="signal-result-score">${record.score}</div>
         </div>
         <div class="signal-result-meta">${record.market} · ${record.type}</div>
-        <div class="signal-result-detail">${record.detail}</div>
-        <div class="signal-result-detail">Contacts: ${record.contacts}. Phone numbers can be pulled from the same contact waterfall.</div>
-      </button>
+        <div class="signal-result-detail">${maskedDetail(record)}</div>
+        <div class="signal-result-detail">Contacts: ${record.contacts.split(',').map((name) => name.trim().split(' ')[0] + ' ███').join(' · ')}. Verified emails are masked. Phone numbers are available in the platform.</div>
+        <div class="signal-result-lock">Unlock full record →</div>
+      </a>
     `).join('');
     signalSearch.classList.add('is-open');
   }
@@ -1120,8 +1141,7 @@ r.parentNode.insertBefore(s,r)}();
     signalResults.addEventListener('click', (event) => {
       const button = event.target.closest('.signal-result');
       if (!button) return;
-      signalSearchInput.value = button.dataset.title;
-      renderSignalResults(button.dataset.title);
+      signalSearchInput.value = button.dataset.title || '';
     });
     document.querySelectorAll('.signal-chip').forEach((chip) => {
       chip.addEventListener('click', () => {
