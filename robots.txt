@@ -1,0 +1,90 @@
+# CapexLayer robots.txt
+# Last updated: 2026-05-12
+#
+# Explicit allowlist for the major AI / generative search crawlers. They are
+# the surface where executives now research vendors before clicking through.
+# We want them indexing every customer-facing page they can reach.
+
+User-agent: *
+Allow: /
+Disallow: /investor/
+Disallow: /demo/thanks.html
+
+# OpenAI ChatGPT / search crawler
+User-agent: GPTBot
+Allow: /
+Disallow: /investor/
+Disallow: /demo/thanks.html
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /investor/
+Disallow: /demo/thanks.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /investor/
+
+# Anthropic Claude crawlers
+User-agent: ClaudeBot
+Allow: /
+Disallow: /investor/
+Disallow: /demo/thanks.html
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /investor/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /investor/
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+Disallow: /investor/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /investor/
+
+# Google AI Overviews + standard Googlebot
+User-agent: Google-Extended
+Allow: /
+Disallow: /investor/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /investor/
+Disallow: /demo/thanks.html
+
+# Bing / Microsoft Copilot
+User-agent: Bingbot
+Allow: /
+Disallow: /investor/
+
+# Apple Intelligence / Spotlight
+User-agent: Applebot
+Allow: /
+Disallow: /investor/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /investor/
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /investor/
+
+User-agent: FacebookBot
+Allow: /
+Disallow: /investor/
+
+# Common Crawl (training corpus for most open models)
+User-agent: CCBot
+Allow: /
+Disallow: /investor/
+
+# Sitemap discovery
+Sitemap: https://capexlayer.com/sitemap.xml
