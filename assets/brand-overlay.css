@@ -96,8 +96,10 @@ body > * {
   opacity: 0.08;
 }
 
-/* Platform screenshot, heavily blurred + darkened so it reads as texture
-   not as a literal product UI screenshot. */
+/* Platform screenshot, lightly blurred + darkened so it reads as texture
+   not as a literal product UI screenshot. Brightness lifted vs the inline
+   capexlayer.com version because cranegenius pages often have semi-opaque
+   panels overlaying the backdrop — a brighter source bleeds through. */
 .platform-backdrop {
   position: fixed;
   inset: 0;
@@ -105,12 +107,27 @@ body > * {
   pointer-events: none;
   overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(8,14,26,0.66), rgba(8,14,26,0.18) 42%, rgba(8,14,26,0.28) 72%, rgba(8,14,26,0.74)),
-    linear-gradient(180deg, rgba(8,14,26,0.14), rgba(8,14,26,0.42) 62%, rgba(8,14,26,0.82)),
+    linear-gradient(90deg, rgba(8,14,26,0.35), rgba(8,14,26,0.06) 42%, rgba(8,14,26,0.14) 72%, rgba(8,14,26,0.42)),
+    linear-gradient(180deg, rgba(8,14,26,0.06), rgba(8,14,26,0.22) 62%, rgba(8,14,26,0.55)),
     url("/assets/platform-map-backdrop.jpg") center top / cover no-repeat;
-  opacity: 0.86;
-  filter: blur(0.9px) saturate(0.84) contrast(1.02) brightness(0.70);
+  opacity: 0.95;
+  filter: blur(0.7px) saturate(0.92) contrast(1.04) brightness(0.92);
   transform: scale(1.008);
+}
+
+/* Soften hero panels that would otherwise cover the backdrop. Several
+   pages use .hero-grid or .hero .container at rgba(6,12,24,0.88) which
+   is too opaque for the backdrop to bleed through. Drop to 0.55 so the
+   backdrop reads as the dominant visual without sacrificing text
+   contrast. capexlayer.com root is unaffected — it carries its own
+   inline backdrop CSS and never loads this file. */
+.hero-grid,
+.hero-grid > .container,
+.hero > .container,
+section.hero > .container,
+section > .container.cta-section,
+.cta-section {
+  background-color: rgba(6, 12, 24, 0.55) !important;
 }
 .platform-backdrop::before,
 .platform-backdrop::after {
