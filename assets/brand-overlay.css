@@ -117,18 +117,30 @@ body > * {
    reads as the dominant visual exactly like capexlayer.com main does.
    The backdrop's built-in gradients (0.66 sides, 0.82 bottom) provide
    enough text contrast on their own — no panel background needed.
-   Text inside these elements stays readable; the panel only contributed
-   solid color before, no functional layout. capexlayer.com root is
-   unaffected (it never loads this file). */
-.hero-grid,
-.hero-grid > .container,
-.hero > .container,
-section.hero > .container,
-section > .container.cta-section,
-.cta-section,
-section.cta-section,
-.hero-card,
-.hero-panel {
+
+   IMPORTANT: customer-facing-brand.css ships rules like
+     body.unified-brand-active .hero-grid { background: rgba(6,12,24,0.88) !important; }
+   We must exceed that specificity (0,0,2,1) to win. We use
+     html body.unified-brand-active.unified-brand-active <target>
+   which scores (0,0,3,2) — beats it on class count without changing
+   the meaning. capexlayer.com root is unaffected (it never loads
+   this file). */
+html body.unified-brand-active.unified-brand-active .hero-grid,
+html body.unified-brand-active.unified-brand-active .hero-grid > .container,
+html body.unified-brand-active.unified-brand-active .hero > .container,
+html body.unified-brand-active.unified-brand-active section.hero > .container,
+html body.unified-brand-active.unified-brand-active section.hero > .container:first-child,
+html body.unified-brand-active.unified-brand-active .hero > .container:first-child,
+html body.unified-brand-active.unified-brand-active .cta-section,
+html body.unified-brand-active.unified-brand-active section.cta-section,
+html body.unified-brand-active.unified-brand-active section.cta-section > .container,
+html body.unified-brand-active.unified-brand-active .hero-card,
+html body.unified-brand-active.unified-brand-active .hero-panel,
+/* fallback for pages that don't carry .unified-brand-active on body */
+html body .hero-grid,
+html body .hero > .container,
+html body section.hero > .container,
+html body .cta-section {
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -139,7 +151,8 @@ section.cta-section,
 /* Add a subtle text shadow on headings + body inside the hero area so
    white type on the now-visible platform screenshot stays legible. */
 .hero h1, .hero h2, .hero-grid h1, .hero-grid h2,
-.hero p, .hero-grid p, .hero-grid .container p {
+.hero p, .hero-grid p, .hero-grid .container p,
+.hero-card h1, .hero-card h2, .hero-card p {
   text-shadow: 0 2px 12px rgba(8,14,26,0.85), 0 0 24px rgba(8,14,26,0.6);
 }
 .platform-backdrop::before,
