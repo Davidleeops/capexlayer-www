@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>CapexLayer Account Tracker · PdM + CMMS</title>
+  <meta name="theme-color" content="#080e1a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/pdm/styles.css" />
+  <style>
+    /* Tracker-specific tweaks. Keeps the same brand tokens as terminal styles. */
+    .lead-line {
+      color: var(--cl-text-body); font-size: 13px; margin: 6px 0 14px;
+      font-family: var(--font-mono); letter-spacing: 0.04em;
+    }
+    .lead-line strong { color: var(--cl-gold); font-weight: 500; }
+    table.terminal td.action-cell { width: 200px; }
+    table.terminal td.hubspot-cell { width: 96px; }
+    .age-amber { color: var(--cl-amber); }
+    .age-red { color: var(--cl-red); }
+    .hs-deal {
+      display: inline-block; padding: 3px 9px; font-size: 10px;
+      font-family: var(--font-mono); letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--cl-gold);
+      border: 1px solid var(--cl-gold); border-radius: 4px;
+    }
+    .hs-deal:hover {
+      background: var(--cl-gold); color: var(--cl-bg);
+      text-decoration: none;
+    }
+    .hs-push {
+      display: inline-block; padding: 3px 9px; font-size: 10px;
+      font-family: var(--font-mono); letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--cl-text-mute);
+      border: 1px solid var(--cl-border); border-radius: 4px;
+    }
+    .fkey.fkey-outline {
+      color: var(--cl-text-body); border-color: var(--cl-border);
+    }
+    .fkey.fkey-outline:hover {
+      color: var(--cl-gold); border-color: var(--cl-gold);
+      background: transparent; transform: none;
+    }
+    .action-pair { display: inline-flex; gap: 6px; align-items: center; }
+    .action-pair .icon-link {
+      color: var(--cl-text-mute); font-family: var(--font-mono);
+      font-size: 14px; text-decoration: none; padding: 0 4px;
+    }
+    .action-pair .icon-link:hover { color: var(--cl-gold); }
+    .summary-line {
+      margin-top: 18px; padding: 12px 16px;
+      background: var(--cl-bg-card); border: 1px solid var(--cl-border);
+      border-radius: 6px; color: var(--cl-text-body);
+      font-family: var(--font-mono); font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+    .summary-line strong { color: var(--cl-gold); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1><span class="live"></span>ACCOUNT TRACKER
+          <span class="vertical">Top PdM/CMMS accounts in active cycle</span>
+        </h1>
+        <div class="lead-line">
+          Your queue for this week. Refreshed nightly. Auto-synced to HubSpot.
+          Click any account to drop into the dossier or your CRM.
+        </div>
+      </div>
+      <div class="meta">
+        <a href="/pdm/" class="home-link">&larr; Home</a>
+        <div id="today-date" style="margin-top:8px;">&nbsp;</div>
+        <div>Last scored: <strong id="last-scored">loading</strong></div>
+      </div>
+    </header>
+
+    <div id="demo-banner" class="banner hidden">
+      <strong>NO ACCOUNTS IN CYCLE.</strong>
+      The tracker is wired up. Once the scoring run lands an account in a top tier, it shows here.
+    </div>
+
+    <div class="filters">
+      <div class="group">
+        <label>Tier</label>
+        <select id="f-tier">
+          <option value="">All tiers</option>
+          <option value="deployment_imminent">Deployment imminent</option>
+          <option value="selection_underway">Selection underway</option>
+          <option value="active_evaluation">Active evaluation</option>
+          <option value="replacement_evaluation">Replacement evaluation</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>State</label>
+        <select id="f-state"><option value="">All states</option></select>
+      </div>
+      <div class="group">
+        <label>Signal age</label>
+        <select id="f-age">
+          <option value="">Any age</option>
+          <option value="7">Under 7 days</option>
+          <option value="30">Under 30 days</option>
+          <option value="90">Under 90 days</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>HubSpot</label>
+        <select id="f-hubspot">
+          <option value="">All</option>
+          <option value="yes">Has deal</option>
+          <option value="no">Not yet pushed</option>
+        </select>
+      </div>
+      <div class="spacer"></div>
+      <span class="count" id="row-count">0 accounts</span>
+      <button class="reset" id="reset-btn">Reset</button>
+    </div>
+
+    <div id="table-wrap">
+      <table class="terminal" id="tracker-table">
+        <thead>
+          <tr>
+            <th data-sort="rank" style="width:36px;">#</th>
+            <th data-sort="facility">Facility</th>
+            <th data-sort="parent">Parent</th>
+            <th data-sort="state" style="width:60px;">State</th>
+            <th data-sort="naics" style="width:80px;">NAICS</th>
+            <th data-sort="top_score" style="text-align:right; width:80px;">Top Score</th>
+            <th data-sort="top_tier">Top Tier</th>
+            <th data-sort="signal_count_90d" style="text-align:right; width:90px;">Signals 90d</th>
+            <th data-sort="last_signal_date">Last Signal</th>
+            <th class="hubspot-cell">HubSpot</th>
+            <th class="action-cell">Action</th>
+          </tr>
+        </thead>
+        <tbody id="tracker-body"></tbody>
+      </table>
+    </div>
+
+    <div id="empty-state" class="empty" style="display:none;">
+      <h2>No accounts match those filters.</h2>
+      <p>Loosen the filters or reset to see every account currently in cycle.</p>
+    </div>
+
+    <div class="summary-line" id="summary-line">&nbsp;</div>
+
+    <footer class="bot">
+      Pulled live from the public account-tracker view. Refreshed nightly. Auto-synced to HubSpot portal 246150766.
+    </footer>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var SUPABASE_URL = "https://qdnaglhailuflynirqtt.supabase.co";
+    var SUPABASE_ANON_KEY = "sb_publishable_B8SfhndBe7JUg0j_CtwgDA_uRJc95Ln";
+    var HS_DEAL_BASE = "https://app-na2.hubspot.com/contacts/246150766/record/0-3/";
+    var CALENDLY = "https://calendly.com/davidlee-capexlayer";
+
+    var TIER_CLASS = {
+      deployment_imminent: "t-red",
+      selection_underway: "t-red",
+      active_evaluation: "t-amber",
+      replacement_evaluation: "t-amber"
+    };
+
+    var state = {
+      rows: [],
+      filtered: [],
+      sortKey: "top_score",
+      sortDir: "desc",
+      filters: { tier: "", state: "", age: "", hubspot: "" }
+    };
+
+    function $(s) { return document.querySelector(s); }
+    function el(tag, props, children) {
+      var n = document.createElement(tag);
+      props = props || {};
+      Object.keys(props).forEach(function (k) {
+        if (k === "class") n.className = props[k];
+        else if (k === "html") n.innerHTML = props[k];
+        else if (k.indexOf("on") === 0) n.addEventListener(k.slice(2), props[k]);
+        else n.setAttribute(k, props[k]);
+      });
+      (Array.isArray(children) ? children : [children]).forEach(function (c) {
+        if (c == null) return;
+        n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+      });
+      return n;
+    }
+
+    function fmtAge(days) {
+      if (days == null || isNaN(days)) return "";
+      if (days < 1) return "today";
+      return days + "d ago";
+    }
+
+    function ageClass(days) {
+      if (days == null || isNaN(days)) return "";
+      if (days > 60) return "age-red";
+      if (days > 14) return "age-amber";
+      return "";
+    }
+
+    function tierLabel(t) {
+      return t ? t.replace(/_/g, " ") : "";
+    }
+
+    function pickTopTier(row) {
+      if (row.pdm_score >= row.cmms_score) return row.pdm_tier || row.cmms_tier;
+      return row.cmms_tier || row.pdm_tier;
+    }
+
+    function isTopTier(row, tier) {
+      return row.pdm_tier === tier || row.cmms_tier === tier;
+    }
+
+    async function loadData() {
+      var url = SUPABASE_URL.replace(/\/$/, "") +
+        "/rest/v1/v_pdm_cmms_account_tracker?select=*&limit=500";
+      try {
+        var res = await fetch(url, {
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: "Bearer " + SUPABASE_ANON_KEY
+          }
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return await res.json();
+      } catch (e) {
+        console.warn("Tracker fetch failed:", e);
+        return [];
+      }
+    }
+
+    function applyFilters() {
+      var f = state.filters;
+      state.filtered = state.rows.filter(function (r) {
+        if (f.tier && !isTopTier(r, f.tier)) return false;
+        if (f.state && r.state !== f.state) return false;
+        if (f.age) {
+          var max = parseInt(f.age, 10);
+          if (r.last_signal_age_days == null || r.last_signal_age_days > max) return false;
+        }
+        if (f.hubspot === "yes" && !r.hubspot_deal_id) return false;
+        if (f.hubspot === "no" && r.hubspot_deal_id) return false;
+        return true;
+      });
+      sortRows();
+      render();
+    }
+
+    function sortRows() {
+      var key = state.sortKey;
+      var dir = state.sortDir === "asc" ? 1 : -1;
+      state.filtered.sort(function (a, b) {
+        var av, bv;
+        if (key === "rank") { av = a.top_score || 0; bv = b.top_score || 0; }
+        else if (key === "facility") { av = a.facility_name || ""; bv = b.facility_name || ""; }
+        else if (key === "parent") { av = a.parent_company_name || ""; bv = b.parent_company_name || ""; }
+        else if (key === "state") { av = a.state || ""; bv = b.state || ""; }
+        else if (key === "naics") { av = a.naics_primary || ""; bv = b.naics_primary || ""; }
+        else if (key === "top_tier") { av = pickTopTier(a) || ""; bv = pickTopTier(b) || ""; }
+        else if (key === "last_signal_date") {
+          av = a.last_signal_age_days != null ? a.last_signal_age_days : 9999;
+          bv = b.last_signal_age_days != null ? b.last_signal_age_days : 9999;
+        }
+        else { av = a[key] || 0; bv = b[key] || 0; }
+        if (av < bv) return -1 * dir;
+        if (av > bv) return 1 * dir;
+        return 0;
+      });
+    }
+
+    function renderAction(row) {
+      var topTier = pickTopTier(row);
+      var dossierUrl = "/pdm/dossier/?facility_id=" + encodeURIComponent(row.facility_id || "");
+      var hotTiers = ["deployment_imminent", "selection_underway"];
+      var pair = el("span", { class: "action-pair" });
+      if (hotTiers.indexOf(topTier) !== -1) {
+        pair.appendChild(el("a", {
+          class: "fkey", href: CALENDLY,
+          target: "_blank", rel: "noopener"
+        }, "BOOK"));
+        pair.appendChild(el("a", {
+          class: "icon-link", href: dossierUrl, title: "Open dossier"
+        }, "[ + ]"));
+      } else {
+        pair.appendChild(el("a", {
+          class: "fkey fkey-outline", href: dossierUrl
+        }, "RESEARCH"));
+      }
+      return pair;
+    }
+
+    function renderHubspot(row) {
+      if (row.hubspot_deal_id) {
+        return el("a", {
+          class: "hs-deal",
+          href: HS_DEAL_BASE + encodeURIComponent(row.hubspot_deal_id),
+          target: "_blank", rel: "noopener",
+          title: "Open in HubSpot"
+        }, "DEAL");
+      }
+      return el("span", {
+        class: "hs-push",
+        title: "Next sync pushes this to HubSpot"
+      }, "PUSH");
+    }
+
+    function render() {
+      var body = $("#tracker-body");
+      body.innerHTML = "";
+      $("#row-count").textContent = state.filtered.length + " accounts";
+
+      if (state.rows.length === 0) {
+        $("#table-wrap").style.display = "none";
+        $("#demo-banner").classList.remove("hidden");
+        $("#empty-state").style.display = "none";
+        renderSummary();
+        return;
+      }
+      if (state.filtered.length === 0) {
+        $("#table-wrap").style.display = "none";
+        $("#empty-state").style.display = "block";
+        renderSummary();
+        return;
+      }
+      $("#table-wrap").style.display = "";
+      $("#empty-state").style.display = "none";
+
+      state.filtered.forEach(function (r, i) {
+        var topTier = pickTopTier(r);
+        var tierEl = el("span", {
+          class: "tier " + (TIER_CLASS[topTier] || "t-gray")
+        }, tierLabel(topTier));
+
+        var facilityCell = el("td", { class: "facility" });
+        facilityCell.appendChild(document.createTextNode(r.facility_name || "(unnamed)"));
+        if (r.city) {
+          facilityCell.appendChild(el("span", { class: "loc" }, " (" + r.city + ")"));
+        }
+
+        var ageCell = el("td", {
+          class: "last " + ageClass(r.last_signal_age_days)
+        }, fmtAge(r.last_signal_age_days));
+
+        var tr = el("tr", {}, [
+          el("td", { class: "rank" }, String(i + 1)),
+          facilityCell,
+          el("td", { class: "parent" }, r.parent_company_name || ""),
+          el("td", { class: "naics" }, r.state || ""),
+          el("td", { class: "naics" }, r.naics_primary || ""),
+          el("td", { class: "score" }, String(r.top_score || 0)),
+          el("td", {}, tierEl),
+          el("td", { class: "signals" }, String(r.signal_count_90d || 0)),
+          ageCell,
+          el("td", { class: "hubspot-cell" }, renderHubspot(r)),
+          el("td", { class: "action-cell" }, renderAction(r))
+        ]);
+        body.appendChild(tr);
+      });
+
+      document.querySelectorAll("th[data-sort]").forEach(function (th) {
+        var ind = th.querySelector(".sort-ind");
+        if (ind) ind.remove();
+        if (th.getAttribute("data-sort") === state.sortKey) {
+          th.appendChild(el("span", { class: "sort-ind" },
+            state.sortDir === "asc" ? "^" : "v"));
+        }
+      });
+
+      renderSummary();
+    }
+
+    function renderSummary() {
+      var inCycle = state.rows.length;
+      var deploy = state.rows.filter(function (r) {
+        return r.pdm_tier === "deployment_imminent" || r.cmms_tier === "deployment_imminent";
+      }).length;
+      var synced = state.rows.filter(function (r) { return !!r.hubspot_deal_id; }).length;
+      $("#summary-line").innerHTML =
+        "<strong>" + inCycle + "</strong> accounts in cycle &middot; " +
+        "<strong>" + deploy + "</strong> in deployment_imminent &middot; " +
+        "<strong>" + synced + "</strong> synced to HubSpot &middot; " +
+        "Updated nightly via auto-sync.";
+    }
+
+    function initStateFilter() {
+      var sel = $("#f-state");
+      var states = {};
+      state.rows.forEach(function (r) { if (r.state) states[r.state] = 1; });
+      Object.keys(states).sort().forEach(function (s) {
+        sel.appendChild(el("option", { value: s }, s));
+      });
+    }
+
+    function bindUI() {
+      $("#f-tier").addEventListener("change", function (e) {
+        state.filters.tier = e.target.value; applyFilters();
+      });
+      $("#f-state").addEventListener("change", function (e) {
+        state.filters.state = e.target.value; applyFilters();
+      });
+      $("#f-age").addEventListener("change", function (e) {
+        state.filters.age = e.target.value; applyFilters();
+      });
+      $("#f-hubspot").addEventListener("change", function (e) {
+        state.filters.hubspot = e.target.value; applyFilters();
+      });
+      $("#reset-btn").addEventListener("click", function () {
+        state.filters = { tier: "", state: "", age: "", hubspot: "" };
+        $("#f-tier").value = "";
+        $("#f-state").value = "";
+        $("#f-age").value = "";
+        $("#f-hubspot").value = "";
+        applyFilters();
+      });
+      document.querySelectorAll("th[data-sort]").forEach(function (th) {
+        th.addEventListener("click", function () {
+          var k = th.getAttribute("data-sort");
+          if (state.sortKey === k) {
+            state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+          } else {
+            state.sortKey = k;
+            var textKeys = ["facility", "parent", "state", "naics", "top_tier"];
+            state.sortDir = textKeys.indexOf(k) !== -1 ? "asc" : "desc";
+          }
+          sortRows(); render();
+        });
+      });
+    }
+
+    function setHeaderMeta() {
+      var now = new Date();
+      $("#today-date").textContent =
+        now.toISOString().slice(0, 10) + " " +
+        now.toTimeString().slice(0, 5) + " local";
+      var dates = state.rows.map(function (r) { return r.score_date; })
+        .filter(Boolean).sort();
+      $("#last-scored").textContent = dates.length
+        ? dates[dates.length - 1] : "n/a";
+    }
+
+    async function start() {
+      var data = await loadData();
+      state.rows = data || [];
+      state.filtered = state.rows.slice();
+      initStateFilter();
+      bindUI();
+      setHeaderMeta();
+      sortRows();
+      render();
+    }
+
+    document.addEventListener("DOMContentLoaded", start);
+  })();
+  </script>
+</body>
+</html>
