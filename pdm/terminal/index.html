@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>CapexLayer Terminal · Maintenance Intelligence</title>
+  <meta name="theme-color" content="#080e1a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/pdm/styles.css" />
+  <script>
+    window.PDMCMMS_CONFIG = {
+      SUPABASE_URL: "https://qdnaglhailuflynirqtt.supabase.co",
+      SUPABASE_ANON_KEY: "sb_publishable_B8SfhndBe7JUg0j_CtwgDA_uRJc95Ln"
+    };
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1><span class="live"></span>CAPEXLAYER TERMINAL
+          <span class="vertical">Vertical 02 · Maintenance Intelligence (PdM + CMMS)</span>
+        </h1>
+      </div>
+      <div class="meta">
+        <a href="/pdm/" class="home-link">← Home</a>
+        <div id="today-date" style="margin-top:8px;">&nbsp;</div>
+        <div>Last scored: <strong id="last-scored">loading</strong></div>
+      </div>
+    </header>
+
+    <div id="demo-banner" class="banner hidden">
+      <strong>DEMO MODE.</strong>
+      Showing representative facilities. Live signal feed wires up at customer onboarding.
+    </div>
+
+    <div class="filters">
+      <div class="group">
+        <label>Vertical</label>
+        <select id="f-vertical">
+          <option value="both">PdM + CMMS</option>
+          <option value="pdm">PdM only</option>
+          <option value="cmms">CMMS only</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>Tier</label>
+        <select id="f-tier">
+          <option value="">All tiers</option>
+          <option value="deployment_imminent">Deployment imminent</option>
+          <option value="selection_underway">Selection underway</option>
+          <option value="active_evaluation">Active evaluation</option>
+          <option value="replacement_evaluation">Replacement evaluation</option>
+          <option value="early_interest">Early interest</option>
+          <option value="watch_list">Watch list</option>
+        </select>
+      </div>
+      <div class="group">
+        <label>State</label>
+        <select id="f-state"><option value="">All states</option></select>
+      </div>
+      <div class="group">
+        <label>Parent</label>
+        <input id="f-search" type="text" placeholder="Search parent company..." />
+      </div>
+      <div class="group">
+        <label>NAICS</label>
+        <div id="f-naics" class="naics-chips"></div>
+      </div>
+      <div class="spacer"></div>
+      <span class="count" id="row-count">0 facilities</span>
+      <button class="reset" id="reset-btn">Reset</button>
+    </div>
+
+    <div id="table-wrap">
+      <table class="terminal" id="terminal-table">
+        <thead>
+          <tr>
+            <th data-sort="rank" style="width:36px;">#</th>
+            <th data-sort="facility">Facility</th>
+            <th data-sort="parent">Parent</th>
+            <th data-sort="naics">NAICS</th>
+            <th data-sort="pdm_score" style="text-align:right;">PdM</th>
+            <th data-sort="cmms_score" style="text-align:right;">CMMS</th>
+            <th data-sort="tier">Tier</th>
+            <th data-sort="signal_count_90d" style="text-align:right;">Signals 90d</th>
+            <th data-sort="last_signal_date">Last Signal</th>
+            <th style="width:120px;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="terminal-body"></tbody>
+      </table>
+    </div>
+
+    <div id="empty-state" class="empty" style="display:none;">
+      <h2>No facilities scored yet.</h2>
+      <p>The signal collectors are running. Check back after the next scoring run.</p>
+    </div>
+
+    <footer class="bot">
+      Signals sourced from public filings, federal procurement, state portals, and public job boards. Refreshed nightly.
+    </footer>
+  </div>
+
+  <script src="/pdm/app.js"></script>
+</body>
+</html>
