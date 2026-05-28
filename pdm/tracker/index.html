@@ -2,20 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=1280" />
-  <title>CapexLayer Account Tracker · PdM + CMMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CapexLayer Account Tracker · PdM and CMMS</title>
+  <meta name="description" content="Your weekly account queue. Refreshed nightly, auto-synced to HubSpot. Every account here has crossed buying-cycle threshold in the last ninety days." />
   <meta name="theme-color" content="#080e1a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/pdm/styles.css" />
+  <link rel="stylesheet" href="/pdm/landing.css" />
   <style>
-    /* Tracker-specific tweaks. Keeps the same brand tokens as terminal styles. */
-    .lead-line {
-      color: var(--cl-text-body); font-size: 13px; margin: 6px 0 14px;
-      font-family: var(--font-mono); letter-spacing: 0.04em;
+    /* Tracker-specific tweaks. Sits inside a cl-section panel for brand parity with /pdm/. */
+    .cl-section-wide {
+      max-width: 1400px;
     }
-    .lead-line strong { color: var(--cl-gold); font-weight: 500; }
+    .cl-section-kicker {
+      font-family: var(--font-mono);
+      font-size: 11px; color: var(--cl-gold);
+      letter-spacing: 0.28em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .tracker-meta {
+      display: flex; gap: 18px; align-items: center;
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--cl-text-mute); letter-spacing: 0.10em;
+      margin: 18px 0 22px;
+      flex-wrap: wrap;
+    }
+    .tracker-meta .live {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--cl-green); margin-right: 8px;
+      box-shadow: 0 0 8px var(--cl-green);
+      animation: cl-pulse 2s ease-in-out infinite;
+    }
+    .tracker-meta strong { color: var(--cl-gold); font-weight: 500; }
+    .tracker-meta .sep { color: var(--cl-text-mute); opacity: 0.5; }
+
+    /* Filter row, inside the panel, tuned to match landing inputs */
+    .filters {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+      padding: 14px 18px;
+      background: var(--cl-bg-deep);
+      border: 1px solid var(--cl-border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    .filters .group { display: flex; align-items: center; gap: 8px; }
+    .filters label {
+      color: var(--cl-gold); font-family: var(--font-mono);
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em;
+    }
+    .filters select, .filters input {
+      background: var(--cl-bg); color: var(--cl-text);
+      border: 1px solid var(--cl-border); padding: 7px 10px;
+      font: inherit; font-size: 13px; border-radius: 6px;
+      font-family: var(--font-mono);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .filters select:focus, .filters input:focus {
+      outline: none; border-color: var(--cl-gold);
+      box-shadow: 0 0 0 1px var(--cl-gold);
+    }
+    .filters .spacer { flex: 1; }
+    .filters .count {
+      color: var(--cl-text-body); font-size: 12px;
+      font-family: var(--font-mono); letter-spacing: 0.06em;
+    }
+    .filters button.reset {
+      background: transparent; color: var(--cl-text-body);
+      border: 1px solid var(--cl-border); padding: 7px 14px;
+      font: inherit; font-size: 11px; cursor: pointer;
+      font-family: var(--font-mono); text-transform: uppercase;
+      letter-spacing: 0.14em; border-radius: 6px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .filters button.reset:hover { color: var(--cl-gold); border-color: var(--cl-gold); }
+
+    /* Table chrome inside the panel */
+    #table-wrap {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--cl-border);
+    }
+    table.terminal {
+      border-radius: 0;
+      border: none;
+    }
     table.terminal td.action-cell { width: 200px; }
     table.terminal td.hubspot-cell { width: 96px; }
     .age-amber { color: var(--cl-amber); }
@@ -49,34 +121,63 @@
       font-size: 14px; text-decoration: none; padding: 0 4px;
     }
     .action-pair .icon-link:hover { color: var(--cl-gold); }
+
     .summary-line {
       margin-top: 18px; padding: 12px 16px;
-      background: var(--cl-bg-card); border: 1px solid var(--cl-border);
+      background: var(--cl-bg-deep); border: 1px solid var(--cl-border);
+      border-left: 3px solid var(--cl-gold);
       border-radius: 6px; color: var(--cl-text-body);
       font-family: var(--font-mono); font-size: 12px;
       letter-spacing: 0.04em;
     }
     .summary-line strong { color: var(--cl-gold); font-weight: 500; }
+
+    /* Highlight the current nav link */
+    .cl-nav-links a[aria-current="page"] {
+      color: var(--cl-gold);
+      border-bottom: 1px solid var(--cl-gold);
+      padding-bottom: 4px;
+    }
+
+    @media (max-width: 1100px) {
+      .cl-section.cl-section-wide { padding: 40px 24px; margin: 32px 20px; }
+      #table-wrap { overflow-x: auto; }
+    }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <header class="top">
-      <div>
-        <h1><span class="live"></span>ACCOUNT TRACKER
-          <span class="vertical">Top PdM/CMMS accounts in active cycle</span>
-        </h1>
-        <div class="lead-line">
-          Your queue for this week. Refreshed nightly. Auto-synced to HubSpot.
-          Click any account to drop into the dossier or your CRM.
-        </div>
+<body class="landing">
+
+  <nav class="cl-nav">
+    <a class="cl-nav-logo" href="https://capexlayer.com">
+      <div class="cl-nav-logo-text">
+        <span class="cl-nav-logo-name">CAPEXLAYER</span>
+        <span class="cl-nav-logo-sub">Maintenance Intelligence</span>
       </div>
-      <div class="meta">
-        <a href="/pdm/" class="home-link">&larr; Home</a>
-        <div id="today-date" style="margin-top:8px;">&nbsp;</div>
-        <div>Last scored: <strong id="last-scored">loading</strong></div>
-      </div>
-    </header>
+    </a>
+    <div class="cl-nav-links">
+      <a href="/pdm/terminal/">Terminal</a>
+      <a href="/pdm/tracker/" aria-current="page">Tracker</a>
+      <a href="/pdm/#why">Why now</a>
+      <a href="/pdm/#who">Who buys it</a>
+      <a href="/pdm/#pricing">Pricing</a>
+      <a href="https://calendly.com/davidlee-capexlayer" target="_blank" rel="noopener" class="cl-nav-cta">Request access</a>
+    </div>
+  </nav>
+
+  <section class="cl-section cl-section-wide" id="tracker">
+    <div class="cl-section-kicker">PDM · CMMS · MAINTENANCE INTELLIGENCE</div>
+    <h2 class="cl-h2">ACCOUNT TRACKER</h2>
+    <p class="cl-section-para">
+      Your queue for the week. Refreshed nightly, auto-synced to HubSpot. Every account here has crossed buying-cycle threshold in the last ninety days. Click any row to drop into the dossier or open the deal in your CRM.
+    </p>
+
+    <div class="tracker-meta">
+      <span><span class="live"></span>LIVE</span>
+      <span class="sep">·</span>
+      <span id="today-date">&nbsp;</span>
+      <span class="sep">·</span>
+      <span>LAST SCORED: <strong id="last-scored">loading</strong></span>
+    </div>
 
     <div id="demo-banner" class="banner hidden">
       <strong>NO ACCOUNTS IN CYCLE.</strong>
@@ -147,11 +248,33 @@
     </div>
 
     <div class="summary-line" id="summary-line">&nbsp;</div>
+  </section>
 
-    <footer class="bot">
-      Pulled live from the public account-tracker view. Refreshed nightly. Auto-synced to HubSpot portal 246150766.
-    </footer>
-  </div>
+  <footer class="cl-footer" id="contact">
+    <div class="cl-footer-grid">
+      <div>
+        <div class="cl-footer-brand">CAPEXLAYER</div>
+        <div class="cl-footer-sub">VERTICAL 02 · MAINTENANCE INTELLIGENCE</div>
+        <p class="cl-footer-platform">
+          CapexLayer powers Vertical 01 (CraneGenius, five hundred thousand crane project signals across nineteen hundred cities) and Vertical 02 (Maintenance Intelligence, this site). One signal infrastructure, multiple buying motions.
+        </p>
+      </div>
+      <div class="cl-footer-col">
+        <div class="cl-footer-h">Platform</div>
+        <a href="https://capexlayer.com">capexlayer.com</a>
+        <a href="https://cranegenius.com">cranegenius.com</a>
+        <a href="/pdm/terminal/">Maintenance terminal</a>
+      </div>
+      <div class="cl-footer-col">
+        <div class="cl-footer-h">Contact</div>
+        <a href="https://calendly.com/davidlee-capexlayer" target="_blank" rel="noopener">Request access</a>
+        <a href="mailto:david@capexlayer.com">david@capexlayer.com</a>
+      </div>
+    </div>
+    <div class="cl-footer-bottom">
+      David Lee · Founder · Portland, Oregon · The engine behind the signal.
+    </div>
+  </footer>
 
   <script>
   (function () {
@@ -440,7 +563,7 @@
       var now = new Date();
       $("#today-date").textContent =
         now.toISOString().slice(0, 10) + " " +
-        now.toTimeString().slice(0, 5) + " local";
+        now.toTimeString().slice(0, 5) + " LOCAL";
       var dates = state.rows.map(function (r) { return r.score_date; })
         .filter(Boolean).sort();
       $("#last-scored").textContent = dates.length
