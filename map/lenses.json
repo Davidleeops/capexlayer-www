@@ -1,0 +1,77 @@
+{
+  "_comment": "Story lenses for the Capital Movement Explorer. Each lens is a saved angle on the same data: a title + caption you can read on camera, plus the filters that frame it. Edit freely, add your own. filters: null/missing = no constraint.",
+  "lenses": [
+    {
+      "id": "everywhere",
+      "title": "Where capital is moving",
+      "caption": "Every signal we track, on one map. The dots are real projects, opportunities, and companies. The bigger the dot, the bigger the dollars behind it.",
+      "audience": "Top of funnel · everyone",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {}
+    },
+    {
+      "id": "democratize",
+      "title": "Capital intelligence, for everyone",
+      "caption": "Big companies pay for this picture. You should be able to see it too. Same data, no gatekeeping. This is what the flow of capital looks like before it shows up in the news.",
+      "audience": "Social · brand",
+      "mode": "map",
+      "colorBy": "score",
+      "filters": { "minScore": 50 }
+    },
+    {
+      "id": "datacenter",
+      "title": "The data center gold rush",
+      "caption": "Hyperscalers are spending. Each star is a data center opportunity, sized by estimated crane spend. Some single sites carry hundreds of millions in lift work.",
+      "audience": "Crane / heavy lift buyers",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": { "verticals": ["Data Center"] }
+    },
+    {
+      "id": "cranes",
+      "title": "Cranes are going up here",
+      "caption": "Scored construction projects with a predicted crane window. This is where a crane company wants to be calling right now.",
+      "audience": "CraneGenius prospects",
+      "mode": "map",
+      "colorBy": "score",
+      "filters": { "verticals": ["Crane"] }
+    },
+    {
+      "id": "billion",
+      "title": "The billion-dollar board",
+      "caption": "Filtered to projects and opportunities with the largest estimated value. When this much capital concentrates, the supply chain underneath it moves for years.",
+      "audience": "Enterprise · CapexLayer",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": { "minValue": 500000000 }
+    },
+    {
+      "id": "hot",
+      "title": "Companies in motion right now",
+      "caption": "Hot prospects flagged by live triggers: hiring, leadership changes, awards, permits. Each one has a story attached. Hover to read it.",
+      "audience": "Sales · outreach",
+      "mode": "map",
+      "colorBy": "score",
+      "filters": { "types": ["prospect"] }
+    },
+    {
+      "id": "structure",
+      "title": "How it all connects",
+      "caption": "Same data, as a network. Companies, projects, signals, territories, and verticals, linked. This is the engine behind the map.",
+      "audience": "How it works",
+      "mode": "graph",
+      "colorBy": "type",
+      "filters": {}
+    },
+    {
+      "id": "funnel",
+      "title": "From signal to conversation",
+      "caption": "This is the CapexLayer thesis: capital signals become qualified opportunities become conversations. We watch the first move so you take the first call.",
+      "audience": "Corporate funnel · close",
+      "mode": "graph",
+      "colorBy": "vertical",
+      "filters": { "types": ["opportunity", "project", "account", "signal"] }
+    }
+  ]
+}
