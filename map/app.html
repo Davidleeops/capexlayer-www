@@ -14,7 +14,7 @@
 :root{--navy:#080e1a;--navy2:#0f1828;--navy3:#16223a;--gold:#c9a84c;--green:#4cc98a;--red:#c95a4c;--blue:#7fb2ff;--pink:#e07fb2;--text:#f4f1e6;--dim:#a4a59c;--border:#1f2c47;}
 *{box-sizing:border-box;}
 html,body{margin:0;height:100%;background:var(--navy);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;overflow:hidden;}
-#stage{position:fixed;inset:0;}canvas{display:block;cursor:grab;}canvas.grabbing{cursor:grabbing;}
+#stage{position:fixed;inset:0;}canvas{display:block;cursor:grab;touch-action:none;}canvas.grabbing{cursor:grabbing;}
 .panel{position:fixed;background:rgba(15,24,40,.93);border:1px solid var(--border);backdrop-filter:blur(6px);}
 h1{font-family:'Bebas Neue';color:var(--gold);letter-spacing:.04em;margin:0;}
 #top{top:0;left:0;right:0;display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--border);z-index:10;}
@@ -61,6 +61,26 @@ select,input[type=text]{width:100%;background:var(--navy3);border:1px solid var(
 #err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:40px;}
 #err div{max-width:560px;}#err code{color:var(--gold);}
 .legend-row{display:flex;align-items:center;gap:7px;font-size:11.5px;padding:2px 0;}
+/* ---- mobile: panels become overlays, toolbar scrolls, big touch targets ---- */
+#layers-toggle,#right .x{-webkit-tap-highlight-color:transparent;}
+#layers-toggle{display:none;position:fixed;left:10px;bottom:106px;z-index:25;min-width:44px;min-height:44px;background:var(--navy3);color:var(--gold);border:1px solid #8a7434;font:inherit;font-size:13px;padding:0 14px;cursor:pointer;}
+@media (max-width:768px){
+  #layers-toggle{display:block;}
+  #top{overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;white-space:nowrap;-webkit-overflow-scrolling:touch;gap:10px;padding:8px 12px;}
+  #top h1{font-size:20px;flex:none;}
+  #top .sub{flex:none;}
+  #top .seg,#top .btn{flex:none;}
+  .seg button,.btn{min-height:40px;}
+  .lens{min-height:44px;}
+  #left{left:0;width:280px;max-width:85vw;top:0;bottom:0;z-index:24;transform:translateX(-105%);transition:transform .22s ease;padding-top:16px;}
+  #left.open{transform:translateX(0);box-shadow:8px 0 24px rgba(0,0,0,.5);}
+  #right{right:0;width:320px;max-width:85vw;top:0;bottom:0;max-height:none;z-index:24;transform:translateX(105%);transition:transform .22s ease;}
+  #right.open{transform:translateX(0);box-shadow:-8px 0 24px rgba(0,0,0,.5);display:block!important;}
+  #right .x{min-width:44px;min-height:44px;font-size:26px;}
+  #bottom{left:0;}
+  #stats{left:0;font-size:11px;}
+  body.embed #layers-toggle{display:none;}
+}
 /* ---- embed mode: drop the chrome, keep the picture + caption ---- */
 body.embed #top,body.embed #left,body.embed #right,body.embed #stats{display:none!important;}
 body.embed #bottom{left:0;}
@@ -91,6 +111,7 @@ body.embed #embed-stats{display:block;}
   <button class="btn" id="reset" style="margin-left:auto">Reset</button>
 </div>
 <div id="stats" class="panel"></div>
+<button id="layers-toggle" type="button" aria-label="Toggle layers panel">Layers</button>
 <div id="left" class="panel">
   <div class="hd">Lenses</div><div id="lenses"></div>
   <div class="hd">Layers</div><div id="types"></div>
@@ -126,8 +147,15 @@ function albers(lat,lng){const theta=nA*((lng*D2R)-lon0);const rho=Math.sqrt(Mat
 
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');
 let W,H,DPR=Math.min(window.devicePixelRatio||1,2);
-function resize(){W=cv.clientWidth=innerWidth;H=cv.clientHeight=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);if(window.__ready)fitMap();}
+function viewportW(){return (window.visualViewport&&window.visualViewport.width)||document.documentElement.clientWidth||innerWidth;}
+function viewportH(){return (window.visualViewport&&window.visualViewport.height)||document.documentElement.clientHeight||innerHeight;}
+function isMobile(){return viewportW()<=768;}
+function resize(){W=Math.round(viewportW());H=Math.round(viewportH());
+  cv.style.width=W+'px';cv.style.height=H+'px';      // CSS size = visual viewport (fixes 2x-DPR overflow on phones)
+  cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);if(window.__ready)fitMap();}
 addEventListener('resize',resize);
+addEventListener('orientationchange',()=>{setTimeout(()=>{resize();if(window.__ready)fitMap();},120);});
+if(window.visualViewport)window.visualViewport.addEventListener('resize',resize);
 
 let DATA=null,LENSES=[],nodes=[],edges=[],idx=new Map(),adj=new Map();
 let mode='map',colorBy='type',activeLens=null,hoverNode=null,focusId=null;
@@ -311,9 +339,9 @@ function radius(n){const v=+n.props.value_usd||0;const base=mode==='map'?3:4;if(
 // ---------- MAP ----------
 function fitMap(){const pts=Object.values(STATES).map(c=>albers(c[0],c[1]));const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);
   const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
-  const padX=64,padTop=96,padBot=110;const aw=W-260-padX,ah=H-padTop-padBot;
+  const leftPad=isMobile()?0:260;const padX=isMobile()?24:64,padTop=isMobile()?70:96,padBot=110;const aw=W-leftPad-padX,ah=H-padTop-padBot;
   const s=Math.min(aw/(x1-x0),ah/(y1-y0))*0.92;
-  mapT={s,ox:260+padX/2+(aw-(x1-x0)*s)/2-x0*s,oy:padTop+(ah-(y1-y0)*s)/2-y0*s};}
+  mapT={s,ox:leftPad+padX/2+(aw-(x1-x0)*s)/2-x0*s,oy:padTop+(ah-(y1-y0)*s)/2-y0*s};}
 function projXY(lat,lng){const a=albers(lat,lng);return[a[0]*mapT.s+mapT.ox,a[1]*mapT.s+mapT.oy];}
 function drawMap(){
   ctx.clearRect(0,0,W,H);
@@ -407,28 +435,112 @@ function tick(){if(!playing)return;timeFrac+=0.01;if(timeFrac>=1){timeFrac=1;pla
 function pickMap(px,py){let best=null,bd=1e9;visibleNodes().forEach(n=>{if(n.props.lat==null)return;const[x,y]=projXY(n.props.lat,n.props.lng);const r=Math.max(radius(n),7);const d=(x-px)**2+(y-py)**2;if(d<r*r&&d<bd){bd=d;best=n;}});return best;}
 function pickGraph(px,py){let best=null,bd=1e9;visibleNodes().forEach(n=>{const p=gS(n);const r=Math.max(radius(n)*Math.sqrt(view.k),6);const d=(p.x-px)**2+(p.y-py)**2;if(d<r*r&&d<bd){bd=d;best=n;}});return best;}
 let dragN=null,panning=false,last=null,moved=false;
-cv.addEventListener('mousedown',e=>{moved=false;last={x:e.clientX,y:e.clientY};const n=(mode==='graph'?pickGraph:pickMap)(e.clientX,e.clientY);if(n&&mode==='graph'){dragN=n;n.pin=true;}else{panning=true;cv.classList.add('grabbing');}});
-addEventListener('mousemove',e=>{const n=(mode==='graph'?pickGraph:pickMap)(e.clientX,e.clientY);hoverNode=n;const tip=document.getElementById('tip');
-  if(n){tip.style.display='block';tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';
-    tip.innerHTML='<b style="color:'+colorOf(n)+'">'+esc(n.label)+'</b><br><span style="color:#a4a59c">'+esc(n.type)+(n.props.vertical?' · '+esc(n.props.vertical):'')+'</span>'+(n.props.value_usd?'<br>'+fmt$(n.props.value_usd):'')+(n.props.narrative&&n.props.narrative!=='?'?'<br><span style="color:#cfcab8">'+esc(n.props.narrative.slice(0,120))+'</span>':'');}
-  else tip.style.display='none';
-  if(!last)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;
-  if(dragN){const k=view.k;dragN.x+= dx/k;dragN.y+=dy/k;}
-  else if(panning){if(mode==='graph'){view.x-=dx/view.k;view.y-=dy/view.k;}else{mapT.ox+=dx;mapT.oy+=dy;}}
-  last={x:e.clientX,y:e.clientY};});
-addEventListener('mouseup',e=>{cv.classList.remove('grabbing');const n=(mode==='graph'?pickGraph:pickMap)(e.clientX,e.clientY);
-  if(!moved){if(n){focusId=(focusId===n.id)?null:n.id;showInfo(n);}else{focusId=null;document.getElementById('right').style.display='none';}}
-  dragN=null;panning=false;last=null;});
-cv.addEventListener('wheel',e=>{e.preventDefault();const f=e.deltaY<0?1.12:.89;if(mode==='graph'){const wx=(e.clientX-W/2)/view.k+view.x,wy=(e.clientY-H/2)/view.k+view.y;view.k=Math.max(.25,Math.min(6,view.k*f));view.x=wx-(e.clientX-W/2)/view.k;view.y=wy-(e.clientY-H/2)/view.k;}else{const mx=e.clientX,my=e.clientY;mapT.ox=mx-(mx-mapT.ox)*f;mapT.oy=my-(my-mapT.oy)*f;mapT.s*=f;}},{passive:false});
+const HAS_POINTER=('PointerEvent' in window);
+function showTip(n,cx,cy){const tip=document.getElementById('tip');
+  if(n){tip.style.display='block';tip.style.left=(cx+12)+'px';tip.style.top=(cy+12)+'px';
+    tip.innerHTML='<b style="color:'+colorOf(n)+'">'+esc(n.label)+'</b><br><span style="color:#a4a59c">'+esc(n.type)+(n.props.vertical?' \u00b7 '+esc(n.props.vertical):'')+'</span>'+(n.props.value_usd?'<br>'+fmt$(n.props.value_usd):'')+(n.props.narrative&&n.props.narrative!=='?'?'<br><span style="color:#cfcab8">'+esc(n.props.narrative.slice(0,120))+'</span>':'');
+    // keep the tooltip on screen (a finger near the right edge would push it off)
+    requestAnimationFrame(()=>{const r=tip.getBoundingClientRect();
+      if(r.right>W-6)tip.style.left=Math.max(6,cx-r.width-12)+'px';
+      if(r.bottom>H-6)tip.style.top=Math.max(6,cy-r.height-12)+'px';});}
+  else tip.style.display='none';}
+function doPick(cx,cy){const n=(mode==='graph'?pickGraph:pickMap)(cx,cy);const R=document.getElementById('right');
+  if(n){focusId=(focusId===n.id)?null:n.id;showInfo(n);showTip(n,cx,cy);} // same pick path as the mouse click
+  else{focusId=null;showTip(null,0,0);R.classList.remove('open');R.style.display='none';}}
+function applyZoom(f,cx,cy){
+  if(mode==='graph'){const wx=(cx-W/2)/view.k+view.x,wy=(cy-H/2)/view.k+view.y;view.k=Math.max(.25,Math.min(6,view.k*f));view.x=wx-(cx-W/2)/view.k;view.y=wy-(cy-H/2)/view.k;}
+  else{mapT.ox=cx-(cx-mapT.ox)*f;mapT.oy=cy-(cy-mapT.oy)*f;mapT.s*=f;}}
+function applyPan(dx,dy){if(dragN){dragN.x+=dx/view.k;dragN.y+=dy/view.k;}
+  else if(mode==='graph'){view.x-=dx/view.k;view.y-=dy/view.k;}else{mapT.ox+=dx;mapT.oy+=dy;}}
+function applyPanMid(dx,dy){if(mode==='graph'){view.x-=dx/view.k;view.y-=dy/view.k;}else{mapT.ox+=dx;mapT.oy+=dy;}}
+function handleDown(cx,cy){moved=false;last={x:cx,y:cy};const n=(mode==='graph'?pickGraph:pickMap)(cx,cy);
+  if(n&&mode==='graph'){dragN=n;n.pin=true;}else{panning=true;cv.classList.add('grabbing');}}
+function handleHoverMove(cx,cy){const n=(mode==='graph'?pickGraph:pickMap)(cx,cy);hoverNode=n;showTip(n,cx,cy);
+  if(!last)return;const dx=cx-last.x,dy=cy-last.y;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;
+  applyPan(dx,dy);last={x:cx,y:cy};}
+function handleUp(cx,cy){cv.classList.remove('grabbing');
+  if(!moved)doPick(cx,cy);
+  dragN=null;panning=false;last=null;}
 
-function showInfo(n){const el=document.getElementById('right');el.style.display='block';const p=n.props;
+if(HAS_POINTER){
+  // ---- unified pointer input: mouse + touch + pen. touch-action:none on the
+  // canvas hands every gesture to us; everything funnels through the same
+  // pan/zoom/pick math the mouse path uses.
+  const ptrs=new Map();              // pointerId -> {x,y}
+  let pinch=null;                    // {d0,cx,cy} while two pointers are down
+  let downAt=0,downX=0,downY=0,tapMoved=false;
+  function pinchState(){const a=[...ptrs.values()];const dx=a[1].x-a[0].x,dy=a[1].y-a[0].y;
+    return{d:Math.hypot(dx,dy)||1,cx:(a[0].x+a[1].x)/2,cy:(a[0].y+a[1].y)/2};}
+  cv.addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    if(cv.setPointerCapture)try{cv.setPointerCapture(e.pointerId);}catch(_){}
+    ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(ptrs.size===2){ // entering pinch: cancel drag/pan, it is a zoom now
+      const st=pinchState();pinch={d0:st.d,cx:st.cx,cy:st.cy};
+      dragN=null;panning=false;last=null;moved=true;tapMoved=true;
+      showTip(null,0,0);
+    }else if(ptrs.size===1){
+      pinch=null;downAt=Date.now();downX=e.clientX;downY=e.clientY;tapMoved=false;
+      handleDown(e.clientX,e.clientY);
+    }});
+  cv.addEventListener('pointermove',e=>{
+    const tracked=ptrs.has(e.pointerId);
+    if(tracked)ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(ptrs.size>=2&&pinch){ // pinch zoom: scale by distance ratio, anchored at the midpoint
+      const st=pinchState();
+      const f=st.d/pinch.d0;
+      if(isFinite(f)&&f>0)applyZoom(f,st.cx,st.cy);
+      applyPanMid(st.cx-pinch.cx,st.cy-pinch.cy); // midpoint drift = two-finger pan
+      pinch={d0:st.d,cx:st.cx,cy:st.cy};
+      return;}
+    if(tracked){ // single pointer down: drag = pan (or node drag in graph mode)
+      if(Math.hypot(e.clientX-downX,e.clientY-downY)>8)tapMoved=true;
+      handleHoverMove(e.clientX,e.clientY);
+    }else if(e.pointerType==='mouse'){ // hover with no button down
+      handleHoverMove(e.clientX,e.clientY);
+    }});
+  function endPtr(e){
+    const had=ptrs.delete(e.pointerId);
+    if(ptrs.size<2)pinch=null;
+    if(!had)return;
+    if(ptrs.size===0){
+      cv.classList.remove('grabbing');
+      const isTap=!tapMoved&&!moved&&(Date.now()-downAt)<250&&e.type!=='pointercancel';
+      if(isTap)doPick(e.clientX,e.clientY);            // tap = pick/select, same path as mouse click
+      else if(e.pointerType!=='mouse')showTip(null,0,0); // drop a stale touch tooltip after a drag
+      dragN=null;panning=false;last=null;
+    }else if(ptrs.size===1){ // pinch ended with one finger still down: resume pan from it
+      const a=[...ptrs.values()][0];last={x:a.x,y:a.y};panning=true;moved=true;tapMoved=true;
+    }}
+  cv.addEventListener('pointerup',endPtr);
+  cv.addEventListener('pointercancel',endPtr);
+  cv.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'&&ptrs.size===0)showTip(null,0,0);});
+}else{
+  // ---- legacy mouse fallback for pre-PointerEvent browsers ----
+  cv.addEventListener('mousedown',e=>{handleDown(e.clientX,e.clientY);});
+  addEventListener('mousemove',e=>{handleHoverMove(e.clientX,e.clientY);});
+  addEventListener('mouseup',e=>{handleUp(e.clientX,e.clientY);});
+}
+cv.addEventListener('wheel',e=>{e.preventDefault();const f=e.deltaY<0?1.12:.89;applyZoom(f,e.clientX,e.clientY);},{passive:false});
+
+// ---- mobile panel toggles ----
+const layersBtn=document.getElementById('layers-toggle');
+if(layersBtn)layersBtn.addEventListener('click',()=>{
+  const L=document.getElementById('left');const open=L.classList.toggle('open');
+  layersBtn.textContent=open?'Close':'Layers';
+  if(open){const R=document.getElementById('right');R.classList.remove('open');}});
+
+function showInfo(n){const el=document.getElementById('right');el.style.display='block';
+  if(isMobile()){el.classList.add('open');const L=document.getElementById('left');
+    if(L.classList.contains('open')){L.classList.remove('open');if(layersBtn)layersBtn.textContent='Layers';}}
+  const p=n.props;
   const flds=['vertical','signal_type','state','metro','date','source'];let kv='';
   if(p.value_usd)kv+='<div class="kv">value: <b>'+fmt$(p.value_usd)+'</b></div>';
   if(p.score)kv+='<div class="kv">score: <b>'+(+p.score).toFixed(1)+'</b></div>';
   flds.forEach(f=>{if(p[f]&&p[f]!=='?')kv+='<div class="kv">'+f.replace(/_/g,' ')+': <b>'+esc(p[f])+'</b></div>';});
   const nb=(adj.get(n.id)||[]).map(i=>idx.get(i)).filter(Boolean).slice(0,30);
   const why=whyNow(n);
-  el.innerHTML='<button class="x" onclick="document.getElementById(\'right\').style.display=\'none\'">×</button>'+
+  el.innerHTML='<button class="x" onclick="(function(r){r.classList.remove(\'open\');r.style.display=\'none\';})(document.getElementById(\'right\'))">×</button>'+
     '<div class="kind">'+esc(n.type)+'</div><h2>'+esc(n.label)+'</h2>'+
     (why?'<div class="why"><span class="lbl">Why now</span>'+esc(why)+'</div>':'')+
     (p.narrative&&p.narrative!=='?'?'<div class="desc">'+esc(p.narrative)+'</div>':'')+kv+

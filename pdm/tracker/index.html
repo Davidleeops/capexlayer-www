@@ -143,6 +143,62 @@
       .cl-section.cl-section-wide { padding: 40px 24px; margin: 32px 20px; }
       #table-wrap { overflow-x: auto; }
     }
+
+    /* Mobile card layout: below 600px the table rows become stacked cards. */
+    @media (max-width: 600px) {
+      .cl-section.cl-section-wide { padding: 28px 14px; margin: 20px 10px; max-width: 100%; }
+      .filters { padding: 12px; gap: 10px; }
+      .filters select, .filters input { max-width: 100%; }
+
+      #table-wrap { overflow-x: visible; border: none; border-radius: 0; }
+      #tracker-table { display: block; width: 100%; }
+      #tracker-table thead { display: none; }
+      #tracker-table tbody { display: block; width: 100%; }
+      #tracker-table tbody tr {
+        display: block; width: 100%; max-width: 100%;
+        background: var(--cl-bg-deep);
+        border: 1px solid var(--cl-border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+      }
+      #tracker-table tbody td {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 12px; width: 100% !important; max-width: 100%;
+        padding: 7px 0; border: none; text-align: left;
+      }
+      #tracker-table tbody td::before {
+        content: attr(data-label);
+        font-family: var(--font-mono);
+        font-size: 10px; text-transform: uppercase;
+        letter-spacing: 0.16em; color: var(--cl-text-mute);
+        flex-shrink: 0;
+      }
+      #tracker-table tbody td.facility {
+        display: block; font-size: 15px;
+        padding-bottom: 10px; margin-bottom: 4px;
+        border-bottom: 1px solid var(--cl-border);
+      }
+      #tracker-table tbody td.facility::before { display: block; margin-bottom: 4px; }
+      #tracker-table tbody td.rank { display: none; }
+      table.terminal td.action-cell, table.terminal td.hubspot-cell { width: 100%; }
+
+      /* Touch targets at least 44px tall on mobile */
+      .action-pair { gap: 12px; }
+      .action-pair .icon-link {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 44px; min-height: 44px; font-size: 16px;
+        border: 1px solid var(--cl-border); border-radius: 6px;
+      }
+      .action-pair .fkey, .fkey.fkey-outline {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-height: 44px; padding: 0 18px;
+      }
+      .hs-deal, .hs-push {
+        display: inline-flex; align-items: center;
+        min-height: 44px; padding: 0 14px;
+      }
+    }
   </style>
 </head>
 <body class="landing">
@@ -463,28 +519,29 @@
           class: "tier " + (TIER_CLASS[topTier] || "t-gray")
         }, tierLabel(topTier));
 
-        var facilityCell = el("td", { class: "facility" });
+        var facilityCell = el("td", { class: "facility", "data-label": "Facility" });
         facilityCell.appendChild(document.createTextNode(r.facility_name || "(unnamed)"));
         if (r.city) {
           facilityCell.appendChild(el("span", { class: "loc" }, " (" + r.city + ")"));
         }
 
         var ageCell = el("td", {
-          class: "last " + ageClass(r.last_signal_age_days)
+          class: "last " + ageClass(r.last_signal_age_days),
+          "data-label": "Last Signal"
         }, fmtAge(r.last_signal_age_days));
 
         var tr = el("tr", {}, [
-          el("td", { class: "rank" }, String(i + 1)),
+          el("td", { class: "rank", "data-label": "#" }, String(i + 1)),
           facilityCell,
-          el("td", { class: "parent" }, r.parent_company_name || ""),
-          el("td", { class: "naics" }, r.state || ""),
-          el("td", { class: "naics" }, r.naics_primary || ""),
-          el("td", { class: "score" }, String(r.top_score || 0)),
-          el("td", {}, tierEl),
-          el("td", { class: "signals" }, String(r.signal_count_90d || 0)),
+          el("td", { class: "parent", "data-label": "Parent" }, r.parent_company_name || ""),
+          el("td", { class: "naics", "data-label": "State" }, r.state || ""),
+          el("td", { class: "naics", "data-label": "NAICS" }, r.naics_primary || ""),
+          el("td", { class: "score", "data-label": "Top Score" }, String(r.top_score || 0)),
+          el("td", { "data-label": "Top Tier" }, tierEl),
+          el("td", { class: "signals", "data-label": "Signals 90d" }, String(r.signal_count_90d || 0)),
           ageCell,
-          el("td", { class: "hubspot-cell" }, renderHubspot(r)),
-          el("td", { class: "action-cell" }, renderAction(r))
+          el("td", { class: "hubspot-cell", "data-label": "HubSpot" }, renderHubspot(r)),
+          el("td", { class: "action-cell", "data-label": "Action" }, renderAction(r))
         ]);
         body.appendChild(tr);
       });

@@ -198,6 +198,24 @@
       color: var(--text-dim);
       font-size: 11px;
     }
+
+    /* Phones: nav links and submit get comfortable touch targets. */
+    @media (max-width: 768px) {
+      .req-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 2px;
+      }
+      button.req-submit { min-height: 44px; }
+      .field input,
+      .field select { min-height: 44px; }
+      .req-fallback a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+      }
+    }
   </style>
 </head>
 <body>

@@ -222,10 +222,14 @@
 
     if (!facility) {
       root.innerHTML =
-        '<div class="empty">' +
+        '<div class="empty-card">' +
           "<h2>No facility selected</h2>" +
-          "<div>Pass <code>?facility_id=&lt;uuid&gt;</code> on the URL, or pick a row from the terminal.</div>" +
-          '<a href="/pdm/terminal/">Back to terminal</a>' +
+          "<p>A dossier shows the full signal history for one facility, so it needs to know which facility you want.</p>" +
+          "<p>Open the terminal, find an account, and click through. The dossier loads from there with everything filled in.</p>" +
+          '<div class="actions">' +
+            '<a class="btn" href="/pdm/terminal/">Open the terminal</a>' +
+            '<a class="btn secondary" href="/pdm/tracker/">Open the tracker</a>' +
+          "</div>" +
         "</div>";
       return;
     }
@@ -395,10 +399,12 @@
 
     if (!result) {
       document.getElementById("root").innerHTML =
-        '<div class="empty">' +
+        '<div class="empty-card">' +
           "<h2>Dossier unavailable</h2>" +
-          "<div>Could not load live data or the bundled sample.</div>" +
-          '<a href="/pdm/terminal/">Back to terminal</a>' +
+          "<p>Could not load live data or the bundled sample. Try again in a minute, or head back to the terminal.</p>" +
+          '<div class="actions">' +
+            '<a class="btn" href="/pdm/terminal/">Back to terminal</a>' +
+          "</div>" +
         "</div>";
       return;
     }

@@ -96,6 +96,18 @@
     .foot-bottom{margin-top:24px;color:var(--mute)}
     @media(max-width:820px){.cards,.grid2{grid-template-columns:1fr}
       .frame iframe{height:420px}}
+    /* Phones: nav wraps instead of pushing past the viewport, links get
+       44px touch targets, nothing exceeds the screen width. */
+    @media(max-width:520px){
+      nav{flex-wrap:wrap;gap:10px;padding:12px 16px}
+      .nav-links{flex-wrap:wrap;gap:6px 14px;width:100%;min-width:0}
+      .nav-links a{display:inline-flex;align-items:center;min-height:44px}
+      .nav-links a.cta{padding:5px 14px}
+      .wrap{padding:0 16px}
+      .ctas a{display:inline-flex;align-items:center;min-height:44px}
+      footer a{display:inline-flex;align-items:center;min-height:44px}
+      img,iframe{max-width:100%}
+    }
   </style>
 </head>
 <body>

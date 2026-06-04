@@ -458,3 +458,28 @@ footer .container {
   form.booking-form { grid-template-columns: 1fr; }
   .show-cta-row { align-items: flex-start; }
 }
+
+
+/* Calendly inline widget: never wider than the viewport on small phones. */
+.calendly-inline-widget {
+  max-width: 100%;
+}
+@media (max-width: 480px) {
+  .calendly-inline-widget {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .calendly-inline-widget iframe {
+    width: 100% !important;
+  }
+}
+
+/* Tap targets: nav + footer links comfortable on touch. */
+@media (max-width: 760px) {
+  nav.top .container a,
+  footer .container a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
