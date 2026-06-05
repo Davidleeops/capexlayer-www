@@ -1,83 +1,2020 @@
 {
-  "generated": "2026-06-04",
+  "generated": "2026-06-05",
   "facilities": [
     {
-      "facility_id": "9099dc13-9699-5a80-b786-83ce1de5b9fc",
+      "facility_id": "0c75dedf-55c9-577a-9606-874758e3b05e",
       "pdm_tier": "deployment_imminent",
-      "cmms_tier": "replacement_evaluation",
-      "name": "ExxonMobil Baytown Refinery",
-      "city": "Baytown",
+      "cmms_tier": "selection_underway",
+      "name": "Marathon Galveston Bay Refinery",
+      "city": "Texas City",
       "state": "TX",
-      "lat": 29.74,
-      "lng": -95.01,
-      "parent": "Exxon Mobil",
-      "ticker": "XOM",
-      "sector": "Refining",
+      "lat": 29.3838,
+      "lng": -94.9027,
+      "parent": "Marathon Petroleum Corporation",
+      "ticker": "MPC",
+      "sector": "Manufacturing",
       "naics": "324110",
-      "cci": 9.4,
-      "tier": "financed_and_timed",
-      "demand": 9.33,
-      "readiness": 9.47,
-      "coverage": 70.0,
-      "pdm": 14,
-      "cmms": 9,
-      "n90": 12,
-      "capex_usd": 25900000000.0,
-      "market_cap_usd": 486000000000.0,
-      "thesis": "Both ends meet. The plant fired 12 signals in 90 days for a PdM score of 14, and the parent is putting capital behind exactly this program. Capex is flowing into Energy Products and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 9.4 of 10, from a facility read of 9.33 and a capital readiness of 9.47.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 14 days.",
+      "cci": 6.08,
+      "tier": "high_conviction",
+      "demand": 10.0,
+      "readiness": 3.7,
+      "coverage": 50.0,
+      "pdm": 31,
+      "cmms": 29,
+      "n90": 6,
+      "capex_usd": 3486000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Strong convergence. Plant level demand is live with 6 signals in 90 days, and the parent's capital posture supports the spend. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 6.08 of 10, from a facility read of 10.0 and a capital readiness of 3.7.",
+      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 21 days.",
       "facts": [
-        "Parent raised full year capex guidance to 27.0B to 29.0B, up 8 percent year over year.",
-        "About 1.4B of the program is earmarked for digital reliability and predictive maintenance.",
-        "Energy Products capex is up 14 percent, faster than the corporate average.",
-        "Free cash flow of 33.4B covers total capex 1.3 times. The program is self funded.",
-        "Net debt to EBITDA of 0.12 with a Aa2 / AA- rating leaves room to fund the spend.",
-        "Analyst consensus Overweight, rating trend up over 90 days, 10 percent upside to the mean target."
+        "Parent raised full year capex guidance to 260M to 260M, up 38 percent year over year.",
+        "Free cash flow of 4.8B covers total capex 1.4 times. The program is self funded.",
+        "Net debt to EBITDA of -0.03 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are up 50 percent on the prior four, from SEC quarterly filings."
       ],
       "risk_flags": [],
       "components": [
         {
-          "label": "Capital program",
-          "score": 2.31,
           "max": 2.5,
-          "note": "capex +8% YoY; digital reliability named on the call; multi year capex trajectory rising"
+          "note": "capex +38% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
         },
         {
-          "label": "Funding capacity",
-          "score": 1.96,
           "max": 2.0,
-          "note": "free cash flow covers capex 1.3x; net debt to EBITDA 0.12; rated Aa2 / AA-"
+          "note": "free cash flow covers capex 1.4x; net debt to EBITDA -0.03",
+          "label": "Funding capacity",
+          "score": 1.6
         },
         {
+          "max": 1.5,
+          "note": "no segment detail on file",
           "label": "Segment economics",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "segment capex +14% YoY; facility sits in this segment"
+          "score": 0.0
         },
         {
-          "label": "Cash generation quality",
-          "score": 0.99,
           "max": 1.0,
-          "note": "free cash flow margin 10%; shareholder returns funded from cash flow"
+          "note": "free cash flow margin 15%",
+          "label": "Cash generation quality",
+          "score": 0.6
         },
         {
+          "max": 1.5,
+          "note": "no analyst detail on file",
           "label": "Analyst and valuation",
-          "score": 1.21,
-          "max": 1.5,
-          "note": "rating trend up over 90 days; 16 of 24 analysts at buy; 10% upside to mean target"
+          "score": 0.0
         },
         {
-          "label": "Sector and macro",
-          "score": 1.5,
           "max": 1.5,
-          "note": "sector capex cycle in expansion; 2 of 2 peers also raising capex; macro backdrop constructive"
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
         }
       ],
       "layers": [
         {
+          "name": "Federal and regulatory",
+          "count": 3,
           "layer": 1,
+          "weight": 14,
+          "sources": [
+            "edgar",
+            "epa_echo",
+            "sam_gov"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 4,
+          "sources": [
+            "state_tx"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-26",
+        "low_usd": 260000000.0,
+        "high_usd": 260000000.0,
+        "sentence": "(c) The 2026 capital investment outlook for Midstream - MPLX excludes $260 million of capital expenditures, which is expected to be incurred primarily by MPC and other MPLX customers on MPLX\u2019s behalf.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1510295/000151029526000009/mpc-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "62a8204a-6c81-5eb7-bfea-998a80b06526",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "ExxonMobil Baytown Refinery and Olefins Plant",
+      "city": "Baytown",
+      "state": "TX",
+      "lat": 29.7355,
+      "lng": -95.0149,
+      "parent": "Exxon Mobil Corporation",
+      "ticker": "XOM",
+      "sector": "Manufacturing",
+      "naics": "324110",
+      "cci": 5.07,
+      "tier": "watch_both_ends",
+      "demand": 10.0,
+      "readiness": 2.57,
+      "coverage": 50.0,
+      "pdm": 46,
+      "cmms": 30,
+      "n90": 8,
+      "capex_usd": 28358000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 5.07 of 10, from a facility read of 10.0 and a capital readiness of 2.57.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to 9.0B to 9.0B, up 17 percent year over year.",
+        "Free cash flow of 23.6B covers total capex 0.8 times. The program is self funded.",
+        "Quarterly capex is moving: the latest four quarters are up 22 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +17% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.8x",
+          "label": "Funding capacity",
+          "score": 0.64
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 7%",
+          "label": "Cash generation quality",
+          "score": 0.43
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 5,
+          "layer": 1,
+          "weight": 20,
+          "sources": [
+            "doe",
+            "edgar",
+            "epa_echo",
+            "sam_gov",
+            "usaspending"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 3,
+          "layer": 4,
+          "weight": 13,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-18",
+        "low_usd": 9000000000.0,
+        "high_usd": 9000000000.0,
+        "sentence": "As the Corporation progresses its emission-reduction plans, worldwide environmental expenditures are expected to increase to approximately $9 billion annually in 2026 and 2027, with capital expenditures expected to account for approximately 44 percent of the total expenditures.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/34088/000003408826000045/xom-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "5a5c25b6-a155-5b03-9d6a-b964203c0789",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Constellation Limerick Generating Station",
+      "city": "Pottstown",
+      "state": "PA",
+      "lat": 40.2261,
+      "lng": -75.5856,
+      "parent": "Constellation Energy Corporation",
+      "ticker": "CEG",
+      "sector": "Utilities",
+      "naics": "221113",
+      "cci": 4.88,
+      "tier": "watch_both_ends",
+      "demand": 10.0,
+      "readiness": 2.38,
+      "coverage": 50.0,
+      "pdm": 42,
+      "cmms": 34,
+      "n90": 8,
+      "capex_usd": 2949000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.88 of 10, from a facility read of 10.0 and a capital readiness of 2.38.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up 15 percent year over year.",
+        "Free cash flow of 1.3B covers total capex 0.4 times. The program is self funded.",
+        "Net debt to EBITDA of 1.17 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are up 45 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +15% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.4x; net debt to EBITDA 1.17",
+          "label": "Funding capacity",
+          "score": 0.58
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 5%",
+          "label": "Cash generation quality",
+          "score": 0.3
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 4,
+          "layer": 1,
+          "weight": 15,
+          "sources": [
+            "edgar",
+            "sam_gov",
+            "usaspending"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 4,
+          "sources": [
+            "state_pa"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 3,
+          "layer": 4,
+          "weight": 14,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "8a1c853a-eae3-5d4a-b0af-1be24e2dff73",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Exelon Byron Generating Station",
+      "city": "Byron",
+      "state": "IL",
+      "lat": 42.0744,
+      "lng": -89.2811,
+      "parent": "Constellation Energy Corporation",
+      "ticker": "CEG",
+      "sector": "Utilities",
+      "naics": "221113",
+      "cci": 4.88,
+      "tier": "watch_both_ends",
+      "demand": 10.0,
+      "readiness": 2.38,
+      "coverage": 50.0,
+      "pdm": 28,
+      "cmms": 19,
+      "n90": 5,
+      "capex_usd": 2949000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.88 of 10, from a facility read of 10.0 and a capital readiness of 2.38.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up 15 percent year over year.",
+        "Free cash flow of 1.3B covers total capex 0.4 times. The program is self funded.",
+        "Net debt to EBITDA of 1.17 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are up 45 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +15% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.4x; net debt to EBITDA 1.17",
+          "label": "Funding capacity",
+          "score": 0.58
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 5%",
+          "label": "Cash generation quality",
+          "score": 0.3
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
           "name": "Federal and regulatory",
           "count": 2,
+          "layer": 1,
+          "weight": 10,
+          "sources": [
+            "edgar",
+            "sam_gov"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 5,
+          "sources": [
+            "state_il"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 9,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "cfbeb2d8-ead7-51b0-9a90-f031af050ade",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Chevron Pascagoula Refinery",
+      "city": "Pascagoula",
+      "state": "MS",
+      "lat": 30.3463,
+      "lng": -88.5328,
+      "parent": "Chevron Corporation",
+      "ticker": "CVX",
+      "sector": "Manufacturing",
+      "naics": "324110",
+      "cci": 4.82,
+      "tier": "watch_both_ends",
+      "demand": 10.0,
+      "readiness": 2.32,
+      "coverage": 50.0,
+      "pdm": 24,
+      "cmms": 23,
+      "n90": 5,
+      "capex_usd": 17347000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.82 of 10, from a facility read of 10.0 and a capital readiness of 2.32.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to 1.0B to 1.0B, up 6 percent year over year.",
+        "Free cash flow of 16.6B covers total capex 1.0 times. The program is self funded."
+      ],
+      "risk_flags": [],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +6% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.05
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 1.0x",
+          "label": "Funding capacity",
+          "score": 0.74
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 9%",
+          "label": "Cash generation quality",
+          "score": 0.53
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 3,
+          "layer": 1,
+          "weight": 13,
+          "sources": [
+            "edgar",
+            "epa_echo",
+            "sam_gov"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 9,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-24",
+        "low_usd": 1000000000.0,
+        "high_usd": 1000000000.0,
+        "sentence": "Downstream Capex is expected to be around $1 billion, with nearly three-fourths allocated to the U.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/93410/000009341026000078/cvx-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "3b011808-2ce9-5ecc-bce5-5ae3ca4ab995",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Valero Port Arthur Refinery",
+      "city": "Port Arthur",
+      "state": "TX",
+      "lat": 29.8638,
+      "lng": -93.9396,
+      "parent": "Valero Energy Corporation",
+      "ticker": "VLO",
+      "sector": "Manufacturing",
+      "naics": "324110",
+      "cci": 4.69,
+      "tier": "watch_both_ends",
+      "demand": 10.0,
+      "readiness": 2.2,
+      "coverage": 50.0,
+      "pdm": 16,
+      "cmms": 25,
+      "n90": 5,
+      "capex_usd": 1353000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.69 of 10, from a facility read of 10.0 and a capital readiness of 2.2.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up 6 percent year over year.",
+        "Free cash flow of 4.5B covers total capex 3.3 times. The program is self funded.",
+        "Net debt to EBITDA of 0.71 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are up 29 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +6% YoY",
+          "label": "Capital program",
+          "score": 0.59
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 3.3x; net debt to EBITDA 0.71",
+          "label": "Funding capacity",
+          "score": 1.39
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 4%",
+          "label": "Cash generation quality",
+          "score": 0.22
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 2,
+          "layer": 1,
+          "weight": 8,
+          "sources": [
+            "edgar",
+            "usaspending"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 5,
+          "sources": [
+            "state_tx"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 9,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "2cb61c1e-91a1-5319-8acd-63c9702e2059",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "International Paper Memphis Mill",
+      "city": "Memphis",
+      "state": "TN",
+      "lat": 35.1495,
+      "lng": -90.049,
+      "parent": "International Paper Company",
+      "ticker": "IP",
+      "sector": "Manufacturing",
+      "naics": "322121",
+      "cci": 4.3,
+      "tier": "watch_both_ends",
+      "demand": 10.0,
+      "readiness": 1.85,
+      "coverage": 50.0,
+      "pdm": 14,
+      "cmms": 15,
+      "n90": 4,
+      "capex_usd": 534000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.3 of 10, from a facility read of 10.0 and a capital readiness of 1.85.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up -47 percent year over year.",
+        "Free cash flow of 1.2B covers total capex 2.2 times. The program is self funded.",
+        "Net debt to EBITDA of 1.51 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are up 94 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -47% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -47% YoY",
+          "label": "Capital program",
+          "score": 0.0
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 2.2x; net debt to EBITDA 1.51",
+          "label": "Funding capacity",
+          "score": 1.15
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 19%",
+          "label": "Cash generation quality",
+          "score": 0.6
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 2,
+          "layer": 1,
+          "weight": 8,
+          "sources": [
+            "edgar",
+            "epa_echo"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "2c9f4130-d5cf-5156-bd92-d9773e195cc1",
+      "pdm_tier": "active_evaluation",
+      "cmms_tier": "selection_underway",
+      "name": "Alcoa Warrick Operations",
+      "city": "Newburgh",
+      "state": "IN",
+      "lat": 37.9474,
+      "lng": -87.334,
+      "parent": "Alcoa Corporation",
+      "ticker": "AA",
+      "sector": "Manufacturing",
+      "naics": "331313",
+      "cci": 4.13,
+      "tier": "watch_both_ends",
+      "demand": 8.0,
+      "readiness": 2.13,
+      "coverage": 50.0,
+      "pdm": 10,
+      "cmms": 12,
+      "n90": 3,
+      "capex_usd": 618000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.13 of 10, from a facility read of 8.0 and a capital readiness of 2.13.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up 7 percent year over year.",
+        "Free cash flow of 567M covers total capex 0.9 times. The program is self funded.",
+        "Quarterly capex is moving: the latest four quarters are down 11 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +7% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.16
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.9x",
+          "label": "Funding capacity",
+          "score": 0.71
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 4%",
+          "label": "Cash generation quality",
+          "score": 0.26
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 4,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 9,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "c8b4d00d-2197-5daf-92e5-9086d770c148",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Freeport-McMoRan Morenci Mine",
+      "city": "Morenci",
+      "state": "AZ",
+      "lat": 33.0517,
+      "lng": -109.3565,
+      "parent": "Freeport-McMoRan Inc.",
+      "ticker": "FCX",
+      "sector": "Mining and extraction",
+      "naics": "212234",
+      "cci": 4.1,
+      "tier": "watch_both_ends",
+      "demand": 10.0,
+      "readiness": 1.68,
+      "coverage": 50.0,
+      "pdm": 17,
+      "cmms": 16,
+      "n90": 4,
+      "capex_usd": 4494000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.1 of 10, from a facility read of 10.0 and a capital readiness of 1.68.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to 4.0B to 4.0B, up -6 percent year over year.",
+        "Free cash flow of 1.1B covers total capex 0.2 times. The program is self funded.",
+        "Net debt to EBITDA of 0.58 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are down 6 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -6% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -6% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 0.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.2x; net debt to EBITDA 0.58",
+          "label": "Funding capacity",
+          "score": 0.82
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 4%",
+          "label": "Cash generation quality",
+          "score": 0.26
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 4,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 5,
+          "sources": [
+            "state_az"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "8-K",
+        "filed": "2026-04-23",
+        "low_usd": 4000000000.0,
+        "high_usd": 4000000000.0,
+        "sentence": "3 billion for Kucing Liar development, and capital investments are estimated to approximate an additional $4 billion through 2033 (averaging approximately $0.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/831259/000083125926000021/a1q2026exhibit991.htm"
+      }
+    },
+    {
+      "facility_id": "9547be29-540c-534a-b671-1a36e3d86808",
+      "pdm_tier": "early_interest",
+      "cmms_tier": "selection_underway",
+      "name": "WestRock Covington Mill",
+      "city": "Covington",
+      "state": "VA",
+      "lat": 37.7935,
+      "lng": -79.9939,
+      "parent": "WestRock Company",
+      "ticker": "WRK",
+      "sector": "Manufacturing",
+      "naics": "322130",
+      "cci": 4.05,
+      "tier": "watch_both_ends",
+      "demand": 9.33,
+      "readiness": 1.76,
+      "coverage": 50.0,
+      "pdm": 6,
+      "cmms": 14,
+      "n90": 3,
+      "capex_usd": 1142100000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.05 of 10, from a facility read of 9.33 and a capital readiness of 1.76.",
+      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
+      "facts": [
+        "Parent raised full year capex guidance to 103M to 103M, up 32 percent year over year.",
+        "Free cash flow of 686M covers total capex 0.6 times. The program is self funded.",
+        "Net debt to EBITDA of 315.12 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are up 27 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "elevated leverage at 315.12x net debt to EBITDA"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +32% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.6x; net debt to EBITDA 315.12",
+          "label": "Funding capacity",
+          "score": 0.46
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 3%",
+          "label": "Cash generation quality",
+          "score": 0.2
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 4,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 9,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2023-11-17",
+        "low_usd": 103000000.0,
+        "high_usd": 103000000.0,
+        "sentence": "We estimate that we will invest approximately $103 million for capital expenditures during fiscal 2024 in connection with matters relating to environmental compliance.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1732845/000095017023064855/wrk-20230930.htm"
+      }
+    },
+    {
+      "facility_id": "5e0d3833-f6db-5387-8c09-f3bccb340e08",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "ADM Decatur Soybean Processing Complex",
+      "city": "Decatur",
+      "state": "IL",
+      "lat": 39.8517,
+      "lng": -88.9292,
+      "parent": "Archer-Daniels-Midland Company",
+      "ticker": "ADM",
+      "sector": "Food and consumer",
+      "naics": "311224",
+      "cci": 3.75,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 1.41,
+      "coverage": 50.0,
+      "pdm": 14,
+      "cmms": 18,
+      "n90": 4,
+      "capex_usd": 1248000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.75 of 10, from a facility read of 10.0 and a capital readiness of 1.41.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to 181M to 181M, up -20 percent year over year.",
+        "Free cash flow of 4.2B covers total capex 3.4 times. The program is self funded.",
+        "Quarterly capex is moving: the latest four quarters are down 28 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -20% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -20% YoY",
+          "label": "Capital program",
+          "score": 0.0
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 3.4x",
+          "label": "Funding capacity",
+          "score": 1.0
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 5%",
+          "label": "Cash generation quality",
+          "score": 0.31
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 4,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 5,
+          "sources": [
+            "state_il"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-17",
+        "low_usd": 181000000.0,
+        "high_usd": 181000000.0,
+        "sentence": "; and \u2013 Increase in the expected capital expenditures as a percentage of revenue over the entire forecast of approximately 100 basis points would result in a goodwill impairment of approximately $181 million.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/7084/000000708426000011/adm-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "120307ac-e37a-52cb-818d-7c6f0295493b",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Phillips 66 Wood River Refinery",
+      "city": "Roxana",
+      "state": "IL",
+      "lat": 38.8442,
+      "lng": -90.0728,
+      "parent": "Phillips 66",
+      "ticker": "PSX",
+      "sector": "Manufacturing",
+      "naics": "324110",
+      "cci": 3.55,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 1.26,
+      "coverage": 50.0,
+      "pdm": 28,
+      "cmms": 34,
+      "n90": 6,
+      "capex_usd": 1455000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.55 of 10, from a facility read of 10.0 and a capital readiness of 1.26.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to 680M to 680M, up -17 percent year over year.",
+        "Free cash flow of 3.5B covers total capex 2.4 times. The program is self funded."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -17% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -17% YoY",
+          "label": "Capital program",
+          "score": 0.0
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 2.4x",
+          "label": "Funding capacity",
+          "score": 1.0
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 3%",
+          "label": "Cash generation quality",
+          "score": 0.16
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 2,
+          "layer": 1,
+          "weight": 8,
+          "sources": [
+            "edgar",
+            "epa_echo"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 5,
+          "sources": [
+            "state_il"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 3,
+          "layer": 4,
+          "weight": 13,
+          "sources": [
+            "greenhouse",
+            "lever"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-20",
+        "low_usd": 680000000.0,
+        "high_usd": 680000000.0,
+        "sentence": "4 billion capital budget excludes our portion of planned capital spending by CPChem totaling $680 million.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1534701/000153470126000006/psx-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "9144db7b-7974-5243-8e36-7f5a712256a5",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Tyson Foods Springdale Poultry Processing",
+      "city": "Springdale",
+      "state": "AR",
+      "lat": 36.1864,
+      "lng": -94.1574,
+      "parent": "Tyson Foods Inc.",
+      "ticker": "TSN",
+      "sector": "Food and consumer",
+      "naics": "311615",
+      "cci": 3.41,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 1.16,
+      "coverage": 50.0,
+      "pdm": 12,
+      "cmms": 20,
+      "n90": 4,
+      "capex_usd": 978000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.41 of 10, from a facility read of 10.0 and a capital readiness of 1.16.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up -14 percent year over year.",
+        "Free cash flow of 1.2B covers total capex 1.2 times. The program is self funded.",
+        "Quarterly capex is moving: the latest four quarters are down 29 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -14% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -14% YoY",
+          "label": "Capital program",
+          "score": 0.0
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 1.2x",
+          "label": "Funding capacity",
+          "score": 0.93
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 2%",
+          "label": "Cash generation quality",
+          "score": 0.13
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 5,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 3,
+          "layer": 4,
+          "weight": 13,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "65975b5e-ff09-540d-ad9e-0af0bbc30dbd",
+      "pdm_tier": "active_evaluation",
+      "cmms_tier": "selection_underway",
+      "name": "Steel Dynamics Butler Flat Roll Division",
+      "city": "Butler",
+      "state": "IN",
+      "lat": 41.4264,
+      "lng": -84.8716,
+      "parent": "Steel Dynamics Inc.",
+      "ticker": "STLD",
+      "sector": "Manufacturing",
+      "naics": "331110",
+      "cci": 3.39,
+      "tier": "weak_convergence",
+      "demand": 8.0,
+      "readiness": 1.44,
+      "coverage": 50.0,
+      "pdm": 10,
+      "cmms": 12,
+      "n90": 3,
+      "capex_usd": 948025000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.39 of 10, from a facility read of 8.0 and a capital readiness of 1.44.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up -49 percent year over year.",
+        "Free cash flow of 502M covers total capex 0.5 times. The program is self funded.",
+        "Net debt to EBITDA of 1.68 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are down 54 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -49% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -49% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 0.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.5x; net debt to EBITDA 1.68",
+          "label": "Funding capacity",
+          "score": 0.7
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 2%",
+          "label": "Cash generation quality",
+          "score": 0.14
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 4,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 9,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "25bc277a-b87e-50d7-8c28-f47b391f4965",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Southern Company Vogtle Electric Generating Plant",
+      "city": "Waynesboro",
+      "state": "GA",
+      "lat": 33.1431,
+      "lng": -81.7625,
+      "parent": "Southern Company",
+      "ticker": "SO",
+      "sector": "Utilities",
+      "naics": "221113",
+      "cci": 3.32,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 1.1,
+      "coverage": 50.0,
+      "pdm": 25,
+      "cmms": 19,
+      "n90": 5,
+      "capex_usd": 12737000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.32 of 10, from a facility read of 10.0 and a capital readiness of 1.1.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to 127M to 127M, up 42 percent year over year.",
+        "Free cash flow of -2,935,000,000 covers total capex -0.2 times. The program is self funded.",
+        "Quarterly capex is moving: the latest four quarters are up 28 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "negative free cash flow over the trailing year"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +42% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex -0.2x",
+          "label": "Funding capacity",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin -10%",
+          "label": "Cash generation quality",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 2,
+          "layer": 1,
+          "weight": 7,
+          "sources": [
+            "edgar",
+            "usaspending"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 4,
+          "sources": [
+            "state_ga"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-19",
+        "low_usd": 127000000.0,
+        "high_usd": 127000000.0,
+        "sentence": "Southern Company Gas Nicor Gas In connection with Nicor Gas' 2023 general base rate case proceeding, the Illinois Commission disallowed $127 million of capital investments that have been completed or were planned to be completed through December 31, 2024.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/92122/000009212226000006/so-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "8a2018d0-8825-5a42-a90a-f5436e4f2682",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Eastman Kingsport Operations",
+      "city": "Kingsport",
+      "state": "TN",
+      "lat": 36.5484,
+      "lng": -82.5618,
+      "parent": "Eastman Chemical Company",
+      "ticker": "EMN",
+      "sector": "Manufacturing",
+      "naics": "325199",
+      "cci": 3.24,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 1.05,
+      "coverage": 50.0,
+      "pdm": 30,
+      "cmms": 28,
+      "n90": 6,
+      "capex_usd": 546000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.24 of 10, from a facility read of 10.0 and a capital readiness of 1.05.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to 125M to 400M, up -9 percent year over year.",
+        "Free cash flow of 424M covers total capex 0.8 times. The program is self funded.",
+        "Net debt to EBITDA of 1.78 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are down 18 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -9% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -9% YoY",
+          "label": "Capital program",
+          "score": 0.0
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 0.8x; net debt to EBITDA 1.78",
+          "label": "Funding capacity",
+          "score": 0.66
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 5%",
+          "label": "Cash generation quality",
+          "score": 0.29
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 2,
+          "layer": 1,
+          "weight": 8,
+          "sources": [
+            "doe",
+            "edgar"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 5,
+          "sources": [
+            "state_tn"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 3,
+          "layer": 4,
+          "weight": 14,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "8-K",
+        "filed": "2026-04-30",
+        "low_usd": 125000000.0,
+        "high_usd": 400000000.0,
+        "sentence": "We remain on track to reduce costs by between $125 million and $150 million, net of inflation, and are maintaining disciplined capital expenditures by spending approximately $400 million this year.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/915389/000091538926000094/ex99_0120260331cctables.htm"
+      }
+    },
+    {
+      "facility_id": "925fd00f-0721-599f-a45a-ff2e6d8ff871",
+      "pdm_tier": "early_interest",
+      "cmms_tier": "replacement_evaluation",
+      "name": "Newmont Cripple Creek and Victor Mine",
+      "city": "Victor",
+      "state": "CO",
+      "lat": 38.71,
+      "lng": -105.1397,
+      "parent": "Newmont Corporation",
+      "ticker": "NEM",
+      "sector": "Mining and extraction",
+      "naics": "212221",
+      "cci": 3.21,
+      "tier": "weak_convergence",
+      "demand": 4.67,
+      "readiness": 2.2,
+      "coverage": 50.0,
+      "pdm": 6,
+      "cmms": 7,
+      "n90": 2,
+      "capex_usd": 3035000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.21 of 10, from a facility read of 4.67 and a capital readiness of 2.2.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up -11 percent year over year.",
+        "Free cash flow of 7.3B covers total capex 2.4 times. The program is self funded.",
+        "Quarterly capex is moving: the latest four quarters are down 8 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -11% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -11% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 0.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 2.4x",
+          "label": "Funding capacity",
+          "score": 1.0
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 109%",
+          "label": "Cash generation quality",
+          "score": 0.6
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "51d05a8f-9ab6-5a58-9a35-073c3f36186a",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Nucor Steel Crawfordsville",
+      "city": "Crawfordsville",
+      "state": "IN",
+      "lat": 40.0383,
+      "lng": -86.9151,
+      "parent": "Nucor Corporation",
+      "ticker": "NUE",
+      "sector": "Manufacturing",
+      "naics": "331110",
+      "cci": 2.97,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 0.88,
+      "coverage": 50.0,
+      "pdm": 18,
+      "cmms": 13,
+      "n90": 4,
+      "capex_usd": 3422000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 2.97 of 10, from a facility read of 10.0 and a capital readiness of 0.88.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to 250M to 250M, up 8 percent year over year.",
+        "Free cash flow of -188,000,000 covers total capex -0.1 times. The program is self funded.",
+        "Quarterly capex is moving: the latest four quarters are up 20 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "negative free cash flow over the trailing year"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +8% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.28
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex -0.1x",
+          "label": "Funding capacity",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin -1%",
+          "label": "Cash generation quality",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 4,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 3,
+          "layer": 4,
+          "weight": 13,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-25",
+        "low_usd": 250000000.0,
+        "high_usd": 250000000.0,
+        "sentence": "We expect that capital expenditures we will direct toward our efforts in these areas will total approximately $250 million in 2026.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/73309/000119312526071575/nue-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "1f5f470f-87d8-58d4-a394-0343ed94ccc4",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "Duke Catawba Nuclear Station",
+      "city": "York",
+      "state": "SC",
+      "lat": 35.0517,
+      "lng": -81.07,
+      "parent": "Duke Energy Corporation",
+      "ticker": "DUK",
+      "sector": "Utilities",
+      "naics": "221113",
+      "cci": 2.65,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 0.7,
+      "coverage": 50.0,
+      "pdm": 21,
+      "cmms": 11,
+      "n90": 4,
+      "capex_usd": 14024000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 2.65 of 10, from a facility read of 10.0 and a capital readiness of 0.7.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to 30.0B to 30.0B, up 14 percent year over year.",
+        "Free cash flow of -1,694,000,000 covers total capex -0.1 times. The program is self funded.",
+        "Net debt to EBITDA of 4.89 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are up 14 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "elevated leverage at 4.89x net debt to EBITDA",
+        "negative free cash flow over the trailing year"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +14% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex -0.1x; net debt to EBITDA 4.89",
+          "label": "Funding capacity",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin -30%",
+          "label": "Cash generation quality",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
+          "weight": 4,
+          "sources": [
+            "edgar"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 4,
+          "sources": [
+            "state_nc"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 9,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-26",
+        "low_usd": 30000000000.0,
+        "high_usd": 30000000000.0,
+        "sentence": "We successfully worked with our state partners to win 87 economic development projects in 2025, representing over $30 billion in new capital investment and approximately 29,000 new jobs within our service territories.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1326160/000132616026000014/duk-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "d83dc27a-8a85-54ee-ba3d-7928db41770e",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
+      "name": "NextEra Turkey Point Nuclear Station",
+      "city": "Homestead",
+      "state": "FL",
+      "lat": 25.4358,
+      "lng": -80.3308,
+      "parent": "NextEra Energy Inc.",
+      "ticker": "NEE",
+      "sector": "Utilities",
+      "naics": "221113",
+      "cci": 2.65,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 0.7,
+      "coverage": 50.0,
+      "pdm": 26,
+      "cmms": 17,
+      "n90": 5,
+      "capex_usd": 21700000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 2.65 of 10, from a facility read of 10.0 and a capital readiness of 0.7.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up 38 percent year over year.",
+        "Free cash flow of -9,215,000,000 covers total capex -0.4 times. The program is self funded.",
+        "Net debt to EBITDA of 5.84 with a strong rating leaves room to fund the spend."
+      ],
+      "risk_flags": [
+        "elevated leverage at 5.84x net debt to EBITDA",
+        "negative free cash flow over the trailing year"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex +38% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 1.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex -0.4x; net debt to EBITDA 5.84",
+          "label": "Funding capacity",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin -273%",
+          "label": "Cash generation quality",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 2,
+          "layer": 1,
           "weight": 9,
           "sources": [
             "edgar",
@@ -85,1329 +2022,526 @@
           ]
         },
         {
-          "layer": 2,
           "name": "State procurement",
           "count": 1,
-          "weight": 4,
+          "layer": 2,
+          "weight": 5,
           "sources": [
-            "state_tx"
+            "state_fl"
           ]
         },
         {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "harris_county"
-          ]
-        },
-        {
-          "layer": 4,
           "name": "Corporate and workforce",
           "count": 2,
-          "weight": 9,
-          "sources": [
-            "earnings_call",
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "7d61ea30-f902-589f-89cc-cc7c1c376b59",
-      "pdm_tier": "deployment_imminent",
-      "cmms_tier": "selection_underway",
-      "name": "Nucor Steel Gallatin",
-      "city": "Ghent",
-      "state": "KY",
-      "lat": 38.74,
-      "lng": -85.05,
-      "parent": "Nucor",
-      "ticker": "NUE",
-      "sector": "Steel",
-      "naics": "331110",
-      "cci": 8.97,
-      "tier": "financed_and_timed",
-      "demand": 8.67,
-      "readiness": 9.29,
-      "coverage": 70.0,
-      "pdm": 13,
-      "cmms": 11,
-      "n90": 10,
-      "capex_usd": 3400000000.0,
-      "market_cap_usd": 38000000000.0,
-      "thesis": "Both ends meet. The plant fired 10 signals in 90 days for a PdM score of 13, and the parent is putting capital behind exactly this program. Capex is flowing into Steel Mills and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 8.97 of 10, from a facility read of 8.67 and a capital readiness of 9.29.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 14 days.",
-      "facts": [
-        "Parent raised full year capex guidance to 3.5B to 3.8B, up 22 percent year over year.",
-        "About 300M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Steel Mills capex is up 24 percent, faster than the corporate average.",
-        "Free cash flow of 3.1B covers total capex 0.9 times. The program is self funded.",
-        "Net debt to EBITDA of 0.50 with a A- / A3 rating leaves room to fund the spend.",
-        "Analyst consensus Buy, rating trend up over 90 days, 14 percent upside to the mean target."
-      ],
-      "risk_flags": [],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 2.5,
-          "max": 2.5,
-          "note": "capex +22% YoY; digital reliability named on the call; multi year capex trajectory rising"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 1.55,
-          "max": 2.0,
-          "note": "free cash flow covers capex 0.9x; net debt to EBITDA 0.50; rated A- / A3"
-        },
-        {
-          "label": "Segment economics",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "segment capex +24% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 0.94,
-          "max": 1.0,
-          "note": "free cash flow margin 9%; shareholder returns funded from cash flow"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 1.3,
-          "max": 1.5,
-          "note": "rating trend up over 90 days; 11 of 17 analysts at buy; 14% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "sector capex cycle in expansion; 2 of 2 peers also raising capex; macro backdrop constructive"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 2,
-          "weight": 7,
-          "sources": [
-            "edgar"
-          ]
-        },
-        {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "kentucky_permits"
-          ]
-        },
-        {
           "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 2,
           "weight": 9,
           "sources": [
             "greenhouse"
           ]
         }
-      ]
+      ],
+      "guidance": null
     },
     {
-      "facility_id": "720ea529-9891-5f32-89b7-324be91b3503",
+      "facility_id": "42c53e1a-0e9b-5a05-bf3f-c2d171a70013",
       "pdm_tier": "deployment_imminent",
       "cmms_tier": "selection_underway",
-      "name": "Constellation Byron Station",
-      "city": "Byron",
-      "state": "IL",
-      "lat": 42.07,
-      "lng": -89.28,
-      "parent": "Constellation Energy",
-      "ticker": "CEG",
-      "sector": "Nuclear",
-      "naics": "221113",
-      "cci": 8.7,
-      "tier": "financed_and_timed",
-      "demand": 8.67,
-      "readiness": 8.73,
-      "coverage": 70.0,
-      "pdm": 13,
-      "cmms": 10,
-      "n90": 11,
-      "capex_usd": 3000000000.0,
-      "market_cap_usd": 72000000000.0,
-      "thesis": "Both ends meet. The plant fired 11 signals in 90 days for a PdM score of 13, and the parent is putting capital behind exactly this program. Capex is flowing into Nuclear Fleet and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 8.7 of 10, from a facility read of 8.67 and a capital readiness of 8.73.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 14 days.",
-      "facts": [
-        "Parent raised full year capex guidance to 3.0B to 3.4B, up 18 percent year over year.",
-        "About 400M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Nuclear Fleet capex is up 20 percent, faster than the corporate average.",
-        "Free cash flow of 2.6B covers total capex 0.9 times. The program is self funded.",
-        "Net debt to EBITDA of 1.80 with a Baa1 / BBB+ rating leaves room to fund the spend.",
-        "Analyst consensus Buy, rating trend up over 90 days, 12 percent upside to the mean target."
-      ],
-      "risk_flags": [],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 2.5,
-          "max": 2.5,
-          "note": "capex +18% YoY; digital reliability named on the call; multi year capex trajectory rising"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 0.93,
-          "max": 2.0,
-          "note": "free cash flow covers capex 0.9x; net debt to EBITDA 1.80; rated Baa1 / BBB+"
-        },
-        {
-          "label": "Segment economics",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "segment capex +20% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 1.0,
-          "max": 1.0,
-          "note": "free cash flow margin 11%; shareholder returns funded from cash flow"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 1.3,
-          "max": 1.5,
-          "note": "rating trend up over 90 days; 13 of 17 analysts at buy; 12% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "sector capex cycle in expansion; 2 of 2 peers also raising capex; macro backdrop constructive"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 2,
-          "weight": 8,
-          "sources": [
-            "edgar",
-            "ferc"
-          ]
-        },
-        {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 3,
-          "sources": [
-            "ogle_county"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 2,
-          "weight": 8,
-          "sources": [
-            "earnings_call",
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "2f395bf1-5d46-565c-9cb0-60e8157f47ec",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "TSMC Arizona Fab 21",
-      "city": "Phoenix",
-      "state": "AZ",
-      "lat": 33.73,
-      "lng": -112.1,
-      "parent": "TSMC",
-      "ticker": "TSM",
-      "sector": "Semiconductors",
-      "naics": "334413",
-      "cci": 7.77,
-      "tier": "high_conviction",
-      "demand": 6.67,
-      "readiness": 9.04,
-      "coverage": 70.0,
-      "pdm": 10,
-      "cmms": 7,
-      "n90": 7,
-      "capex_usd": 40000000000.0,
-      "market_cap_usd": 900000000000.0,
-      "thesis": "Strong convergence. Plant level demand is live with 7 signals in 90 days, and the parent's capital posture supports the spend. Capex is flowing into Advanced Nodes and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 7.77 of 10, from a facility read of 6.67 and a capital readiness of 9.04.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 21 days.",
-      "facts": [
-        "Parent raised full year capex guidance to 38.0B to 42.0B, up 12 percent year over year.",
-        "About 1.2B of the program is earmarked for digital reliability and predictive maintenance.",
-        "Advanced Nodes capex is up 15 percent, faster than the corporate average.",
-        "Free cash flow of 22.0B covers total capex 0.6 times. The program is self funded.",
-        "Net debt to EBITDA of 0.10 with a AA- / Aa3 rating leaves room to fund the spend.",
-        "Analyst consensus Buy, rating trend up over 90 days, 15 percent upside to the mean target."
-      ],
-      "risk_flags": [],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 2.5,
-          "max": 2.5,
-          "note": "capex +12% YoY; digital reliability named on the call; multi year capex trajectory rising"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 1.39,
-          "max": 2.0,
-          "note": "free cash flow covers capex 0.6x; net debt to EBITDA 0.10; rated AA- / Aa3"
-        },
-        {
-          "label": "Segment economics",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "segment capex +15% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 1.0,
-          "max": 1.0,
-          "note": "free cash flow margin 24%; shareholder returns funded from cash flow"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 1.45,
-          "max": 1.5,
-          "note": "rating trend up over 90 days; 30 of 33 analysts at buy; 15% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 1.2,
-          "max": 1.5,
-          "note": "sector capex cycle in expansion; 1 of 2 peers also raising capex"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "edgar"
-          ]
-        },
-        {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "maricopa_county"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "0d3d1c82-86f2-55ce-b882-0b93609d9e67",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "Cheniere Sabine Pass LNG",
-      "city": "Cameron",
-      "state": "LA",
-      "lat": 29.74,
-      "lng": -93.87,
-      "parent": "Cheniere Energy",
-      "ticker": "LNG",
-      "sector": "LNG",
-      "naics": "325120",
-      "cci": 7.75,
-      "tier": "high_conviction",
-      "demand": 7.33,
-      "readiness": 8.19,
-      "coverage": 70.0,
-      "pdm": 11,
-      "cmms": 7,
-      "n90": 8,
-      "capex_usd": 2800000000.0,
-      "market_cap_usd": 48000000000.0,
-      "thesis": "Strong convergence. Plant level demand is live with 8 signals in 90 days, and the parent's capital posture supports the spend. Capex is flowing into Liquefaction and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 7.75 of 10, from a facility read of 7.33 and a capital readiness of 8.19.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 21 days.",
-      "facts": [
-        "Parent raised full year capex guidance to 2.5B to 3.0B, up 16 percent year over year.",
-        "About 200M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Liquefaction capex is up 17 percent, faster than the corporate average.",
-        "Free cash flow of 4.5B covers total capex 1.6 times. The program is self funded.",
-        "Net debt to EBITDA of 2.40 with a BBB / Baa2 rating leaves room to fund the spend.",
-        "Analyst consensus Buy, rating trend up over 90 days, 11 percent upside to the mean target."
-      ],
-      "risk_flags": [],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 2.0,
-          "max": 2.5,
-          "note": "capex +16% YoY; digital reliability named on the call"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 1.2,
-          "max": 2.0,
-          "note": "free cash flow covers capex 1.6x; net debt to EBITDA 2.40; rated BBB / Baa2"
-        },
-        {
-          "label": "Segment economics",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "segment capex +17% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 1.0,
-          "max": 1.0,
-          "note": "free cash flow margin 18%; shareholder returns funded from cash flow"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 1.29,
-          "max": 1.5,
-          "note": "rating trend up over 90 days; 12 of 15 analysts at buy; 11% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 1.2,
-          "max": 1.5,
-          "note": "sector capex cycle in expansion; 2 of 2 peers also raising capex"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 2,
-          "weight": 8,
-          "sources": [
-            "edgar",
-            "ferc"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "2e9f005b-a5da-531b-940d-7f1039aa666a",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "Linde Pasadena Plant",
-      "city": "Pasadena",
-      "state": "TX",
-      "lat": 29.69,
-      "lng": -95.21,
-      "parent": "Linde",
-      "ticker": "LIN",
-      "sector": "Industrial Gas",
-      "naics": "325120",
-      "cci": 7.19,
-      "tier": "high_conviction",
-      "demand": 6.0,
-      "readiness": 8.61,
-      "coverage": 70.0,
-      "pdm": 9,
-      "cmms": 8,
-      "n90": 6,
-      "capex_usd": 5200000000.0,
-      "market_cap_usd": 220000000000.0,
-      "thesis": "Strong convergence. Plant level demand is live with 6 signals in 90 days, and the parent's capital posture supports the spend. Capex is flowing into Americas and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 7.19 of 10, from a facility read of 6.0 and a capital readiness of 8.61.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 21 days.",
-      "facts": [
-        "Parent raised full year capex guidance to 5.0B to 5.5B, up 12 percent year over year.",
-        "About 500M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Americas capex is up 13 percent, faster than the corporate average.",
-        "Free cash flow of 6.5B covers total capex 1.2 times. The program is self funded.",
-        "Net debt to EBITDA of 1.10 with a A / A2 rating leaves room to fund the spend.",
-        "Analyst consensus Buy, rating trend up over 90 days, 10 percent upside to the mean target."
-      ],
-      "risk_flags": [],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 2.0,
-          "max": 2.5,
-          "note": "capex +12% YoY; digital reliability named on the call"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 1.63,
-          "max": 2.0,
-          "note": "free cash flow covers capex 1.2x; net debt to EBITDA 1.10; rated A / A2"
-        },
-        {
-          "label": "Segment economics",
-          "score": 1.5,
-          "max": 1.5,
-          "note": "segment capex +13% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 1.0,
-          "max": 1.0,
-          "note": "free cash flow margin 19%; shareholder returns funded from cash flow"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 1.28,
-          "max": 1.5,
-          "note": "rating trend up over 90 days; 18 of 22 analysts at buy; 10% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 1.2,
-          "max": 1.5,
-          "note": "sector capex cycle in expansion; 1 of 2 peers also raising capex"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "edgar"
-          ]
-        },
-        {
-          "layer": 2,
-          "name": "State procurement",
-          "count": 1,
-          "weight": 3,
-          "sources": [
-            "state_tx"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "2d81bf54-46bf-5fdc-8fc7-304876ab6eb0",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "LyondellBasell Channelview",
+      "name": "LyondellBasell Channelview Complex",
       "city": "Channelview",
       "state": "TX",
-      "lat": 29.81,
-      "lng": -95.11,
-      "parent": "LyondellBasell",
+      "lat": 29.7822,
+      "lng": -95.1166,
+      "parent": "LyondellBasell Industries N.V.",
       "ticker": "LYB",
-      "sector": "Chemicals",
+      "sector": "Manufacturing",
       "naics": "325110",
-      "cci": 6.77,
-      "tier": "high_conviction",
-      "demand": 6.67,
-      "readiness": 6.88,
-      "coverage": 70.0,
-      "pdm": 10,
-      "cmms": 8,
-      "n90": 7,
-      "capex_usd": 2100000000.0,
-      "market_cap_usd": 31000000000.0,
-      "thesis": "Strong convergence. Plant level demand is live with 7 signals in 90 days, and the parent's capital posture supports the spend. Capex is flowing into Olefins and Polyolefins and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 6.77 of 10, from a facility read of 6.67 and a capital readiness of 6.88.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 21 days.",
+      "cci": 2.12,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 0.45,
+      "coverage": 50.0,
+      "pdm": 26,
+      "cmms": 18,
+      "n90": 5,
+      "capex_usd": 1878000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 2.12 of 10, from a facility read of 10.0 and a capital readiness of 0.45.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
       "facts": [
-        "Parent raised full year capex guidance to 2.0B to 2.3B, up 5 percent year over year.",
-        "About 180M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Olefins and Polyolefins capex is up 7 percent, faster than the corporate average.",
-        "Free cash flow of 2.0B covers total capex 1.0 times. The program is self funded.",
-        "Net debt to EBITDA of 1.60 with a BBB / Baa2 rating leaves room to fund the spend.",
-        "Analyst consensus Hold, rating trend up over 90 days, 9 percent upside to the mean target."
+        "Parent raised full year capex guidance to 1.8B to 1.9B, up 2 percent year over year.",
+        "Free cash flow of 384M covers total capex 0.2 times. The program is self funded.",
+        "Net debt to EBITDA of 2.40 with a strong rating leaves room to fund the spend."
       ],
       "risk_flags": [],
       "components": [
         {
-          "label": "Capital program",
-          "score": 1.5,
           "max": 2.5,
-          "note": "capex +5% YoY; digital reliability named on the call"
+          "note": "capex +2% YoY",
+          "label": "Capital program",
+          "score": 0.21
         },
         {
-          "label": "Funding capacity",
-          "score": 1.25,
           "max": 2.0,
-          "note": "free cash flow covers capex 1.0x; net debt to EBITDA 1.60; rated BBB / Baa2"
+          "note": "free cash flow covers capex 0.2x; net debt to EBITDA 2.40",
+          "label": "Funding capacity",
+          "score": 0.16
         },
         {
+          "max": 1.5,
+          "note": "no segment detail on file",
           "label": "Segment economics",
-          "score": 1.12,
-          "max": 1.5,
-          "note": "segment capex +7% YoY; facility sits in this segment"
+          "score": 0.0
         },
         {
-          "label": "Cash generation quality",
-          "score": 0.76,
           "max": 1.0,
-          "note": "free cash flow margin 6%; shareholder returns funded from cash flow"
+          "note": "free cash flow margin 1%",
+          "label": "Cash generation quality",
+          "score": 0.08
         },
         {
+          "max": 1.5,
+          "note": "no analyst detail on file",
           "label": "Analyst and valuation",
-          "score": 1.05,
-          "max": 1.5,
-          "note": "rating trend up over 90 days; 7 of 17 analysts at buy; 9% upside to mean target"
+          "score": 0.0
         },
         {
-          "label": "Sector and macro",
-          "score": 1.2,
           "max": 1.5,
-          "note": "sector capex cycle in expansion; 2 of 2 peers also raising capex"
+          "note": "no sector or macro detail on file",
+          "label": "Sector and macro",
+          "score": 0.0
         }
       ],
       "layers": [
         {
+          "name": "Federal and regulatory",
+          "count": 2,
           "layer": 1,
+          "weight": 8,
+          "sources": [
+            "edgar",
+            "epa_echo"
+          ]
+        },
+        {
+          "name": "State procurement",
+          "count": 1,
+          "layer": 2,
+          "weight": 4,
+          "sources": [
+            "state_tx"
+          ]
+        },
+        {
+          "name": "Corporate and workforce",
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
+          "sources": [
+            "greenhouse"
+          ]
+        }
+      ],
+      "guidance": {
+        "form": "10-K",
+        "filed": "2026-02-20",
+        "low_usd": 1839000000.0,
+        "high_usd": 1878000000.0,
+        "sentence": "Investing Activities \u2014Capital expenditures in 2025 totaled $1,878 million compared to $1,839 million in 2024, of which approximately 65% and 75%, respectively, support sustaining maintenance such as turnaround activities at several sites as well as other plant health, safety and environmental projects.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/1489393/000148939326000012/lyb-20251231.htm"
+      }
+    },
+    {
+      "facility_id": "da20a98f-5d82-4c0b-9f79-92f4dab2e508",
+      "pdm_tier": "noise",
+      "cmms_tier": "noise",
+      "name": "EOG RESOURCES INC",
+      "city": "MIRANDO CITY",
+      "state": "TX",
+      "lat": 27.2808,
+      "lng": -99.0505,
+      "parent": "EOG RESOURCES INC",
+      "ticker": "EOG",
+      "sector": "Mining and extraction",
+      "naics": "211120",
+      "cci": 1.95,
+      "tier": "weak_convergence",
+      "demand": 1.33,
+      "readiness": 2.87,
+      "coverage": 50.0,
+      "pdm": 2,
+      "cmms": 2,
+      "n90": 1,
+      "capex_usd": 479000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 1.95 of 10, from a facility read of 1.33 and a capital readiness of 2.87.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to n/a to n/a, up -53 percent year over year.",
+        "Free cash flow of 9.6B covers total capex 20.0 times. The program is self funded.",
+        "Net debt to EBITDA of 0.42 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are down 50 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -53% YoY"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -53% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 0.5
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex 20.0x; net debt to EBITDA 0.42",
+          "label": "Funding capacity",
+          "score": 1.67
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin 42%",
+          "label": "Cash generation quality",
+          "score": 0.6
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
           "name": "Federal and regulatory",
           "count": 1,
+          "layer": 1,
+          "weight": 3,
+          "sources": [
+            "edgar"
+          ]
+        }
+      ],
+      "guidance": null
+    },
+    {
+      "facility_id": "43543ffd-6328-5b72-80ac-818508e03dde",
+      "pdm_tier": "early_interest",
+      "cmms_tier": "selection_underway",
+      "name": "Cleveland-Cliffs Burns Harbor Works",
+      "city": "Burns Harbor",
+      "state": "IN",
+      "lat": 41.6362,
+      "lng": -87.1577,
+      "parent": "Cleveland-Cliffs Inc.",
+      "ticker": "CLF",
+      "sector": "Manufacturing",
+      "naics": "331110",
+      "cci": 1.73,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 0.3,
+      "coverage": 50.0,
+      "pdm": 6,
+      "cmms": 15,
+      "n90": 3,
+      "capex_usd": 561000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 1.73 of 10, from a facility read of 10.0 and a capital readiness of 0.3.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
+      "facts": [
+        "Parent raised full year capex guidance to 575M to 700M, up -19 percent year over year.",
+        "Free cash flow of -1,023,000,000 covers total capex -1.8 times. The program is self funded.",
+        "Net debt to EBITDA of -20.92 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are down 12 percent on the prior four, from SEC quarterly filings."
+      ],
+      "risk_flags": [
+        "capital program shrinking, capex -19% YoY",
+        "negative free cash flow over the trailing year"
+      ],
+      "components": [
+        {
+          "max": 2.5,
+          "note": "capex -19% YoY",
+          "label": "Capital program",
+          "score": 0.0
+        },
+        {
+          "max": 2.0,
+          "note": "free cash flow covers capex -1.8x; net debt to EBITDA -20.92",
+          "label": "Funding capacity",
+          "score": 0.6
+        },
+        {
+          "max": 1.5,
+          "note": "no segment detail on file",
+          "label": "Segment economics",
+          "score": 0.0
+        },
+        {
+          "max": 1.0,
+          "note": "free cash flow margin -6%",
+          "label": "Cash generation quality",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "no analyst detail on file",
+          "label": "Analyst and valuation",
+          "score": 0.0
+        },
+        {
+          "max": 1.5,
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
+        }
+      ],
+      "layers": [
+        {
+          "name": "Federal and regulatory",
+          "count": 1,
+          "layer": 1,
           "weight": 4,
           "sources": [
             "edgar"
           ]
         },
         {
-          "layer": 3,
-          "name": "County permits",
+          "name": "State procurement",
           "count": 1,
-          "weight": 3,
+          "layer": 2,
+          "weight": 5,
           "sources": [
-            "harris_county"
+            "state_in"
           ]
         },
         {
-          "layer": 4,
           "name": "Corporate and workforce",
           "count": 1,
+          "layer": 4,
           "weight": 5,
           "sources": [
             "greenhouse"
           ]
         }
-      ]
+      ],
+      "guidance": {
+        "form": "8-K",
+        "filed": "2026-04-20",
+        "low_usd": 575000000.0,
+        "high_usd": 700000000.0,
+        "sentence": "0 million net tons \u2022 Capital expenditures maintained at approximately $700 million \u2022 Selling, general and administrative expenses maintained at approximately $575 million \u2022 Depreciation, depletion and amortization maintained at approximately $1.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/764065/000076406526000067/clf-202603318xkex991.htm"
+      }
     },
     {
-      "facility_id": "93641030-1d10-5450-b999-8fa70f9c8f55",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
+      "facility_id": "4b9ccfe2-a0b8-50ee-9826-b413a1f5e311",
+      "pdm_tier": "deployment_imminent",
+      "cmms_tier": "selection_underway",
       "name": "Dow Freeport Operations",
       "city": "Freeport",
       "state": "TX",
-      "lat": 28.95,
-      "lng": -95.36,
-      "parent": "Dow",
+      "lat": 28.9544,
+      "lng": -95.3597,
+      "parent": "Dow Inc.",
       "ticker": "DOW",
-      "sector": "Chemicals",
+      "sector": "Manufacturing",
       "naics": "325110",
-      "cci": 6.62,
-      "tier": "high_conviction",
-      "demand": 7.33,
-      "readiness": 5.98,
-      "coverage": 70.0,
-      "pdm": 11,
-      "cmms": 9,
-      "n90": 8,
-      "capex_usd": 3200000000.0,
-      "market_cap_usd": 39000000000.0,
-      "thesis": "Strong convergence. Plant level demand is live with 8 signals in 90 days, and the parent's capital posture supports the spend. Capex is flowing into Packaging and Specialty and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 6.62 of 10, from a facility read of 7.33 and a capital readiness of 5.98.",
-      "action": "Put this account at the top of the AE queue. Open with the capital story, not the sensor pitch: the parent already told the market it is funding this. Suggested outreach window: next 21 days.",
+      "cci": 1.41,
+      "tier": "weak_convergence",
+      "demand": 10.0,
+      "readiness": 0.2,
+      "coverage": 50.0,
+      "pdm": 40,
+      "cmms": 33,
+      "n90": 7,
+      "capex_usd": 2479000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 1.41 of 10, from a facility read of 10.0 and a capital readiness of 0.2.",
+      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
       "facts": [
-        "Parent raised full year capex guidance to 3.0B to 3.5B, up 6 percent year over year.",
-        "About 250M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Packaging and Specialty capex is up 9 percent, faster than the corporate average.",
-        "Free cash flow of 2.6B covers total capex 0.8 times. The program is self funded.",
-        "Net debt to EBITDA of 1.90 with a BBB / Baa2 rating leaves room to fund the spend.",
-        "Analyst consensus Hold, rating trend flat over 90 days, 7 percent upside to the mean target."
+        "Parent raised full year capex guidance to n/a to n/a, up -16 percent year over year.",
+        "Free cash flow of -1,447,000,000 covers total capex -0.6 times. The program is self funded."
       ],
-      "risk_flags": [],
+      "risk_flags": [
+        "capital program shrinking, capex -16% YoY",
+        "negative free cash flow over the trailing year"
+      ],
       "components": [
         {
-          "label": "Capital program",
-          "score": 1.6,
           "max": 2.5,
-          "note": "capex +6% YoY; digital reliability named on the call"
+          "note": "capex -16% YoY; multi year capex trajectory rising",
+          "label": "Capital program",
+          "score": 0.5
         },
         {
-          "label": "Funding capacity",
-          "score": 0.85,
           "max": 2.0,
-          "note": "free cash flow covers capex 0.8x; net debt to EBITDA 1.90; rated BBB / Baa2"
+          "note": "free cash flow covers capex -0.6x",
+          "label": "Funding capacity",
+          "score": 0.0
         },
         {
+          "max": 1.5,
+          "note": "no segment detail on file",
           "label": "Segment economics",
-          "score": 1.28,
-          "max": 1.5,
-          "note": "segment capex +9% YoY; facility sits in this segment"
+          "score": 0.0
         },
         {
-          "label": "Cash generation quality",
-          "score": 0.7,
           "max": 1.0,
-          "note": "free cash flow margin 5%; shareholder returns funded from cash flow"
+          "note": "free cash flow margin -4%",
+          "label": "Cash generation quality",
+          "score": 0.0
         },
         {
+          "max": 1.5,
+          "note": "no analyst detail on file",
           "label": "Analyst and valuation",
-          "score": 0.35,
-          "max": 1.5,
-          "note": "6 of 18 analysts at buy; 7% upside to mean target"
+          "score": 0.0
         },
         {
-          "label": "Sector and macro",
-          "score": 1.2,
           "max": 1.5,
-          "note": "sector capex cycle in expansion; 2 of 2 peers also raising capex"
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
         }
       ],
       "layers": [
         {
-          "layer": 1,
           "name": "Federal and regulatory",
-          "count": 2,
-          "weight": 8,
+          "count": 3,
+          "layer": 1,
+          "weight": 12,
           "sources": [
+            "doe",
             "edgar",
-            "epa_echo"
+            "usaspending"
           ]
         },
         {
-          "layer": 2,
           "name": "State procurement",
           "count": 1,
-          "weight": 3,
+          "layer": 2,
+          "weight": 5,
           "sources": [
             "state_tx"
           ]
         },
         {
-          "layer": 4,
           "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
+          "count": 3,
+          "layer": 4,
+          "weight": 13,
           "sources": [
             "greenhouse"
           ]
         }
-      ]
+      ],
+      "guidance": null
     },
     {
-      "facility_id": "a0a00cc6-e5eb-5fe1-bcde-e3b1f9335762",
+      "facility_id": "89dce82e-f2a7-5a88-a59e-d5947e8971cc",
       "pdm_tier": "early_interest",
       "cmms_tier": "replacement_evaluation",
-      "name": "PepsiCo Frito-Lay Plano",
-      "city": "Plano",
-      "state": "TX",
-      "lat": 33.02,
-      "lng": -96.7,
-      "parent": "PepsiCo",
-      "ticker": "PEP",
-      "sector": "Food and Beverage",
-      "naics": "311919",
-      "cci": 5.11,
-      "tier": "watch_both_ends",
-      "demand": 4.67,
-      "readiness": 5.59,
-      "coverage": 70.0,
-      "pdm": 7,
-      "cmms": 6,
-      "n90": 4,
-      "capex_usd": 5200000000.0,
-      "market_cap_usd": 230000000000.0,
-      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. Capex is flowing into Frito-Lay North America and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 5.11 of 10, from a facility read of 4.67 and a capital readiness of 5.59.",
-      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
-      "facts": [
-        "Parent raised full year capex guidance to 5.0B to 5.5B, up 4 percent year over year.",
-        "About 300M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Frito-Lay North America capex is up 5 percent, faster than the corporate average.",
-        "Free cash flow of 8.0B covers total capex 1.5 times. The program is self funded.",
-        "Net debt to EBITDA of 2.20 with a A+ / A1 rating leaves room to fund the spend.",
-        "Analyst consensus Hold, rating trend flat over 90 days, 6 percent upside to the mean target."
-      ],
-      "risk_flags": [],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 1.4,
-          "max": 2.5,
-          "note": "capex +4% YoY; digital reliability named on the call"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 1.4,
-          "max": 2.0,
-          "note": "free cash flow covers capex 1.5x; net debt to EBITDA 2.20; rated A+ / A1"
-        },
-        {
-          "label": "Segment economics",
-          "score": 0.98,
-          "max": 1.5,
-          "note": "segment capex +5% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 0.94,
-          "max": 1.0,
-          "note": "free cash flow margin 9%; shareholder returns funded from cash flow"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 0.37,
-          "max": 1.5,
-          "note": "9 of 21 analysts at buy; 6% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 0.5,
-          "max": 1.5,
-          "note": "2 of 2 peers also raising capex"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "edgar"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "bde3a3e0-a86d-5930-acb6-cee8fa3a9121",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "Marathon Galveston Bay",
-      "city": "Texas City",
-      "state": "TX",
-      "lat": 29.38,
-      "lng": -94.91,
-      "parent": "Marathon Petroleum",
-      "ticker": "MPC",
-      "sector": "Refining",
-      "naics": "324110",
-      "cci": 4.47,
-      "tier": "watch_both_ends",
-      "demand": 5.33,
-      "readiness": 3.75,
-      "coverage": 70.0,
-      "pdm": 8,
-      "cmms": 6,
-      "n90": 5,
-      "capex_usd": 1400000000.0,
-      "market_cap_usd": 55000000000.0,
-      "thesis": "Partial convergence. One end is strong and the other is forming, so this account is worth watching rather than leading with today. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 4.47 of 10, from a facility read of 5.33 and a capital readiness of 3.75.",
-      "action": "Hold for one more signal cycle. Re check after the next earnings call or the next plant level signal. Suggested outreach window: next 45 days.",
-      "facts": [
-        "Parent raised full year capex guidance to 1.3B to 1.5B, up 2 percent year over year.",
-        "Refining and Marketing capex is up 3 percent, faster than the corporate average.",
-        "Free cash flow of 5.0B covers total capex 3.6 times. The program is self funded.",
-        "Net debt to EBITDA of 1.30 with a BBB / Baa2 rating leaves room to fund the spend.",
-        "Analyst consensus Hold, rating trend flat over 90 days, 6 percent upside to the mean target."
-      ],
-      "risk_flags": [],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 0.2,
-          "max": 2.5,
-          "note": "capex +2% YoY"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 1.61,
-          "max": 2.0,
-          "note": "free cash flow covers capex 3.6x; net debt to EBITDA 1.30; rated BBB / Baa2"
-        },
-        {
-          "label": "Segment economics",
-          "score": 0.82,
-          "max": 1.5,
-          "note": "segment capex +3% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 0.24,
-          "max": 1.0,
-          "note": "free cash flow margin 4%"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 0.38,
-          "max": 1.5,
-          "note": "8 of 18 analysts at buy; 6% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 0.5,
-          "max": 1.5,
-          "note": "2 of 2 peers also raising capex"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 2,
-          "weight": 7,
-          "sources": [
-            "edgar",
-            "osha"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "1f38daa5-aeab-585c-8b09-f905716687c1",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "Intel Ohio One",
-      "city": "New Albany",
-      "state": "OH",
-      "lat": 40.08,
-      "lng": -82.8,
-      "parent": "Intel",
-      "ticker": "INTC",
-      "sector": "Semiconductors",
-      "naics": "334413",
-      "cci": 3.92,
-      "tier": "weak_convergence",
-      "demand": 6.0,
-      "readiness": 2.56,
-      "coverage": 70.0,
-      "pdm": 9,
-      "cmms": 6,
-      "n90": 6,
-      "capex_usd": 25000000000.0,
-      "market_cap_usd": 130000000000.0,
-      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. Capex is flowing into Foundry and the digital reliability line item is named at the top, the same demand the facility signals show from the bottom. Capital Convergence Index 3.92 of 10, from a facility read of 6.0 and a capital readiness of 2.56.",
-      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
-      "facts": [
-        "Parent raised full year capex guidance to 23.0B to 25.0B, up -4 percent year over year.",
-        "About 600M of the program is earmarked for digital reliability and predictive maintenance.",
-        "Foundry capex is up 5 percent, faster than the corporate average.",
-        "Free cash flow of -2,000,000,000 covers total capex -0.1 times. The program is self funded.",
-        "Net debt to EBITDA of 2.80 with a A- / A3 rating leaves room to fund the spend.",
-        "Analyst consensus Hold, rating trend down over 90 days, 4 percent upside to the mean target."
-      ],
-      "risk_flags": [
-        "Free cash flow negative through the build cycle",
-        "Foundry segment operating at a loss"
-      ],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 1.0,
-          "max": 2.5,
-          "note": "capex -4% YoY; digital reliability named on the call"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 0.2,
-          "max": 2.0,
-          "note": "free cash flow covers capex -0.1x; net debt to EBITDA 2.80; rated A- / A3"
-        },
-        {
-          "label": "Segment economics",
-          "score": 0.78,
-          "max": 1.5,
-          "note": "segment capex +5% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 0.0,
-          "max": 1.0,
-          "note": "free cash flow margin -3%"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 0.18,
-          "max": 1.5,
-          "note": "5 of 33 analysts at buy; 4% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 1.2,
-          "max": 1.5,
-          "note": "sector capex cycle in expansion; 2 of 2 peers also raising capex"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "edgar"
-          ]
-        },
-        {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "licking_county"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "6be7815c-7fa4-53d7-af91-b5c8fa38a02a",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "Cleveland-Cliffs Burns Harbor",
-      "city": "Burns Harbor",
-      "state": "IN",
-      "lat": 41.63,
-      "lng": -87.13,
-      "parent": "Cleveland-Cliffs",
+      "name": "Cleveland-Cliffs Hibbing Taconite",
+      "city": "Hibbing",
+      "state": "MN",
+      "lat": 47.4274,
+      "lng": -92.9379,
+      "parent": "Cleveland-Cliffs Inc.",
       "ticker": "CLF",
-      "sector": "Steel",
-      "naics": "331110",
-      "cci": 3.66,
+      "sector": "Mining and extraction",
+      "naics": "212210",
+      "cci": 1.18,
       "tier": "weak_convergence",
-      "demand": 5.33,
-      "readiness": 2.52,
-      "coverage": 70.0,
-      "pdm": 8,
+      "demand": 4.67,
+      "readiness": 0.3,
+      "coverage": 50.0,
+      "pdm": 6,
       "cmms": 7,
-      "n90": 5,
-      "capex_usd": 650000000.0,
-      "market_cap_usd": 9000000000.0,
-      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 3.66 of 10, from a facility read of 5.33 and a capital readiness of 2.52.",
+      "n90": 2,
+      "capex_usd": 561000000.0,
+      "market_cap_usd": 0.0,
+      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 1.18 of 10, from a facility read of 4.67 and a capital readiness of 0.3.",
       "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
       "facts": [
-        "Parent raised full year capex guidance to 600M to 700M, up 1 percent year over year.",
-        "Steelmaking capex is up 2 percent, faster than the corporate average.",
-        "Free cash flow of 500M covers total capex 0.8 times. The program is self funded.",
-        "Net debt to EBITDA of 2.60 with a BB / Ba2 rating leaves room to fund the spend.",
-        "Analyst consensus Hold, rating trend down over 90 days, 5 percent upside to the mean target."
+        "Parent raised full year capex guidance to 575M to 700M, up -19 percent year over year.",
+        "Free cash flow of -1,023,000,000 covers total capex -1.8 times. The program is self funded.",
+        "Net debt to EBITDA of -20.92 with a strong rating leaves room to fund the spend.",
+        "Quarterly capex is moving: the latest four quarters are down 12 percent on the prior four, from SEC quarterly filings."
       ],
       "risk_flags": [
-        "High leverage limits discretionary capital"
+        "capital program shrinking, capex -19% YoY",
+        "negative free cash flow over the trailing year"
       ],
       "components": [
         {
-          "label": "Capital program",
-          "score": 0.1,
           "max": 2.5,
-          "note": "capex +1% YoY"
+          "note": "capex -19% YoY",
+          "label": "Capital program",
+          "score": 0.0
         },
         {
-          "label": "Funding capacity",
-          "score": 0.79,
           "max": 2.0,
-          "note": "free cash flow covers capex 0.8x; net debt to EBITDA 2.60; rated BB / Ba2"
+          "note": "free cash flow covers capex -1.8x; net debt to EBITDA -20.92",
+          "label": "Funding capacity",
+          "score": 0.6
         },
         {
+          "max": 1.5,
+          "note": "no segment detail on file",
           "label": "Segment economics",
-          "score": 0.75,
-          "max": 1.5,
-          "note": "segment capex +2% YoY; facility sits in this segment"
+          "score": 0.0
         },
         {
-          "label": "Cash generation quality",
-          "score": 0.52,
           "max": 1.0,
-          "note": "free cash flow margin 2%; shareholder returns funded from cash flow"
+          "note": "free cash flow margin -6%",
+          "label": "Cash generation quality",
+          "score": 0.0
         },
         {
+          "max": 1.5,
+          "note": "no analyst detail on file",
           "label": "Analyst and valuation",
-          "score": 0.26,
-          "max": 1.5,
-          "note": "4 of 16 analysts at buy; 5% upside to mean target"
+          "score": 0.0
         },
         {
-          "label": "Sector and macro",
-          "score": 0.5,
           "max": 1.5,
-          "note": "1 of 2 peers also raising capex"
+          "note": "12 of 24 peers also raising capex",
+          "label": "Sector and macro",
+          "score": 0.5
         }
       ],
       "layers": [
         {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "edgar"
-          ]
-        },
-        {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 3,
-          "sources": [
-            "porter_county"
-          ]
-        },
-        {
-          "layer": 4,
           "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 5,
+          "count": 2,
+          "layer": 4,
+          "weight": 8,
           "sources": [
             "greenhouse"
           ]
         }
-      ]
-    },
-    {
-      "facility_id": "73bb06a7-5ee6-553e-9565-c55eacf5e854",
-      "pdm_tier": "early_interest",
-      "cmms_tier": "replacement_evaluation",
-      "name": "Tyson Foods Amarillo",
-      "city": "Amarillo",
-      "state": "TX",
-      "lat": 35.2,
-      "lng": -101.83,
-      "parent": "Tyson Foods",
-      "ticker": "TSN",
-      "sector": "Food Processing",
-      "naics": "311611",
-      "cci": 2.97,
-      "tier": "weak_convergence",
-      "demand": 5.33,
-      "readiness": 1.66,
-      "coverage": 70.0,
-      "pdm": 7,
-      "cmms": 8,
-      "n90": 5,
-      "capex_usd": 1300000000.0,
-      "market_cap_usd": 21000000000.0,
-      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 2.97 of 10, from a facility read of 5.33 and a capital readiness of 1.66.",
-      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
-      "facts": [
-        "Parent raised full year capex guidance to 1.0B to 1.2B, up -6 percent year over year.",
-        "Beef capex is up -4 percent, faster than the corporate average.",
-        "Free cash flow of 800M covers total capex 0.6 times. The program is self funded.",
-        "Net debt to EBITDA of 3.10 with a BBB / Baa2 rating leaves room to fund the spend.",
-        "Analyst consensus Hold, rating trend down over 90 days, 3 percent upside to the mean target."
       ],
-      "risk_flags": [
-        "Protein margins compressed",
-        "Capex guided lower year over year"
-      ],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 0.0,
-          "max": 2.5,
-          "note": "capex -6% YoY"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 0.67,
-          "max": 2.0,
-          "note": "free cash flow covers capex 0.6x; net debt to EBITDA 3.10; rated BBB / Baa2"
-        },
-        {
-          "label": "Segment economics",
-          "score": 0.6,
-          "max": 1.5,
-          "note": "segment capex -4% YoY; facility sits in this segment"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 0.49,
-          "max": 1.0,
-          "note": "free cash flow margin 2%; shareholder returns funded from cash flow"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 0.2,
-          "max": 1.5,
-          "note": "4 of 17 analysts at buy; 3% upside to mean target"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 0.5,
-          "max": 1.5,
-          "note": "1 of 2 peers also raising capex"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 3,
-          "sources": [
-            "potter_county"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 5,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
-    },
-    {
-      "facility_id": "5b5c14ca-1b7a-5097-8ed9-2a04c7224b94",
-      "pdm_tier": "active_evaluation",
-      "cmms_tier": "replacement_evaluation",
-      "name": "Georgia-Pacific Brewton Mill",
-      "city": "Brewton",
-      "state": "AL",
-      "lat": 31.1,
-      "lng": -87.07,
-      "parent": "Georgia-Pacific (Koch, private)",
-      "ticker": "",
-      "sector": "Paper",
-      "naics": "322130",
-      "cci": 0.0,
-      "tier": "weak_convergence",
-      "demand": 6.0,
-      "readiness": 0.0,
-      "coverage": 0.0,
-      "pdm": 9,
-      "cmms": 7,
-      "n90": 6,
-      "capex_usd": 0,
-      "market_cap_usd": 0,
-      "thesis": "Weak convergence. Either the plant signal or the parent's capital posture is missing, so this is not a financed and timed account yet. The capital read is built from guidance, cash flow, analysts, and the sector cycle. Capital Convergence Index 0.0 of 10, from a facility read of 6.0 and a capital readiness of 0.0.",
-      "action": "Leave in the watch list. Suggested outreach window: no action this cycle.",
-      "facts": [],
-      "risk_flags": [
-        "Privately held; no public capital-markets disclosure"
-      ],
-      "components": [
-        {
-          "label": "Capital program",
-          "score": 0.0,
-          "max": 2.5,
-          "note": "no capital program detail on file"
-        },
-        {
-          "label": "Funding capacity",
-          "score": 0.0,
-          "max": 2.0,
-          "note": "no balance-sheet detail on file"
-        },
-        {
-          "label": "Segment economics",
-          "score": 0.0,
-          "max": 1.5,
-          "note": "no segment detail on file"
-        },
-        {
-          "label": "Cash generation quality",
-          "score": 0.0,
-          "max": 1.0,
-          "note": "no cash-flow detail on file"
-        },
-        {
-          "label": "Analyst and valuation",
-          "score": 0.0,
-          "max": 1.5,
-          "note": "no analyst detail on file"
-        },
-        {
-          "label": "Sector and macro",
-          "score": 0.0,
-          "max": 1.5,
-          "note": "no sector or macro detail on file"
-        }
-      ],
-      "layers": [
-        {
-          "layer": 1,
-          "name": "Federal and regulatory",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "epa_echo"
-          ]
-        },
-        {
-          "layer": 3,
-          "name": "County permits",
-          "count": 1,
-          "weight": 3,
-          "sources": [
-            "escambia_county"
-          ]
-        },
-        {
-          "layer": 4,
-          "name": "Corporate and workforce",
-          "count": 1,
-          "weight": 4,
-          "sources": [
-            "greenhouse"
-          ]
-        }
-      ]
+      "guidance": {
+        "form": "8-K",
+        "filed": "2026-04-20",
+        "low_usd": 575000000.0,
+        "high_usd": 700000000.0,
+        "sentence": "0 million net tons \u2022 Capital expenditures maintained at approximately $700 million \u2022 Selling, general and administrative expenses maintained at approximately $575 million \u2022 Depreciation, depletion and amortization maintained at approximately $1.",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/764065/000076406526000067/clf-202603318xkex991.htm"
+      }
     }
   ]
 }
