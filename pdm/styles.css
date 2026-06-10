@@ -323,3 +323,36 @@ footer.bot a:hover { color: var(--cl-gold); }
     display: inline-flex; align-items: center; min-height: 44px;
   }
 }
+
+/* --- LatAm maintenance signals (additive section) --- */
+.latam-section {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--cl-divider);
+}
+.latam-head { margin-bottom: 16px; }
+.latam-h2 {
+  font-family: var(--font-display);
+  font-size: 26px; letter-spacing: 0.04em;
+  color: var(--cl-gold); margin: 0 0 8px;
+}
+.latam-sub {
+  max-width: 760px; color: var(--cl-text-body);
+  font-size: 13px; line-height: 1.6; margin: 0 0 14px;
+}
+.latam-controls {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.latam-select {
+  background: var(--cl-bg-card); color: var(--cl-text);
+  border: 1px solid var(--cl-border); border-radius: 5px;
+  padding: 6px 10px; font-family: var(--font-mono); font-size: 12px;
+}
+.latam-buyer { max-width: 280px; }
+.latam-summ {
+  max-width: 320px; color: var(--cl-text-body); font-size: 12px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.latam-nosrc { color: var(--cl-text-mute); font-size: 12px; }
+.tier.lt-primary { color: var(--cl-green); }
+.tier.lt-adjacent { color: var(--cl-blue); }

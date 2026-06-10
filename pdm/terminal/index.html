@@ -100,11 +100,52 @@
       <p>The signal collectors are running. Check back after the next scoring run.</p>
     </div>
 
+    <section id="latam-section" class="latam-section" style="display:none;">
+      <div class="latam-head">
+        <h2 class="latam-h2">LatAm maintenance signals</h2>
+        <p class="latam-sub">
+          Live predictive-maintenance and CMMS demand windows across eight Latin
+          American markets (Brazil, Mexico, Chile, Colombia, Peru, Argentina,
+          Costa Rica, Panama). Project-level signals from public procurement and
+          industrial filings, classed for the maintenance buying motion. Facility
+          resolution is on the roadmap; these are the opportunity windows today.
+        </p>
+        <div class="latam-controls">
+          <span class="count" id="latam-count">0 opportunities</span>
+          <select id="latam-country" class="latam-select"><option value="">All countries</option></select>
+          <select id="latam-rel" class="latam-select">
+            <option value="">All maintenance signals</option>
+            <option value="maintenance_primary">Maintenance primary</option>
+            <option value="maintenance_adjacent">Maintenance adjacent</option>
+          </select>
+        </div>
+      </div>
+      <div id="latam-table-wrap">
+        <table class="terminal" id="latam-table">
+          <thead>
+            <tr>
+              <th style="width:36px;">#</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Buyer / project</th>
+              <th>Signal</th>
+              <th>Relevance</th>
+              <th style="text-align:right;">Signals</th>
+              <th>Latest</th>
+              <th style="width:90px;">Source</th>
+            </tr>
+          </thead>
+          <tbody id="latam-body"></tbody>
+        </table>
+      </div>
+    </section>
+
     <footer class="bot">
       Signals sourced from public filings, federal procurement, state portals, and public job boards. Refreshed nightly.
     </footer>
   </div>
 
   <script src="/pdm/app.js"></script>
+  <script src="/pdm/latam.js"></script>
 </body>
 </html>
