@@ -34,11 +34,14 @@
       ctx.clearRect(0,0,w,h);
       const r=Math.min(w,h)*.36,cx=w*.5,cy=h*.5;
       const grad=ctx.createRadialGradient(cx-r*.25,cy-r*.35,r*.1,cx,cy,r);
-      grad.addColorStop(0,gold2);grad.addColorStop(.08,gold);grad.addColorStop(.42,panel);grad.addColorStop(1,css("--bg-nearblack"));
-      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=grad;ctx.globalAlpha=.18;ctx.fill();ctx.globalAlpha=1;
-      ctx.strokeStyle=hair;ctx.lineWidth=1;
+      grad.addColorStop(0,gold2);grad.addColorStop(.1,gold);grad.addColorStop(.48,panel);grad.addColorStop(1,css("--bg-nearblack"));
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=grad;ctx.globalAlpha=.34;ctx.fill();ctx.globalAlpha=1;
+      ctx.beginPath();ctx.arc(cx,cy,r+1,0,Math.PI*2);ctx.strokeStyle=gold;ctx.globalAlpha=.52;ctx.lineWidth=1.5;ctx.stroke();
+      ctx.strokeStyle=gold;ctx.lineWidth=1.25;ctx.globalAlpha=.34;
       for(let i=-60;i<=60;i+=20){ctx.beginPath();ctx.ellipse(cx,cy,r*Math.cos(i*Math.PI/180),r,0,0,Math.PI*2);ctx.stroke();}
-      for(let i=0;i<180;i+=20){ctx.beginPath();ctx.ellipse(cx,cy,r,r*.22,i*Math.PI/180,0,Math.PI*2);ctx.stroke();}
+      ctx.strokeStyle=hair;ctx.globalAlpha=1;ctx.lineWidth=1.2;
+      for(let i=0;i<180;i+=18){ctx.beginPath();ctx.ellipse(cx,cy,r,r*.24,i*Math.PI/180,0,Math.PI*2);ctx.stroke();}
+      ctx.globalAlpha=1;
       while(arcs.length<12){
         const route=routes[(Math.floor((dt+arcs.length)*2))%routes.length];
         arcs.push({a:route[0],b:route[1],born:dt-Math.random()*1.2,life:3.4});
@@ -54,7 +57,7 @@
         const mx=(A.x+B.x)/2,my=(A.y+B.y)/2-r*.24;
         const facing=Math.max(.22,((A.z+B.z)/2+1)/2);
         ctx.globalAlpha=Math.sin((age/ar.life)*Math.PI)*facing;
-        ctx.strokeStyle=gold;ctx.lineWidth=1.2+1.4*facing;ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.quadraticCurveTo(mx,my,B.x,B.y);ctx.stroke();
+        ctx.strokeStyle=gold;ctx.lineWidth=1.9+1.9*facing;ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.quadraticCurveTo(mx,my,B.x,B.y);ctx.stroke();
         const q=age/ar.life, x=(1-q)*(1-q)*A.x+2*(1-q)*q*mx+q*q*B.x, y=(1-q)*(1-q)*A.y+2*(1-q)*q*my+q*q*B.y;
         ctx.fillStyle=gold2;ctx.beginPath();ctx.arc(x,y,3.2+2*facing,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
       }
