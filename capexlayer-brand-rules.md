@@ -20,10 +20,10 @@
 - Secondary lockup allowed: "not a single source of truth. a single source of trust."
 
 ## Brand architecture (load-bearing)
-- CapexLayer is the PARENT brand on every customer-facing surface.
-- CraneGenius is "vertical one" only (crane / rigging / lift-planning / heavy-equipment).
-- Never make a first-touch buyer reconcile two brands. No CraneGenius branding, logos, or screenshots on a CapexLayer surface.
-- Approved bridge phrase, verbatim: "CraneGenius is the crane and equipment vertical from CapexLayer."
+- CapexLayer is the parent brand on every customer-facing surface.
+- The first-touch buyer should not have to reconcile another brand, category, or narrow use case.
+- Position CapexLayer as a CRM-native capital signal layer that can support many buyer types.
+- Do not frame the platform around cranes, maintenance, or any numbered vertical on CapexLayer surfaces.
 
 ## Copy rules
 - No em dashes or en dashes. Use commas, periods, or rewrite.
@@ -40,7 +40,7 @@
 - [ ] No hardcoded hex/font on customer-facing surfaces; everything via tokens.
 - [ ] Gold on navy; green only for verified/positive; cream only for serif headlines.
 - [ ] V2 tag present where a tagline lockup belongs; old tag absent anywhere.
-- [ ] CapexLayer is the visible parent; no CraneGenius bleed on CapexLayer pages.
+- [ ] CapexLayer is the visible parent; no narrow category bleed on CapexLayer pages.
 - [ ] No em/en dashes; no business-speak words.
 - [ ] Hero is the live map/gold globe; no blob-explorer in a lead slot.
 - [ ] Body text on navy passes AA contrast.

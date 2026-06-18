@@ -15,12 +15,12 @@ Customer-facing pages use the same shell:
 
 - CapexLayer parent wordmark in the top bar.
 - V2 lockup where a tagline belongs: `predicting the future by predicting the pain`.
-- Live gold signal globe as the hero visual.
+- Live gold signal globe as the hero underlay.
 - Money-map bars for the capital-before-bid argument.
 - `cx-*` cards, tiles, feed rows, terminal blocks, inputs, and buttons.
 
 ## Components
 
-- `globe.js` mounts on any `<canvas data-cx-globe>`.
+- `globe.js` mounts on any `<canvas data-cx-globe>` and should show visible global signal movement throughout the rotation.
 - `cx-bar` is used for the money-map waterfall.
 - `cx-tile`, `cx-card`, `cx-feed-row`, `cx-term`, `cx-pill`, and `cx-input` come from `capexlayer-tokens.css`.
