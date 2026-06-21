@@ -145,6 +145,11 @@ const REGION_DEFS=[
   ['apac','APAC','#e07fb2']
 ];
 const FAMILY_DEFS=[
+  ['energy_iso_queues','ISO interconnection queues','#7fb2ff'],
+  ['eia_power_lifecycle','EIA plant lifecycle','#4cc98a'],
+  ['transmission_grid_infrastructure','Transmission/grid infrastructure','#d68a3a'],
+  ['global_energy_projects','Global energy projects','#e07fb2'],
+  ['datacenter_power_demand','Data center power demand','#c9a84c'],
   ['international_permits_planning','International permits/planning','#7fb2ff'],
   ['emea_tenders','EMEA tenders','#d68a3a'],
   ['latam_public_works_procurement','LATAM public works/procurement','#4cc98a'],
@@ -332,6 +337,11 @@ function regionOf(n){
 function familyOf(n){
   const src=srcOf(n),v=verticalOf(n),r=regionOf(n);
   const text=src+' '+v+' '+String((n.props&&n.props.signal_type)||'').toLowerCase();
+  if(/(iso_queue|interconnection_queue)/.test(text))return 'energy_iso_queues';
+  if(/(eia_860m|eia_923|power_plant_planned|power_plant_retirement|capacity_addition|generation_decline)/.test(text))return 'eia_power_lifecycle';
+  if(/(ferc elibrary|ferc_transmission|doe\/nrel national transmission|doe_ntp|hifld|transmission_project|substation_upgrade|infrastructure_filing)/.test(text))return 'transmission_grid_infrastructure';
+  if(/(gem_integrated_power_tracker|wri_global_power|irena_renewable_capacity|entsoe_generation|global_power|renewable_capacity|coal|gas|solar|wind)/.test(text)&&r!=='north_america')return 'global_energy_projects';
+  if(/(data center pipeline|data center power|large-load|large load|hyperscale|colocation|datacenter_power_demand)/.test(text)||v==='data center')return 'datacenter_power_demand';
   if(r==='emea'&&/(tender|eu_ted|uk_find_a_tender|government_tender|procurement)/.test(text))return 'emea_tenders';
   if(r==='latam'&&/(public_works|public_procurement|procurement|government_tender|comprar|comprasmx|secop|chilecompra|mercadopublico|seace|pncp|sicop|panamacompra|sercop|obras)/.test(text))return 'latam_public_works_procurement';
   if(r==='apac'&&/(development|procurement|tender|permit|planning|infrastructure)/.test(text))return 'apac_development_procurement';

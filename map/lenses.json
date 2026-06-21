@@ -28,6 +28,71 @@
       }
     },
     {
+      "id": "energy_iso_queues",
+      "title": "Power projects waiting on the grid",
+      "caption": "Generator and large-load interconnection queues across US ISOs. Each point is early evidence of power, storage, renewable, or industrial capacity trying to connect.",
+      "audience": "Energy infrastructure",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": {
+        "families": [
+          "energy_iso_queues"
+        ]
+      }
+    },
+    {
+      "id": "energy_eia_lifecycle",
+      "title": "Power plant lifecycle signals",
+      "caption": "EIA planned generators, additions, retirements, and generation-decline signals. This is the build, repower, retire, and replacement layer.",
+      "audience": "Energy infrastructure",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "families": [
+          "eia_power_lifecycle"
+        ]
+      }
+    },
+    {
+      "id": "energy_grid_infrastructure",
+      "title": "Transmission and grid infrastructure",
+      "caption": "FERC filings, DOE transmission scenarios, HIFLD transmission lines, substations, and power plants in one grid-infrastructure view.",
+      "audience": "Energy infrastructure",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "families": [
+          "transmission_grid_infrastructure"
+        ]
+      }
+    },
+    {
+      "id": "global_energy_projects",
+      "title": "Global energy project tracker",
+      "caption": "GEM, WRI, IRENA, and ENTSO-E style global energy signals: power plants, renewable additions, capacity changes, and market-sizing signals.",
+      "audience": "Global energy",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": {
+        "families": [
+          "global_energy_projects"
+        ]
+      }
+    },
+    {
+      "id": "datacenter_power_demand",
+      "title": "Data center power demand",
+      "caption": "Data center power demand, large-load utility filings, and hyperscale opportunities sized by MW and estimated build cost.",
+      "audience": "Data center energy",
+      "mode": "map",
+      "colorBy": "score",
+      "filters": {
+        "families": [
+          "datacenter_power_demand"
+        ]
+      }
+    },
+    {
       "id": "emea",
       "title": "EMEA tenders",
       "caption": "European, UK, Middle East, and Africa tender and procurement signals currently in the explorer.",
