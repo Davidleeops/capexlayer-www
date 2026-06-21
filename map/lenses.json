@@ -1,41 +1,482 @@
 {
-  "_comment": "Story lenses for the Capital Movement Explorer. Each lens is a saved angle on the same data: a title + caption you can read on camera, plus the filters that frame it. Edit freely, add your own. filters: null/missing = no constraint.",
+  "_comment": "Story lenses for the Capital Movement Explorer. One engine, a lens per ICP: each lens is a saved angle on the same data: a title + caption you can read on camera, plus the filters that frame it. The ICP lenses (gc, cranes, equipment, datacenter, maintenance) each speak to one buyer segment; the brand/structure lenses zoom back out. filters: null/missing = no constraint. NOTE: the 'maintenance' lens only shows data once caps.pdm > 0 in config.js and the backend pdm_cmms_facilities_public view exists (see docs/ICP_explorer.md).",
   "lenses": [
     {
       "id": "everywhere",
       "title": "Where capital is moving",
-      "caption": "Every signal we track, on one map. The dots are real projects, opportunities, and companies. The bigger the dot, the bigger the dollars behind it.",
+      "caption": "Every signal we track, on one map. The dots are real projects, opportunities, facilities, and companies. The bigger the dot, the bigger the dollars behind it.",
       "audience": "Top of funnel · everyone",
       "mode": "map",
       "colorBy": "type",
       "filters": {}
     },
     {
-      "id": "democratize",
-      "title": "Capital intelligence, for everyone",
-      "caption": "Big companies pay for this picture. You should be able to see it too. Same data, no gatekeeping. This is what the flow of capital looks like before it shows up in the news.",
-      "audience": "Social · brand",
+      "id": "global_signal_expansion",
+      "title": "Global signal expansion",
+      "caption": "International permits, planning, tenders, public works, procurement, and the North America signal base in one map view.",
+      "audience": "Platform coverage",
       "mode": "map",
-      "colorBy": "score",
-      "filters": { "minScore": 50 }
+      "colorBy": "vertical",
+      "filters": {
+        "families": [
+          "international_permits_planning",
+          "emea_tenders",
+          "latam_public_works_procurement",
+          "apac_development_procurement",
+          "north_america_signals"
+        ]
+      }
     },
     {
-      "id": "datacenter",
-      "title": "The data center gold rush",
-      "caption": "Hyperscalers are spending. Each star is a data center opportunity, sized by estimated crane spend. Some single sites carry hundreds of millions in lift work.",
-      "audience": "Crane / heavy lift buyers",
+      "id": "emea",
+      "title": "EMEA tenders",
+      "caption": "European, UK, Middle East, and Africa tender and procurement signals currently in the explorer.",
+      "audience": "Region - EMEA",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": {
+        "regions": [
+          "emea"
+        ],
+        "families": [
+          "emea_tenders"
+        ]
+      }
+    },
+    {
+      "id": "latam",
+      "title": "LATAM public works and procurement",
+      "caption": "Latin America public works, procurement, environmental, development finance, and infrastructure signals.",
+      "audience": "Region - LATAM",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": {
+        "regions": [
+          "latam"
+        ],
+        "families": [
+          "latam_public_works_procurement",
+          "international_permits_planning"
+        ]
+      }
+    },
+    {
+      "id": "apac",
+      "title": "APAC development and procurement",
+      "caption": "Asia-Pacific development and procurement signals as they enter the explorer coverage.",
+      "audience": "Region - APAC",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": {
+        "regions": [
+          "apac"
+        ],
+        "families": [
+          "apac_development_procurement",
+          "international_permits_planning"
+        ]
+      }
+    },
+    {
+      "id": "north_america",
+      "title": "North America signals",
+      "caption": "Existing US and Canada projects, permits, facilities, opportunities, and account signals.",
+      "audience": "Region - North America",
       "mode": "map",
       "colorBy": "type",
-      "filters": { "verticals": ["Data Center"] }
+      "filters": {
+        "regions": [
+          "north_america"
+        ],
+        "families": [
+          "north_america_signals"
+        ]
+      }
+    },
+    {
+      "id": "gc",
+      "title": "General contractors: the build pipeline",
+      "caption": "The construction and capital projects forming right now, sized by dollars. This is the pipeline a GC wants to be positioning against before the bid hits the street.",
+      "audience": "Motion 1 · general contractors",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": {
+        "types": [
+          "project",
+          "opportunity"
+        ]
+      }
     },
     {
       "id": "cranes",
       "title": "Cranes are going up here",
       "caption": "Scored construction projects with a predicted crane window. This is where a crane company wants to be calling right now.",
-      "audience": "CraneGenius prospects",
+      "audience": "Motion 2 · crane & smart-lift subs",
       "mode": "map",
       "colorBy": "score",
-      "filters": { "verticals": ["Crane"] }
+      "filters": {
+        "verticals": [
+          "Crane"
+        ]
+      }
+    },
+    {
+      "id": "equipment",
+      "title": "Equipment dealers: where the orders are",
+      "caption": "The largest projects and opportunities across every industrial vertical: the sites that buy or rent heavy equipment as they break ground. Sell into the build, not after it.",
+      "audience": "Motion 3 · equipment makers & dealers",
+      "mode": "map",
+      "colorBy": "vertical",
+      "filters": {
+        "types": [
+          "project",
+          "opportunity"
+        ],
+        "minValue": 50000000
+      }
+    },
+    {
+      "id": "datacenter",
+      "title": "The data center gold rush",
+      "caption": "Hyperscalers are spending. Each star is a data center opportunity, sized by estimated crane spend. Some single sites carry hundreds of millions in lift work.",
+      "audience": "Crane / heavy-lift buyers",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "verticals": [
+          "Data Center"
+        ]
+      }
+    },
+    {
+      "id": "maintenance",
+      "title": "Plants near a maintenance RFP",
+      "caption": "Industrial facilities scored for predictive-maintenance and CMMS buying intent. Each one is a plant 30 to 270 days from an RFP, with sourced evidence behind the score. The named-account hunting list for a maintenance-software vendor.",
+      "audience": "Vertical 02 · PdM & CMMS vendors",
+      "mode": "map",
+      "colorBy": "score",
+      "filters": {
+        "types": [
+          "facility"
+        ]
+      }
+    },
+    {
+      "id": "trade_electrical_contractors",
+      "title": "Electrical contractors: the next 120 days",
+      "caption": "Projects whose live signals say electrical scope is coming -- permits, interconnects, RFPs -- with an estimated window for when the work opens. Call the GC before the bid hits the street.",
+      "audience": "Trade ICP - electrical",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "electrical_contractors"
+        ]
+      }
+    },
+    {
+      "id": "trade_steel_fabricators",
+      "title": "Steel is about to go up here",
+      "caption": "Structural permits and lift activity that precede fabrication and erection orders. The window estimate is when steel hits the schedule.",
+      "audience": "Trade ICP - structural steel",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "steel_fabricators"
+        ]
+      }
+    },
+    {
+      "id": "trade_heavy_haul",
+      "title": "Heavy haul: loads forming now",
+      "caption": "Oversize permits, interconnect queues, and module deliveries that put heavy loads on the road months out. Longest windows in the system.",
+      "audience": "Trade ICP - heavy haul",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "heavy_haul"
+        ]
+      }
+    },
+    {
+      "id": "trade_generator_temp_power",
+      "title": "Temp power before the grid arrives",
+      "caption": "Sites that will need generators and temporary power between groundbreaking and interconnection. Window estimated from utility and capex signals.",
+      "audience": "Trade ICP - temp power",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "generator_temp_power"
+        ]
+      }
+    },
+    {
+      "id": "trade_rigging_crane",
+      "title": "Rigging windows opening",
+      "caption": "The empirical lag model: signals to crane-and-rigging need, peak around day 110. Each dot carries its window estimate.",
+      "audience": "Trade ICP - rigging",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "rigging_crane"
+        ]
+      }
+    },
+    {
+      "id": "trade_telehandler",
+      "title": "Telehandlers on site soon",
+      "caption": "Structural permits, hiring spikes, and pre-bid activity that put telehandlers on site. Peak need around day 319 after the signal.",
+      "audience": "Trade ICP - telehandler",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "telehandler"
+        ]
+      }
+    },
+    {
+      "id": "trade_excavator_earthmoving",
+      "title": "Dirt moves first",
+      "caption": "Utility, infrastructure, and capital-improvement signals that precede excavation packages. Earthmoving is the first trade on site.",
+      "audience": "Trade ICP - earthmoving",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "excavator_earthmoving"
+        ]
+      }
+    },
+    {
+      "id": "trade_scaffolding_services",
+      "title": "Scaffolding & industrial services",
+      "caption": "Turnaround and RFP signals that precede scaffolding, insulation, and coatings scopes -- the industrial-services window.",
+      "audience": "Trade ICP - industrial services",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "scaffolding_services"
+        ]
+      }
+    },
+    {
+      "id": "trade_ready_mix_concrete",
+      "title": "Concrete pours coming",
+      "caption": "Structural and zoning signals roughly four weeks ahead of pour schedules. Shortest lag in the model.",
+      "audience": "Trade ICP - concrete",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "ready_mix_concrete"
+        ]
+      }
+    },
+    {
+      "id": "trade_equipment_dealers",
+      "title": "Equipment buyers in motion",
+      "caption": "Rental contracts, RFPs, and permits that flag equipment acquisition ahead. The dealer and rental hunting list.",
+      "audience": "Trade ICP - dealers & rental",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "equipment_dealers"
+        ]
+      }
+    },
+    {
+      "id": "trade_crane_companies",
+      "title": "Crane companies: every window in the system",
+      "caption": "The core motion at full width -- 6,100+ projects with crane-relevant signals and a window opening inside 120 days, across 38 states.",
+      "audience": "Tier 1 - crane companies",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "crane_companies"
+        ]
+      }
+    },
+    {
+      "id": "trade_equipment_financing",
+      "title": "Equipment financing: capex about to be spent",
+      "caption": "SEC capex filings, funding events, and permits that precede equipment purchases -- the moment financing gets shopped.",
+      "audience": "Tier 1 - equipment finance",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "equipment_financing"
+        ]
+      }
+    },
+    {
+      "id": "trade_crane_dealers",
+      "title": "Crane dealers: where fleets will grow",
+      "caption": "Permit and lift activity dense enough to drive crane purchases and rentals. The dealer's territory map.",
+      "audience": "Tier 1 - crane dealers",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "crane_dealers"
+        ]
+      }
+    },
+    {
+      "id": "trade_datacenter_hardware",
+      "title": "DC hardware: racks follow the cranes",
+      "caption": "Interconnects, site plans, and fab orders that put hardware deliveries 12 weeks out. 5,100+ windows opening.",
+      "audience": "Tier 2 - DC hardware",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "datacenter_hardware"
+        ]
+      }
+    },
+    {
+      "id": "trade_hvac_contractors",
+      "title": "Mechanical & HVAC scope forming",
+      "caption": "Structural permits plus utility signals that flag mechanical packages ahead -- 4,900+ windows in the next 120 days.",
+      "audience": "Tier 2 - HVAC",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "hvac_contractors"
+        ]
+      }
+    },
+    {
+      "id": "trade_solar_epc",
+      "title": "Solar & battery EPC: the queue is the pipeline",
+      "caption": "Interconnection queues and utility filings 12 weeks ahead of EPC awards, across 37 states.",
+      "audience": "Tier 3 - solar EPC",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "solar_epc"
+        ]
+      }
+    },
+    {
+      "id": "trade_modular_manufacturers",
+      "title": "Modular builds: longest lead, earliest call",
+      "caption": "14-week lag from signal to order -- the longest planning window in the catalog, 5,700+ open.",
+      "audience": "Tier 3 - modular",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "modular_manufacturers"
+        ]
+      }
+    },
+    {
+      "id": "trade_site_selectors",
+      "title": "Site selectors: where capital is shopping",
+      "caption": "Utility, capex, and funding signals that reveal corporate site searches before announcements.",
+      "audience": "Tier 3 - site selection",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "site_selectors"
+        ]
+      }
+    },
+    {
+      "id": "trade_telecom_contractors",
+      "title": "Fiber follows the grid",
+      "caption": "Utility and interconnect activity that precedes fiber and telecom buildouts -- 5,000 windows opening.",
+      "audience": "Tier 3 - telecom",
+      "mode": "map",
+      "colorBy": "type",
+      "filters": {
+        "types": [
+          "project"
+        ],
+        "trades": [
+          "telecom_contractors"
+        ]
+      }
+    },
+    {
+      "id": "hot",
+      "title": "Companies in motion right now",
+      "caption": "Hot prospects flagged by live triggers: hiring, leadership changes, awards, permits. Each one has a story attached. Hover to read it.",
+      "audience": "Sales · outreach (all ICPs)",
+      "mode": "map",
+      "colorBy": "score",
+      "filters": {
+        "types": [
+          "prospect"
+        ]
+      }
     },
     {
       "id": "billion",
@@ -44,21 +485,14 @@
       "audience": "Enterprise · CapexLayer",
       "mode": "map",
       "colorBy": "vertical",
-      "filters": { "minValue": 500000000 }
-    },
-    {
-      "id": "hot",
-      "title": "Companies in motion right now",
-      "caption": "Hot prospects flagged by live triggers: hiring, leadership changes, awards, permits. Each one has a story attached. Hover to read it.",
-      "audience": "Sales · outreach",
-      "mode": "map",
-      "colorBy": "score",
-      "filters": { "types": ["prospect"] }
+      "filters": {
+        "minValue": 500000000
+      }
     },
     {
       "id": "structure",
       "title": "How it all connects",
-      "caption": "Same data, as a network. Companies, projects, signals, territories, and verticals, linked. This is the engine behind the map.",
+      "caption": "Same data, as a network. Companies, projects, signals, facilities, territories, and verticals, linked. This is the engine behind every ICP lens.",
       "audience": "How it works",
       "mode": "graph",
       "colorBy": "type",
@@ -71,7 +505,26 @@
       "audience": "Corporate funnel · close",
       "mode": "graph",
       "colorBy": "vertical",
-      "filters": { "types": ["opportunity", "project", "account", "signal"] }
+      "filters": {
+        "types": [
+          "opportunity",
+          "project",
+          "account",
+          "signal",
+          "facility"
+        ]
+      }
+    },
+    {
+      "id": "democratize",
+      "title": "Capital intelligence, for everyone",
+      "caption": "Big companies pay for this picture. You should be able to see it too. Same data, no gatekeeping. This is what the flow of capital looks like before it shows up in the news.",
+      "audience": "Social · brand",
+      "mode": "map",
+      "colorBy": "score",
+      "filters": {
+        "minScore": 50
+      }
     }
   ]
 }

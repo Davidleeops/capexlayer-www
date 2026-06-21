@@ -1,16 +1,614 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <title>CapexLayer Explorer App</title>
-  <meta name="robots" content="noindex,nofollow" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/capexlayer-tokens.css" />
-  <link rel="stylesheet" href="/assets/capexlayer-site.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Capital Movement Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onerror="window.__noSb=true"></script>
+<script src="config.js" onerror="window.__noCfg=true"></script>
+<script src="config.local.js" onerror="window.__noLocal=true"></script>
+<script src="graphify-build.js"></script>
+<style>
+:root{--navy:#080e1a;--navy2:#0f1828;--navy3:#16223a;--gold:#c9a84c;--green:#4cc98a;--red:#c95a4c;--blue:#7fb2ff;--pink:#e07fb2;--text:#f4f1e6;--dim:#a4a59c;--border:#1f2c47;}
+*{box-sizing:border-box;}
+html,body{margin:0;height:100%;background:var(--navy);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;overflow:hidden;}
+#stage{position:fixed;inset:0;}canvas{display:block;cursor:grab;}canvas.grabbing{cursor:grabbing;}
+.panel{position:fixed;background:rgba(15,24,40,.93);border:1px solid var(--border);backdrop-filter:blur(6px);}
+h1{font-family:'Bebas Neue';color:var(--gold);letter-spacing:.04em;margin:0;}
+#top{top:0;left:0;right:0;display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--border);z-index:10;}
+#top h1{font-size:26px;}
+#top .sub{color:var(--dim);font-size:12px;}
+.seg{display:flex;border:1px solid var(--border);}
+.seg button{background:var(--navy2);color:var(--text);border:none;padding:7px 13px;cursor:pointer;font:inherit;font-size:13px;}
+.seg button.on{background:var(--gold);color:var(--navy);font-weight:700;}
+.btn{background:var(--navy3);color:var(--gold);border:1px solid #8a7434;padding:7px 12px;cursor:pointer;font:inherit;font-size:13px;}
+.btn:hover{background:#1b2a47;}
+#left{top:58px;bottom:96px;left:0;width:230px;overflow:auto;padding:12px 14px;border-right:1px solid var(--border);}
+#right{top:58px;right:0;width:320px;max-height:calc(100% - 150px);overflow:auto;padding:14px 16px;display:none;}
+.hd{font-family:'Bebas Neue';color:var(--gold);letter-spacing:.04em;font-size:16px;margin:14px 0 6px;}
+.hd:first-child{margin-top:0;}
+.lens{display:block;width:100%;text-align:left;background:var(--navy2);border:1px solid var(--border);color:var(--text);padding:8px 10px;margin-bottom:6px;cursor:pointer;font:inherit;}
+.lens:hover{border-color:var(--gold);}
+.lens.on{border-color:var(--gold);background:#1a2742;}
+.lens .t{font-weight:700;font-size:13px;}
+.lens .a{color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.chk{display:flex;align-items:center;gap:7px;font-size:12px;padding:2px 0;cursor:pointer;user-select:none;}
+.chk input{accent-color:var(--gold);}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;}
+.ct{color:var(--dim);margin-left:auto;font-variant-numeric:tabular-nums;font-size:11px;}
+label.rng{display:block;font-size:11px;color:var(--dim);margin:8px 0 2px;}
+input[type=range]{width:100%;accent-color:var(--gold);}
+select,input[type=text]{width:100%;background:var(--navy3);border:1px solid var(--border);color:var(--text);padding:6px 8px;font:inherit;font-size:12px;margin-top:4px;}
+#bottom{left:230px;right:0;bottom:0;height:96px;padding:10px 18px;border-top:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:6px;}
+#cap-title{font-family:'Bebas Neue';color:var(--gold);font-size:24px;letter-spacing:.02em;line-height:1;}
+#cap-text{color:var(--text);font-size:14px;max-width:1100px;line-height:1.35;}
+#timeline{display:flex;align-items:center;gap:10px;}
+#timeline input{flex:1;}
+#tl-label{font-size:11px;color:var(--dim);min-width:150px;font-variant-numeric:tabular-nums;}
+#stats{position:fixed;top:58px;left:230px;padding:8px 14px;font-size:12px;color:var(--dim);background:rgba(8,14,26,.6);}
+#stats b{color:var(--text);}
+#stats .big{color:var(--gold);font-family:'Bebas Neue';font-size:18px;}
+#tip{position:fixed;pointer-events:none;background:rgba(8,14,26,.96);border:1px solid var(--gold);padding:7px 10px;font-size:12px;display:none;max-width:300px;z-index:30;}
+#right h2{font-family:'Bebas Neue';color:var(--gold);margin:0 0 4px;font-size:22px;}
+#right .kind{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);}
+#right .desc{font-size:13px;margin:8px 0;}
+#right .why{background:linear-gradient(180deg,rgba(201,168,76,.14),rgba(201,168,76,.04));border:1px solid #6c5a28;border-left:3px solid var(--gold);padding:8px 10px;margin:10px 0;font-size:13px;line-height:1.4;}
+#right .why .lbl{font-family:'Bebas Neue';color:var(--gold);letter-spacing:.06em;font-size:12px;display:block;margin-bottom:3px;}
+#right .kv{font-size:12px;color:var(--dim);}#right .kv b{color:var(--text);font-weight:500;}
+#right .x{float:right;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer;}
+#err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:40px;}
+#err div{max-width:560px;}#err code{color:var(--gold);}
+.legend-row{display:flex;align-items:center;gap:7px;font-size:11.5px;padding:2px 0;}
+/* ---- embed mode: drop the chrome, keep the picture + caption ---- */
+body.embed #top,body.embed #left,body.embed #right,body.embed #stats{display:none!important;}
+body.embed #bottom{left:0;}
+body.embed #stage{inset:0;}
+body.embed #brand{display:flex;}
+#brand{display:none;position:fixed;top:12px;left:16px;z-index:12;align-items:center;gap:8px;pointer-events:none;}
+#brand .mark{font-family:'Bebas Neue';color:var(--gold);font-size:22px;letter-spacing:.04em;}
+#brand .by{color:var(--dim);font-size:11px;}
+#embed-stats{display:none;position:fixed;top:42px;left:16px;z-index:12;font-size:12px;color:var(--dim);pointer-events:none;}
+body.embed #embed-stats{display:block;}
+#embed-stats .big{color:var(--gold);font-family:'Bebas Neue';font-size:18px;}
+#embed-stats b{color:var(--text);}
+</style>
 </head>
-<body><div class="site-shell"><div class="cx-topline"></div><div class="cx-grid"></div><nav class="wrap nav"><a class="cx-wordmark" href="/">CAPEX<b>LAYER</b></a><div class="nav-links"><a href="/platform/">Open CapexLayer Platform</a><a href="/#request">Book a call</a></div></nav><main><section class="section"><div class="wrap"><div class="section-head"><h1 class="cx-display">Explorer app.</h1><p>Public app shell for capital movement research. Production explorer data is available inside the dashboard.</p></div><div class="cx-card table-shell"><table class="cx-table"><thead><tr><th>Market</th><th>Signal</th><th>Capital read</th><th>Next move</th></tr></thead><tbody><tr><td>Dallas</td><td>Utility queue plus permits</td><td>High</td><td>Check owner network</td></tr><tr><td>Toronto</td><td>Battery materials capex</td><td>Medium</td><td>Watch procurement</td></tr><tr><td>Sao Paulo</td><td>Cold chain expansion</td><td>High</td><td>Route to LATAM owner</td></tr></tbody></table></div></div></section></main><footer class="footer"><div class="wrap"><span>CapexLayer explorer app</span><span>support-only surface</span></div></footer></div></body>
+<body>
+<div id="stage"><canvas id="c"></canvas></div>
+<div id="brand"><span class="mark">CapExLayer</span><span class="by">capital movement, live</span></div>
+<div id="embed-stats"></div>
+<div id="top" class="panel">
+  <h1>Capital Movement Explorer</h1>
+  <div class="seg" id="mode"><button data-m="map" class="on">Map</button><button data-m="graph">Graph</button></div>
+  <span class="sub">color</span>
+  <div class="seg" id="colorby"><button data-cb="type" class="on">Type</button><button data-cb="vertical">Vertical</button><button data-cb="score">Heat</button></div>
+  <button class="btn" id="play">▶ Play time</button>
+  <button class="btn" id="save">Save image</button>
+  <button class="btn" id="record">● Record clip</button>
+  <button class="btn" id="copylink">Copy link</button>
+  <button class="btn" id="reset" style="margin-left:auto">Reset</button>
+</div>
+<div id="stats" class="panel"></div>
+<div id="left" class="panel">
+  <div class="hd">Lenses</div><div id="lenses"></div>
+  <div class="hd">Layers</div><div id="types"></div>
+  <div class="hd">Vertical</div><div id="verticals"></div>
+  <div class="hd">Signal type</div><div id="sigtypes"></div>
+  <div class="hd">Region</div><div id="regions"></div>
+  <div class="hd">Signal family</div><div id="families"></div>
+  <div class="hd">Thresholds</div>
+  <label class="rng">Min score: <span id="ms-v">0</span></label><input type="range" id="ms" min="0" max="100" value="0"/>
+  <label class="rng">Min value: <span id="mv-v">$0</span></label><input type="range" id="mv" min="0" max="100" value="0"/>
+  <div class="hd">Search</div><input type="text" id="search" placeholder="company, project..."/>
+</div>
+<div id="right" class="panel"></div>
+<div id="bottom" class="panel">
+  <div id="cap-title"></div>
+  <div id="cap-text"></div>
+  <div id="timeline"><span id="tl-label"></span><input type="range" id="tl" min="0" max="100" value="100"/></div>
+</div>
+<div id="tip"></div>
+<div id="err" class="panel"><div>
+  <h1 style="font-size:34px">No data yet</h1>
+  <p>This explorer reads <code>data.json</code> next to it. Generate it with:</p>
+  <p><code>make graphify-explorer</code> &nbsp;(offline snapshot)<br/>or<br/><code>make graphify-explorer src=supabase</code> &nbsp;(live)</p>
+  <p style="color:var(--dim)">Then refresh. If you opened this as a file, serve the folder first so it can load the data:<br/><code>python3 -m http.server 8765 --directory dashboard/explorer</code> then open <code>http://localhost:8765/</code></p>
+</div></div>
+<script>
+const PALETTE_FALLBACK={territory:"#5ad0d0",vertical:"#d68a3a",source:"#9a6bd6",tier:"#d68a3a",metro:"#5ad0d0",account:"#7fb2ff",signal:"#c95a4c",project:"#7fb2ff",opportunity:"#4cc98a",prospect:"#e07fb2"};
+// embedded continental state centroids for map framing + faint reference labels
+const STATES={AL:[32.8,-86.8],AZ:[34.2,-111.9],AR:[34.9,-92.4],CA:[37.2,-119.4],CO:[39.0,-105.5],CT:[41.6,-72.7],DE:[39.0,-75.5],FL:[28.6,-82.4],GA:[32.6,-83.4],ID:[44.4,-114.6],IL:[40.0,-89.2],IN:[39.9,-86.3],IA:[42.0,-93.5],KS:[38.5,-98.4],KY:[37.5,-85.3],LA:[31.0,-92.0],ME:[45.4,-69.2],MD:[39.0,-76.8],MA:[42.3,-71.8],MI:[44.3,-85.4],MN:[46.3,-94.3],MS:[32.7,-89.7],MO:[38.4,-92.5],MT:[47.0,-109.6],NE:[41.5,-99.8],NV:[39.3,-116.6],NH:[43.7,-71.6],NJ:[40.2,-74.7],NM:[34.4,-106.1],NY:[42.9,-75.5],NC:[35.5,-79.4],ND:[47.5,-100.5],OH:[40.3,-82.8],OK:[35.6,-97.5],OR:[44.0,-120.6],PA:[40.9,-77.8],RI:[41.7,-71.5],SC:[33.9,-80.9],SD:[44.4,-100.2],TN:[35.9,-86.4],TX:[31.5,-99.3],UT:[39.3,-111.7],VT:[44.1,-72.7],VA:[37.5,-78.9],WA:[47.4,-120.5],WV:[38.6,-80.6],WI:[44.6,-89.9],WY:[43.0,-107.6],DC:[38.9,-77.0]};
+
+// ---- Albers USA conic projection ----
+const D2R=Math.PI/180, p1=29.5*D2R, p2=45.5*D2R, lat0=23*D2R, lon0=-96*D2R;
+const nA=0.5*(Math.sin(p1)+Math.sin(p2)), C=Math.cos(p1)**2+2*nA*Math.sin(p1), rho0=Math.sqrt(C-2*nA*Math.sin(lat0))/nA;
+function albers(lat,lng){const theta=nA*((lng*D2R)-lon0);const rho=Math.sqrt(Math.max(0,C-2*nA*Math.sin(lat*D2R)))/nA;return[rho*Math.sin(theta), rho0-rho*Math.cos(theta)];}
+
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+let W,H,DPR=Math.min(window.devicePixelRatio||1,2);
+function resize(){W=cv.clientWidth=innerWidth;H=cv.clientHeight=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);if(window.__ready)fitMap();}
+addEventListener('resize',resize);
+
+let DATA=null,LENSES=[],nodes=[],edges=[],idx=new Map(),adj=new Map();
+let mode='map',colorBy='type',activeLens=null,hoverNode=null,focusId=null;
+let filters={types:null,verticals:null,signalTypes:null,trades:null,regions:null,families:null,minScore:0,minValue:0,search:''};
+let timeFrac=1,playing=false,allDates=[],minDate=null,maxDate=null;
+let mapT={s:1,ox:0,oy:0};   // map fit transform (albers->screen)
+let view={x:0,y:0,k:1};     // graph camera
+
+const REGION_DEFS=[
+  ['north_america','North America','#5ad0d0'],
+  ['emea','EMEA','#d68a3a'],
+  ['latam','LATAM','#4cc98a'],
+  ['apac','APAC','#e07fb2']
+];
+const FAMILY_DEFS=[
+  ['international_permits_planning','International permits/planning','#7fb2ff'],
+  ['emea_tenders','EMEA tenders','#d68a3a'],
+  ['latam_public_works_procurement','LATAM public works/procurement','#4cc98a'],
+  ['apac_development_procurement','APAC development/procurement','#e07fb2'],
+  ['north_america_signals','North America','#5ad0d0']
+];
+const US_STATES=new Set('AL AK AZ AR CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY DC PR'.split(' '));
+const CA_PROVINCES=new Set('AB BC MB NB NL NS NT NU ON PE QC SK YT'.split(' '));
+const LATAM_CODES=new Set('MX CL BR CO AR PE CR PA UY PY BO EC GT HN NI SV DO'.split(' '));
+const EMEA_CODES=new Set('GB IE FR DE ES PT IT NL BE LU CH AT CZ SK PL HU RO BG HR SI GR SE NO DK FI EE LV LT MT CY ZA EU'.split(' '));
+const APAC_CODES=new Set('NZ SG AU JP KR IN ID MY PH TH VN CN HK TW'.split(' '));
+
+let dataMode='snapshot';
+async function loadData(){
+  // Live mode: read the public views with the anon key (same as the terminals),
+  // build the graph in the browser. Falls back to the committed data.json.
+  const url=window.SUPABASE_URL, key=window.SUPABASE_PUBLISHABLE_KEY||window.SUPABASE_ANON_KEY;
+  if(url&&key&&!window.__noSb&&window.supabase&&window.GraphifyBuild){
+    try{
+      const sb=window.supabase.createClient(url,key,{auth:{persistSession:false}});
+      const raw=await window.GraphifyBuild.loadFromSupabase(sb,window.GRAPHIFY_CAPS||{});
+      const total=Object.values(raw).reduce((a,v)=>a+(v?v.length:0),0);
+      if(total>0){dataMode='live';return window.GraphifyBuild.buildLive(raw);}
+    }catch(e){console.warn('live load failed, using snapshot:',e);}
+  }
+  const r=await fetch('data.json');if(!r.ok)throw 0;dataMode='snapshot';return r.json();
+}
+async function boot(){
+  resize();
+  try{
+    const [d,l]=await Promise.all([loadData(),
+      fetch('lenses.json').then(r=>r.ok?r.json():{lenses:[]}).catch(()=>({lenses:[]}))]);
+    DATA=d;LENSES=(l&&l.lenses)||[];
+  }catch(e){document.getElementById('err').style.display='flex';return;}
+  nodes=DATA.nodes.map(n=>({...n,x:0,y:0,vx:0,vy:0,r:0}));
+  idx=new Map(nodes.map(n=>[n.id,n]));
+  edges=DATA.edges.map(e=>({s:idx.get(e.source),t:idx.get(e.target)})).filter(e=>e.s&&e.t);
+  adj=new Map(nodes.map(n=>[n.id,[]]));edges.forEach(e=>{adj.get(e.s.id).push(e.t.id);adj.get(e.t.id).push(e.s.id);});
+  allDates=nodes.map(n=>n.props.date).filter(Boolean).sort();
+  minDate=allDates[0];maxDate=allDates[allDates.length-1];
+  const maxV=Math.max(1,...nodes.map(n=>+n.props.value_usd||0));
+  document.getElementById('mv').max=Math.ceil(Math.sqrt(maxV));
+  window.__maxValSqrt=Math.sqrt(maxV);
+  buildUI();fitMap();seedGraph();window.__ready=true;
+  // URL state wins over the default first lens, so a shared link opens framed.
+  if(!applyUrlState()) applyLens(LENSES[0]||null);
+  frame();
+}
+
+// ---------- shareable URL state + embed mode ----------
+// ?lens=ID                         open a saved story lens
+// ?embed=1                         strip chrome (for iframes / DMs)
+// ?mode=map|graph &color=type|vertical|score
+// ?type=a,b &vertical=a,b &sig=a,b &minScore=N &minValue=N &q=text &t=0..100
+// ?state=TX  (territory teaser: filter the map to one state's footprint)
+const QP=new URLSearchParams(location.search);
+const EMBED=QP.get('embed')==='1'||QP.get('embed')==='true';
+function qpList(k){const v=QP.get(k);return v?v.split(',').map(s=>s.trim()).filter(Boolean):null;}
+function applyUrlState(){
+  if(EMBED)document.body.classList.add('embed');
+  const lensId=QP.get('lens');
+  let touched=false;
+  if(lensId){const L=LENSES.find(x=>x.id===lensId);if(L){applyLens(L);touched=true;}}
+  // explicit filters layer on top of (or instead of) a lens
+  const f={types:qpList('type'),verticals:qpList('vertical'),signalTypes:qpList('sig'),trades:qpList('trade'),
+    regions:qpList('region'),families:qpList('family'),
+    minScore:+QP.get('minScore')||(touched?filters.minScore:0),
+    minValue:+QP.get('minValue')||(touched?filters.minValue:0),
+    search:QP.get('q')||''};
+  const st=(QP.get('state')||'').toUpperCase();
+  const hasExplicit=['type','vertical','sig','trade','region','family','minScore','minValue','q','state'].some(k=>QP.has(k));
+  if(hasExplicit){
+    if(st)window.__stateFilter=st;           // territory framing (see passes())
+    filters={types:f.types,verticals:f.verticals,signalTypes:f.signalTypes,trades:f.trades,
+      regions:f.regions,families:f.families,minScore:f.minScore,minValue:f.minValue,search:f.search};
+    if(!touched){activeLens=null;document.getElementById('cap-title').textContent=st?st+' territory':'Custom view';
+      document.getElementById('cap-text').textContent=st?'Capital moving through '+st+', live.':'Filtered view.';}
+    document.getElementById('ms').value=filters.minScore;document.getElementById('ms-v').textContent=filters.minScore;
+    document.getElementById('mv').value=Math.round(Math.sqrt(filters.minValue||0));document.getElementById('mv-v').textContent=fmt$(filters.minValue);
+    document.getElementById('search').value=filters.search;syncChecks();
+    touched=true;
+  }
+  if(QP.get('mode'))setMode(QP.get('mode')==='graph'?'graph':'map',true);
+  if(QP.get('color')){colorBy=QP.get('color');document.querySelectorAll('#colorby button').forEach(x=>x.classList.toggle('on',x.dataset.cb===colorBy));}
+  const t=QP.get('t');if(t!==null&&t!==''){timeFrac=Math.max(0,Math.min(1,(+t)/100));document.getElementById('tl').value=Math.round(timeFrac*100);updateTL();}
+  if(touched){if(mode==='map')fitMap();render();}
+  return touched;
+}
+// reflect the current view into the URL (so "copy link" shares exactly this).
+function syncUrl(){
+  if(EMBED)return; // never rewrite an embed's URL
+  const p=new URLSearchParams();
+  if(activeLens)p.set('lens',activeLens.id);
+  else{
+    if(filters.types)p.set('type',filters.types.join(','));
+    if(filters.verticals)p.set('vertical',filters.verticals.join(','));
+    if(filters.signalTypes)p.set('sig',filters.signalTypes.join(','));
+    if(filters.trades)p.set('trade',filters.trades.join(','));
+    if(filters.regions)p.set('region',filters.regions.join(','));
+    if(filters.families)p.set('family',filters.families.join(','));
+    if(filters.minScore)p.set('minScore',filters.minScore);
+    if(filters.minValue)p.set('minValue',filters.minValue);
+    if(filters.search)p.set('q',filters.search);
+    if(window.__stateFilter)p.set('state',window.__stateFilter);
+  }
+  if(mode!=='map')p.set('mode',mode);
+  if(colorBy!=='type')p.set('color',colorBy);
+  if(timeFrac<1)p.set('t',Math.round(timeFrac*100));
+  const qs=p.toString();
+  history.replaceState(null,'',qs?location.pathname+'?'+qs:location.pathname);
+}
+
+// ---------- UI ----------
+function buildUI(){
+  const counts=DATA.meta.counts||{};
+  const lc=document.getElementById('lenses');
+  LENSES.forEach(L=>{const b=document.createElement('button');b.className='lens';b.dataset.id=L.id;
+    b.innerHTML='<div class="t">'+esc(L.title)+'</div><div class="a">'+esc(L.audience||'')+'</div>';
+    b.onclick=()=>applyLens(L);lc.appendChild(b);});
+  // type layers
+  const order=['project','opportunity','prospect','signal','account','vertical','territory','metro','source','tier','motion','segment','facility','pipeline_stage'];
+  const tEl=document.getElementById('types');
+  order.filter(t=>counts[t]).forEach(t=>{tEl.appendChild(chk(t,t,colorOf({type:t,props:{}}),counts[t],()=>toggleSet('types',t)));});
+  // verticals + signal types from data
+  fillMulti('verticals','vertical','verticals');
+  fillMulti('sigtypes','signal_type','signalTypes');
+  fillDerived('regions',REGION_DEFS,regionOf,'regions');
+  fillDerived('families',FAMILY_DEFS,familyOf,'families');
+  document.getElementById('ms').oninput=e=>{filters.minScore=+e.target.value;document.getElementById('ms-v').textContent=e.target.value;clearLens();render();};
+  document.getElementById('mv').oninput=e=>{filters.minValue=Math.round((+e.target.value)**2);document.getElementById('mv-v').textContent=fmt$(filters.minValue);clearLens();render();};
+  document.getElementById('search').oninput=e=>{filters.search=e.target.value.toLowerCase();render();};
+  document.getElementById('tl').oninput=e=>{timeFrac=+e.target.value/100;updateTL();render();};
+  document.querySelectorAll('#mode button').forEach(b=>b.onclick=()=>{setMode(b.dataset.m);});
+  document.querySelectorAll('#colorby button').forEach(b=>b.onclick=()=>{colorBy=b.dataset.cb;document.querySelectorAll('#colorby button').forEach(x=>x.classList.toggle('on',x===b));render();});
+  document.getElementById('play').onclick=togglePlay;
+  document.getElementById('reset').onclick=()=>{filters={types:null,verticals:null,signalTypes:null,trades:null,regions:null,families:null,minScore:0,minValue:0,search:''};document.getElementById('ms').value=0;document.getElementById('mv').value=0;document.getElementById('ms-v').textContent='0';document.getElementById('mv-v').textContent='$0';document.getElementById('search').value='';timeFrac=1;document.getElementById('tl').value=100;syncChecks();clearLens();fitMap();render();};
+  document.getElementById('save').onclick=saveImage;
+  document.getElementById('record').onclick=recordClip;
+  document.getElementById('copylink').onclick=copyLink;
+}
+function copyLink(){syncUrl();const url=location.href;
+  const done=()=>{const b=document.getElementById('copylink');const o=b.textContent;b.textContent='Copied ✓';setTimeout(()=>b.textContent=o,1400);};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(done,done);else done();}
+function chk(val,label,color,count,fn){const d=document.createElement('label');d.className='chk';
+  d.innerHTML='<input type="checkbox" data-v="'+esc(val)+'"><span class="dot" style="background:'+color+'"></span>'+esc(label.replace(/_/g,' '))+'<span class="ct">'+(count||'')+'</span>';
+  d.querySelector('input').onchange=fn;return d;}
+function fillMulti(elId,prop,fkey){const el=document.getElementById(elId);const m={};nodes.forEach(n=>{const v=n.props[prop];if(v)m[v]=(m[v]||0)+1;});
+  Object.keys(m).sort((a,b)=>m[b]-m[a]).slice(0,16).forEach(v=>{el.appendChild(chk(v,v,'#5a6a88',m[v],()=>toggleSet(fkey,v,prop)));});}
+function fillDerived(elId,defs,fn,fkey){const el=document.getElementById(elId);const counts={};nodes.forEach(n=>{const v=fn(n);if(v)counts[v]=(counts[v]||0)+1;});
+  defs.forEach(d=>{el.appendChild(chk(d[0],d[1],d[2],counts[d[0]]||0,()=>toggleSet(fkey,d[0],true)));});}
+function toggleSet(fkey,val,refit){const set=new Set(filters[fkey]||[]);set.has(val)?set.delete(val):set.add(val);filters[fkey]=set.size?[...set]:null;clearLens();if(refit&&mode==='map')fitMap();render();}
+function syncChecks(){document.querySelectorAll('#left input[type=checkbox]').forEach(c=>{const v=c.dataset.v;
+  c.checked=(filters.types&&filters.types.includes(v))||(filters.verticals&&filters.verticals.includes(v))||(filters.signalTypes&&filters.signalTypes.includes(v))||(filters.regions&&filters.regions.includes(v))||(filters.families&&filters.families.includes(v));});}
+
+function applyLens(L){activeLens=L;document.querySelectorAll('.lens').forEach(b=>b.classList.toggle('on',L&&b.dataset.id===L.id));
+  if(!L){render();return;}
+  const f=L.filters||{};filters={types:f.types||null,verticals:f.verticals||null,signalTypes:f.signalTypes||null,trades:f.trades||null,regions:f.regions||null,families:f.families||null,minScore:f.minScore||0,minValue:f.minValue||0,search:''};
+  document.getElementById('ms').value=filters.minScore;document.getElementById('ms-v').textContent=filters.minScore;
+  document.getElementById('mv').value=Math.round(Math.sqrt(filters.minValue||0));document.getElementById('mv-v').textContent=fmt$(filters.minValue);
+  document.getElementById('search').value='';syncChecks();
+  if(L.mode)setMode(L.mode,true);if(L.colorBy){colorBy=L.colorBy;document.querySelectorAll('#colorby button').forEach(x=>x.classList.toggle('on',x.dataset.cb===colorBy));}
+  document.getElementById('cap-title').textContent=L.title||'';document.getElementById('cap-text').textContent=L.caption||'';
+  window.__stateFilter=null;
+  if(mode==='map')fitMap();render();
+}
+function clearLens(){if(activeLens){activeLens=null;document.querySelectorAll('.lens').forEach(b=>b.classList.remove('on'));document.getElementById('cap-title').textContent='Custom view';document.getElementById('cap-text').textContent='Filtered live. Pick a lens to snap back to a story.';}}
+function setMode(m,silent){mode=m;document.querySelectorAll('#mode button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));if(m==='map')fitMap();else seedGraph();if(!silent)render();}
+
+// ---------- filtering ----------
+function codeOf(n){return String((n.props&&n.props.country)||(n.props&&n.props.state)||'').toUpperCase();}
+function stateOf(n){return String((n.props&&n.props.state)||'').toUpperCase();}
+function srcOf(n){return String((n.props&&n.props.source_name)||(n.props&&n.props.source)||'').toLowerCase();}
+function verticalOf(n){return String((n.props&&n.props.vertical)||'').toLowerCase();}
+function inNorthAmericaByCoords(n){const lat=+n.props.lat,lng=+n.props.lng;return isFinite(lat)&&isFinite(lng)&&lat>=14&&lat<=72&&lng>=-170&&lng<=-52;}
+function inLatamByCoords(n){const lat=+n.props.lat,lng=+n.props.lng;return isFinite(lat)&&isFinite(lng)&&lat>=-60&&lat<=33&&lng>=-118&&lng<=-30;}
+function isLatamSource(src){return /(comprar|comprasmx|secop|chilecompra|mercadopublico|seace|pncp|bndes|aneel|ibama|seia|caged|sicop|panamacompra|sercop|nuevo_leon|sp_obras|obras)/.test(src);}
+function regionOf(n){
+  const c=codeOf(n),st=stateOf(n),src=srcOf(n),v=verticalOf(n);
+  if(APAC_CODES.has(c)||/\b(nz|sg|apac|australia|japan|korea)\b/.test(src+' '+v))return 'apac';
+  if(EMEA_CODES.has(c)||/(eu_ted|uk_find_a_tender|uk_planning|ted_de|ted_fr|ted_nordic|ted_pl|etenders|etimad|tejari|europe|emea)/.test(src+' '+v))return 'emea';
+  if(isLatamSource(src)||(LATAM_CODES.has(c)&&(!US_STATES.has(c)||inLatamByCoords(n))))return 'latam';
+  if(US_STATES.has(st)||CA_PROVINCES.has(st)||c==='US'||c==='CA'||inNorthAmericaByCoords(n))return 'north_america';
+  return '';
+}
+function familyOf(n){
+  const src=srcOf(n),v=verticalOf(n),r=regionOf(n);
+  const text=src+' '+v+' '+String((n.props&&n.props.signal_type)||'').toLowerCase();
+  if(r==='emea'&&/(tender|eu_ted|uk_find_a_tender|government_tender|procurement)/.test(text))return 'emea_tenders';
+  if(r==='latam'&&/(public_works|public_procurement|procurement|government_tender|comprar|comprasmx|secop|chilecompra|mercadopublico|seace|pncp|sicop|panamacompra|sercop|obras)/.test(text))return 'latam_public_works_procurement';
+  if(r==='apac'&&/(development|procurement|tender|permit|planning|infrastructure)/.test(text))return 'apac_development_procurement';
+  if(r==='north_america')return 'north_america_signals';
+  if(r&&/(permit|planning|plan|eia|environmental|license|development|seia|ibama|building)/.test(text))return 'international_permits_planning';
+  return '';
+}
+function passes(n){
+  const p=n.props;
+  if(filters.types&&!filters.types.includes(n.type))return false;
+  if(filters.verticals&&!filters.verticals.includes(p.vertical))return false;
+  if(filters.signalTypes&&!filters.signalTypes.includes(p.signal_type))return false;
+  if(filters.trades&&!((p.trades||[]).some(t=>filters.trades.includes(t))))return false;
+  if(filters.regions&&!filters.regions.includes(regionOf(n)))return false;
+  if(filters.families&&!filters.families.includes(familyOf(n)))return false;
+  if(filters.minScore&&(+p.score||0)<filters.minScore)return false;
+  if(filters.minValue&&(+p.value_usd||0)<filters.minValue)return false;
+  if(filters.search&&!(n.label||'').toLowerCase().includes(filters.search))return false;
+  if(window.__stateFilter&&(p.state||'').toUpperCase()!==window.__stateFilter)return false;
+  if(timeFrac<1&&p.date&&minDate){if(p.date>dateCut())return false;}
+  return true;
+}
+function dateCut(){if(!minDate||!maxDate)return '9999';const a=Date.parse(minDate),b=Date.parse(maxDate);const t=new Date(a+(b-a)*timeFrac);return t.toISOString().slice(0,10);}
+function visibleNodes(){return nodes.filter(passes);}
+
+// ---------- color/size ----------
+function colorOf(n){const t=n.type;
+  if(colorBy==='type')return (DATA.meta.node_types&&DATA.meta.node_types[t]&&DATA.meta.node_types[t].color)||PALETTE_FALLBACK[t]||'#888';
+  if(colorBy==='vertical'){const v=n.props.vertical||'';let h=0;for(const c of v)h=(h*31+c.charCodeAt(0))%360;return v?`hsl(${h},55%,62%)`:'#5a6a88';}
+  const s=Math.max(0,Math.min(100,+n.props.score||0));return `hsl(${(1-s/100)*45},${40+s*0.5}%,${55}%)`; // heat: gold->red
+}
+function alphaColor(c,a){
+  if(/^#[0-9a-f]{6}$/i.test(c))return c+Math.round(Math.max(0,Math.min(1,a))*255).toString(16).padStart(2,'0');
+  const m=/^hsl\(([^)]+)\)$/i.exec(c);return m?'hsla('+m[1]+','+Math.max(0,Math.min(1,a))+')':c;
+}
+function radius(n){const v=+n.props.value_usd||0;const base=mode==='map'?3:4;if(v>0)return base+Math.sqrt(v)/window.__maxValSqrt*(mode==='map'?22:18);const s=+n.props.score||0;return base+Math.sqrt(s)*(mode==='map'?1.4:1.6);}
+
+// ---------- MAP ----------
+// Equirectangular world projection (x = longitude east, y = latitude down). The
+// old map used a US-only Albers cone, which projected every international node
+// (EU, LatAm, Canada) far outside the US-fitted viewport, so they never showed.
+// This places every country in its true position so the world map is global.
+function world(lat,lng){return [lng,-lat];}
+function fitMap(){
+  // Fit to where the geocoded data actually is, not just the US, so Europe,
+  // Latin America and Canada all frame in. Fall back to US state centroids
+  // before any geocoded nodes have loaded.
+  let base=(window.__ready?visibleNodes():nodes).filter(n=>n.props.lat!=null&&n.props.lng!=null);
+  if(base.length<3)base=nodes.filter(n=>n.props.lat!=null&&n.props.lng!=null);
+  let pts=base.map(n=>world(n.props.lat,n.props.lng));
+  if(pts.length<3)pts=Object.values(STATES).map(c=>world(c[0],c[1]));
+  const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const padX=64,padTop=96,padBot=110;const aw=W-260-padX,ah=H-padTop-padBot;
+  const s=Math.min(aw/((x1-x0)||1),ah/((y1-y0)||1))*0.92;
+  mapT={s,ox:260+padX/2+(aw-(x1-x0)*s)/2-x0*s,oy:padTop+(ah-(y1-y0)*s)/2-y0*s};}
+function projXY(lat,lng){const a=world(lat,lng);return[a[0]*mapT.s+mapT.ox,a[1]*mapT.s+mapT.oy];}
+function drawMap(){
+  ctx.clearRect(0,0,W,H);
+  // faint state labels
+  ctx.font='10px DM Sans';ctx.fillStyle='rgba(120,150,180,.18)';ctx.textAlign='center';
+  for(const k in STATES){const[x,y]=projXY(STATES[k][0],STATES[k][1]);ctx.fillText(k,x,y);}
+  ctx.textAlign='left';
+  const vis=visibleNodes().filter(n=>n.props.lat!=null&&n.props.lng!=null);
+  const visSet=new Set(vis.map(n=>n.id));
+  // connection web: when a node is focused, trace its links across the map so you
+  // SEE customer -> facilities -> signals light up where they actually sit.
+  if(focusId&&visSet.has(focusId)){
+    const f=idx.get(focusId);const[fx,fy]=projXY(f.props.lat,f.props.lng);
+    const nbrs=(adj.get(focusId)||[]).map(i=>idx.get(i)).filter(n=>n&&n.props.lat!=null&&visSet.has(n.id));
+    const pulse=0.5+0.5*Math.sin(Date.now()/380);
+    nbrs.forEach(n=>{const[x,y]=projXY(n.props.lat,n.props.lng);
+      ctx.strokeStyle='rgba(201,168,76,'+(0.18+0.3*pulse)+')';ctx.lineWidth=1.1;
+      ctx.beginPath();ctx.moveTo(fx,fy);
+      const mx=(fx+x)/2,my=(fy+y)/2-Math.hypot(x-fx,y-fy)*0.12; // gentle arc
+      ctx.quadraticCurveTo(mx,my,x,y);ctx.stroke();
+      // a spark travelling the wire
+      const t=(Date.now()/900+ (n.id.length%7)/7)%1;
+      const sx=(1-t)*(1-t)*fx+2*(1-t)*t*mx+t*t*x, sy=(1-t)*(1-t)*fy+2*(1-t)*t*my+t*t*y;
+      ctx.fillStyle='rgba(244,241,230,'+(0.7*pulse+0.2)+')';ctx.beginPath();ctx.arc(sx,sy,2,0,7);ctx.fill();});
+  }
+  // glow pass (largest first)
+  vis.sort((a,b)=>radius(b)-radius(a));
+  vis.forEach(n=>{const[x,y]=projXY(n.props.lat,n.props.lng);const r=radius(n);const col=colorOf(n);
+    const ig=igniteAmt(n); // freshly-appeared nodes flare during time-lapse
+    const g=ctx.createRadialGradient(x,y,0,x,y,r*(2.4+ig*2.5));g.addColorStop(0,alphaColor(col,ig>0?1:.8));g.addColorStop(1,alphaColor(col,0));
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r*(2.4+ig*2.5),0,7);ctx.fill();});
+  vis.forEach(n=>{const[x,y]=projXY(n.props.lat,n.props.lng);const r=radius(n);const ig=igniteAmt(n);
+    ctx.beginPath();ctx.arc(x,y,r+ig*3,0,7);ctx.fillStyle=ig>0?'#ffffff':colorOf(n);ctx.globalAlpha=.92;ctx.fill();ctx.globalAlpha=1;
+    if(ig>0){ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=colorOf(n);ctx.fill();}
+    if(n===hoverNode||n.id===focusId){ctx.lineWidth=2;ctx.strokeStyle='#f4f1e6';ctx.stroke();
+      ctx.fillStyle='#f4f1e6';ctx.font='12px DM Sans';ctx.fillText(n.label,x+r+4,y+4);}
+  });
+  if(playing||timeFrac<1)drawTimelapseHUD(vis);
+  drawStats(vis);
+}
+// how "freshly appeared" a node is on the current time cut (0..1), for the
+// Visual-Capitalist "watch it ignite" effect while the time-lapse plays.
+function igniteAmt(n){if(!playing&&timeFrac>=1)return 0;const d=n.props.date;if(!d||!minDate||!maxDate)return 0;
+  const a=Date.parse(minDate),b=Date.parse(maxDate),cut=a+(b-a)*timeFrac,age=cut-Date.parse(d);
+  const win=(b-a)*0.05+8.64e7;if(age<0||age>win)return 0;return 1-age/win;}
+// big cinematic date + climbing capital counter, center-stage during playback
+function drawTimelapseHUD(vis){const tot=vis.reduce((a,n)=>a+(+n.props.value_usd||0),0);
+  ctx.save();ctx.textAlign='center';
+  ctx.fillStyle='rgba(244,241,230,.10)';ctx.font='700 86px Bebas Neue, DM Sans';
+  ctx.fillText(dateCut(),W/2+115,H/2-20);
+  ctx.fillStyle='rgba(201,168,76,.16)';ctx.font='700 120px Bebas Neue, DM Sans';
+  ctx.fillText(fmt$(tot),W/2+115,H/2+90);
+  ctx.restore();ctx.textAlign='left';}
+
+// ---------- GRAPH ----------
+function seedGraph(){nodes.forEach(n=>{if(!n._seeded){n.x=W/2+(Math.random()-.5)*700;n.y=H/2+(Math.random()-.5)*500;n._seeded=1;}});view={x:W/2,y:H/2,k:1};}
+function stepGraph(){const vis=visibleNodes();const S=new Set(vis.map(n=>n.id));
+  for(let i=0;i<vis.length;i++){const a=vis[i];for(let j=i+1;j<vis.length;j++){const b=vis[j];let dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy+.01;let f=2200/d2,d=Math.sqrt(d2);dx/=d;dy/=d;a.vx+=dx*f;a.vy+=dy*f;b.vx-=dx*f;b.vy-=dy*f;}}
+  edges.forEach(e=>{if(!S.has(e.s.id)||!S.has(e.t.id))return;let dx=e.t.x-e.s.x,dy=e.t.y-e.s.y,d=Math.sqrt(dx*dx+dy*dy)+.01,f=(d-92)*.012;dx/=d;dy/=d;e.s.vx+=dx*f;e.s.vy+=dy*f;e.t.vx-=dx*f;e.t.vy-=dy*f;});
+  vis.forEach(n=>{n.vx+=(W/2-n.x)*.0006;n.vy+=(H/2-n.y)*.0006;if(n.pin)return;n.vx*=.86;n.vy*=.86;n.x+=n.vx;n.y+=n.vy;});}
+function gS(n){return{x:(n.x-view.x)*view.k+W/2,y:(n.y-view.y)*view.k+H/2};}
+function drawGraph(){ctx.clearRect(0,0,W,H);const vis=visibleNodes();const S=new Set(vis.map(n=>n.id));
+  const focus=focusId?new Set([focusId,...(adj.get(focusId)||[])]):null;
+  edges.forEach(e=>{if(!S.has(e.s.id)||!S.has(e.t.id))return;const lit=focus?(focus.has(e.s.id)&&focus.has(e.t.id)):true;
+    const a=gS(e.s),b=gS(e.t);ctx.strokeStyle=lit?'rgba(201,168,76,.22)':'rgba(120,130,150,.05)';ctx.lineWidth=lit?1:.6;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();});
+  vis.forEach(n=>{const p=gS(n),r=radius(n)*Math.sqrt(view.k);const lit=focus?focus.has(n.id):true;ctx.globalAlpha=lit?1:.2;
+    ctx.beginPath();ctx.arc(p.x,p.y,r,0,7);ctx.fillStyle=colorOf(n);ctx.fill();
+    if(n===hoverNode||n.id===focusId){ctx.lineWidth=2;ctx.strokeStyle='#f4f1e6';ctx.stroke();}ctx.globalAlpha=1;
+    if(lit&&(view.k>1.2||radius(n)>10||n===hoverNode||n.id===focusId)){ctx.fillStyle='#f4f1e6';ctx.font='11px DM Sans';ctx.fillText(n.label,p.x+r+3,p.y+4);}});
+  drawStats(vis);}
+
+function drawStats(vis){const tot=vis.reduce((a,n)=>a+(+n.props.value_usd||0),0);
+  const badge='<span style="color:'+(dataMode==='live'?'var(--green)':'var(--dim)')+'">● '+(dataMode==='live'?'LIVE':'snapshot')+'</span> · ';
+  const body='<span class="big">'+vis.length+'</span> shown · <b>'+fmt$(tot)+'</b> capital in view'+(timeFrac<1?' · through <b>'+dateCut()+'</b>':'');
+  document.getElementById('stats').innerHTML=badge+body;
+  const es=document.getElementById('embed-stats');if(es)es.innerHTML='<span class="big">'+fmt$(tot)+'</span> capital in view · <b>'+vis.length+'</b> moves';}
+
+let needGraph=true;
+function frame(){if(mode==='graph'){stepGraph();drawGraph();}else{drawMap();}requestAnimationFrame(frame);}
+// discrete user action changed state: the RAF loop repaints; we also reflect the
+// new view into the URL so the address bar always equals "what you see".
+function render(){if(window.__ready){syncUrl();updateRecordLabel();}}
+
+// ---------- timeline ----------
+function updateTL(){document.getElementById('tl-label').textContent=minDate?(timeFrac>=1?'All time':(minDate+'  →  '+dateCut())):'';}
+function togglePlay(){playing=!playing;document.getElementById('play').textContent=playing?'❚❚ Pause':'▶ Play time';if(playing)tick();}
+function tick(){if(!playing)return;timeFrac+=0.01;if(timeFrac>=1){timeFrac=1;playing=false;document.getElementById('play').textContent='▶ Play time';}
+  document.getElementById('tl').value=Math.round(timeFrac*100);updateTL();if(playing)setTimeout(tick,90);}
+
+// ---------- interaction ----------
+function pickMap(px,py){let best=null,bd=1e9;visibleNodes().forEach(n=>{if(n.props.lat==null)return;const[x,y]=projXY(n.props.lat,n.props.lng);const r=Math.max(radius(n),7);const d=(x-px)**2+(y-py)**2;if(d<r*r&&d<bd){bd=d;best=n;}});return best;}
+function pickGraph(px,py){let best=null,bd=1e9;visibleNodes().forEach(n=>{const p=gS(n);const r=Math.max(radius(n)*Math.sqrt(view.k),6);const d=(p.x-px)**2+(p.y-py)**2;if(d<r*r&&d<bd){bd=d;best=n;}});return best;}
+let dragN=null,panning=false,last=null,moved=false;
+cv.addEventListener('mousedown',e=>{moved=false;last={x:e.clientX,y:e.clientY};const n=(mode==='graph'?pickGraph:pickMap)(e.clientX,e.clientY);if(n&&mode==='graph'){dragN=n;n.pin=true;}else{panning=true;cv.classList.add('grabbing');}});
+addEventListener('mousemove',e=>{const n=(mode==='graph'?pickGraph:pickMap)(e.clientX,e.clientY);hoverNode=n;const tip=document.getElementById('tip');
+  if(n){tip.style.display='block';tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';
+    tip.innerHTML='<b style="color:'+colorOf(n)+'">'+esc(n.label)+'</b><br><span style="color:#a4a59c">'+esc(n.type)+(n.props.vertical?' · '+esc(n.props.vertical):'')+'</span>'+(n.props.value_usd?'<br>'+fmt$(n.props.value_usd):'')+(n.props.narrative&&n.props.narrative!=='?'?'<br><span style="color:#cfcab8">'+esc(n.props.narrative.slice(0,120))+'</span>':'');}
+  else tip.style.display='none';
+  if(!last)return;const dx=e.clientX-last.x,dy=e.clientY-last.y;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;
+  if(dragN){const k=view.k;dragN.x+= dx/k;dragN.y+=dy/k;}
+  else if(panning){if(mode==='graph'){view.x-=dx/view.k;view.y-=dy/view.k;}else{mapT.ox+=dx;mapT.oy+=dy;}}
+  last={x:e.clientX,y:e.clientY};});
+addEventListener('mouseup',e=>{cv.classList.remove('grabbing');const n=(mode==='graph'?pickGraph:pickMap)(e.clientX,e.clientY);
+  if(!moved){if(n){focusId=(focusId===n.id)?null:n.id;showInfo(n);}else{focusId=null;document.getElementById('right').style.display='none';}}
+  dragN=null;panning=false;last=null;});
+cv.addEventListener('wheel',e=>{e.preventDefault();const f=e.deltaY<0?1.12:.89;if(mode==='graph'){const wx=(e.clientX-W/2)/view.k+view.x,wy=(e.clientY-H/2)/view.k+view.y;view.k=Math.max(.25,Math.min(6,view.k*f));view.x=wx-(e.clientX-W/2)/view.k;view.y=wy-(e.clientY-H/2)/view.k;}else{const mx=e.clientX,my=e.clientY;mapT.ox=mx-(mx-mapT.ox)*f;mapT.oy=my-(my-mapT.oy)*f;mapT.s*=f;}},{passive:false});
+
+function showInfo(n){const el=document.getElementById('right');el.style.display='block';const p=n.props;
+  const flds=['vertical','signal_type','state','metro','date','source'];let kv='';
+  if(p.value_usd)kv+='<div class="kv">value: <b>'+fmt$(p.value_usd)+'</b></div>';
+  if(p.score)kv+='<div class="kv">score: <b>'+(+p.score).toFixed(1)+'</b></div>';
+  flds.forEach(f=>{if(p[f]&&p[f]!=='?')kv+='<div class="kv">'+f.replace(/_/g,' ')+': <b>'+esc(p[f])+'</b></div>';});
+  const nb=(adj.get(n.id)||[]).map(i=>idx.get(i)).filter(Boolean).slice(0,30);
+  const why=whyNow(n);
+  el.innerHTML='<button class="x" onclick="document.getElementById(\'right\').style.display=\'none\'">×</button>'+
+    '<div class="kind">'+esc(n.type)+'</div><h2>'+esc(n.label)+'</h2>'+
+    (why?'<div class="why"><span class="lbl">Why now</span>'+esc(why)+'</div>':'')+
+    (p.narrative&&p.narrative!=='?'?'<div class="desc">'+esc(p.narrative)+'</div>':'')+kv+
+    (nb.length?'<div class="kind" style="margin-top:10px;border-top:1px solid var(--border);padding-top:8px">Connected ('+nb.length+')</div>'+nb.map(x=>'<a style="display:block;color:var(--gold);font-size:12px;padding:2px 0;cursor:pointer" data-id="'+x.id+'">'+esc(x.label)+'</a>').join(''):'');
+  el.querySelectorAll('a[data-id]').forEach(a=>a.onclick=()=>{const t=idx.get(a.dataset.id);focusId=t.id;if(mode==='graph'){view.x=t.x;view.y=t.y;}showInfo(t);});}
+
+// "Why now" — a plain-English read of why this node matters at this moment.
+// Built only from facts in the data (magnitude vs peers, recency, score
+// percentile, how many signals connect to it). No invention, no banned words.
+function whyNow(n){const p=n.props;const bits=[];
+  const v=+p.value_usd||0;
+  if(v>0){const vals=nodes.map(x=>+x.props.value_usd||0).filter(x=>x>0).sort((a,b)=>a-b);
+    const pct=Math.round(100*vals.filter(x=>x<=v).length/vals.length);
+    if(pct>=90)bits.push('One of the largest moves on the board at '+fmt$(v)+' (top '+(100-pct+1)+' percent by size).');
+    else bits.push(fmt$(v)+' in capital tied to it.');}
+  const sc=+p.score||0;
+  if(sc>0){const ss=nodes.map(x=>+x.props.score||0).filter(x=>x>0).sort((a,b)=>a-b);
+    const spct=Math.round(100*ss.filter(x=>x<=sc).length/ss.length);
+    if(spct>=80)bits.push('Scores in the top '+(100-spct+1)+' percent on our signal strength.');}
+  // recency
+  if(p.date&&maxDate){const days=Math.round((Date.parse(maxDate)-Date.parse(p.date))/8.64e7);
+    if(days<=7)bits.push('Signal landed in the last week.');
+    else if(days<=30)bits.push('Signal landed in the last month.');
+    else if(days<=90)bits.push('Active in the last quarter.');}
+  // signal-specific facts that ride along in props
+  if(p.signal_type&&p.signal_type!=='?')bits.push('Trigger type: '+p.signal_type+'.');
+  if(+p.trigger_count>=2)bits.push(p.trigger_count+' separate trigger events stacked up.');
+  if(+p.capacity_mw>0)bits.push(Math.round(+p.capacity_mw)+' MW of planned capacity.');
+  if(+p.days_to_rfp>0&&+p.days_to_rfp<=180)bits.push('Estimated RFP in about '+p.days_to_rfp+' days.');
+  // connection density (the Palantir "web" read)
+  const deg=(adj.get(n.id)||[]).length;
+  const sigN=(adj.get(n.id)||[]).map(i=>idx.get(i)).filter(x=>x&&x.type==='signal').length;
+  if(sigN>=2)bits.push(sigN+' separate signals converge here, not a one-off.');
+  else if(deg>=4)bits.push('Sits at the center of '+deg+' connected moves.');
+  // type-specific lead
+  let lead='';
+  if(n.type==='opportunity')lead='A build forming before the RFP is public. ';
+  else if(n.type==='prospect')lead='A company showing the moves that come before a buy. ';
+  else if(n.type==='project'&&v>0)lead='Capital already committed to a project here. ';
+  else if(n.type==='signal')lead='A public signal of capital starting to move. ';
+  const out=(lead+bits.join(' ')).trim();
+  return out.length>20?out:'';}
+
+function saveImage(){const a=document.createElement('a');a.download='capital-movement-'+(activeLens?activeLens.id:'view')+'.png';a.href=cv.toDataURL('image/png');a.click();}
+
+// the scope the record button will capture: a territory (?state), else the
+// active lens, else national. Drives the "Record my territory" preset label.
+function recordScope(){
+  if(window.__stateFilter)return {tag:window.__stateFilter,label:'Record '+window.__stateFilter};
+  if(activeLens&&activeLens.id!=='everywhere')return {tag:activeLens.id,label:'Record this view'};
+  return {tag:'national',label:'Record clip'};
+}
+function updateRecordLabel(){const b=document.getElementById('record');
+  if(!b||recording)return;b.textContent='● '+recordScope().label;}
+
+// ---- Record clip: capture the live time-lapse straight from the canvas as a
+// WebM video (browser-native, zero deps). Plays the timeline start->finish in
+// Map mode, records the canvas stream, downloads, then restores the prior view.
+let recording=false;
+function recordClip(){
+  const btn=document.getElementById('record');
+  if(recording)return;
+  if(!cv.captureStream||typeof MediaRecorder==='undefined'){
+    alert('Recording needs a Chromium or Firefox browser. Tip: use the Save image button, or run make graphify-gif for a shareable GIF.');
+    return;}
+  // remember what to restore
+  const prevMode=mode,prevFrac=timeFrac,prevPlaying=playing,prevTLval=document.getElementById('tl').value;
+  if(mode!=='map')setMode('map',true);
+  recording=true;btn.textContent='● Recording...';btn.style.color='var(--red)';
+  let chunks=[];
+  let rec;
+  const stream=cv.captureStream(30);
+  const mime=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(m=>MediaRecorder.isTypeSupported(m))||'video/webm';
+  try{rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:6e6});}
+  catch(e){recording=false;btn.style.color='';updateRecordLabel();alert('Could not start the recorder: '+e.message);return;}
+  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
+  const scopeTag=recordScope().tag;
+  rec.onstop=()=>{
+    const blob=new Blob(chunks,{type:mime});
+    const a=document.createElement('a');
+    a.download='capital-timelapse-'+scopeTag+'.webm';
+    a.href=URL.createObjectURL(blob);a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    // restore prior view
+    recording=false;btn.style.color='';updateRecordLabel();
+    playing=false;timeFrac=prevFrac;document.getElementById('tl').value=prevTLval;updateTL();
+    if(prevMode!=='map')setMode(prevMode,true);
+    if(prevPlaying){playing=true;tick();}
+  };
+  rec.start();
+  // run the time-lapse from the start, a touch slower so the clip reads well
+  timeFrac=0;document.getElementById('tl').value=0;updateTL();
+  playing=true;
+  (function recTick(){
+    if(!recording)return;
+    timeFrac+=0.012;
+    if(timeFrac>=1){timeFrac=1;document.getElementById('tl').value=100;updateTL();
+      // hold the final full frame ~1.2s, then stop
+      setTimeout(()=>{if(rec.state!=='inactive')rec.stop();},1200);return;}
+    document.getElementById('tl').value=Math.round(timeFrac*100);updateTL();
+    setTimeout(recTick,70);
+  })();
+}
+function fmt$(v){v=+v||0;if(v>=1e9)return '$'+(v/1e9).toFixed(1)+'B';if(v>=1e6)return '$'+(v/1e6).toFixed(0)+'M';if(v>=1e3)return '$'+(v/1e3).toFixed(0)+'K';return '$'+v;}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+boot();
+</script>
+</body>
 </html>
