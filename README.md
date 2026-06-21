@@ -25,6 +25,14 @@ Target: `capexlayer.com` via CNAME once DNS is configured. Drop a `CNAME` file a
 
 Operational codebase: **private** repo `Davidleeops/capexlayer`. See that repo's `ARCHITECTURE.md` for the full system map.
 
+## Access flow
+
+Public website CTAs should follow the enterprise data-platform pattern:
+
+- Prospects use `/demo/` or the homepage request form.
+- Existing customers use `/platform/`, which redirects to the production platform login.
+- Do not publish bearer demo-token links in public navigation or public pages. Sales can share scoped platform demo links directly after qualification.
+
 ## Copy rules
 
 Any copy added to this repo is customer-facing. It must pass the AI-commodity filter and the no-em-dashes rule documented in the private `capexlayer/docs/playbook.md`. Before editing any page, read the copy rules section.
