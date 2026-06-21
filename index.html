@@ -108,18 +108,36 @@
       <section class="section" id="request">
         <div class="wrap grid-2">
           <div>
-            <span class="cx-kicker">Request access</span>
+            <span class="cx-kicker">Request demo</span>
             <h2>Bring one territory. We will pull the signal live.</h2>
-            <p class="cx-lede">The walkthrough is 15 minutes. You leave with a sample account list, source trail, and a clear view of whether the timing is useful.</p>
+            <p class="cx-lede">The walkthrough is 15 minutes. Share the territory, segment, or named accounts you care about so the demo can be scoped before access is granted.</p>
           </div>
           <form class="cx-card" action="https://formspree.io/f/xgegvkyr" method="POST">
             <div class="form-grid">
               <input type="hidden" name="source" value="capexlayer_home_request_access" />
+              <input type="hidden" name="_subject" value="CapexLayer demo request from homepage" />
+              <input type="hidden" name="_redirect" value="https://capexlayer.com/demo/thanks.html" />
               <input class="cx-input" name="name" autocomplete="name" placeholder="Name" required />
               <input class="cx-input" name="email" type="email" autocomplete="email" placeholder="Work email" required />
-              <input class="cx-input full" name="company" autocomplete="organization" placeholder="Company" />
-              <textarea class="cx-input full" name="territory" placeholder="Territory or account you want checked"></textarea>
-              <button class="cx-btn cx-btn--solid full" type="submit">Request access</button>
+              <input class="cx-input" name="company" autocomplete="organization" placeholder="Company" required />
+              <input class="cx-input" name="role" autocomplete="organization-title" placeholder="Role" />
+              <input class="cx-input full" name="territory" placeholder="Sales territory or market focus" required />
+              <textarea class="cx-input full" name="accounts" placeholder="Named accounts, CRM segment, or project types to check"></textarea>
+              <select class="cx-input full" name="crm" aria-label="CRM or system of record">
+                <option value="">CRM or system of record</option>
+                <option value="Salesforce">Salesforce</option>
+                <option value="HubSpot">HubSpot</option>
+                <option value="Microsoft Dynamics">Microsoft Dynamics</option>
+                <option value="Other">Other</option>
+              </select>
+              <select class="cx-input full" name="timeline" aria-label="Evaluation timeline">
+                <option value="">Evaluation timeline</option>
+                <option value="Now">Now</option>
+                <option value="This quarter">This quarter</option>
+                <option value="Exploring">Exploring</option>
+              </select>
+              <p class="form-note full">We do not send public credential links. If there is a fit, access is provisioned after qualification and scoped to the agreed territory or account set.</p>
+              <button class="cx-btn cx-btn--solid full" type="submit">Request demo</button>
             </div>
           </form>
         </div>

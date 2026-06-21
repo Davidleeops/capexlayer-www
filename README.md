@@ -32,6 +32,7 @@ Public website CTAs should follow the enterprise data-platform pattern:
 - Prospects use `/demo/` or the homepage request form.
 - Existing customers use `/platform/`, which redirects to the production platform login.
 - Do not publish bearer demo-token links in public navigation or public pages. Sales can share scoped platform demo links directly after qualification.
+- Sales handoff details live in `docs/gtm-demo-handoff.md`.
 
 ## Copy rules
 
