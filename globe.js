@@ -31,6 +31,8 @@
     function draw(now){
       const gold=css("--gold"),gold2=css("--gold-2"),hair=css("--hair"),body=css("--text-body"),panel=css("--panel");
       const dt=(now-t0)/1000,rot=-82+dt*7;
+      const labelsEnabled=window.innerWidth>1100;
+      const placedLabels=[];
       ctx.clearRect(0,0,w,h);
       const r=Math.min(w,h)*.36,cx=w*.5,cy=h*.5;
       const grad=ctx.createRadialGradient(cx-r*.25,cy-r*.35,r*.1,cx,cy,r);
@@ -61,11 +63,20 @@
         const q=age/ar.life, x=(1-q)*(1-q)*A.x+2*(1-q)*q*mx+q*q*B.x, y=(1-q)*(1-q)*A.y+2*(1-q)*q*my+q*q*B.y;
         ctx.fillStyle=gold2;ctx.beginPath();ctx.arc(x,y,3.2+2*facing,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
       }
+      function drawLabel(name,x,y){
+        ctx.font="10px "+css("--font-mono");
+        const width=ctx.measureText(name).width;
+        const box={left:x,top:y-9,right:x+width,bottom:y+4};
+        const collides=placedLabels.some(p=>!(box.right<p.left||box.left>p.right||box.bottom<p.top||box.top>p.bottom));
+        if(collides||box.right>w-8||box.left<8)return;
+        placedLabels.push(box);
+        ctx.fillText(name,x,y);
+      }
       cities.forEach(c=>{
         const p=project(c,rot);if(p.z<-.45)return;
         const a=Math.max(.12,(p.z+1)/2*c.a);
         ctx.globalAlpha=a;ctx.fillStyle=gold;ctx.beginPath();ctx.arc(p.x,p.y,3+c.a*2,0,Math.PI*2);ctx.fill();
-        if(c.a>.55&&p.z>.2){ctx.fillStyle=body;ctx.font="10px "+css("--font-mono");ctx.fillText(c.n,p.x+8,p.y+3);}
+        if(labelsEnabled&&c.a>.55&&p.z>.6&&p.x>w*.55){ctx.fillStyle=body;drawLabel(c.n,p.x+8,p.y+3);}
         ctx.globalAlpha=1;
       });
       requestAnimationFrame(draw);
