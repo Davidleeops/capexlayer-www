@@ -1,6 +1,6 @@
 # capexlayer-www
 
-Public marketing and demo booking surface for CapEx Layer, served at capexlayer.com.
+Public marketing and demo booking surface for CapexLayer, served at capexlayer.com.
 
 ## Tree
 
