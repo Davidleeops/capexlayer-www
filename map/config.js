@@ -1,4 +1,4 @@
-// Capital Movement Explorer — default live config (committed).
+// Capital Movement Explorer  -  default live config (committed).
 //
 // This makes LIVE mode the default wherever the explorer is deployed: it reads
 // the public Supabase views in the browser and builds the graph client-side.
@@ -21,7 +21,7 @@ window.SUPABASE_PUBLISHABLE_KEY = "sb_publishable_B8SfhndBe7JUg0j_CtwgDA_uRJc95L
 // pdm_cmms_facilities_public view (anon-readable, created 2026-06-03). ~134 scored
 // facilities today; cap 500 pulls them all. The maintenance lens now renders real
 // plants (ExxonMobil Baytown, Dow Freeport, Constellation, ...) on the same map as
-// every other ICP — no longer a silo.
+// every other ICP  -  no longer a silo.
 window.GRAPHIFY_CAPS = {
   projects: 3000,
   projects_intl_per_source: 220,

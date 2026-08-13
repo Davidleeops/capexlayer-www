@@ -77,7 +77,7 @@ body.embed #embed-stats{display:block;}
 </head>
 <body>
 <div id="stage"><canvas id="c"></canvas></div>
-<div id="brand"><span class="mark">CapExLayer</span><span class="by">capital movement, live</span></div>
+<div id="brand"><span class="mark">CapexLayer</span><span class="by">capital movement, live</span></div>
 <div id="embed-stats"></div>
 <div id="top" class="panel">
   <h1>Capital Movement Explorer</h1>
@@ -596,7 +596,7 @@ function showInfo(n){const el=document.getElementById('right');el.style.display=
     (nb.length?'<div class="kind" style="margin-top:10px;border-top:1px solid var(--border);padding-top:8px">Connected ('+nb.length+')</div>'+nb.map(x=>'<a style="display:block;color:var(--gold);font-size:12px;padding:2px 0;cursor:pointer" data-id="'+x.id+'">'+esc(x.label)+'</a>').join(''):'');
   el.querySelectorAll('a[data-id]').forEach(a=>a.onclick=()=>{const t=idx.get(a.dataset.id);focusId=t.id;if(mode==='graph'){view.x=t.x;view.y=t.y;}showInfo(t);});}
 
-// "Why now" — a plain-English read of why this node matters at this moment.
+// "Why now"  -  a plain-English read of why this node matters at this moment.
 // Built only from facts in the data (magnitude vs peers, recency, score
 // percentile, how many signals connect to it). No invention, no banned words.
 function whyNow(n){const p=n.props;const bits=[];

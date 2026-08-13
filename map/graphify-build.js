@@ -1,4 +1,4 @@
-/* graphify-build.js — build the capital-movement graph in the browser.
+/* graphify-build.js  -  build the capital-movement graph in the browser.
  *
  * A faithful JS port of scripts/graphify/{model,geo,build}.py build_live, so the
  * explorer can read the public Supabase views live with the anon key and build
