@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050810" />
+  <meta name="description" content="Identify where commercial timing breaks between market movement, account priority, and owned revenue action." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://capexlayer.com/diagnostic/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Commercial Timing Diagnostic | CapexLayer" />
+  <meta property="og:description" content="Identify where commercial timing breaks between market movement, account priority, and owned revenue action." />
+  <meta property="og:url" content="https://capexlayer.com/diagnostic/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Commercial Timing Diagnostic | CapexLayer" />
+  <meta name="twitter:description" content="Identify where commercial timing breaks between market movement, account priority, and owned revenue action." />
+  <title>Commercial Timing Diagnostic | CapexLayer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23050810'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23c9a84c' stroke-width='4'/%3E%3Cpath d='M18 32h28M32 18v28' stroke='%23efe7d3' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-nearblack: #050810;
+      --bg: #080e1a;
+      --panel: #060c18;
+      --card: #0b1426;
+      --card-2: #0d182c;
+      --gold: #c9a84c;
+      --gold-2: #ffe8a0;
+      --cream: #efe7d3;
+      --green: #74dc87;
+      --red: #f28779;
+      --text-primary: #eaf0fb;
+      --text-body: #aab6cd;
+      --text-muted: #6f7f9c;
+      --hair: #1b2740;
+      --font-display: "Bebas Neue", sans-serif;
+      --font-serif: "Fraunces", Georgia, serif;
+      --font-sans: "DM Sans", system-ui, sans-serif;
+      --font-mono: "DM Mono", ui-monospace, monospace;
+      --shadow: 0 30px 90px rgba(0, 0, 0, .42);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--bg-nearblack); scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 14% 0%, rgba(201, 168, 76, .12), transparent 30%),
+        radial-gradient(circle at 86% 100%, rgba(71, 101, 159, .16), transparent 34%),
+        var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(27, 39, 64, .55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27, 39, 64, .55) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: .38;
+      mask-image: radial-gradient(100% 100% at 50% 50%, #000 20%, transparent 82%);
+    }
+
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+    .topline { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), var(--gold-2), var(--gold), transparent); }
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; position: relative; z-index: 1; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; }
+    .wordmark { font-family: var(--font-display); letter-spacing: .3em; font-size: 25px; text-decoration: none; }
+    .wordmark b { color: var(--gold); font-weight: 400; }
+    .nav-meta { font-family: var(--font-mono); color: var(--text-muted); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; }
+
+    .main { display: grid; grid-template-columns: minmax(240px, .8fr) minmax(0, 1.7fr); gap: 24px; padding: 42px 0 70px; align-items: start; }
+    .context { position: sticky; top: 24px; padding: 28px 10px 24px 0; }
+    .kicker { color: var(--gold); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; }
+    .context h1 { margin: 18px 0 18px; color: var(--cream); font-family: var(--font-serif); font-size: clamp(2.25rem, 5vw, 4.4rem); font-weight: 500; line-height: .98; letter-spacing: -.02em; }
+    .context h1 em { color: var(--gold-2); font-weight: 400; }
+    .context p { margin: 0; color: var(--text-body); max-width: 39ch; font-size: 1.05rem; }
+    .logic { display: grid; gap: 10px; margin-top: 30px; }
+    .logic-row { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; color: var(--text-muted); font-size: .86rem; }
+    .logic-row strong { color: var(--gold); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; padding-top: 3px; }
+
+    .quiz-card { background: linear-gradient(145deg, rgba(13, 24, 44, .98), rgba(6, 12, 24, .98)); border: 1px solid var(--hair); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; min-height: 670px; }
+    .quiz-head { padding: 20px 24px; border-bottom: 1px solid var(--hair); display: grid; gap: 12px; }
+    .status-line { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--text-muted); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+    .progress-track { height: 5px; background: #0a1120; border: 1px solid var(--hair); border-radius: 999px; overflow: hidden; }
+    .progress-fill { display: block; height: 100%; width: 10%; background: linear-gradient(90deg, var(--gold), var(--gold-2)); transition: width .35s ease; }
+    .screen { padding: 36px 34px 34px; }
+    .question-number { color: var(--gold); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; }
+    .question h2 { margin: 12px 0 10px; color: var(--cream); font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.65rem); font-weight: 500; line-height: 1.12; }
+    .question-note { margin: 0 0 28px; color: var(--text-body); font-size: .98rem; max-width: 64ch; }
+    .options { display: grid; gap: 12px; }
+    .option {
+      width: 100%;
+      border: 1px solid var(--hair);
+      border-radius: 12px;
+      background: rgba(5, 8, 16, .56);
+      padding: 17px 18px;
+      text-align: left;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 30px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .option:hover, .option:focus-visible { transform: translateY(-1px); border-color: var(--gold); background: rgba(201, 168, 76, .08); outline: none; }
+    .option.selected { border-color: var(--gold-2); background: rgba(201, 168, 76, .12); }
+    .option-index { width: 30px; height: 30px; border: 1px solid #35425c; border-radius: 50%; display: grid; place-items: center; color: var(--gold); font-family: var(--font-mono); font-size: .72rem; }
+    .option-copy { display: grid; gap: 3px; }
+    .option-title { color: var(--text-primary); font-weight: 600; font-size: 1rem; }
+    .option-sub { color: var(--text-muted); font-size: .86rem; }
+    .option-arrow { color: var(--gold); font-size: 1.1rem; }
+    .quiz-actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 26px; min-height: 44px; }
+    .btn { border: 1px solid var(--gold); border-radius: 999px; background: transparent; color: var(--gold); padding: 11px 20px; cursor: pointer; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; transition: background .2s ease, color .2s ease, opacity .2s ease; }
+    .btn:hover, .btn:focus-visible { background: var(--gold); color: var(--bg-nearblack); outline: none; }
+    .btn.solid { background: var(--gold); color: var(--bg-nearblack); }
+    .btn.solid:hover, .btn.solid:focus-visible { background: var(--gold-2); }
+    .btn[disabled] { opacity: .38; cursor: not-allowed; }
+    .btn[disabled]:hover { background: transparent; color: var(--gold); }
+    .microcopy { color: var(--text-muted); font-size: .78rem; }
+
+    .result { display: none; }
+    .result.active { display: block; }
+    .result-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+    .result-main, .result-side, .contact-card { border: 1px solid var(--hair); border-radius: 14px; background: rgba(5, 8, 16, .48); padding: 24px; }
+    .result h2 { margin: 10px 0 12px; color: var(--cream); font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 500; line-height: 1.02; }
+    .result-thesis { margin: 0; color: var(--text-body); font-size: 1rem; }
+    .confidence { margin: 18px 0 0; padding: 12px 14px; border-left: 2px solid var(--gold); background: rgba(201, 168, 76, .06); color: var(--text-body); font-size: .88rem; }
+    .secondary { margin-top: 20px; color: var(--text-muted); font-size: .86rem; }
+    .secondary strong { color: var(--text-primary); }
+    .result-side h3, .contact-card h3 { margin: 0 0 14px; color: var(--cream); font-family: var(--font-serif); font-size: 1.45rem; font-weight: 500; }
+    .action-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .action-list li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; color: var(--text-body); font-size: .9rem; }
+    .action-list span { color: var(--gold); font-family: var(--font-mono); font-size: .72rem; padding-top: 3px; }
+    .artifact { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--hair); }
+    .artifact-label { color: var(--text-muted); font-family: var(--font-mono); font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; }
+    .artifact-name { margin-top: 7px; color: var(--gold-2); font-size: 1.02rem; font-weight: 600; }
+    .artifact-use { margin: 6px 0 0; color: var(--text-body); font-size: .86rem; }
+    .contact-card { margin-top: 18px; }
+    .contact-card > p { color: var(--text-body); margin: -4px 0 18px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: var(--text-muted); font-size: .78rem; }
+    .input { width: 100%; min-height: 46px; background: var(--panel); border: 1px solid var(--hair); border-radius: 8px; color: var(--text-primary); padding: 10px 12px; }
+    .input:focus { outline: 1px solid var(--gold); border-color: var(--gold); }
+    .consent { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; color: var(--text-muted); font-size: .78rem; }
+    .consent input { margin-top: 4px; accent-color: var(--gold); }
+    .form-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 4px; }
+    .submit-note { color: var(--text-muted); font-size: .74rem; }
+    .copy-status { min-height: 1.2em; color: var(--green); font-size: .78rem; }
+    .error { color: var(--red); font-size: .8rem; margin-top: 8px; display: none; }
+    .footer { padding: 26px 0 34px; border-top: 1px solid var(--hair); color: var(--text-muted); font-family: var(--font-mono); font-size: .68rem; letter-spacing: .11em; text-transform: uppercase; }
+    .footer .shell { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .hidden { display: none !important; }
+
+    @media (max-width: 880px) {
+      .main { grid-template-columns: 1fr; padding-top: 18px; }
+      .context { position: static; padding: 12px 4px 0; }
+      .context h1 { font-size: clamp(2.45rem, 12vw, 4rem); max-width: 11ch; }
+      .context p { font-size: .98rem; }
+      .logic { grid-template-columns: repeat(3, 1fr); }
+      .logic-row { grid-template-columns: 1fr; gap: 3px; }
+      .quiz-card { min-height: 0; }
+      .result-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 20px, 1180px); }
+      .nav { min-height: 66px; }
+      .nav-meta { display: none; }
+      .screen { padding: 28px 18px 24px; }
+      .quiz-head { padding: 16px 18px; }
+      .option { grid-template-columns: 28px 1fr; padding: 14px; }
+      .option-arrow { display: none; }
+      .logic { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .field.full, .consent, .form-actions { grid-column: auto; }
+      .quiz-actions { align-items: flex-end; }
+      .microcopy { max-width: 20ch; text-align: right; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <nav class="shell nav" aria-label="CapexLayer">
+    <a class="wordmark" href="https://capexlayer.com/" aria-label="CapexLayer home">CAPEX<b>LAYER</b></a>
+    <div class="nav-meta">Commercial timing diagnostic</div>
+  </nav>
+
+  <main class="shell main">
+    <section class="context" aria-labelledby="page-title">
+      <span class="kicker">3-minute diagnostic</span>
+      <h1 id="page-title">Where does revenue lose <em>timing?</em></h1>
+      <p>Find the point where market movement stops becoming account priority, stakeholder action, or owned CRM work. You will leave with one constraint hypothesis and the next decision artifact to build.</p>
+      <div class="logic" aria-label="What the diagnostic covers">
+        <div class="logic-row"><strong>01</strong><span>See the movement earlier.</span></div>
+        <div class="logic-row"><strong>02</strong><span>Decide what deserves action.</span></div>
+        <div class="logic-row"><strong>03</strong><span>Route the next move to an owner.</span></div>
+      </div>
+    </section>
+
+    <section class="quiz-card" aria-live="polite">
+      <div class="quiz-head">
+        <div class="status-line"><span id="progress-label">Question 1 of 10</span><span id="time-label">About 3 minutes</span></div>
+        <div class="progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1" aria-label="Diagnostic progress">
+          <span class="progress-fill" id="progress-fill"></span>
+        </div>
+      </div>
+
+      <div class="screen question" id="question-screen">
+        <div class="question-number" id="question-number">Decision 01</div>
+        <h2 id="question-title"></h2>
+        <p class="question-note" id="question-note"></p>
+        <div class="options" id="options" role="radiogroup" aria-labelledby="question-title"></div>
+        <div class="quiz-actions">
+          <button class="btn" id="back-button" type="button">Back</button>
+          <span class="microcopy">Choose the closest answer. You can go back.</span>
+        </div>
+      </div>
+
+      <div class="screen result" id="result-screen" tabindex="-1">
+        <div class="result-grid">
+          <div class="result-main">
+            <span class="kicker">Your primary constraint</span>
+            <h2 id="result-title"></h2>
+            <p class="result-thesis" id="result-thesis"></p>
+            <div class="confidence" id="result-boundary"></div>
+            <div class="secondary">Secondary pressure: <strong id="secondary-title"></strong></div>
+          </div>
+          <aside class="result-side" aria-labelledby="next-move-title">
+            <h3 id="next-move-title">What to do next</h3>
+            <ol class="action-list" id="action-list"></ol>
+            <div class="artifact">
+              <div class="artifact-label">Decision artifact</div>
+              <div class="artifact-name" id="artifact-name"></div>
+              <p class="artifact-use" id="artifact-use"></p>
+            </div>
+          </aside>
+        </div>
+
+        <form class="contact-card" id="result-form" action="https://formspree.io/f/xgegvkyr" method="POST">
+          <h3>Send the result to CapexLayer</h3>
+          <p>David will review the answer pattern and reply with the evidence he would need to confirm, correct, or reject the diagnosis.</p>
+          <input type="hidden" name="source" value="capexlayer_commercial_timing_diagnostic" />
+          <input type="hidden" name="_subject" value="CapexLayer commercial timing diagnostic result" />
+          <input type="hidden" name="_redirect" value="https://capexlayer.com/demo/thanks.html" />
+          <input type="hidden" name="diagnostic_result" id="form-result" />
+          <input type="hidden" name="secondary_pressure" id="form-secondary" />
+          <input type="hidden" name="decision_artifact" id="form-artifact" />
+          <input type="hidden" name="recommended_next_step" id="form-route" />
+          <input type="hidden" name="answer_summary" id="form-answers" />
+          <div class="contact-grid">
+            <div class="field"><label for="name">Name</label><input class="input" id="name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="email">Work email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="company">Company</label><input class="input" id="company" name="company" autocomplete="organization" required /></div>
+            <div class="field"><label for="role">Role</label><input class="input" id="role" name="role" autocomplete="organization-title" required /></div>
+            <label class="consent"><input type="checkbox" name="review_permission" value="yes" required /><span>Use my answers and work contact details only to review this diagnostic and respond about the relevant CapexLayer next step.</span></label>
+            <div class="form-actions">
+              <button class="btn solid" type="submit">Request the evidence review</button>
+              <button class="btn" id="copy-button" type="button">Copy my result</button>
+              <button class="btn" id="restart-button" type="button">Retake</button>
+            </div>
+            <div class="copy-status" id="copy-status" aria-live="polite"></div>
+            <div class="submit-note">No phone number is requested. Your answers stay in this browser unless you choose to submit them.</div>
+          </div>
+          <div class="error" id="form-error">Please complete every visible field and the permission checkbox before submitting.</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell"><span>CapexLayer</span><span>From market movement to owned revenue action.</span></div>
+  </footer>
+
+  <script>
+    const segments = {
+      signal: {
+        title: "The Early Signal Gap",
+        thesis: "Your team is likely seeing commercial movement after the account has already defined the need, shaped the project, or entered a formal buying path. The problem may not be account volume. It may be how early the team can see funded pressure forming.",
+        boundary: "This is an outside-in hypothesis based on your answers. A live source trail is required before CapexLayer would call an account active or funded.",
+        artifact: "Territory Signal Brief",
+        artifactUse: "A sourced view of the accounts moving in one territory, what changed, how early the evidence appears, and which events deserve inspection.",
+        actions: ["Choose one bounded territory, segment, or project type.", "Pull the earliest source-backed movement before the public bid stage.", "Compare the top signals with the team's current account list and timing assumptions."],
+        route: "Pull a live signal set for one territory or segment."
+      },
+      priority: {
+        title: "The Account Priority Gap",
+        thesis: "You have accounts and signals, but the team still lacks a defensible answer to a harder question: which account deserves action now, and why should it displace everything else competing for seller time?",
+        boundary: "This result does not assume your current priorities are wrong. It identifies the evidence required to pressure-test timing and resource allocation.",
+        artifact: "Ranked Account Timing Board",
+        artifactUse: "A bounded list that connects source evidence, timing, commercial pressure, owner, and the next action for the accounts most likely to merit attention.",
+        actions: ["Define the bounded account set the team is willing to inspect.", "Rank timing with a visible source trail instead of a generic fit score.", "Give the top three accounts one owner, one reason to act, and one next decision."],
+        route: "Rank one account set and inspect the top three."
+      },
+      stakeholder: {
+        title: "The Stakeholder Execution Gap",
+        thesis: "The opportunity may be real, but the path from evidence to decision is incomplete. The team needs a clearer view of who owns the outcome, what could block movement, and which business case can survive executive scrutiny.",
+        boundary: "Public evidence cannot establish the internal buying group. The initial map is a correction instrument, not a claim about who will buy.",
+        artifact: "Live-Deal Decision Map",
+        artifactUse: "One inspectable view of the account thesis, decision owners, missing stakeholders, financial narrative, counterforce, and next owned action.",
+        actions: ["Select one live strategic opportunity with an accountable owner.", "Separate verified stakeholders from gaps and hypotheses.", "Build the smallest decision object that can earn a correction or remove an obstacle."],
+        route: "Map one live opportunity from evidence to owned next action."
+      },
+      leadership: {
+        title: "The Leadership Visibility Gap",
+        thesis: "Leadership can see stages and activity, but may not be able to inspect whether the evidence, stakeholder path, and next decision are strong enough across the deals that matter most.",
+        boundary: "This result does not assign a probability to any deal. It identifies the portfolio evidence leaders need before making a resource or forecast decision.",
+        artifact: "Strategic Deal Portfolio Readout",
+        artifactUse: "A compact view of evidence quality, stakeholder gaps, required action, accountable owner, and the decision leadership must make across a small must-win portfolio.",
+        actions: ["Choose the small set of opportunities that materially affect the outcome.", "Inspect evidence and stakeholder completeness, not seller activity alone.", "Assign the corrective decision, owner, and review date for each exception."],
+        route: "Review a must-win portfolio and choose the corrective action."
+      },
+      systems: {
+        title: "The Revenue System Gap",
+        thesis: "Your team can find useful evidence, but the signal does not consistently become a CRM change, accountable owner, completed next action, and inspectable management decision.",
+        boundary: "A workflow audit is required before recommending integration or system changes. The issue may be routing, ownership, data quality, or operating cadence.",
+        artifact: "Signal-to-CRM Routing Map",
+        artifactUse: "A source-to-action trace showing what enters the system, how it is interpreted, where ownership is assigned, and how completion is inspected.",
+        actions: ["Choose one signal class and one live workflow.", "Trace the event from source through CRM ownership and completion.", "Fix the first break before adding another tool or data source."],
+        route: "Audit one workflow from source event to completed owner action."
+      },
+      founder: {
+        title: "The Founder Leverage Gap",
+        thesis: "The revenue motion still depends on founder judgment to identify the opportunity, interpret the account, decide what matters, and push the next move forward.",
+        boundary: "The goal is not to remove founder judgment. It is to identify which parts should remain founder-owned and which can become a repeatable operating system.",
+        artifact: "Founder Judgment Transfer Map",
+        artifactUse: "A working map of the signal, decision rule, owner, evidence standard, escalation point, and review cadence for one live revenue priority.",
+        actions: ["Pick one live priority that repeatedly returns to the founder.", "Document the evidence and decision rule currently held in the founder's head.", "Transfer execution while keeping the true exception and escalation decisions visible."],
+        route: "Convert one live priority into a repeatable operating cadence."
+      }
+    };
+
+    const questions = [
+      {
+        id: "decision",
+        title: "Which decision sits closest to your desk right now?",
+        note: "Start with the decision, not the tool. This tells us what the result must help you change.",
+        options: [
+          ["portfolio", "Which strategic deals deserve leadership attention?", "I need a better portfolio view.", { leadership: 4, priority: 1 }],
+          ["accounts", "Which accounts deserve action now?", "I need timing and priority across a territory or list.", { priority: 4, signal: 1 }],
+          ["deal", "Why is one important opportunity not moving?", "I need the missing decision and stakeholder path.", { stakeholder: 4, leadership: 1 }],
+          ["workflow", "How should a signal become CRM action?", "I need reliable routing, ownership, and inspection.", { systems: 4, signal: 1 }],
+          ["founder", "How do I stop carrying the revenue system myself?", "I need to transfer judgment without losing quality.", { founder: 4, systems: 1 }]
+        ]
+      },
+      {
+        id: "visibility",
+        title: "When does your team usually learn that an account is moving?",
+        note: "The later the signal appears, the fewer decisions your team can still influence.",
+        options: [
+          ["formal", "When the RFP, bid, or formal process appears", "The buying path is already visible to the market.", { signal: 5 }],
+          ["rep", "When a rep or partner hears about it", "Useful, but difficult to cover consistently.", { signal: 3, systems: 1 }],
+          ["research", "Through occasional public research", "We can find evidence, but not systematically.", { signal: 2, priority: 2 }],
+          ["feeds", "Through monitored external signals", "We see movement, but still need to rank and route it.", { priority: 3, systems: 2 }],
+          ["unknown", "There is no reliable early-warning method", "The team works mostly from current pipeline and memory.", { signal: 4, founder: 1 }]
+        ]
+      },
+      {
+        id: "unit",
+        title: "What is the commercial unit that must move?",
+        note: "A useful operating system starts with a bounded unit of work.",
+        options: [
+          ["one", "One named strategic opportunity", "There is a live account and a decision to advance.", { stakeholder: 4 }, 3],
+          ["few", "Two or three important deals", "A small team needs repeatable execution.", { stakeholder: 2, leadership: 3 }, 4],
+          ["portfolio", "A must-win portfolio", "Leadership needs consistent inspection across several deals.", { leadership: 5 }, 5],
+          ["territory", "A territory, market, or named-account set", "The first decision is where to focus.", { signal: 2, priority: 4 }, 3],
+          ["workflow", "A data or CRM workflow", "The unit is a repeatable source-to-action process.", { systems: 5 }, 4]
+        ]
+      },
+      {
+        id: "break",
+        title: "What most often breaks after a useful signal appears?",
+        note: "Finding evidence is not the same as turning it into commercial movement.",
+        options: [
+          ["meaning", "The team cannot tell whether it matters", "Interpretation and timing are inconsistent.", { priority: 4 }],
+          ["owner", "No one clearly owns the next move", "The signal reaches the team but not an accountable person.", { systems: 4, leadership: 1 }],
+          ["stakeholder", "The right stakeholder path is unclear", "The team has a reason to act, but not a decision route.", { stakeholder: 5 }],
+          ["case", "The evidence never becomes an executive business case", "The account story lacks a defensible financial narrative.", { stakeholder: 3, leadership: 2 }],
+          ["followthrough", "The CRM records activity, but follow-through is uneven", "Completion and correction are hard to inspect.", { systems: 5 }]
+        ]
+      },
+      {
+        id: "evidence",
+        title: "How inspectable is the evidence behind account priority today?",
+        note: "A decision-grade signal should preserve the source, date, interpretation, and claim boundary.",
+        options: [
+          ["complete", "The source trail is preserved and reviewed", "Leaders can inspect what changed and why it matters.", { leadership: 1, systems: 1 }, 3],
+          ["partial", "Some sources are saved, but interpretation varies", "The facts exist, but the decision standard does not.", { priority: 3, systems: 2 }, 2],
+          ["seller", "It mostly lives in seller notes or memory", "The evidence cannot be inspected consistently.", { founder: 2, leadership: 3 }, 1],
+          ["vendor", "A vendor score exists without a visible source trail", "The ranking is difficult to pressure-test.", { priority: 4, systems: 1 }, 1],
+          ["none", "We do not have a repeatable evidence standard", "Fit and timing are often blended together.", { signal: 2, priority: 3 }, 0]
+        ]
+      },
+      {
+        id: "stakeholders",
+        title: "How clear is the path from interest to a real decision?",
+        note: "A contact is not a buying group, and an engaged user is not automatically the outcome owner.",
+        options: [
+          ["clear", "The outcome owner, authority, and decision path are known", "The remaining issue is execution and timing.", { leadership: 1, systems: 1 }, 3],
+          ["sponsor", "A sponsor exists, but other decision roles are incomplete", "There is momentum and a material map gap.", { stakeholder: 4 }, 2],
+          ["user", "The team is engaged mainly with users or evaluators", "The executive and economic path is unclear.", { stakeholder: 5 }, 1],
+          ["map", "Stakeholders are mapped, but evidence is mostly inferred", "The map needs correction from inside the account.", { stakeholder: 4, priority: 1 }, 1],
+          ["unknown", "The path is not visible yet", "The next action needs to earn a correction, not force a meeting.", { stakeholder: 5 }, 0]
+        ]
+      },
+      {
+        id: "cadence",
+        title: "What does leadership inspect each week?",
+        note: "Inspection determines which behavior the system actually reinforces.",
+        options: [
+          ["evidence", "Evidence, stakeholder gaps, decisions, and owned actions", "The cadence can support a live operating system.", { leadership: 1, systems: 1 }, 3],
+          ["forecast", "Forecast stage, activity, and seller commentary", "The review may miss why the deal should move.", { leadership: 4 }],
+          ["activity", "Calls, emails, meetings, and pipeline volume", "Effort is visible, but decision quality is not.", { leadership: 3, priority: 1 }],
+          ["exceptions", "Only stalled deals and escalations", "The system learns after movement has already stopped.", { leadership: 4, stakeholder: 1 }],
+          ["adhoc", "There is no consistent inspection cadence", "Follow-through depends on individual discipline.", { systems: 3, founder: 3 }]
+        ]
+      },
+      {
+        id: "consequence",
+        title: "What becomes materially worse if this stays unresolved for 90 days?",
+        note: "A real activation needs a consequence that matters beyond better-looking data.",
+        options: [
+          ["window", "The team misses funded demand before competitors arrive", "The cost is a lost timing advantage.", { signal: 3, priority: 2 }, 2],
+          ["deal", "Strategic revenue remains stalled or exposed", "The cost sits inside live pipeline.", { stakeholder: 3, leadership: 2 }, 3],
+          ["forecast", "Leadership makes weaker resource and forecast decisions", "The cost is operating uncertainty.", { leadership: 5 }, 3],
+          ["capacity", "Seller or founder time keeps going to the wrong work", "The cost is constrained management leverage.", { founder: 4, priority: 1 }, 2],
+          ["unknown", "The consequence has not been quantified", "The first useful step is a baseline, not a large implementation.", { priority: 1, systems: 1 }, 0]
+        ]
+      },
+      {
+        id: "input",
+        title: "What can you bring to a live evidence review today?",
+        note: "The best starting point is the smallest real unit that can prove or reject the diagnosis.",
+        options: [
+          ["deal", "One live strategic opportunity", "We can inspect a real stakeholder and decision path.", { stakeholder: 3 }, 4],
+          ["accounts", "A bounded named-account list", "We can rank timing and identify the top three.", { priority: 3 }, 4],
+          ["territory", "A territory, market, or project type", "We can pull early movement and compare it with current coverage.", { signal: 3 }, 3],
+          ["workflow", "One signal-to-CRM workflow", "We can trace where ownership or completion breaks.", { systems: 4 }, 4],
+          ["notyet", "I am still defining the unit of work", "The result should help narrow the first test.", { founder: 1, priority: 1 }, 0]
+        ]
+      },
+      {
+        id: "output",
+        title: "Which output would change a real decision fastest?",
+        note: "Choose the object you would be willing to inspect with another stakeholder.",
+        options: [
+          ["signals", "A sourced view of accounts moving before the bid stage", "I need earlier market visibility.", { signal: 5 }],
+          ["rank", "A ranked account list with a reason to act now", "I need resource and territory clarity.", { priority: 5 }],
+          ["dealmap", "A decision map for one live strategic deal", "I need stakeholder and business-case clarity.", { stakeholder: 5 }],
+          ["portfolio", "A leadership readout across must-win deals", "I need inspectable portfolio decisions.", { leadership: 5 }],
+          ["routing", "A source-to-owner CRM workflow", "I need signals to become completed action.", { systems: 5 }]
+        ]
+      }
+    ];
+
+    let current = 0;
+    let answers = [];
+    let currentResult = null;
+
+    const questionScreen = document.getElementById("question-screen");
+    const resultScreen = document.getElementById("result-screen");
+    const optionsNode = document.getElementById("options");
+    const progressLabel = document.getElementById("progress-label");
+    const progressFill = document.getElementById("progress-fill");
+    const progressBar = document.querySelector("[role='progressbar']");
+    const backButton = document.getElementById("back-button");
+
+    function applyScore(score, additions) {
+      Object.entries(additions || {}).forEach(([key, value]) => { score[key] += value; });
+    }
+
+    function renderQuestion() {
+      const question = questions[current];
+      questionScreen.classList.remove("hidden");
+      resultScreen.classList.remove("active");
+      progressLabel.textContent = `Question ${current + 1} of ${questions.length}`;
+      document.getElementById("question-number").textContent = `Decision ${String(current + 1).padStart(2, "0")}`;
+      document.getElementById("question-title").textContent = question.title;
+      document.getElementById("question-note").textContent = question.note;
+      progressFill.style.width = `${((current + 1) / questions.length) * 100}%`;
+      progressBar.setAttribute("aria-valuenow", String(current + 1));
+      backButton.disabled = current === 0;
+      optionsNode.innerHTML = "";
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `option${answers[current]?.optionId === option[0] ? " selected" : ""}`;
+        button.setAttribute("role", "radio");
+        button.setAttribute("aria-checked", answers[current]?.optionId === option[0] ? "true" : "false");
+        button.innerHTML = `<span class="option-index">${String.fromCharCode(65 + index)}</span><span class="option-copy"><span class="option-title">${option[1]}</span><span class="option-sub">${option[2]}</span></span><span class="option-arrow" aria-hidden="true">›</span>`;
+        button.addEventListener("click", () => selectOption(index));
+        optionsNode.appendChild(button);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function selectOption(index) {
+      const question = questions[current];
+      const option = question.options[index];
+      answers[current] = {
+        questionId: question.id,
+        question: question.title,
+        optionId: option[0],
+        answer: option[1],
+        scores: option[3] || {},
+        readiness: Number(option[4] || 0)
+      };
+      if (current < questions.length - 1) {
+        current += 1;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function calculateResult() {
+      const score = { signal: 0, priority: 0, stakeholder: 0, leadership: 0, systems: 0, founder: 0 };
+      let readiness = 0;
+      answers.forEach(answer => {
+        applyScore(score, answer.scores);
+        readiness += answer.readiness;
+      });
+      const ranked = Object.entries(score).sort((a, b) => b[1] - a[1]);
+      const primaryKey = ranked[0][0];
+      const secondaryKey = ranked[1][0];
+      return {
+        primaryKey,
+        secondaryKey,
+        primary: segments[primaryKey],
+        secondary: segments[secondaryKey],
+        readiness: readiness >= 18 ? "Activation ready" : readiness >= 9 ? "Baseline ready" : "Exploration"
+      };
+    }
+
+    function answerSummary() {
+      return answers.map((answer, index) => `${index + 1}. ${answer.question}\n${answer.answer}`).join("\n\n");
+    }
+
+    function resultSummary() {
+      const result = currentResult;
+      return `CapexLayer Commercial Timing Diagnostic\n\nPrimary constraint: ${result.primary.title}\nSecondary pressure: ${result.secondary.title}\nDecision artifact: ${result.primary.artifact}\nRecommended next step: ${result.primary.route}\n\nDiagnosis\n${result.primary.thesis}\n\nClaim boundary\n${result.primary.boundary}\n\nAnswers\n${answerSummary()}`;
+    }
+
+    function showResult() {
+      currentResult = calculateResult();
+      questionScreen.classList.add("hidden");
+      resultScreen.classList.add("active");
+      progressLabel.textContent = "Diagnostic complete";
+      document.getElementById("time-label").textContent = "Your result is ready";
+      progressFill.style.width = "100%";
+      progressBar.setAttribute("aria-valuenow", String(questions.length));
+      document.getElementById("result-title").textContent = currentResult.primary.title;
+      document.getElementById("result-thesis").textContent = currentResult.primary.thesis;
+      document.getElementById("result-boundary").textContent = currentResult.primary.boundary;
+      document.getElementById("secondary-title").textContent = currentResult.secondary.title;
+      document.getElementById("artifact-name").textContent = currentResult.primary.artifact;
+      document.getElementById("artifact-use").textContent = currentResult.primary.artifactUse;
+      document.getElementById("action-list").innerHTML = currentResult.primary.actions.map((action, index) => `<li><span>${String(index + 1).padStart(2, "0")}</span><div>${action}</div></li>`).join("");
+      document.getElementById("form-result").value = currentResult.primary.title;
+      document.getElementById("form-secondary").value = currentResult.secondary.title;
+      document.getElementById("form-artifact").value = currentResult.primary.artifact;
+      document.getElementById("form-route").value = currentResult.primary.route;
+      document.getElementById("form-answers").value = answerSummary();
+      resultScreen.focus();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetDiagnostic() {
+      current = 0;
+      answers = [];
+      currentResult = null;
+      document.getElementById("result-form").reset();
+      document.getElementById("copy-status").textContent = "";
+      document.getElementById("form-error").style.display = "none";
+      renderQuestion();
+    }
+
+    backButton.addEventListener("click", () => {
+      if (current === 0) return;
+      current -= 1;
+      renderQuestion();
+    });
+
+    document.getElementById("restart-button").addEventListener("click", resetDiagnostic);
+    document.getElementById("copy-button").addEventListener("click", async () => {
+      const status = document.getElementById("copy-status");
+      try {
+        await navigator.clipboard.writeText(resultSummary());
+        status.textContent = "Result copied.";
+      } catch (error) {
+        status.textContent = "Copy is unavailable in this browser. You can still submit the result.";
+      }
+    });
+
+    document.getElementById("result-form").addEventListener("submit", event => {
+      const form = event.currentTarget;
+      const error = document.getElementById("form-error");
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        error.style.display = "block";
+        form.reportValidity();
+      } else {
+        error.style.display = "none";
+      }
+    });
+
+    function registerWebMCP() {
+      const context = document.modelContext;
+      if (!context || typeof context.registerTool !== "function") return;
+      const noInput = { type: "object", properties: {}, additionalProperties: false };
+      try {
+        context.registerTool({
+          name: "start_commercial_timing_diagnostic",
+          title: "Start commercial timing diagnostic",
+          description: "Reset and start the visible CapexLayer commercial timing diagnostic.",
+          inputSchema: noInput,
+          annotations: { readOnlyHint: false, untrustedContentHint: false },
+          execute() {
+            resetDiagnostic();
+            return { status: "started", question: questions[0].title };
+          }
+        });
+        context.registerTool({
+          name: "answer_commercial_timing_question",
+          title: "Answer current diagnostic question",
+          description: "Answer the currently visible question using one of its option IDs and advance the same visible diagnostic.",
+          inputSchema: {
+            type: "object",
+            properties: { optionId: { type: "string" } },
+            required: ["optionId"],
+            additionalProperties: false
+          },
+          annotations: { readOnlyHint: false, untrustedContentHint: false },
+          execute(input) {
+            if (currentResult) throw new Error("The diagnostic is complete. Start again before answering another question.");
+            const question = questions[current];
+            const index = question.options.findIndex(option => option[0] === input.optionId);
+            if (index < 0) throw new Error("The optionId is not valid for the current question.");
+            selectOption(index);
+            return currentResult ? { status: "complete", result: currentResult.primary.title } : { status: "advanced", question: questions[current].title };
+          }
+        });
+        context.registerTool({
+          name: "read_commercial_timing_result",
+          title: "Read diagnostic result",
+          description: "Read the completed result currently visible in the CapexLayer diagnostic.",
+          inputSchema: noInput,
+          annotations: { readOnlyHint: true, untrustedContentHint: false },
+          execute() {
+            if (!currentResult) return { status: "incomplete", answered: answers.length, total: questions.length };
+            return { status: "complete", primary: currentResult.primary.title, secondary: currentResult.secondary.title, artifact: currentResult.primary.artifact, nextStep: currentResult.primary.route };
+          }
+        });
+      } catch (error) {
+        console.warn("Structured diagnostic tools could not be registered.");
+      }
+    }
+
+    renderQuestion();
+    registerWebMCP();
+  </script>
+</body>
+</html>
