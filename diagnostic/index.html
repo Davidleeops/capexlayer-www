@@ -148,6 +148,13 @@
     .artifact-name { margin-top: 7px; color: var(--gold-2); font-size: 1.02rem; font-weight: 600; }
     .artifact-use { margin: 6px 0 0; color: var(--text-body); font-size: .86rem; }
     .contact-card { margin-top: 18px; }
+    .contact-card.gate { margin-top: 0; }
+    .gate-title { margin-top: 10px !important; font-size: clamp(1.8rem, 4vw, 2.55rem) !important; }
+    .unlock-note { display: grid; grid-template-columns: 24px 1fr; gap: 10px; margin: 0 0 18px; padding: 12px 14px; border: 1px solid var(--hair); border-radius: 10px; background: rgba(201, 168, 76, .06); color: var(--text-body); font-size: .86rem; }
+    .unlock-note strong { color: var(--gold); font-family: var(--font-mono); font-size: .72rem; padding-top: 2px; }
+    .result-content { display: grid; gap: 18px; }
+    .result-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding-top: 2px; }
+    .artifact-link { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
     .contact-card > p { color: var(--text-body); margin: -4px 0 18px; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .field { display: grid; gap: 6px; }
@@ -235,7 +242,36 @@
       </div>
 
       <div class="screen result" id="result-screen" tabindex="-1">
-        <div class="result-grid">
+        <form class="contact-card gate" id="result-form" action="https://formspree.io/f/xgegvkyr" method="POST">
+          <span class="kicker">Your result is ready</span>
+          <h2 class="gate-title">Unlock the diagnosis and decision artifact.</h2>
+          <p>Enter your work email to open the full result immediately. CapexLayer will receive the answer pattern so David can respond with the evidence needed to confirm, correct, or reject the diagnosis.</p>
+          <div class="unlock-note"><strong>01</strong><span>You will receive the segment-specific diagnosis, the next move, and a printable decision artifact built for that constraint.</span></div>
+          <input type="hidden" name="source" value="capexlayer_commercial_timing_diagnostic" />
+          <input type="hidden" name="_subject" value="CapexLayer commercial timing diagnostic result" />
+          <input type="hidden" name="diagnostic_result" id="form-result" />
+          <input type="hidden" name="secondary_pressure" id="form-secondary" />
+          <input type="hidden" name="decision_artifact" id="form-artifact" />
+          <input type="hidden" name="recommended_next_step" id="form-route" />
+          <input type="hidden" name="answer_summary" id="form-answers" />
+          <div class="contact-grid">
+            <div class="field"><label for="name">Name</label><input class="input" id="name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="email">Work email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="company">Company</label><input class="input" id="company" name="company" autocomplete="organization" required /></div>
+            <div class="field"><label for="role">Role</label><input class="input" id="role" name="role" autocomplete="organization-title" required /></div>
+            <label class="consent"><input type="checkbox" name="review_permission" value="yes" required /><span>Use my answers and work contact details only to deliver this result and respond about the relevant CapexLayer next step.</span></label>
+            <div class="form-actions">
+              <button class="btn solid" id="submit-button" type="submit">Unlock my result</button>
+              <button class="btn" id="gate-restart-button" type="button">Retake</button>
+            </div>
+            <div class="copy-status" id="submit-status" aria-live="polite"></div>
+            <div class="submit-note">No phone number is requested. Your contact information is submitted only when you select Unlock my result.</div>
+          </div>
+          <div class="error" id="form-error">Please complete every visible field and the permission checkbox before submitting.</div>
+        </form>
+
+        <div class="result-content hidden" id="result-content">
+          <div class="result-grid">
           <div class="result-main">
             <span class="kicker">Your primary constraint</span>
             <h2 id="result-title"></h2>
@@ -252,35 +288,14 @@
               <p class="artifact-use" id="artifact-use"></p>
             </div>
           </aside>
-        </div>
-
-        <form class="contact-card" id="result-form" action="https://formspree.io/f/xgegvkyr" method="POST">
-          <h3>Send the result to CapexLayer</h3>
-          <p>David will review the answer pattern and reply with the evidence he would need to confirm, correct, or reject the diagnosis.</p>
-          <input type="hidden" name="source" value="capexlayer_commercial_timing_diagnostic" />
-          <input type="hidden" name="_subject" value="CapexLayer commercial timing diagnostic result" />
-          <input type="hidden" name="_redirect" value="https://capexlayer.com/demo/thanks.html" />
-          <input type="hidden" name="diagnostic_result" id="form-result" />
-          <input type="hidden" name="secondary_pressure" id="form-secondary" />
-          <input type="hidden" name="decision_artifact" id="form-artifact" />
-          <input type="hidden" name="recommended_next_step" id="form-route" />
-          <input type="hidden" name="answer_summary" id="form-answers" />
-          <div class="contact-grid">
-            <div class="field"><label for="name">Name</label><input class="input" id="name" name="name" autocomplete="name" required /></div>
-            <div class="field"><label for="email">Work email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required /></div>
-            <div class="field"><label for="company">Company</label><input class="input" id="company" name="company" autocomplete="organization" required /></div>
-            <div class="field"><label for="role">Role</label><input class="input" id="role" name="role" autocomplete="organization-title" required /></div>
-            <label class="consent"><input type="checkbox" name="review_permission" value="yes" required /><span>Use my answers and work contact details only to review this diagnostic and respond about the relevant CapexLayer next step.</span></label>
-            <div class="form-actions">
-              <button class="btn solid" type="submit">Request the evidence review</button>
-              <button class="btn" id="copy-button" type="button">Copy my result</button>
-              <button class="btn" id="restart-button" type="button">Retake</button>
-            </div>
-            <div class="copy-status" id="copy-status" aria-live="polite"></div>
-            <div class="submit-note">No phone number is requested. Your answers stay in this browser unless you choose to submit them.</div>
           </div>
-          <div class="error" id="form-error">Please complete every visible field and the permission checkbox before submitting.</div>
-        </form>
+          <div class="result-tools">
+            <a class="btn solid artifact-link" id="artifact-link" href="/diagnostic/artifact/">Open my decision artifact</a>
+            <button class="btn" id="copy-button" type="button">Copy my result</button>
+            <button class="btn" id="restart-button" type="button">Retake</button>
+            <span class="copy-status" id="copy-status" aria-live="polite"></span>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -473,6 +488,7 @@
     let current = 0;
     let answers = [];
     let currentResult = null;
+    let leadCaptured = false;
 
     const questionScreen = document.getElementById("question-screen");
     const resultScreen = document.getElementById("result-screen");
@@ -561,10 +577,13 @@
 
     function showResult() {
       currentResult = calculateResult();
+      leadCaptured = false;
       questionScreen.classList.add("hidden");
       resultScreen.classList.add("active");
+      document.getElementById("result-form").classList.remove("hidden");
+      document.getElementById("result-content").classList.add("hidden");
       progressLabel.textContent = "Diagnostic complete";
-      document.getElementById("time-label").textContent = "Your result is ready";
+      document.getElementById("time-label").textContent = "Unlock your result";
       progressFill.style.width = "100%";
       progressBar.setAttribute("aria-valuenow", String(questions.length));
       document.getElementById("result-title").textContent = currentResult.primary.title;
@@ -579,6 +598,8 @@
       document.getElementById("form-artifact").value = currentResult.primary.artifact;
       document.getElementById("form-route").value = currentResult.primary.route;
       document.getElementById("form-answers").value = answerSummary();
+      document.getElementById("artifact-link").href = `/diagnostic/artifact/?segment=${encodeURIComponent(currentResult.primaryKey)}`;
+      document.getElementById("artifact-link").textContent = `Open ${currentResult.primary.artifact}`;
       resultScreen.focus();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -587,8 +608,10 @@
       current = 0;
       answers = [];
       currentResult = null;
+      leadCaptured = false;
       document.getElementById("result-form").reset();
       document.getElementById("copy-status").textContent = "";
+      document.getElementById("submit-status").textContent = "";
       document.getElementById("form-error").style.display = "none";
       renderQuestion();
     }
@@ -600,6 +623,7 @@
     });
 
     document.getElementById("restart-button").addEventListener("click", resetDiagnostic);
+    document.getElementById("gate-restart-button").addEventListener("click", resetDiagnostic);
     document.getElementById("copy-button").addEventListener("click", async () => {
       const status = document.getElementById("copy-status");
       try {
@@ -610,72 +634,42 @@
       }
     });
 
-    document.getElementById("result-form").addEventListener("submit", event => {
+    document.getElementById("result-form").addEventListener("submit", async event => {
+      event.preventDefault();
       const form = event.currentTarget;
       const error = document.getElementById("form-error");
+      const status = document.getElementById("submit-status");
+      const submitButton = document.getElementById("submit-button");
       if (!form.checkValidity()) {
-        event.preventDefault();
         error.style.display = "block";
         form.reportValidity();
-      } else {
-        error.style.display = "none";
+        return;
+      }
+      error.style.display = "none";
+      status.textContent = "Submitting your result...";
+      submitButton.disabled = true;
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        });
+        if (!response.ok) throw new Error("Submission was not accepted.");
+        leadCaptured = true;
+        document.getElementById("result-form").classList.add("hidden");
+        document.getElementById("result-content").classList.remove("hidden");
+        document.getElementById("time-label").textContent = "Your result is ready";
+        status.textContent = "";
+        document.getElementById("result-content").focus?.();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (error) {
+        status.textContent = "We could not unlock the result yet. Check the connection and try again.";
+      } finally {
+        submitButton.disabled = leadCaptured;
       }
     });
 
-    function registerWebMCP() {
-      const context = document.modelContext;
-      if (!context || typeof context.registerTool !== "function") return;
-      const noInput = { type: "object", properties: {}, additionalProperties: false };
-      try {
-        context.registerTool({
-          name: "start_commercial_timing_diagnostic",
-          title: "Start commercial timing diagnostic",
-          description: "Reset and start the visible CapexLayer commercial timing diagnostic.",
-          inputSchema: noInput,
-          annotations: { readOnlyHint: false, untrustedContentHint: false },
-          execute() {
-            resetDiagnostic();
-            return { status: "started", question: questions[0].title };
-          }
-        });
-        context.registerTool({
-          name: "answer_commercial_timing_question",
-          title: "Answer current diagnostic question",
-          description: "Answer the currently visible question using one of its option IDs and advance the same visible diagnostic.",
-          inputSchema: {
-            type: "object",
-            properties: { optionId: { type: "string" } },
-            required: ["optionId"],
-            additionalProperties: false
-          },
-          annotations: { readOnlyHint: false, untrustedContentHint: false },
-          execute(input) {
-            if (currentResult) throw new Error("The diagnostic is complete. Start again before answering another question.");
-            const question = questions[current];
-            const index = question.options.findIndex(option => option[0] === input.optionId);
-            if (index < 0) throw new Error("The optionId is not valid for the current question.");
-            selectOption(index);
-            return currentResult ? { status: "complete", result: currentResult.primary.title } : { status: "advanced", question: questions[current].title };
-          }
-        });
-        context.registerTool({
-          name: "read_commercial_timing_result",
-          title: "Read diagnostic result",
-          description: "Read the completed result currently visible in the CapexLayer diagnostic.",
-          inputSchema: noInput,
-          annotations: { readOnlyHint: true, untrustedContentHint: false },
-          execute() {
-            if (!currentResult) return { status: "incomplete", answered: answers.length, total: questions.length };
-            return { status: "complete", primary: currentResult.primary.title, secondary: currentResult.secondary.title, artifact: currentResult.primary.artifact, nextStep: currentResult.primary.route };
-          }
-        });
-      } catch (error) {
-        console.warn("Structured diagnostic tools could not be registered.");
-      }
-    }
-
     renderQuestion();
-    registerWebMCP();
   </script>
 </body>
 </html>

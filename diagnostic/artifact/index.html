@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050810" />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="description" content="A CapexLayer decision artifact for turning commercial evidence into an owned next move." />
+  <title>Decision Artifact | CapexLayer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23050810'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23c9a84c' stroke-width='4'/%3E%3Cpath d='M18 32h28M32 18v28' stroke='%23efe7d3' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#080e1a; --panel:#060c18; --card:#0b1426; --gold:#c9a84c; --gold2:#ffe8a0; --cream:#efe7d3; --text:#eaf0fb; --body:#aab6cd; --muted:#6f7f9c; --hair:#1b2740; --serif:"Fraunces",Georgia,serif; --sans:"DM Sans",sans-serif; --mono:"DM Mono",monospace; }
+    * { box-sizing: border-box; }
+    html { background:#050810; }
+    body { margin:0; min-height:100vh; background:radial-gradient(circle at 15% 0%,rgba(201,168,76,.12),transparent 30%),var(--bg); color:var(--text); font-family:var(--sans); line-height:1.5; }
+    .topline { height:2px; background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent); }
+    .shell { width:min(1080px,calc(100% - 32px)); margin:0 auto; }
+    nav { min-height:74px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .wordmark { color:var(--cream); text-decoration:none; font-family:"Bebas Neue",sans-serif; font-size:1.25rem; letter-spacing:.22em; }
+    .wordmark b { color:var(--gold); }
+    .nav-label,.eyebrow,.label { color:var(--muted); font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; }
+    main { padding:36px 0 64px; }
+    .hero { display:grid; grid-template-columns:1fr .62fr; gap:28px; align-items:end; padding:34px; border:1px solid var(--hair); border-radius:18px; background:linear-gradient(145deg,rgba(13,24,44,.98),rgba(6,12,24,.98)); }
+    h1 { margin:12px 0 14px; color:var(--cream); font-family:var(--serif); font-size:clamp(2.4rem,6vw,4.6rem); font-weight:500; line-height:.98; }
+    .hero p { margin:0; color:var(--body); max-width:64ch; font-size:1.02rem; }
+    .route { padding:18px; border-left:2px solid var(--gold); background:rgba(201,168,76,.06); }
+    .route strong { display:block; margin-top:8px; color:var(--gold2); font-size:1.02rem; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px; }
+    .card { border:1px solid var(--hair); border-radius:14px; background:rgba(5,8,16,.58); padding:24px; }
+    .card h2 { margin:8px 0 12px; color:var(--cream); font-family:var(--serif); font-size:1.55rem; font-weight:500; }
+    .card p { margin:0; color:var(--body); }
+    .list { display:grid; gap:10px; margin:14px 0 0; padding:0; list-style:none; }
+    .list li { display:grid; grid-template-columns:24px 1fr; gap:10px; color:var(--body); font-size:.9rem; }
+    .list span { color:var(--gold); font-family:var(--mono); font-size:.68rem; padding-top:3px; }
+    .worksheet { margin-top:18px; border:1px solid var(--hair); border-radius:14px; background:rgba(5,8,16,.58); overflow:hidden; }
+    .worksheet-head { padding:22px 24px; border-bottom:1px solid var(--hair); display:flex; align-items:end; justify-content:space-between; gap:20px; }
+    .worksheet-head h2 { margin:8px 0 0; color:var(--cream); font-family:var(--serif); font-size:1.7rem; font-weight:500; }
+    .worksheet-grid { display:grid; grid-template-columns:1fr 1fr; }
+    .prompt { padding:22px 24px; border-right:1px solid var(--hair); border-bottom:1px solid var(--hair); }
+    .prompt:nth-child(2n) { border-right:0; }
+    .prompt h3 { margin:8px 0 10px; color:var(--text); font-size:.98rem; }
+    textarea { width:100%; min-height:118px; resize:vertical; border:1px solid var(--hair); border-radius:8px; background:var(--panel); color:var(--text); padding:12px; font:inherit; }
+    textarea:focus { outline:1px solid var(--gold); border-color:var(--gold); }
+    .decision { margin-top:18px; display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; padding:24px; border:1px solid var(--gold); border-radius:14px; background:rgba(201,168,76,.07); }
+    .decision h2 { margin:7px 0 8px; color:var(--cream); font-family:var(--serif); font-size:1.55rem; font-weight:500; }
+    .decision p { margin:0; color:var(--body); }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; }
+    .btn { border:1px solid var(--gold); border-radius:999px; background:transparent; color:var(--gold); padding:11px 18px; cursor:pointer; text-decoration:none; font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; }
+    .btn.primary { background:var(--gold); color:#050810; }
+    .boundary { margin-top:18px; color:var(--muted); font-size:.76rem; }
+    footer { padding:26px 0 34px; border-top:1px solid var(--hair); color:var(--muted); font-family:var(--mono); font-size:.68rem; letter-spacing:.11em; text-transform:uppercase; }
+    footer .shell { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    @media(max-width:760px){ .hero,.grid,.worksheet-grid,.decision{grid-template-columns:1fr}.hero{padding:24px}.prompt{border-right:0}.nav-label{display:none}.actions{justify-content:flex-start} }
+    @media print { body{background:#fff;color:#111}.topline,nav,.actions,footer{display:none}.shell{width:100%}main{padding:0}.hero,.card,.worksheet,.decision{background:#fff;border-color:#999;box-shadow:none}.hero{padding:20px}.route{background:#f7f2e6}.eyebrow,.label,.nav-label,.boundary{color:#555}h1,.card h2,.worksheet-head h2,.decision h2,.prompt h3{color:#111}.hero p,.card p,.list li,.decision p{color:#333}textarea{background:#fff;color:#111;border-color:#aaa;min-height:90px}.worksheet,.grid,.decision{break-inside:avoid} }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <nav class="shell"><a class="wordmark" href="https://capexlayer.com/">CAPEX<b>LAYER</b></a><div class="nav-label">Decision artifact</div></nav>
+  <main class="shell">
+    <section class="hero">
+      <div><div class="eyebrow" id="artifact-label">Decision artifact</div><h1 id="artifact-title">Loading artifact</h1><p id="artifact-purpose"></p></div>
+      <div class="route"><div class="label">Right next move</div><strong id="artifact-route"></strong></div>
+    </section>
+    <section class="grid">
+      <article class="card"><div class="label">Decision to improve</div><h2 id="decision-title"></h2><p id="decision-copy"></p></article>
+      <article class="card"><div class="label">Bring to the review</div><ul class="list" id="bring-list"></ul></article>
+    </section>
+    <section class="worksheet">
+      <div class="worksheet-head"><div><div class="label">Working surface</div><h2>Build the decision object</h2></div><div class="nav-label">Your notes stay in this browser</div></div>
+      <div class="worksheet-grid" id="worksheet-grid"></div>
+    </section>
+    <section class="decision">
+      <div><div class="label">Smallest useful commitment</div><h2 id="next-title"></h2><p id="next-copy"></p></div>
+      <div class="actions"><button class="btn primary" type="button" onclick="window.print()">Print or save PDF</button><a class="btn" href="/diagnostic/">Return to diagnostic</a></div>
+    </section>
+    <p class="boundary" id="artifact-boundary"></p>
+  </main>
+  <footer><div class="shell"><span>CapexLayer</span><span>From market movement to owned revenue action.</span></div></footer>
+  <script>
+    const artifacts = {
+      signal: {
+        title: "Territory Signal Brief",
+        purpose: "Turn early external movement into a small set of inspectable account decisions before the buying path becomes obvious to the market.",
+        route: "Recognition: inspect one source-backed signal set against current territory coverage.",
+        decisionTitle: "Which account movements deserve investigation now?",
+        decisionCopy: "The brief should distinguish a dated source event from the commercial interpretation, the unknowns, and the decision that would change if the interpretation holds.",
+        bring: ["One bounded territory, segment, or project type", "The account list currently receiving seller attention", "Any source evidence already used to infer movement", "The person who can compare the evidence with current coverage"],
+        prompts: ["What changed, where, and on what source date?", "What does the evidence support, and what remains unknown?", "Which accounts are absent from current coverage?", "What investigation, action, or stop decision follows?"],
+        nextTitle: "Compare the top three signals with current coverage.",
+        nextCopy: "The output is useful when it causes one account to be investigated, prioritized, rejected, or intentionally left alone for an evidenced reason.",
+        boundary: "This artifact does not establish intent, funding, or a buying decision. It organizes source evidence so the team can decide what deserves inspection."
+      },
+      priority: {
+        title: "Ranked Account Timing Board",
+        purpose: "Replace a generic fit list with a bounded decision surface that explains which accounts deserve action now and why they should displace competing work.",
+        route: "Correction: rank one bounded account set and choose the top three actions.",
+        decisionTitle: "Where should limited seller capacity go first?",
+        decisionCopy: "Each priority must connect evidence, timing, commercial pressure, owner, and next action. The board should make it possible to disagree with the ranking using facts.",
+        bring: ["A bounded named-account list", "Current priority or tiering logic", "Recent source evidence for the strongest candidates", "The leader responsible for territory or account allocation"],
+        prompts: ["Which account has the strongest source-backed reason to act now?", "What would make that priority wrong or premature?", "Who owns the next decision for each top account?", "Which work should lose priority if these accounts move up?"],
+        nextTitle: "Assign the top three accounts one owner and one next decision.",
+        nextCopy: "The output is complete when leadership can explain why these accounts deserve attention now and which competing work will not be pursued.",
+        boundary: "This artifact is not a predictive score. It is a transparent timing and resource-allocation decision based on inspectable evidence."
+      },
+      stakeholder: {
+        title: "Live-Deal Decision Map",
+        purpose: "Clarify the path from an active opportunity to a real decision without pretending public evidence can reveal the internal buying group.",
+        route: "Workshop fit: correct one live-deal decision map with someone who knows the account.",
+        decisionTitle: "What decision must happen next, and who can shape it?",
+        decisionCopy: "Separate verified relationships from hypotheses. Map the business result, decision authority, financial narrative, counterforce, missing stakeholder, and next value object.",
+        bring: ["One live strategic opportunity", "The last material customer conversation", "Known participants and what each has actually said", "The current business case and the decision the team is trying to earn"],
+        prompts: ["What business outcome is the customer accountable for?", "Who can approve, block, or remove a real obstacle?", "Which stakeholder or decision remains unverified?", "What value object can earn a correction or advance the decision?"],
+        nextTitle: "Earn one correction from inside the account.",
+        nextCopy: "The smallest useful move is not a generic meeting. It is a correction, introduction, evidence request, or decision that makes the map more accurate.",
+        boundary: "The initial map is a correction instrument. It must label facts, inferences, unknowns, and contradictory evidence separately."
+      },
+      leadership: {
+        title: "Strategic Deal Portfolio Readout",
+        purpose: "Give leadership an inspectable view of whether evidence, stakeholder coverage, and next decisions are strong enough across the deals that matter most.",
+        route: "Workshop fit: review a small must-win portfolio and choose the corrective action for each exception.",
+        decisionTitle: "Which leadership decision would improve the portfolio now?",
+        decisionCopy: "The readout should move beyond stage and activity. It should show evidence quality, stakeholder completeness, the live decision, the accountable owner, and the next review point.",
+        bring: ["A small must-win opportunity set", "Current forecast stage and owner", "Evidence supporting the next expected movement", "The leadership decision available for each exception"],
+        prompts: ["Which deal lacks enough evidence for its current forecast position?", "Where is the stakeholder or authority path incomplete?", "What leadership action could remove a specific constraint?", "Should the team continue, investigate, revise, or stop?"],
+        nextTitle: "Choose one corrective decision per exception.",
+        nextCopy: "The output is useful when every exception has a decision, owner, review date, and evidence standard rather than a request for more activity.",
+        boundary: "This artifact does not assign win probability. It helps leadership inspect the evidence required for resource and forecast decisions."
+      },
+      systems: {
+        title: "Signal-to-CRM Routing Map",
+        purpose: "Trace how one useful event becomes an interpretation, a system change, an accountable owner, a completed action, and an inspectable management decision.",
+        route: "Correction: audit one source-to-owner workflow and fix the first break.",
+        decisionTitle: "Where does useful evidence stop becoming completed action?",
+        decisionCopy: "Follow one signal class through the existing workflow. Do not add another data source until the current break is visible and owned.",
+        bring: ["One live signal class or event", "The CRM fields and routing rules it should affect", "The role expected to act", "The management review that should inspect completion"],
+        prompts: ["What event enters the workflow, and how is it interpreted?", "Which CRM state should change, and who owns it?", "What completion window and exception rule apply?", "How will a manager inspect action, correction, or justified stop?"],
+        nextTitle: "Fix the first break in one live workflow.",
+        nextCopy: "The output is complete when one event can be traced from source to owner, action, exception, and review without relying on memory.",
+        boundary: "A workflow audit must precede any integration recommendation. The constraint may be routing, ownership, data quality, or operating cadence."
+      },
+      founder: {
+        title: "Founder Judgment Transfer Map",
+        purpose: "Separate the judgment that should remain founder-owned from repeatable revenue work that can move without waiting for the founder.",
+        route: "Workshop fit: map one live priority that repeatedly returns to the founder.",
+        decisionTitle: "Which revenue decision can move without losing judgment quality?",
+        decisionCopy: "Document the evidence rule, delegated action, retained decision, escalation condition, and review cadence for one live priority.",
+        bring: ["One priority that repeatedly returns to the founder", "The evidence the founder uses to judge it", "The person who could own normal execution", "The conditions that genuinely require founder escalation"],
+        prompts: ["What judgment is currently held only in the founder's head?", "Which steps are repeatable and safe to transfer?", "What exception must return to the founder, and why?", "What cadence proves the work moved without quality loss?"],
+        nextTitle: "Transfer one decision cycle while preserving true exceptions.",
+        nextCopy: "The output is useful when execution can move independently and the founder is involved only for the decisions that require unique authority or judgment.",
+        boundary: "The objective is not to remove founder judgment. It is to make the operating rule, escalation point, and review standard explicit."
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const segment = artifacts[params.get("segment")] ? params.get("segment") : "signal";
+    const artifact = artifacts[segment];
+    document.title = `${artifact.title} | CapexLayer`;
+    document.getElementById("artifact-title").textContent = artifact.title;
+    document.getElementById("artifact-purpose").textContent = artifact.purpose;
+    document.getElementById("artifact-route").textContent = artifact.route;
+    document.getElementById("decision-title").textContent = artifact.decisionTitle;
+    document.getElementById("decision-copy").textContent = artifact.decisionCopy;
+    document.getElementById("next-title").textContent = artifact.nextTitle;
+    document.getElementById("next-copy").textContent = artifact.nextCopy;
+    document.getElementById("artifact-boundary").textContent = artifact.boundary;
+    document.getElementById("bring-list").innerHTML = artifact.bring.map((item,index)=>`<li><span>${String(index+1).padStart(2,"0")}</span><div>${item}</div></li>`).join("");
+    document.getElementById("worksheet-grid").innerHTML = artifact.prompts.map((prompt,index)=>`<div class="prompt"><div class="label">Decision field ${String(index+1).padStart(2,"0")}</div><h3>${prompt}</h3><textarea aria-label="${prompt}"></textarea></div>`).join("");
+  </script>
+</body>
+</html>
