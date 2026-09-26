@@ -36,6 +36,28 @@ textarea.cx-input{height:116px;padding-top:12px;resize:vertical}
 .form-note{margin:0;color:var(--text-muted);font-size:13px;line-height:1.5}
 .footer{border-top:1px solid var(--hair);padding:34px 0;color:var(--text-muted);font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 .footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.training-hero{position:relative;display:block;min-height:620px;padding:96px 0 86px;overflow:visible}
+.training-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 88%,transparent) 52%,color-mix(in srgb,var(--bg) 24%,transparent) 100%);z-index:1;pointer-events:none}
+.training-hero .hero-copy{max-width:700px}
+.training-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px;width:min(680px,100%)}
+.training-fact{background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--hair);border-radius:var(--r-md);padding:18px;min-height:116px}
+.training-fact strong{display:block;font-family:var(--font-display);font-size:38px;line-height:1;color:var(--cream);font-weight:400}
+.training-fact span{display:block;margin-top:10px;font-family:var(--font-mono);font-size:10px;line-height:1.45;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+.training-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.training-grid .cx-card{min-height:250px}
+.training-list{margin:16px 0 0;padding-left:20px;color:var(--text-body)}
+.training-list li+li{margin-top:10px}
+.course-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.course-meta dl{margin:0;display:grid;gap:0}
+.course-meta dl>div{display:grid;grid-template-columns:minmax(130px,.7fr) minmax(0,1.3fr);gap:18px;padding:14px 0;border-bottom:1px solid var(--hair)}
+.course-meta dt{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.course-meta dd{margin:0;color:var(--text-body)}
+.training-note{border-left:3px solid var(--gold)}
+.training-note h3{font-family:var(--font-serif);font-size:28px;color:var(--cream)}
+.training-note p+p{margin-top:12px}
+.training-table td:nth-child(1){white-space:nowrap}
+.training-table td:nth-child(2){color:var(--cream);font-weight:500}
+.training-form-intro{padding-right:32px}
 .redirect{min-height:100vh;display:grid;place-items:center;text-align:center}
 .redirect .cx-card{max-width:640px}
 .redirect h1{margin:0 0 12px}
@@ -67,4 +89,18 @@ textarea.cx-input{height:116px;padding-top:12px;resize:vertical}
   .cx-display{font-size:clamp(42px,12vw,56px)}
   .cx-bar{display:grid;grid-template-columns:1fr;gap:8px}
   .cx-bar .lab,.cx-bar .amt{width:auto;text-align:left}
+  .training-hero{min-height:auto;padding:84px 0 38px}
+  .training-hero::after{background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 20%,transparent),var(--bg) 42%)}
+  .training-hero .hero-copy{gap:14px}
+  .training-hero .cx-display{font-size:40px}
+  .training-hero .cx-lede{font-size:14px;line-height:1.5}
+  .training-hero .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .training-hero .cx-btn{padding:9px 8px;font-size:9px;letter-spacing:.10em;text-align:center;white-space:nowrap}
+  .training-facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:6px}
+  .training-fact{min-height:84px;padding:12px 8px}
+  .training-fact strong{font-size:28px}
+  .training-fact span{margin-top:7px;font-size:8px;letter-spacing:.10em}
+  .training-grid,.course-meta{grid-template-columns:1fr}
+  .training-form-intro{padding-right:0}
+  .course-meta dl>div{grid-template-columns:1fr;gap:5px}
 }
