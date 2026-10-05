@@ -51,7 +51,7 @@
         z-index: 0;
         pointer-events: none;
         background:
-          linear-gradient(90deg, rgba(5, 7, 13, 0.96) 0%, rgba(5, 7, 13, 0.82) 42%, rgba(5, 7, 13, 0.28) 100%),
+          linear-gradient(90deg, rgba(5, 7, 13, 0.82) 0%, rgba(5, 7, 13, 0.64) 42%, rgba(5, 7, 13, 0.18) 100%),
           radial-gradient(circle at 72% 22%, rgba(216, 184, 106, 0.16), transparent 26rem);
       }
 
@@ -108,6 +108,31 @@
         display: block;
         font-size: 1.1rem;
         line-height: 1;
+      }
+
+      .floating-qualifier-tab {
+        position: fixed;
+        right: 18px;
+        top: calc(46% + 82px);
+        z-index: 30;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        max-width: 236px;
+        padding: 14px 16px;
+        border: 1px solid rgba(121, 167, 255, 0.72);
+        border-radius: 999px;
+        background:
+          linear-gradient(135deg, rgba(121, 167, 255, 0.96), rgba(79, 119, 216, 0.86)),
+          var(--blue);
+        color: #f8fbff;
+        box-shadow: 0 18px 50px rgba(121, 167, 255, 0.22);
+        font-size: 0.86rem;
+        font-weight: 900;
+        line-height: 1.15;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        cursor: pointer;
       }
 
       a {
@@ -197,6 +222,14 @@
       .hero .shell {
         position: relative;
         z-index: 3;
+        padding: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 34px;
+        background:
+          linear-gradient(135deg, rgba(5, 7, 13, 0.72), rgba(5, 7, 13, 0.42)),
+          rgba(5, 7, 13, 0.48);
+        box-shadow: 0 30px 110px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(6px);
       }
 
       .eyebrow {
@@ -217,7 +250,7 @@
 
       .lead {
         max-width: 760px;
-        color: #d4d9e8;
+        color: #edf1fb;
         font-size: clamp(1.15rem, 2vw, 1.45rem);
         line-height: 1.55;
       }
@@ -248,6 +281,7 @@
 
       .metric {
         padding: 22px;
+        background: rgba(5, 7, 13, 0.62);
       }
 
       .metric strong {
@@ -257,7 +291,7 @@
       }
 
       .metric span {
-        color: #c9cfdd;
+        color: #e0e5f1;
         font-size: 0.92rem;
       }
 
@@ -474,6 +508,101 @@
         line-height: 1.55;
       }
 
+      .qualifier {
+        border: 1px solid rgba(121, 167, 255, 0.28);
+        border-radius: 30px;
+        background:
+          linear-gradient(135deg, rgba(121, 167, 255, 0.12), rgba(216, 184, 106, 0.1)),
+          rgba(255, 255, 255, 0.07);
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.24);
+        padding: 28px;
+        margin-top: 28px;
+      }
+
+      .qualifier-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+        gap: 22px;
+        align-items: start;
+      }
+
+      .path-options {
+        display: grid;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .path-option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(5, 7, 13, 0.64);
+        color: var(--text);
+        padding: 16px;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .path-option[aria-pressed="true"] {
+        border-color: rgba(216, 184, 106, 0.72);
+        background: rgba(216, 184, 106, 0.14);
+      }
+
+      .path-option strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .path-option span {
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .qualifier-form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .qualifier-field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .qualifier-field label {
+        color: #d4d9e8;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .qualifier-field input,
+      .qualifier-field textarea,
+      .qualifier-field select {
+        width: 100%;
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(5, 7, 13, 0.72);
+        color: var(--text);
+        padding: 10px 12px;
+        font: inherit;
+      }
+
+      .qualifier-field textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+
+      .qualifier-readout {
+        border: 1px solid rgba(121, 167, 255, 0.24);
+        border-radius: 18px;
+        background: rgba(121, 167, 255, 0.08);
+        padding: 16px;
+        color: #e9edf7;
+        line-height: 1.55;
+      }
+
       footer {
         padding: 40px 0;
         color: var(--muted);
@@ -498,6 +627,14 @@
         .floating-cash-tab {
           top: auto;
           right: 16px;
+          bottom: 78px;
+          max-width: calc(100% - 32px);
+          font-size: 0.78rem;
+        }
+
+        .floating-qualifier-tab {
+          top: auto;
+          right: 16px;
           bottom: 16px;
           max-width: calc(100% - 32px);
           font-size: 0.78rem;
@@ -517,6 +654,7 @@
         .grid,
         .grid.two,
         .cash-flow-panel,
+        .qualifier-grid,
         .calc-grid,
         .calc-results {
           grid-template-columns: 1fr;
@@ -525,6 +663,10 @@
         .hero {
           padding-top: 190px;
           min-height: auto;
+        }
+
+        .hero .shell {
+          padding: 24px;
         }
 
         .step {
@@ -544,6 +686,10 @@
       <span>$</span>
       Having trouble growing because cash is trapped?
     </a>
+
+    <button class="floating-qualifier-tab" type="button" data-qualifier-open aria-label="Open CapexLayer qualification path">
+      Start the right path
+    </button>
 
     <header>
       <div class="shell nav">
@@ -819,6 +965,78 @@
         </div>
       </section>
 
+      <section id="qualify">
+        <div class="shell">
+          <div class="eyebrow">Conversion Path</div>
+          <h2>Start with the path that matches the pressure.</h2>
+          <p class="section-copy">
+            The fastest way to use CapexLayer is to separate the conversation into the real business pressure first:
+            trapped cash, complex-market revenue motion, or hands-on monthly execution.
+          </p>
+          <div class="qualifier" data-qualifier>
+            <div class="qualifier-grid">
+              <div>
+                <h3>Choose the closest path.</h3>
+                <p class="section-copy">
+                  This routes the first conversation so the work starts with the right artifact, the right decision owner, and the right next step.
+                </p>
+                <div class="path-options" role="group" aria-label="CapexLayer qualification path">
+                  <button class="path-option" type="button" data-path="cash_flow" aria-pressed="true">
+                    <strong>Cash flow is blocking growth</strong>
+                    <span>Receivables, working capital, payroll timing, mobilization cost, or delayed customer payments are constraining profitable growth.</span>
+                  </button>
+                  <button class="path-option" type="button" data-path="workshop" aria-pressed="false">
+                    <strong>I need the $5,000 October workshop</strong>
+                    <span>There is a specific market, territory, account list, or customer segment that needs a signal map, stakeholder map, and proof object.</span>
+                  </button>
+                  <button class="path-option" type="button" data-path="activation" aria-pressed="false">
+                    <strong>I need monthly revenue activation</strong>
+                    <span>The need is ongoing account research, buyer path mapping, proof object planning, outreach support, and pipeline review.</span>
+                  </button>
+                </div>
+              </div>
+              <div class="qualifier-form">
+                <div class="qualifier-readout" data-qualifier-readout>
+                  Good fit if you can name the invoices, market, accounts, or decision owners that are keeping growth from moving faster.
+                </div>
+                <div class="qualifier-field">
+                  <label for="qualifierName">Name</label>
+                  <input id="qualifierName" autocomplete="name" data-qualifier-input="name" />
+                </div>
+                <div class="qualifier-field">
+                  <label for="qualifierEmail">Email</label>
+                  <input id="qualifierEmail" autocomplete="email" inputmode="email" data-qualifier-input="email" />
+                </div>
+                <div class="qualifier-field">
+                  <label for="qualifierCompany">Company</label>
+                  <input id="qualifierCompany" autocomplete="organization" data-qualifier-input="company" />
+                </div>
+                <div class="qualifier-field">
+                  <label for="qualifierRole">Role</label>
+                  <input id="qualifierRole" autocomplete="organization-title" data-qualifier-input="role" />
+                </div>
+                <div class="qualifier-field">
+                  <label for="qualifierUrgency">How urgent is this?</label>
+                  <select id="qualifierUrgency" data-qualifier-input="urgency">
+                    <option>Need a path this week</option>
+                    <option>Need a path this month</option>
+                    <option>Exploring for next quarter</option>
+                  </select>
+                </div>
+                <div class="qualifier-field">
+                  <label for="qualifierContext">What is the pressure or opportunity?</label>
+                  <textarea id="qualifierContext" data-qualifier-input="context" placeholder="Example: invoices are tying up cash, a target segment is moving, or the team needs a sharper account motion."></textarea>
+                </div>
+                <a class="button full" data-qualifier-mailto href="mailto:david@capexlayer.com?subject=CapexLayer%20Qualification">Send this qualification note</a>
+                <p class="fine-print">
+                  If a call is the right next step, the scheduling path will prioritize times after 12 PM Eastern.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="demo">
         <div class="shell">
           <div class="footer-cta">
@@ -922,6 +1140,83 @@
           input.addEventListener("input", update);
           input.addEventListener("change", update);
         });
+        update();
+      })();
+    </script>
+    <script>
+      (function () {
+        const root = document.querySelector("[data-qualifier]");
+        if (!root) return;
+
+        const pathCopy = {
+          cash_flow: {
+            subject: "Cash Flow Growth Qualification",
+            readout: "Good fit if receivables, customer payment timing, payroll, mobilization, materials, or equipment cost is holding back profitable growth. The next useful artifact is a cash conversion readout tied to revenue capacity and enterprise value."
+          },
+          workshop: {
+            subject: "CapexLayer October Workshop Qualification",
+            readout: "Good fit if there is one market, territory, account list, or customer segment where the buyer timing, stakeholder path, and proof object need to be mapped before outreach or sales calls."
+          },
+          activation: {
+            subject: "CapexLayer Revenue Activation Qualification",
+            readout: "Good fit if the market already matters and the need is recurring support around account research, proof objects, follow-up, outreach strategy, buyer path mapping, and pipeline review."
+          }
+        };
+
+        let selectedPath = "cash_flow";
+        const readout = root.querySelector("[data-qualifier-readout]");
+        const mailto = root.querySelector("[data-qualifier-mailto]");
+        const buttons = root.querySelectorAll("[data-path]");
+
+        const value = (name) => {
+          const input = root.querySelector(`[data-qualifier-input="${name}"]`);
+          return input ? input.value.trim() : "";
+        };
+
+        function update() {
+          const config = pathCopy[selectedPath] || pathCopy.cash_flow;
+          if (readout) readout.textContent = config.readout;
+          const body = [
+            "CapexLayer qualification note",
+            "",
+            `Path: ${config.subject}`,
+            `Name: ${value("name")}`,
+            `Email: ${value("email")}`,
+            `Company: ${value("company")}`,
+            `Role: ${value("role")}`,
+            `Urgency: ${value("urgency")}`,
+            "",
+            "Pressure or opportunity:",
+            value("context"),
+            "",
+            "I want to review the right next artifact and decide whether a cash flow readout, workshop, or monthly activation path makes sense."
+          ].join("\n");
+
+          if (mailto) {
+            mailto.href = `mailto:david@capexlayer.com?subject=${encodeURIComponent(config.subject)}&body=${encodeURIComponent(body)}`;
+          }
+        }
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedPath = button.getAttribute("data-path") || "cash_flow";
+            buttons.forEach((item) => item.setAttribute("aria-pressed", item === button ? "true" : "false"));
+            update();
+          });
+        });
+
+        root.querySelectorAll("[data-qualifier-input]").forEach((input) => {
+          input.addEventListener("input", update);
+          input.addEventListener("change", update);
+        });
+
+        document.querySelectorAll("[data-qualifier-open]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const target = document.getElementById("qualify");
+            if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
+
         update();
       })();
     </script>
