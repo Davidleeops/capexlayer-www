@@ -147,6 +147,10 @@
         color: var(--muted);
       }
 
+      .button.full {
+        width: 100%;
+      }
+
       .hero {
         position: relative;
         padding: 92px 0 64px;
@@ -327,6 +331,119 @@
           var(--panel);
       }
 
+      .cash-flow-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+        gap: 22px;
+        align-items: start;
+        margin-top: 28px;
+      }
+
+      .cash-copy,
+      .calculator {
+        border: 1px solid rgba(216, 184, 106, 0.26);
+        border-radius: 28px;
+        background:
+          linear-gradient(135deg, rgba(216, 184, 106, 0.13), rgba(121, 167, 255, 0.08)),
+          rgba(255, 255, 255, 0.07);
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.24);
+        padding: 26px;
+      }
+
+      .cash-copy ul {
+        margin: 22px 0 0;
+        padding-left: 20px;
+        color: #d4d9e8;
+        line-height: 1.6;
+      }
+
+      .cash-copy li + li {
+        margin-top: 10px;
+      }
+
+      .calculator h3 {
+        margin: 0 0 8px;
+        font-size: 1.35rem;
+      }
+
+      .calculator-intro,
+      .fine-print {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .fine-print {
+        margin: 16px 0 0;
+        font-size: 0.84rem;
+      }
+
+      .calc-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .calc-field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .calc-field label {
+        color: #d4d9e8;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .calc-field input {
+        width: 100%;
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(5, 7, 13, 0.72);
+        color: var(--text);
+        padding: 0 12px;
+        font: inherit;
+      }
+
+      .calc-results {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .result-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(5, 7, 13, 0.58);
+        padding: 16px;
+      }
+
+      .result-card strong {
+        display: block;
+        font-size: 1.55rem;
+        color: var(--text);
+      }
+
+      .result-card span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.35;
+      }
+
+      .calc-readout {
+        margin-top: 16px;
+        border: 1px solid rgba(216, 184, 106, 0.24);
+        border-radius: 18px;
+        background: rgba(216, 184, 106, 0.08);
+        padding: 16px;
+        color: #e9edf7;
+        line-height: 1.55;
+      }
+
       footer {
         padding: 40px 0;
         color: var(--muted);
@@ -360,7 +477,10 @@
 
         .metrics,
         .grid,
-        .grid.two {
+        .grid.two,
+        .cash-flow-panel,
+        .calc-grid,
+        .calc-results {
           grid-template-columns: 1fr;
         }
 
@@ -388,6 +508,7 @@
         <nav class="nav-links" aria-label="Primary navigation">
           <a href="#how">How it works</a>
           <a href="#lanes">Focus lanes</a>
+          <a href="#cash-flow">Cash Flow Growth</a>
           <a href="#offers">Offers</a>
           <a class="button" href="#demo">Request demo</a>
         </nav>
@@ -560,6 +681,101 @@
         </div>
       </section>
 
+      <section id="cash-flow">
+        <div class="shell">
+          <div class="eyebrow">Cash Flow Growth</div>
+          <h2>Hard time growing because receivables are trapping your cash?</h2>
+          <p class="section-copy">
+            Some companies can win more work, but the growth stalls because payroll, mobilization, materials, equipment, and subcontractor costs hit before customers pay. The question is not just whether factoring gives you cash. The question is whether faster cash conversion creates enough profitable capacity to raise enterprise value.
+          </p>
+          <div class="cash-flow-panel">
+            <div class="cash-copy">
+              <h3>Use factoring as a growth tool, not a panic button.</h3>
+              <p class="section-copy">
+                CapexLayer helps owners model when receivables financing can support growth, where it damages margin, and what has to be true for it to increase valuation instead of just adding cost.
+              </p>
+              <ul>
+                <li>See how much working cash may be unlocked from invoices already waiting to be paid.</li>
+                <li>Estimate whether the added capacity creates enough gross profit to cover financing cost.</li>
+                <li>Translate the net monthly impact into a directional enterprise value range.</li>
+                <li>Use the readout to decide if a factoring path, revenue activation path, or both should be modeled in more detail.</li>
+              </ul>
+              <div class="cta-row">
+                <a class="button" href="mailto:david@capexlayer.com?subject=Cash%20Flow%20Growth%20Readout">Send my cash flow readout</a>
+                <a class="button secondary" href="#demo">Book a 15-minute review</a>
+              </div>
+            </div>
+            <div class="calculator" data-cash-flow-calculator>
+              <h3>Cash flow to enterprise value readout</h3>
+              <p class="calculator-intro">
+                Enter rough numbers. This produces a directional readout, not a financing quote.
+              </p>
+              <div class="calc-grid">
+                <div class="calc-field">
+                  <label for="monthlyRevenue">Monthly revenue</label>
+                  <input id="monthlyRevenue" inputmode="decimal" value="250000" data-calc-input="monthlyRevenue" />
+                </div>
+                <div class="calc-field">
+                  <label for="invoiceVolume">Monthly invoice volume financed</label>
+                  <input id="invoiceVolume" inputmode="decimal" value="150000" data-calc-input="invoiceVolume" />
+                </div>
+                <div class="calc-field">
+                  <label for="collectionDays">Average collection days</label>
+                  <input id="collectionDays" inputmode="decimal" value="55" data-calc-input="collectionDays" />
+                </div>
+                <div class="calc-field">
+                  <label for="advanceRate">Advance rate percent</label>
+                  <input id="advanceRate" inputmode="decimal" value="85" data-calc-input="advanceRate" />
+                </div>
+                <div class="calc-field">
+                  <label for="factorFee">Factoring fee percent per 30 days</label>
+                  <input id="factorFee" inputmode="decimal" value="3" data-calc-input="factorFee" />
+                </div>
+                <div class="calc-field">
+                  <label for="growthCapacity">Added monthly revenue capacity</label>
+                  <input id="growthCapacity" inputmode="decimal" value="50000" data-calc-input="growthCapacity" />
+                </div>
+                <div class="calc-field">
+                  <label for="grossMargin">Gross margin percent on added work</label>
+                  <input id="grossMargin" inputmode="decimal" value="32" data-calc-input="grossMargin" />
+                </div>
+                <div class="calc-field">
+                  <label for="ebitdaMultiple">Enterprise value multiple</label>
+                  <input id="ebitdaMultiple" inputmode="decimal" value="5" data-calc-input="ebitdaMultiple" />
+                </div>
+              </div>
+              <div class="calc-results" aria-live="polite">
+                <div class="result-card">
+                  <strong data-calc-output="cashUnlocked">$127,500</strong>
+                  <span>Estimated cash advanced from financed invoices.</span>
+                </div>
+                <div class="result-card">
+                  <strong data-calc-output="monthlyFee">$8,250</strong>
+                  <span>Estimated monthly factoring cost at the entered terms.</span>
+                </div>
+                <div class="result-card">
+                  <strong data-calc-output="netMonthlyImpact">$7,750</strong>
+                  <span>Estimated net monthly EBITDA impact after financing cost.</span>
+                </div>
+                <div class="result-card">
+                  <strong data-calc-output="evImpact">$465,000</strong>
+                  <span>Directional enterprise value impact at the selected multiple.</span>
+                </div>
+              </div>
+              <div class="calc-readout" data-calc-output="readout">
+                If these inputs are directionally right, financing $150,000 in invoices could unlock about $127,500 in working cash and create an estimated $465,000 enterprise value impact if the added work is actually won, delivered, and collected.
+              </div>
+              <div class="cta-row">
+                <a class="button full" data-calc-output="mailto" href="mailto:david@capexlayer.com?subject=Cash%20Flow%20Growth%20Readout">Email this readout</a>
+              </div>
+              <p class="fine-print">
+                This is a planning model for business owners. It is not a loan offer, valuation opinion, or financial advice. Actual terms, eligibility, dilution, covenants, reserves, and customer payment behavior matter.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="demo">
         <div class="shell">
           <div class="footer-cta">
@@ -582,6 +798,90 @@
         <span>CapexLayer. Not a single source of truth. A single source of trust.</span>
       </div>
     </footer>
+    <script>
+      (function () {
+        const root = document.querySelector("[data-cash-flow-calculator]");
+        if (!root) return;
+
+        const currency = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0
+        });
+
+        const number = new Intl.NumberFormat("en-US", {
+          maximumFractionDigits: 1
+        });
+
+        const get = (name) => {
+          const input = root.querySelector(`[data-calc-input="${name}"]`);
+          const raw = input ? input.value.replace(/[^0-9.]/g, "") : "0";
+          return Number(raw) || 0;
+        };
+
+        const set = (name, value) => {
+          const output = root.querySelector(`[data-calc-output="${name}"]`);
+          if (output) output.textContent = value;
+        };
+
+        function update() {
+          const monthlyRevenue = get("monthlyRevenue");
+          const invoiceVolume = get("invoiceVolume");
+          const collectionDays = get("collectionDays");
+          const advanceRate = get("advanceRate") / 100;
+          const factorFee = get("factorFee") / 100;
+          const growthCapacity = get("growthCapacity");
+          const grossMargin = get("grossMargin") / 100;
+          const ebitdaMultiple = get("ebitdaMultiple");
+
+          const cashUnlocked = invoiceVolume * advanceRate;
+          const monthlyFee = invoiceVolume * factorFee * Math.max(collectionDays, 1) / 30;
+          const addedGrossProfit = growthCapacity * grossMargin;
+          const netMonthlyImpact = addedGrossProfit - monthlyFee;
+          const evImpact = netMonthlyImpact * 12 * ebitdaMultiple;
+          const growthLift = monthlyRevenue > 0 ? growthCapacity / monthlyRevenue * 100 : 0;
+
+          set("cashUnlocked", currency.format(cashUnlocked));
+          set("monthlyFee", currency.format(monthlyFee));
+          set("netMonthlyImpact", currency.format(netMonthlyImpact));
+          set("evImpact", currency.format(evImpact));
+
+          const readout = `If these inputs are directionally right, financing ${currency.format(invoiceVolume)} in invoices could unlock about ${currency.format(cashUnlocked)} in working cash. If that supports ${currency.format(growthCapacity)} in added monthly revenue capacity, that is a ${number.format(growthLift)} percent revenue lift and an estimated ${currency.format(evImpact)} enterprise value impact at a ${number.format(ebitdaMultiple)}x multiple.`;
+          set("readout", readout);
+
+          const mailto = root.querySelector('[data-calc-output="mailto"]');
+          if (mailto) {
+            const body = [
+              "Here is my cash flow growth readout:",
+              "",
+              `Monthly revenue: ${currency.format(monthlyRevenue)}`,
+              `Monthly invoice volume financed: ${currency.format(invoiceVolume)}`,
+              `Average collection days: ${number.format(collectionDays)}`,
+              `Advance rate: ${number.format(advanceRate * 100)} percent`,
+              `Factoring fee per 30 days: ${number.format(factorFee * 100)} percent`,
+              `Added monthly revenue capacity: ${currency.format(growthCapacity)}`,
+              `Gross margin on added work: ${number.format(grossMargin * 100)} percent`,
+              `Enterprise value multiple: ${number.format(ebitdaMultiple)}x`,
+              "",
+              `Estimated cash advanced: ${currency.format(cashUnlocked)}`,
+              `Estimated monthly factoring cost: ${currency.format(monthlyFee)}`,
+              `Estimated net monthly EBITDA impact: ${currency.format(netMonthlyImpact)}`,
+              `Directional enterprise value impact: ${currency.format(evImpact)}`,
+              "",
+              "I want to review whether factoring, revenue activation, or both make sense."
+            ].join("\n");
+
+            mailto.href = `mailto:david@capexlayer.com?subject=${encodeURIComponent("Cash Flow Growth Readout")}&body=${encodeURIComponent(body)}`;
+          }
+        }
+
+        root.querySelectorAll("[data-calc-input]").forEach((input) => {
+          input.addEventListener("input", update);
+          input.addEventListener("change", update);
+        });
+        update();
+      })();
+    </script>
     <script src="/globe.js"></script>
   </body>
 </html>
