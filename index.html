@@ -1,158 +1,502 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <title>CapexLayer &middot; Industrial Signal Intelligence</title>
-  <meta name="description" content="CapexLayer reads capital signals before projects reach public bid boards, then routes the account, timing, source trail, and next move into the systems revenue teams already use." />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-  <link rel="canonical" href="https://capexlayer.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="CapexLayer" />
-  <meta property="og:title" content="CapexLayer &middot; Industrial Signal Intelligence" />
-  <meta property="og:description" content="Predicting the future by predicting the pain." />
-  <meta property="og:url" content="https://capexlayer.com/" />
-  <meta property="og:image" content="https://capexlayer.com/assets/og-image.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CapexLayer &middot; Industrial Signal Intelligence" />
-  <meta name="twitter:description" content="Predicting the future by predicting the pain." />
-  <meta name="twitter:image" content="https://capexlayer.com/assets/og-image.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/capexlayer-tokens.css" />
-  <link rel="stylesheet" href="/assets/capexlayer-site.css" />
-</head>
-<body>
-  <div class="site-shell">
-    <div class="cx-topline"></div>
-    <div class="cx-grid"></div>
-    <div class="globe-underlay" aria-hidden="true">
-      <div class="globe-panel">
-        <canvas data-cx-globe aria-label="Rotating gold signal globe"></canvas>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CapexLayer | Complex-Market GTM</title>
+    <meta
+      name="description"
+      content="CapexLayer helps founder-led and executive-involved companies sell into complex markets by turning signals, stakeholder intelligence, and proof objects into qualified revenue opportunities."
+    />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/assets/capexlayer-site.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #05070d;
+        --panel: rgba(255, 255, 255, 0.07);
+        --panel-strong: rgba(255, 255, 255, 0.11);
+        --text: #f6f7fb;
+        --muted: #b7bfd4;
+        --gold: #d8b86a;
+        --line: rgba(255, 255, 255, 0.14);
+        --blue: #79a7ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(121, 167, 255, 0.2), transparent 32rem),
+          radial-gradient(circle at top right, rgba(216, 184, 106, 0.16), transparent 30rem),
+          var(--bg);
+        color: var(--text);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(18px);
+        background: rgba(5, 7, 13, 0.78);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 76px;
+        gap: 24px;
+      }
+
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(216, 184, 106, 0.52);
+        background: rgba(216, 184, 106, 0.14);
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .button.secondary {
+        border-color: var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+      }
+
+      .hero {
+        padding: 92px 0 64px;
+      }
+
+      .eyebrow {
+        color: var(--gold);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      h1 {
+        max-width: 920px;
+        margin: 18px 0 22px;
+        font-size: clamp(3rem, 8vw, 6.5rem);
+        line-height: 0.92;
+        letter-spacing: -0.075em;
+      }
+
+      .lead {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: clamp(1.15rem, 2vw, 1.45rem);
+        line-height: 1.55;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 32px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin: 58px 0 0;
+      }
+
+      .metric,
+      .card,
+      .lane,
+      .offer {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--panel);
+        box-shadow: 0 24px 90px rgba(0, 0, 0, 0.24);
+      }
+
+      .metric {
+        padding: 22px;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 2rem;
+        color: var(--text);
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      h2 {
+        margin: 0 0 16px;
+        max-width: 760px;
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1;
+        letter-spacing: -0.055em;
+      }
+
+      .section-copy {
+        max-width: 760px;
+        color: var(--muted);
+        line-height: 1.65;
+        font-size: 1.08rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card,
+      .lane,
+      .offer {
+        padding: 24px;
+      }
+
+      .card h3,
+      .lane h3,
+      .offer h3 {
+        margin: 0 0 12px;
+        font-size: 1.22rem;
+      }
+
+      .card p,
+      .lane p,
+      .offer p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .steps {
+        counter-reset: step;
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .step {
+        counter-increment: step;
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 18px;
+        align-items: start;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--panel);
+      }
+
+      .step::before {
+        content: counter(step, decimal-leading-zero);
+        color: var(--gold);
+        font-weight: 900;
+        letter-spacing: 0.1em;
+      }
+
+      .step h3 {
+        margin: 0 0 8px;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .offer {
+        background: var(--panel-strong);
+      }
+
+      .footer-cta {
+        padding: 42px;
+        border: 1px solid rgba(216, 184, 106, 0.32);
+        border-radius: 32px;
+        background:
+          linear-gradient(135deg, rgba(216, 184, 106, 0.15), rgba(121, 167, 255, 0.12)),
+          var(--panel);
+      }
+
+      footer {
+        padding: 40px 0;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 820px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 18px 0;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+        }
+
+        .metrics,
+        .grid,
+        .grid.two {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 62px;
+        }
+
+        .step {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="shell nav">
+        <a class="brand" href="/">CapexLayer</a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#how">How it works</a>
+          <a href="#lanes">Focus lanes</a>
+          <a href="#offers">Offers</a>
+          <a class="button" href="#demo">Request demo</a>
+        </nav>
       </div>
-    </div>
-    <nav class="wrap nav" aria-label="Primary navigation">
-      <a class="cx-wordmark" href="/">CAPEX<b>LAYER</b></a>
-      <div class="nav-links"><a href="/GovSignal/">GovSignal</a><a href="/offers/">Revenue activations</a><a href="/training/revenue-signal-sales/">Training</a><a href="/platform/">Log in</a><a href="/demo/">Request demo</a></div>
-    </nav>
+    </header>
 
     <main>
-      <section class="wrap hero">
-        <div class="hero-copy">
-          <div class="cx-lockup">predicting the future by predicting the pain</div>
-          <h1 class="cx-display">Capital markets leave a trail <em>before</em> the bid board.</h1>
-          <p class="cx-lede">CapexLayer reads filings, permits, utility queues, procurement notices, labor signals, and capital plans. It turns early movement into sourced accounts, timing, and next actions that Cappy can execute inside your CRM.</p>
-          <div class="hero-actions">
-            <a class="cx-btn cx-btn--solid" href="/demo/">Request demo</a>
-            <a class="cx-btn" href="/offers/">Revenue activations</a>
-            <a class="cx-btn" href="/GovSignal/">Open GovSignal</a>
-            <a class="cx-btn" href="/platform/">Customer login</a>
+      <section class="hero">
+        <div class="shell">
+          <div class="eyebrow">Complex-market GTM</div>
+          <h1>Turn market signals into qualified revenue opportunities.</h1>
+          <p class="lead">
+            CapexLayer helps founder-led and executive-involved companies sell into complex markets where timing,
+            trust, stakeholders, and proof matter more than generic lead generation.
+          </p>
+          <div class="cta-row">
+            <a class="button" href="#demo">Book a qualified 15-minute call</a>
+            <a class="button secondary" href="#offers">See workshop and activation paths</a>
           </div>
-          <div class="stats">
-            <div class="cx-tile"><div class="n">70<b>+</b></div><div class="l">Signal classes</div></div>
-            <div class="cx-tile"><div class="n">504K<b>+</b></div><div class="l">Live signals</div></div>
-            <div class="cx-tile"><div class="n">1.9K<b>+</b></div><div class="l">Cities tracked</div></div>
-          </div>
-          <div class="signal-feed" aria-label="Worldwide signal feed">
-            <div class="cx-feed-row"><i></i><span class="c">Funded account movement</span><span class="t">CRM-ready</span></div>
-            <div class="cx-feed-row"><i></i><span class="c">Buyer timing changed</span><span class="t">source trail</span></div>
-            <div class="cx-feed-row"><i></i><span class="c">Action routed to owner</span><span class="t">workflow</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <h2>The money-map shows the head start.</h2>
-            <p>Public bid boards are late. CapexLayer ranks earlier signals by how close they are to funded work, then carries the source trail into the account record.</p>
-          </div>
-          <div class="cx-card money-map" data-money-map>
-            <div class="cx-bar"><span class="lab">Capex guidance increase</span><span class="track"><span class="fill w-94"></span></span><span class="amt">$64.5B</span></div>
-            <div class="cx-bar"><span class="lab">Utility interconnection</span><span class="track"><span class="fill w-82"></span></span><span class="amt">18 months</span></div>
-            <div class="cx-bar"><span class="lab">Permit cluster</span><span class="track"><span class="fill w-68"></span></span><span class="amt">42 sites</span></div>
-            <div class="cx-bar"><span class="lab">Reliability hiring</span><span class="track"><span class="fill w-53"></span></span><span class="amt">117 roles</span></div>
-            <div class="cx-bar"><span class="lab">Public bid board</span><span class="track"><span class="fill w-18"></span></span><span class="amt">too late</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <h2>CapexLayer turns timing intelligence into CRM execution.</h2>
-            <p>David's research identifies the account, scores the urgency, and turns the next move into accountable CRM work. The result is higher pipeline throughput through disciplined execution.</p>
-          </div>
-          <div class="grid-3">
-            <div class="cx-card"><span class="cx-kicker">Step 01</span><h3>Detect the account</h3><p>CapexLayer resolves capital movement to the company, owner, territory, source trail, and timing window.</p></div>
-            <div class="cx-card"><span class="cx-kicker">Step 02</span><h3>Score the urgency</h3><p>Bleed Reports identify which accounts are already in pain, why the window matters now, and what pressure is creating the opening.</p></div>
-            <div class="cx-card"><span class="cx-kicker">Step 03</span><h3>Execute the next move</h3><p>David's operating support converts the research into CRM updates, an owned workflow, and a clear next action.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="wrap">
-          <div class="section-head">
-            <h2>Built for revenue systems and data teams.</h2>
-            <p>Revenue teams should not rely on stale pages or wait for manual account reconstruction. CapexLayer delivers the signal, urgency, source trail, and next action when the commercial opening is real.</p>
-          </div>
-          <div class="grid-3">
-            <div class="cx-card"><span class="cx-kicker">API</span><h3>Signal data on demand</h3><p>Accounts, source trails, timing windows, contacts, and Bleed Report urgency can be pulled into your application, CRM, or internal revenue system.</p></div>
-            <div class="cx-card"><span class="cx-kicker">MCP</span><h3>Structured access</h3><p>Give approved revenue systems structured access to accounts that are moving, why the timing matters, and what action should happen next.</p></div>
-            <div class="cx-card"><span class="cx-kicker">Buy path</span><h3>From signal to purchase</h3><p>When David's research identifies a funded account under pressure, the team receives the dossier, responsible owner, and workflow required to convert demand into pipeline.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="request">
-        <div class="wrap grid-2">
-          <div>
-            <span class="cx-kicker">Request demo</span>
-            <h2>Bring one territory. We will pull the signal live.</h2>
-            <p class="cx-lede">The walkthrough is 15 minutes. Share the territory, segment, or named accounts you care about so the demo can be scoped before access is granted.</p>
-          </div>
-          <form class="cx-card" action="https://formspree.io/f/xgegvkyr" method="POST">
-            <div class="form-grid">
-              <input type="hidden" name="source" value="capexlayer_home_request_access" />
-              <input type="hidden" name="_subject" value="CapexLayer demo request from homepage" />
-              <input type="hidden" name="_redirect" value="https://capexlayer.com/demo/thanks.html" />
-              <input class="cx-input" name="name" autocomplete="name" placeholder="Name" required />
-              <input class="cx-input" name="email" type="email" autocomplete="email" placeholder="Work email" required />
-              <input class="cx-input" name="company" autocomplete="organization" placeholder="Company" required />
-              <input class="cx-input" name="role" autocomplete="organization-title" placeholder="Role" />
-              <input class="cx-input full" name="territory" placeholder="Sales territory or market focus" required />
-              <textarea class="cx-input full" name="accounts" placeholder="Named accounts, CRM segment, or project types to check"></textarea>
-              <select class="cx-input full" name="crm" aria-label="CRM or system of record">
-                <option value="">CRM or system of record</option>
-                <option value="Enterprise CRM">Enterprise CRM</option>
-                <option value="Growth CRM">Growth CRM</option>
-                <option value="Operations CRM">Operations CRM</option>
-                <option value="Other">Other</option>
-              </select>
-              <select class="cx-input full" name="timeline" aria-label="Evaluation timeline">
-                <option value="">Evaluation timeline</option>
-                <option value="Now">Now</option>
-                <option value="This quarter">This quarter</option>
-                <option value="Exploring">Exploring</option>
-              </select>
-              <p class="form-note full">We do not send public credential links. If there is a fit, access is provisioned after qualification and scoped to the agreed territory or account set.</p>
-              <button class="cx-btn cx-btn--solid full" type="submit">Request demo</button>
+          <div class="metrics" aria-label="CapexLayer proof metrics">
+            <div class="metric">
+              <strong>504K+</strong>
+              <span>Signals tracked across capital, labor, permit, funding, and market movement.</span>
             </div>
-          </form>
+            <div class="metric">
+              <strong>100+</strong>
+              <span>Signal classes mapped to account timing and buyer pressure.</span>
+            </div>
+            <div class="metric">
+              <strong>30+</strong>
+              <span>Markets analyzed for timing, pain, stakeholder movement, and revenue action.</span>
+            </div>
+            <div class="metric">
+              <strong>50K+</strong>
+              <span>Verified contacts and account paths used for research and activation.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="shell">
+          <h2>Most teams do not need more generic leads.</h2>
+          <p class="section-copy">
+            They need to know who is most likely to buy now, why the timing matters, which stakeholder owns the
+            outcome, what proof earns attention, and what message creates the next useful conversation. CapexLayer
+            builds that bridge between evidence and revenue action.
+          </p>
+          <div class="grid">
+            <article class="card">
+              <h3>Account timing</h3>
+              <p>Find accounts showing expansion, funding, hiring, procurement, operational friction, or market movement.</p>
+            </article>
+            <article class="card">
+              <h3>Stakeholder intelligence</h3>
+              <p>Map the people who own the outcome, remove obstacles, influence the decision, or feel the pain first.</p>
+            </article>
+            <article class="card">
+              <h3>Proof objects</h3>
+              <p>Create a brief, map, readout, video, or business case the buyer can inspect, correct, and act on.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="how">
+        <div class="shell">
+          <h2>How CapexLayer turns evidence into motion.</h2>
+          <div class="steps">
+            <article class="step">
+              <div>
+                <h3>Signal map</h3>
+                <p>Identify timing, pressure, expansion, funding, operational friction, or stakeholder movement.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Stakeholder universe</h3>
+                <p>Map the executive, economic, operational, technical, and field stakeholders who shape the decision.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Executive point of view</h3>
+                <p>Translate evidence into a business problem tied to revenue, margin, launch confidence, risk, or enterprise value.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Proof object</h3>
+                <p>Build the artifact that makes the opportunity concrete enough for a buyer to inspect and correct.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>Revenue motion</h3>
+                <p>Turn the work into outreach, partner activation, meeting prep, workshop, pilot, or deal support.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="lanes">
+        <div class="shell">
+          <h2>Current proof lanes.</h2>
+          <p class="section-copy">
+            These are the lanes currently being proven through live customer and partner conversations. The method applies anywhere the buyer path is complex, political, timing-sensitive, and evidence-driven.
+          </p>
+          <div class="grid two">
+            <article class="lane">
+              <h3>Industrial Reliability-to-Revenue Activation</h3>
+              <p>
+                For industrial companies and reliability partners where maintenance, specialist labor, backlog,
+                startup readiness, production capacity, or planning friction is becoming a revenue, margin, launch,
+                or enterprise value problem.
+              </p>
+            </article>
+            <article class="lane">
+              <h3>Public Contracting and Grant-Funded Growth</h3>
+              <p>
+                For opportunities that move through procurement, grants, donors, workforce funding, compliance,
+                community benefit, and stakeholder trust.
+              </p>
+            </article>
+            <article class="lane">
+              <h3>Construction and Workforce Technology</h3>
+              <p>
+                For companies selling into construction, safety, workforce visibility, productivity, labor risk,
+                and complex project execution.
+              </p>
+            </article>
+            <article class="lane">
+              <h3>Enterprise Decision and Simulation</h3>
+              <p>
+                For companies where the buyer needs to understand the cost of being wrong before they commit to a
+                decision platform, workshop, or pilot.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="offers">
+        <div class="shell">
+          <h2>Activation paths.</h2>
+          <div class="grid">
+            <article class="offer">
+              <h3>Flagship Workshop</h3>
+              <p>
+                A focused activation workshop that maps the market signal, stakeholder universe, account thesis,
+                proof object, and next revenue motion. $5,000.
+              </p>
+            </article>
+            <article class="offer">
+              <h3>Revenue Activation</h3>
+              <p>
+                Monthly account research, signal mapping, stakeholder mapping, outreach strategy, proof object planning,
+                and pipeline review after the workshop. Starts at $2,500 per month.
+              </p>
+            </article>
+            <article class="offer">
+              <h3>Fractional Growth Operator</h3>
+              <p>
+                Deeper support for deal movement, sales calls, follow-up, partner coordination, implementation strategy,
+                and client-facing execution. Scoped separately.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="demo">
+        <div class="shell">
+          <div class="footer-cta">
+            <div class="eyebrow">Start with one market</div>
+            <h2>Bring one territory, segment, or account list.</h2>
+            <p class="section-copy">
+              In 15 minutes, we can pressure-test whether a $5,000 workshop should map the timing, pain, stakeholders, proof object, and next revenue motion for the market you care about.
+            </p>
+            <div class="cta-row">
+              <a class="button" href="mailto:david@capexlayer.com?subject=CapexLayer%20Revenue%20Activation">Request a qualified call</a>
+              <a class="button secondary" href="/offers/">View offers</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="wrap">
-        <span>CapexLayer</span>
-        <span>not a single source of truth. a single source of trust.</span>
+    <footer>
+      <div class="shell">
+        <span>CapexLayer. Not a single source of truth. A single source of trust.</span>
       </div>
     </footer>
-  </div>
-  <script src="/globe.js" defer></script>
-</body>
+  </body>
 </html>
