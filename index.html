@@ -80,6 +80,36 @@
         filter: saturate(1.42) brightness(1.2);
       }
 
+      .floating-cash-tab {
+        position: fixed;
+        right: 18px;
+        top: 46%;
+        z-index: 30;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        max-width: 236px;
+        padding: 14px 16px;
+        border: 1px solid rgba(245, 217, 143, 0.82);
+        border-radius: 999px;
+        background:
+          linear-gradient(135deg, rgba(245, 217, 143, 0.96), rgba(216, 184, 106, 0.82)),
+          var(--gold);
+        color: #10131b;
+        box-shadow: 0 18px 50px rgba(216, 184, 106, 0.22);
+        font-size: 0.86rem;
+        font-weight: 900;
+        line-height: 1.15;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .floating-cash-tab span {
+        display: block;
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+
       a {
         color: inherit;
         text-decoration: none;
@@ -465,6 +495,14 @@
           opacity: 0.72;
         }
 
+        .floating-cash-tab {
+          top: auto;
+          right: 16px;
+          bottom: 16px;
+          max-width: calc(100% - 32px);
+          font-size: 0.78rem;
+        }
+
         .nav {
           align-items: flex-start;
           flex-direction: column;
@@ -501,6 +539,11 @@
         <canvas data-cx-globe aria-label="Rotating gold signal globe"></canvas>
       </div>
     </div>
+
+    <a class="floating-cash-tab" href="#cash-flow" aria-label="Open cash flow growth calculator">
+      <span>$</span>
+      Having trouble growing because cash is trapped?
+    </a>
 
     <header>
       <div class="shell nav">
