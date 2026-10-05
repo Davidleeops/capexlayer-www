@@ -80,59 +80,126 @@
         filter: saturate(1.42) brightness(1.2);
       }
 
-      .floating-cash-tab {
+      .path-concierge {
         position: fixed;
-        right: 18px;
-        top: 46%;
+        right: 22px;
+        bottom: 22px;
         z-index: 30;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        max-width: 236px;
-        padding: 14px 16px;
-        border: 1px solid rgba(245, 217, 143, 0.82);
-        border-radius: 999px;
-        background:
-          linear-gradient(135deg, rgba(245, 217, 143, 0.96), rgba(216, 184, 106, 0.82)),
-          var(--gold);
-        color: #10131b;
-        box-shadow: 0 18px 50px rgba(216, 184, 106, 0.22);
-        font-size: 0.86rem;
-        font-weight: 900;
-        line-height: 1.15;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
+        width: min(360px, calc(100vw - 44px));
       }
 
-      .floating-cash-tab span {
+      .path-concierge-panel {
+        display: none;
+        margin-bottom: 12px;
+        border: 1px solid rgba(245, 217, 143, 0.28);
+        border-radius: 24px;
+        background:
+          linear-gradient(135deg, rgba(15, 19, 29, 0.94), rgba(5, 7, 13, 0.9)),
+          rgba(5, 7, 13, 0.94);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+      }
+
+      .path-concierge[data-open="true"] .path-concierge-panel {
         display: block;
-        font-size: 1.1rem;
-        line-height: 1;
       }
 
-      .floating-qualifier-tab {
-        position: fixed;
-        right: 18px;
-        top: calc(46% + 82px);
-        z-index: 30;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        max-width: 236px;
-        padding: 14px 16px;
-        border: 1px solid rgba(121, 167, 255, 0.72);
+      .path-concierge-head {
+        padding: 18px 18px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .path-concierge-head strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      .path-concierge-head span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.45;
+      }
+
+      .path-concierge-options {
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+      }
+
+      .path-concierge-link {
+        display: grid;
+        gap: 4px;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+      }
+
+      .path-concierge-link:hover {
+        border-color: rgba(245, 217, 143, 0.46);
+        background: rgba(216, 184, 106, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .path-concierge-link strong {
+        font-size: 0.92rem;
+      }
+
+      .path-concierge-link span {
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.35;
+      }
+
+      .path-concierge-launcher {
+        width: 100%;
+        min-height: 64px;
+        border: 1px solid rgba(245, 217, 143, 0.54);
         border-radius: 999px;
         background:
-          linear-gradient(135deg, rgba(121, 167, 255, 0.96), rgba(79, 119, 216, 0.86)),
-          var(--blue);
-        color: #f8fbff;
-        box-shadow: 0 18px 50px rgba(121, 167, 255, 0.22);
-        font-size: 0.86rem;
-        font-weight: 900;
-        line-height: 1.15;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
+          linear-gradient(135deg, rgba(216, 184, 106, 0.96), rgba(121, 167, 255, 0.88)),
+          var(--gold);
+        color: #07101c;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
         cursor: pointer;
+        font: inherit;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 18px 0 20px;
+        text-align: left;
+      }
+
+      .path-concierge-launcher span {
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.78;
+      }
+
+      .path-concierge-launcher b {
+        display: block;
+        font-size: 1rem;
+        line-height: 1.2;
+      }
+
+      .path-concierge-toggle {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        border-radius: 999px;
+        background: rgba(5, 7, 13, 0.18);
       }
 
       a {
@@ -626,20 +693,14 @@
           opacity: 0.72;
         }
 
-        .floating-cash-tab {
-          top: auto;
-          right: 16px;
-          bottom: 78px;
+        .path-concierge {
+          right: 14px;
+          bottom: 14px;
           max-width: calc(100% - 32px);
-          font-size: 0.78rem;
         }
 
-        .floating-qualifier-tab {
-          top: auto;
-          right: 16px;
-          bottom: 16px;
-          max-width: calc(100% - 32px);
-          font-size: 0.78rem;
+        .path-concierge-launcher {
+          min-height: 58px;
         }
 
         .nav {
@@ -684,14 +745,35 @@
       </div>
     </div>
 
-    <a class="floating-cash-tab" href="#cash-flow" aria-label="Open cash flow growth calculator">
-      <span>$</span>
-      Having trouble growing because cash is trapped?
-    </a>
-
-    <button class="floating-qualifier-tab" type="button" data-qualifier-open aria-label="Open CapexLayer qualification path">
-      Start the right path
-    </button>
+    <div class="path-concierge" data-path-concierge data-open="false">
+      <div class="path-concierge-panel" aria-label="CapexLayer path chooser">
+        <div class="path-concierge-head">
+          <strong>Not sure where to start?</strong>
+          <span>Choose the pressure that is closest to what is happening. Each path gives you a different next artifact.</span>
+        </div>
+        <div class="path-concierge-options">
+          <a class="path-concierge-link" href="#cash-flow">
+            <strong>Cash is trapped in receivables</strong>
+            <span>Use the calculator to see if financing creates profitable growth capacity.</span>
+          </a>
+          <a class="path-concierge-link" href="#qualify" data-qualifier-open>
+            <strong>I need the right GTM path</strong>
+            <span>Pick workshop, monthly activation, or cash flow support based on your situation.</span>
+          </a>
+          <a class="path-concierge-link" href="#offers">
+            <strong>I already know I need help</strong>
+            <span>Compare the October workshop and monthly revenue activation paths.</span>
+          </a>
+        </div>
+      </div>
+      <button class="path-concierge-launcher" type="button" data-path-concierge-toggle aria-expanded="false">
+        <span>
+          Need direction?
+          <b>Find the right CapexLayer path</b>
+        </span>
+        <span class="path-concierge-toggle" aria-hidden="true">+</span>
+      </button>
+    </div>
 
     <header>
       <div class="shell nav">
@@ -1212,10 +1294,24 @@
           input.addEventListener("change", update);
         });
 
-        document.querySelectorAll("[data-qualifier-open]").forEach((button) => {
-          button.addEventListener("click", () => {
+        const concierge = document.querySelector("[data-path-concierge]");
+        const conciergeToggle = document.querySelector("[data-path-concierge-toggle]");
+        if (concierge && conciergeToggle) {
+          conciergeToggle.addEventListener("click", () => {
+            const isOpen = concierge.getAttribute("data-open") === "true";
+            concierge.setAttribute("data-open", isOpen ? "false" : "true");
+            conciergeToggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+          });
+        }
+
+        document.querySelectorAll("[data-qualifier-open]").forEach((trigger) => {
+          trigger.addEventListener("click", () => {
             const target = document.getElementById("qualify");
             if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (concierge && conciergeToggle) {
+              concierge.setAttribute("data-open", "false");
+              conciergeToggle.setAttribute("aria-expanded", "false");
+            }
           });
         });
 
