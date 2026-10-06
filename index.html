@@ -525,6 +525,22 @@
         margin-top: 10px;
       }
 
+      .funding-star {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding: 8px 12px;
+        border: 1px solid rgba(245, 217, 143, 0.5);
+        border-radius: 999px;
+        background: rgba(245, 217, 143, 0.14);
+        color: var(--gold-2);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
       .calculator h3 {
         margin: 0 0 8px;
         font-size: 1.35rem;
@@ -784,8 +800,8 @@
         </div>
         <div class="path-concierge-options">
           <a class="path-concierge-link" href="#cash-flow">
-            <strong>Cash is trapped in receivables</strong>
-            <span>Use the calculator to see if financing creates profitable growth capacity.</span>
+            <strong>Funding for cash flow growth</strong>
+            <span>Use the factoring readout to see if financing unlocks profitable growth capacity.</span>
           </a>
           <a class="path-concierge-link" href="#qualify" data-qualifier-open>
             <strong>I need the right GTM path</strong>
@@ -816,7 +832,7 @@
         <nav class="nav-links" aria-label="Primary navigation">
           <a href="#how">How it works</a>
           <a href="#lanes">Focus lanes</a>
-          <a href="#cash-flow">Cash Flow Growth</a>
+          <a href="#cash-flow">Funding for Cash Flow Growth</a>
           <a href="#offers">Offers</a>
           <a class="button" href="#demo">Request demo</a>
         </nav>
@@ -1017,25 +1033,26 @@
 
       <section id="cash-flow">
         <div class="shell">
-          <div class="eyebrow">Cash Flow Growth</div>
-          <h2>Hard time growing because receivables are trapping your cash?</h2>
+          <div class="eyebrow">Funding for Cash Flow Growth</div>
+          <h2>Hard time growing because receivables are trapping the cash you need to deliver more work?</h2>
           <p class="section-copy">
-            Some companies can win more work, but the growth stalls because payroll, mobilization, materials, equipment, and subcontractor costs hit before customers pay. The question is not just whether factoring gives you cash. The question is whether faster cash conversion creates enough profitable capacity to raise enterprise value.
+            Some companies can win more work, but growth stalls because payroll, mobilization, materials, equipment, and subcontractor costs hit before customers pay. This path is for owners who need funding for cash flow growth and want to know whether factoring can create profitable capacity instead of just adding financing cost.
           </p>
           <div class="cash-flow-panel">
             <div class="cash-copy">
+              <span class="funding-star">★ Funding path</span>
               <h3>Use factoring as a growth tool, not a panic button.</h3>
               <p class="section-copy">
-                CapexLayer helps owners model when receivables financing can support growth, where it damages margin, and what has to be true for it to increase valuation instead of just adding cost.
+                CapexLayer helps owners model when receivables financing can fund cash flow growth, where it damages margin, and what has to be true for it to increase valuation instead of just adding cost.
               </p>
               <ul>
                 <li>See how much working cash may be unlocked from invoices already waiting to be paid.</li>
                 <li>Estimate whether the added capacity creates enough gross profit to cover financing cost.</li>
                 <li>Translate the net monthly impact into a directional enterprise value range.</li>
-                <li>Use the readout to decide if a factoring path, revenue activation path, or both should be modeled in more detail.</li>
+                <li>Use the readout to decide if a factoring funding path, revenue activation path, or both should be modeled in more detail.</li>
               </ul>
               <div class="cta-row">
-                <a class="button" href="mailto:david@capexlayer.com?subject=Cash%20Flow%20Growth%20Readout">Send my cash flow readout</a>
+                <a class="button" href="mailto:david@capexlayer.com?subject=Funding%20for%20Cash%20Flow%20Growth%20Readout">Start the funding readout</a>
                 <a class="button secondary" href="#demo">Book a 15-minute review</a>
               </div>
             </div>
@@ -1268,7 +1285,7 @@
           const mailto = root.querySelector('[data-calc-output="mailto"]');
           if (mailto) {
             const body = [
-              "Here is my cash flow growth readout:",
+              "Here is my funding for cash flow growth readout:",
               "",
               `Monthly revenue: ${currency.format(monthlyRevenue)}`,
               `Monthly invoice volume financed: ${currency.format(invoiceVolume)}`,
@@ -1284,10 +1301,10 @@
               `Estimated net monthly EBITDA impact: ${currency.format(netMonthlyImpact)}`,
               `Directional enterprise value impact: ${currency.format(evImpact)}`,
               "",
-              "I want to review whether factoring, revenue activation, or both make sense."
+              "I want to review whether a factoring funding path, revenue activation, or both make sense."
             ].join("\n");
 
-            mailto.href = `mailto:david@capexlayer.com?subject=${encodeURIComponent("Cash Flow Growth Readout")}&body=${encodeURIComponent(body)}`;
+            mailto.href = `mailto:david@capexlayer.com?subject=${encodeURIComponent("Funding for Cash Flow Growth Readout")}&body=${encodeURIComponent(body)}`;
           }
         }
 
@@ -1305,8 +1322,8 @@
 
         const pathCopy = {
           cash_flow: {
-            subject: "Cash Flow Growth Qualification",
-            readout: "Good fit if receivables, customer payment timing, payroll, mobilization, materials, or equipment cost is holding back profitable growth. The next useful artifact is a cash conversion readout tied to revenue capacity and enterprise value."
+            subject: "Funding for Cash Flow Growth Qualification",
+            readout: "Good fit if receivables, customer payment timing, payroll, mobilization, materials, or equipment cost is holding back profitable growth. The next useful artifact is a factoring funding readout tied to revenue capacity, financing cost, and enterprise value."
           },
           workshop: {
             subject: "CapexLayer October Workshop Qualification",
