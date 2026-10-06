@@ -455,6 +455,37 @@
         background: var(--panel-strong);
       }
 
+      .offer-kicker {
+        display: inline-flex;
+        margin-bottom: 12px;
+        padding: 6px 10px;
+        border: 1px solid rgba(216, 184, 106, 0.34);
+        border-radius: 999px;
+        color: var(--gold-2);
+        background: rgba(216, 184, 106, 0.08);
+        font-size: 0.74rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .offer-price {
+        display: block;
+        margin: 0 0 12px;
+        color: var(--text);
+        font-size: 1.55rem;
+        font-weight: 900;
+        letter-spacing: -0.035em;
+      }
+
+      .offer-note {
+        display: block;
+        margin-top: 14px;
+        color: #d4d9e8;
+        font-size: 0.9rem;
+        line-height: 1.45;
+      }
+
       .footer-cta {
         padding: 42px;
         border: 1px solid rgba(216, 184, 106, 0.32);
@@ -749,7 +780,7 @@
       <div class="path-concierge-panel" aria-label="CapexLayer path chooser">
         <div class="path-concierge-head">
           <strong>Not sure where to start?</strong>
-          <span>Choose the pressure that is closest to what is happening. Each path gives you a different next artifact.</span>
+          <span>Choose the level of help you need. Each path points to a different commercial motion.</span>
         </div>
         <div class="path-concierge-options">
           <a class="path-concierge-link" href="#cash-flow">
@@ -758,11 +789,15 @@
           </a>
           <a class="path-concierge-link" href="#qualify" data-qualifier-open>
             <strong>I need the right GTM path</strong>
-            <span>Pick workshop, monthly activation, or cash flow support based on your situation.</span>
+            <span>Start with the workshop or $2,500-plus monthly advisory path.</span>
           </a>
           <a class="path-concierge-link" href="#offers">
-            <strong>I already know I need help</strong>
-            <span>Compare the October workshop and monthly revenue activation paths.</span>
+            <strong>I need embedded GTM leadership</strong>
+            <span>Review the $10,000 per month fractional GTM executive path.</span>
+          </a>
+          <a class="path-concierge-link" href="#offers">
+            <strong>I need the system built</strong>
+            <span>Review the $25,000 to $100,000 AI-agent implementation path.</span>
           </a>
         </div>
       </div>
@@ -928,27 +963,53 @@
       <section id="offers">
         <div class="shell">
           <h2>Activation paths.</h2>
-          <div class="grid">
+          <p class="section-copy">
+            CapexLayer is not a cheap lead-generation retainer. The work starts with a focused workshop, then expands
+            into advisory, embedded GTM leadership, or implementation depending on how much ownership and execution the
+            company needs.
+          </p>
+          <div class="grid two">
             <article class="offer">
+              <span class="offer-kicker">Start here</span>
               <h3>Flagship Workshop</h3>
+              <strong class="offer-price">$10,000 standard. $5,000 October launch rate.</strong>
               <p>
                 A focused activation workshop that maps the market signal, stakeholder universe, account thesis,
-                proof object, and next revenue motion. Standard workshop rate is $10,000. October launch rate is $5,000.
+                proof object, and next revenue motion.
               </p>
+              <span class="offer-note">Best when the company needs the plan, pressure test, and first commercial motion before committing to a larger engagement.</span>
             </article>
             <article class="offer">
+              <span class="offer-kicker">Advisory plus light execution</span>
               <h3>Revenue Activation</h3>
+              <strong class="offer-price">Starts at $2,500 per month, plus scoped execution.</strong>
               <p>
-                Monthly account research, signal mapping, stakeholder mapping, outreach strategy, proof object planning,
-                and pipeline review after the workshop. Starts at $2,500 per month.
+                The entry monthly layer is built around the first 10 hours of coaching, GTM review, account guidance,
+                signal interpretation, and pipeline direction. Execution support can be added in scoped blocks when the
+                company needs hands-on work beyond advisory.
               </p>
+              <span class="offer-note">Best when the founder or executive team can still execute, but needs senior direction, pressure testing, and decision support.</span>
             </article>
             <article class="offer">
-              <h3>Fractional Growth Operator</h3>
+              <span class="offer-kicker">Embedded GTM leadership</span>
+              <h3>Fractional GTM Executive</h3>
+              <strong class="offer-price">$10,000 per month.</strong>
               <p>
-                Deeper support for deal movement, sales calls, follow-up, partner coordination, implementation strategy,
-                and client-facing execution. Scoped separately.
+                A fully embedded fractional go-to-market executive, temporary commercial operator, or acting
+                co-founder style role for companies that need senior ownership of GTM motion, deal movement,
+                partner coordination, sales process, and execution cadence.
               </p>
+              <span class="offer-note">Best when the company needs a senior operator in the room, not just advice from the outside.</span>
+            </article>
+            <article class="offer">
+              <span class="offer-kicker">Systems implementation</span>
+              <h3>AI-Agent Revenue System Build</h3>
+              <strong class="offer-price">$25,000 to $100,000 scoped build.</strong>
+              <p>
+                Implementation of the agents, workflows, data layer, dashboards, and operating system needed to execute
+                the revenue motion that gets designed in the workshop or embedded GTM engagement.
+              </p>
+              <span class="offer-note">Best when the company wants the system built, not only the strategy. Final scope depends on integrations, data readiness, workflow complexity, and execution requirements.</span>
             </article>
           </div>
         </div>
@@ -1074,8 +1135,16 @@
                     <span>There is a specific market, territory, account list, or customer segment that needs a signal map, stakeholder map, and proof object.</span>
                   </button>
                   <button class="path-option" type="button" data-path="activation" aria-pressed="false">
-                    <strong>I need monthly revenue activation</strong>
-                    <span>The need is ongoing account research, buyer path mapping, proof object planning, outreach support, and pipeline review.</span>
+                    <strong>I need monthly advisory and activation</strong>
+                    <span>The need is a $2,500-plus monthly layer for coaching, GTM review, account guidance, signal interpretation, and scoped execution support.</span>
+                  </button>
+                  <button class="path-option" type="button" data-path="embedded" aria-pressed="false">
+                    <strong>I need embedded GTM leadership</strong>
+                    <span>The need is a $10,000 per month fractional GTM executive, temporary commercial operator, or acting co-founder style role.</span>
+                  </button>
+                  <button class="path-option" type="button" data-path="agents" aria-pressed="false">
+                    <strong>I need the revenue system built</strong>
+                    <span>The need is a $25,000 to $100,000 AI-agent revenue system implementation with workflows, dashboards, data, and execution infrastructure.</span>
                   </button>
                 </div>
               </div>
@@ -1127,7 +1196,9 @@
             <div class="eyebrow">Start with one market</div>
             <h2>Bring one territory, segment, or account list.</h2>
             <p class="section-copy">
-              In 15 minutes, we can pressure-test whether the October $5,000 launch-rate workshop should map the timing, pain, stakeholders, proof object, and next revenue motion for the market you care about.
+              In 15 minutes, we can pressure-test whether the right starting point is the October $5,000 workshop,
+              the $2,500-plus monthly activation layer, the $10,000 embedded GTM executive path, or a scoped
+              AI-agent revenue system build.
             </p>
             <div class="cta-row">
               <a class="button" href="mailto:david@capexlayer.com?subject=CapexLayer%20Revenue%20Activation">Request a qualified call</a>
@@ -1243,7 +1314,15 @@
           },
           activation: {
             subject: "CapexLayer Revenue Activation Qualification",
-            readout: "Good fit if the market already matters and the need is recurring support around account research, proof objects, follow-up, outreach strategy, buyer path mapping, and pipeline review."
+            readout: "Good fit if the market already matters and the need is the $2,500-plus monthly layer for coaching, GTM review, account guidance, signal interpretation, and scoped execution support."
+          },
+          embedded: {
+            subject: "CapexLayer Embedded GTM Executive Qualification",
+            readout: "Good fit if the company needs the $10,000 per month embedded GTM executive path: senior ownership of commercial motion, deal movement, partner coordination, sales process, and execution cadence."
+          },
+          agents: {
+            subject: "CapexLayer AI-Agent Revenue System Build Qualification",
+            readout: "Good fit if the company needs a scoped $25,000 to $100,000 implementation build for agents, workflows, data, dashboards, and the operating system behind the revenue motion."
           }
         };
 
