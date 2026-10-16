@@ -1,0 +1,142 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'; connect-src 'none'"><title>Engagement Economics | CapexLayer</title><style>
+:root{color-scheme:light;--foreground:#14323b;--muted-foreground:#4c646c;--destructive:#a42332;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eef3f4;color:var(--foreground)}
+*{box-sizing:border-box}body{margin:0;padding:32px 24px}main{max-width:1120px;margin:auto}header{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:32px}.brand{font-size:23px;font-weight:750;letter-spacing:-.8px}header p{font-size:12px;color:#536970}h2{font-size:clamp(29px,5vw,44px);font-weight:650;letter-spacing:-1.4px;line-height:1.08;margin:0 0 18px}h3{font-size:22px;letter-spacing:-.5px;margin:0 0 18px}.viz-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:25px 0}.form-label{font-size:13px;font-weight:550;line-height:1.45}.form-control,.form-select{display:block;width:100%;background:white;color:#14323b;border:1px solid #b7c9cc;border-radius:8px;padding:13px 12px;font:inherit;font-size:17px;margin-top:9px;min-height:48px}.form-control:focus,.form-select:focus{outline:3px solid #2e8b8b55;border-color:#246a72}.assumptions{line-height:1.6;max-width:1000px}.text-small{font-size:13px}.viz-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.metric{padding:20px;background:white;border-radius:12px}.metric span{font-size:12px;line-height:1.4;color:#536970;display:block;min-height:32px}.metric output{font-size:clamp(19px,3vw,29px);letter-spacing:-.8px;margin-top:8px;line-height:1.2}.tabular-nums{font-variant-numeric:tabular-nums}.table-responsive{overflow:auto;background:white;border-radius:12px;padding:12px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:right;padding:14px 12px;white-space:nowrap}th:first-child,td:first-child{text-align:left}th{font-size:12px;color:#536970}tbody tr:nth-child(odd){background:#f3f6f6}footer{font-size:12px;color:#536970;line-height:1.6;margin-top:30px}.privacy{color:#536970;font-size:12px}@media(max-width:700px){body{padding:24px 16px}header{align-items:flex-start;flex-direction:column;gap:0;margin-bottom:24px}.viz-controls,.viz-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.metric{padding:15px}.metric span{min-height:42px}.form-control,.form-select{font-size:16px}}@media(max-width:390px){.viz-controls{grid-template-columns:1fr}.metric output{font-size:20px}}@media print{body{padding:0;background:white}.form-control,.form-select{border-color:#aaa}.metric{break-inside:avoid}header p,.privacy{display:none}}
+</style></head><body><main><header><div class="brand">CapexLayer</div><p>DECISION WORKSHEET / SIX-MONTH VIEW</p></header><p class="privacy">Calculations stay in this browser tab. Inputs are not transmitted or saved. Refreshing clears your scenario.</p><div id="predicore-roi-oct16">
+  <style>
+    #predicore-roi-oct16 { color:var(--foreground); padding:12px 0; }
+    #predicore-roi-oct16 .section { margin-top:24px; }
+    #predicore-roi-oct16 .assumptions { margin:12px 0; color:var(--muted-foreground); }
+    #predicore-roi-oct16 output { font-weight:500; }
+    #predicore-roi-oct16 .error { color:var(--destructive); }
+    #predicore-roi-oct16 .metric { margin-top:14px; }
+    #predicore-roi-oct16 .metric output { display:block; }
+  </style>
+  <h2>Six-month engagement economics</h2>
+  <div class="assumptions">Six-month goal: ten U.S. pilots with at least implementation paid. Enter your own pricing, costs and expected starts. A pilot does not establish recurring revenue or expansion.</div>
+  <div class="viz-controls">
+    <label class="form-label">Monthly engagement fee, USD. Minimum $5,000<input class="form-control" data-key="fee" type="number" min="5000" value="5000"></label>
+    <label class="form-label">Service billing<select class="form-select" data-key="billing"><option value="monthly">Monthly</option><option value="annual">Annual, prepaid</option></select></label>
+    <label class="form-label">Installation charge per project, USD<input class="form-control" data-key="setupRevenue" type="number" min="0" aria-label="Installation charge per project, USD"></label>
+    <label class="form-label"><span id="roi-service-label">Service price per project per month, USD</span><input class="form-control" data-key="servicePrice" type="number" min="0" aria-label="Service price per project"></label>
+    <label class="form-label">Hardware and installation cost per project, USD<input class="form-control" data-key="setupCost" type="number" min="0" aria-label="Hardware and installation cost per project, USD"></label>
+    <label class="form-label">Monthly delivery and support cost per project, USD<input class="form-control" data-key="serviceCost" type="number" min="0" aria-label="Monthly delivery and support cost per project, USD"></label>
+    <label class="form-label">Other incremental monthly program cost, USD<input class="form-control" data-key="otherMonthly" type="number" min="0" value="0"></label>
+    <label class="form-label">Other upfront program cost, USD<input class="form-control" data-key="otherUpfront" type="number" min="0" value="0"></label>
+    <label class="form-label">Collection delay, whole months<input class="form-control" data-key="lag" type="number" min="0" max="12" step="1" value="0"></label>
+  </div>
+  <div class="assumptions text-small">Required commitment: three or six months. At $5,000 monthly, three months totals $15,000 and six months totals $30,000. This calculator models six months of fees and delivery, not a one-month cancellation option. Other costs and collection delay default to zero as editable assumptions.</div>
+  <div class="section">
+    <h3>New U.S. pilots by start month</h3>
+    <div class="viz-controls">
+      <label class="form-label">Month 1<input class="form-control" data-start="0" type="number" min="0" step="1" value="0"></label>
+      <label class="form-label">Month 2<input class="form-control" data-start="1" type="number" min="0" step="1" value="0"></label>
+      <label class="form-label">Month 3<input class="form-control" data-start="2" type="number" min="0" step="1" value="0"></label>
+      <label class="form-label">Month 4<input class="form-control" data-start="3" type="number" min="0" step="1" value="0"></label>
+      <label class="form-label">Month 5<input class="form-control" data-start="4" type="number" min="0" step="1" value="0"></label>
+      <label class="form-label">Month 6<input class="form-control" data-start="5" type="number" min="0" step="1" value="0"></label>
+    </div>
+    <div class="assumptions text-small">Count each manufacturer once in this scenario. Paid implementation does not mean a recurring contract. Enter zero service revenue when the pilot includes no service charge. No automatic conversion or expansion modeled. This simplified model starts a full service and support month at pilot start and continues that monthly amount through month six. Compare separate scenarios if pilot terms, service start or duration differ. No churn, bad debt, tax or financing modeled.</div>
+  </div>
+  <div id="roi-error" class="section error" role="alert"></div>
+  <div id="roi-results" class="section" aria-live="polite">
+    <div class="viz-grid">
+      <div class="metric"><span>Program cost</span><output id="roi-program" class="tabular-nums">$30,000</output></div>
+      <div class="metric"><span>U.S. pilots started</span><output id="roi-projects" class="tabular-nums">0 / 10 target</output></div>
+      <div class="metric"><span>Contribution-based engagement ROI</span><output id="roi-percent" class="tabular-nums">Pricing and costs needed</output></div>
+    </div>
+    <div class="viz-grid">
+      <div class="metric"><span>Six-month modeled revenue</span><output id="roi-revenue" class="tabular-nums">Not calculated</output></div>
+      <div class="metric"><span>Contribution before program cost</span><output id="roi-contribution" class="tabular-nums">Not calculated</output></div>
+      <div class="metric"><span>Net contribution after program cost</span><output id="roi-net" class="tabular-nums">Not calculated</output></div>
+      <div class="metric"><span>Cash received in six months</span><output id="roi-receipts" class="tabular-nums">Not calculated</output></div>
+      <div class="metric"><span>Net six-month cash impact</span><output id="roi-cash" class="tabular-nums">Not calculated</output></div>
+      <div class="metric"><span>Projects for contribution break-even at this timing</span><output id="roi-break" class="tabular-nums">Set project starts</output></div>
+    </div>
+    <div class="section table-responsive"><table class="table table-sm wide-table"><thead><tr><th>Month</th><th>Cumulative pilot starts</th><th>Modeled revenue</th><th>Contribution</th><th>Cumulative net cash</th></tr></thead><tbody id="roi-months"></tbody></table></div>
+    <div class="assumptions text-small">Engagement ROI uses contribution after variable delivery costs, less engagement and other incremental program costs, divided by those program costs. It is not revenue divided by fees. Annual prepayment can produce cash for service still owed after month six.</div>
+  </div>
+  <script>
+  (() => {
+    const root = document.getElementById('predicore-roi-oct16');
+    const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+    const required = ['setupRevenue','servicePrice','setupCost','serviceCost'];
+    let previousBilling = 'monthly';
+    function model(p) {
+      const annual = p.billing === 'annual';
+      const monthlyPrice = annual ? p.servicePrice / 12 : p.servicePrice;
+      let active = 0, totalRevenue = 0, totalContribution = 0, totalReceipts = 0, cumulativeCash = 0;
+      const bills = [], rows = [];
+      const programCost = p.fee * 6 + p.otherMonthly * 6 + p.otherUpfront;
+      for (let m = 0; m < 6; m++) {
+        const starts = p.starts[m];
+        active += starts;
+        const revenue = starts * p.setupRevenue + active * monthlyPrice;
+        const deliveryCost = starts * p.setupCost + active * p.serviceCost;
+        const contribution = revenue - deliveryCost;
+        const bill = starts * p.setupRevenue + (annual ? starts * p.servicePrice : active * monthlyPrice);
+        bills.push(bill);
+        const receipt = m >= p.lag ? bills[m-p.lag] : 0;
+        const periodProgramCost = p.fee + p.otherMonthly + (m === 0 ? p.otherUpfront : 0);
+        const cash = receipt - deliveryCost - periodProgramCost;
+        cumulativeCash += cash;
+        totalRevenue += revenue; totalContribution += contribution; totalReceipts += receipt;
+        rows.push({month:m+1,active,revenue,contribution,receipt,cash,cumulativeCash});
+      }
+      const totalProjects = p.starts.reduce((a,b)=>a+b,0);
+      const avgContribution = totalProjects ? totalContribution / totalProjects : null;
+      const breakEven = avgContribution > 0 ? Math.ceil((programCost - 1e-9) / avgContribution) : null;
+      return {programCost,totalProjects,totalRevenue,totalContribution,totalReceipts,netContribution:totalContribution-programCost,netCash:cumulativeCash,roi:programCost>0?(totalContribution-programCost)/programCost:null,breakEven,avgContribution,rows};
+    }
+    function read() {
+      const p = {};
+      for (const input of root.querySelectorAll('[data-key]')) p[input.dataset.key] = input.dataset.key === 'billing' ? input.value : (input.value === '' ? null : Number(input.value));
+      p.starts = [...root.querySelectorAll('[data-start]')].map(i=>i.value === '' ? null : Number(i.value));
+      return p;
+    }
+    function save(p) {}
+    function update(persist=false) {
+      const p = read();
+      if (p.billing !== previousBilling) {
+        if (p.servicePrice !== null) {
+          p.servicePrice = p.billing === 'annual' ? p.servicePrice * 12 : p.servicePrice / 12;
+          root.querySelector('[data-key="servicePrice"]').value = String(p.servicePrice);
+        }
+        previousBilling = p.billing;
+      }
+      root.querySelector('#roi-service-label').textContent = 'Service price per project per '+(p.billing==='annual'?'year':'month')+', USD';
+      const numeric = Object.entries(p).filter(([k])=>k!=='billing'&&k!=='starts');
+      const invalid = numeric.some(([,v])=>v!==null&&(!Number.isFinite(v)||v<0)) || p.starts.some(v=>v===null||!Number.isInteger(v)||v<0) || !Number.isInteger(p.lag) || p.lag>12 || p.fee===null || p.fee<5000 || p.otherMonthly===null || p.otherUpfront===null;
+      const missing = required.some(k=>p[k]===null);
+      root.querySelector('#roi-error').textContent = invalid ? 'Monthly engagement fee must be at least $5,000. Use nonnegative costs and whole-number pilot counts and collection delay. Complete the required cost fields.' : '';
+      const set=(id,text)=>{root.querySelector(id).textContent=text;};
+      set('#roi-program',invalid?'Check inputs':money(p.fee*6+p.otherMonthly*6+p.otherUpfront));
+      set('#roi-projects',invalid?'Check inputs':p.starts.reduce((a,b)=>a+b,0)+' / 10 target');
+      const tbody=root.querySelector('#roi-months');
+      if(invalid||missing){
+        set('#roi-percent','Pricing and costs needed');
+        ['#roi-revenue','#roi-contribution','#roi-net','#roi-receipts','#roi-cash'].forEach(id=>set(id,'Not calculated'));
+        set('#roi-break','Set pricing, costs and project starts');tbody.innerHTML='';
+      } else {
+        const r=model(p);
+        set('#roi-percent',r.roi===null?'Undefined with zero program cost':(r.roi*100).toFixed(1)+'%');
+        set('#roi-revenue',money(r.totalRevenue));set('#roi-contribution',money(r.totalContribution));set('#roi-net',money(r.netContribution));set('#roi-receipts',money(r.totalReceipts));set('#roi-cash',money(r.netCash));
+        set('#roi-break',r.totalProjects===0?'Set project starts':r.breakEven===null?'No break-even at this unit contribution':r.breakEven+' projects at this timing mix');
+        tbody.innerHTML=r.rows.map(x=>'<tr><td>'+x.month+'</td><td class="tabular-nums">'+x.active+'</td><td class="tabular-nums">'+money(x.revenue)+'</td><td class="tabular-nums">'+money(x.contribution)+'</td><td class="tabular-nums">'+money(x.cumulativeCash)+'</td></tr>').join('');
+      }
+      if(persist&&!invalid)save(p);
+    }
+    function restore(state) {
+      const p=state&&state.modelContent&&state.modelContent.scenario;
+      if(!p||!Array.isArray(p.starts)||p.starts.length!==6)return;
+      for(const input of root.querySelectorAll('[data-key]')) if(p[input.dataset.key]!==undefined)input.value=p[input.dataset.key]===null?'':p[input.dataset.key];
+      for(const input of root.querySelectorAll('[data-start]'))input.value=p.starts[Number(input.dataset.start)];
+      previousBilling=p.billing;
+      update(false);
+    }
+    root.addEventListener('input',()=>update(true));root.addEventListener('change',()=>update(true));
+    root.predicoreModel=model;
+    update(false);
+  })();
+  </script>
+</div>
+<footer>Scenario planning only. Results depend on your inputs and do not predict sales, customer conversion or expansion. Validate assumptions and compare downside cases before committing resources.</footer></main></body></html>
