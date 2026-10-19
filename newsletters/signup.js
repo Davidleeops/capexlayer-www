@@ -2,6 +2,11 @@
   const form = document.getElementById("newsletter-form");
   const result = document.getElementById("result");
   if (!form || !result) return;
+  const requested = new URLSearchParams(window.location.search).get("publication");
+  for (const choice of form.querySelectorAll('input[name="publications"]')) {
+    if (choice.value === requested) choice.checked = true;
+  }
+
   form.addEventListener("submit", async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
