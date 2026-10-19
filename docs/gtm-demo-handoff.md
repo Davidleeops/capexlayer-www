@@ -1,3 +1,33 @@
+# Current invitation-only access flow
+
+Updated October 19, 2026. This section supersedes the historical demo-form flow below for the homepage and `/demo/`.
+
+- Platform and service access is by invitation after fit review.
+- The primary path is a founder conversation using the existing verified 15-minute calendar linked from `/access/` and `/demo/`.
+- The alternative is `/access/#waitlist`. Requests persist in `capexlayer_access_requests` in the existing shared research-site database.
+- Waitlist requests are `waiting`. Email-only requests are `updates_only`. Neither grants platform access.
+- Collect name, work email, company, optional role, market and use case, and explicit access-request permission.
+- The separate, unchecked product-updates option requests only `capexlayer-updates`.
+- `/updates/` permits email-only signup without adding a person to the waitlist.
+- Public form submission uses the existing shared `/api/access` endpoint. No admin credentials are exposed in public source.
+- Confirmed Listmonk membership is authoritative for email eligibility. A stored request or email option is not confirmed consent.
+- Public-facing receipts distinguish saved access, accepted email requests, and pending delivery. Do not claim instant access or invented waitlist positions.
+- Existing customer login and private scoped invitations remain unchanged.
+
+## CapexLayer signals nurture
+
+List: CapexLayer Signals & Updates. Slug: `capexlayer-updates`. Public, double opt-in. This is separate from Signal Over Noise, Uptime Economics and The Reliability Report.
+
+Use the opt-in population for relevant commercial signals, product updates and access invitations. A useful signal includes what changed, a primary source and date, the commercial implication, what is still an inference, and the decision or account worth validating. Close with one appropriate next action, normally the founder/access path. Do not present publicity, views or opens as buying intent.
+
+A waitlist request alone authorizes discussion of that access request, not recurring marketing. Never import cold prospects or automatically enroll LinkedIn followers. Honor Listmonk unsubscribes and suppression before any campaign. Handpick relevance using the submitted role, company, market and use case. No campaign or outbound nurture sequence is activated by this website change.
+
+Owner review: inspect the access-request table through the existing authenticated Sites database viewer. Select only confirmed members of the dedicated list when preparing an email campaign. Do not publish a public export endpoint.
+
+## Historical demo-form implementation
+
+The historical contract below is retained for context and any legacy PDM surface. It is not the current homepage or `/demo/` intake.
+
 # CapexLayer demo request handoff
 
 Purpose: keep the public request-demo motion aligned with the operating model:

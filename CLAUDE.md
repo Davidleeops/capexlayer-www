@@ -12,14 +12,13 @@ Read these before editing public funnel pages:
 
 ## Public UX Flow
 
-The public site follows the enterprise data-platform pattern:
-
-1. Public proof on `capexlayer.com`.
-2. Prospect CTA goes to `/demo/`.
-3. Form submission redirects to `/demo/thanks.html`.
-4. Sales qualifies the account, territory, CRM, and timeline.
-5. Sales privately provisions scoped platform demo access if there is a fit.
-6. Existing customers use `/platform/`, which redirects to the production platform login.
+1. Public proof on capexlayer.com explains the invitation-only platform and service.
+2. `/access/` offers founder booking or a waitlist. `/demo/` preserves old prospect links and uses the same access model.
+3. Waitlist requests save to the existing shared backend at `/api/access` with explicit request consent.
+4. The optional CapexLayer signals checkbox requests only the dedicated double opt-in list. It never enrolls a reader into editorial newsletters.
+5. `/updates/` supports email-only opt-in without an access request.
+6. David reviews fit and scope before any invitation or provisioning. Forms do not grant access.
+7. Existing customers continue through `/platform/`.
 
 ## Hard Rules
 
@@ -27,7 +26,7 @@ The public site follows the enterprise data-platform pattern:
 - Do not put `/dashboard?demo=TOKEN` in HTML, Markdown, screenshots, issues, or public docs.
 - Do not route public prospects directly into the platform dashboard.
 - Do not change `/platform/` away from the production login bridge unless the platform production URL changes.
-- Keep request-demo form fields aligned with `docs/gtm-demo-handoff.md`.
+- Keep access and updates intent and consent boundaries aligned with `docs/gtm-demo-handoff.md`.
 
 ## Canonical Routes
 

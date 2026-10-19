@@ -27,12 +27,17 @@ Operational codebase: **private** repo `Davidleeops/capexlayer`. See that repo's
 
 ## Access flow
 
-Public website CTAs should follow the enterprise data-platform pattern:
+CapexLayer is an invitation-only platform and service. The public site remains visible.
 
-- Prospects use `/demo/` or the homepage request form.
-- Existing customers use `/platform/`, which redirects to the production platform login.
-- Do not publish bearer demo-token links in public navigation or public pages. Sales can share scoped platform demo links directly after qualification.
-- Sales handoff details live in `docs/gtm-demo-handoff.md`.
+- `/access/` offers the verified existing founder booking calendar and an access waitlist.
+- `/demo/` routes existing prospect links into a founder conversation or the waitlist.
+- `/updates/` is the separate CapexLayer Signals & Updates opt-in. It does not request access.
+- The waitlist stores company, role, market and use case. An unchecked email option never enrolls a person in marketing.
+- Email opt-in is confirmed separately through the existing owned Listmonk service.
+- Editorial subscriptions remain independent on `/newsletters/`.
+- Existing customers still use `/platform/`. Public forms never provision platform access.
+- Do not publish bearer demo-token links. Invitations remain a qualification and provisioning operation.
+- Current handoff details live in `docs/gtm-demo-handoff.md`.
 
 ## Copy rules
 
