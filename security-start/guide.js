@@ -27,7 +27,7 @@ function activate(id, move=false) {
  $('step-position').textContent=`Step ${active+1} of 6`; $('previous-step').disabled=active===0; $('next-step').disabled=active===5;
  if(move) $('workspace').scrollIntoView({block:'start'});
 }
-function hashRoute(){const id=location.hash.slice(1);if(ids.includes(id))activate(id);}
+function hashRoute(){const id=location.hash.slice(1);if(ids.includes(id))activate(id,true);}
 window.addEventListener('hashchange',hashRoute);
 $('previous-step').addEventListener('click',()=>{location.hash=ids[active-1];activate(ids[active-1],true);});
 $('next-step').addEventListener('click',()=>{location.hash=ids[active+1];activate(ids[active+1],true);});
