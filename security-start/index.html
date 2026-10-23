@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start a website security review | CapexLayer</title>
+  <meta name="description" content="A practical first security review for website owners: inventory, permissions, updates, evidence and retesting. Includes a bounded Claude Red workflow.">
+  <link rel="canonical" href="https://capexlayer.com/security-start/">
+  <link rel="stylesheet" href="../capexlayer-tokens.css"><link rel="stylesheet" href="guide.css">
+  <script src="guide.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to guide</a>
+  <header><a class="wordmark" href="/">CapexLayer</a><span class="label">Practical field guide · October 23, 2026</span></header>
+  <main id="main">
+    <section class="intro" id="start">
+      <p class="label">For the website owner who needs a starting point</p>
+      <h1>Know what is exposed.<br><em>Know what to fix next.</em></h1>
+      <p class="lead">A security scare can leave you with twenty tabs and no clear first step. Start with the systems you own, the access they allow, and a record of what you can actually verify.</p>
+      <div class="actions"><a class="button" href="#inventory">Start the checklist</a><button id="print" class="secondary">Print or save as PDF</button></div>
+      <div class="takeaway"><strong>A clean package scan answers one question.</strong><p>It does not tell you whether a stranger can read your database or trigger a privileged action. Check software versions and access permissions separately.</p></div>
+    </section>
+    <nav aria-label="Guide steps"><a href="#inventory">1. Inventory</a><a href="#access">2. Access</a><a href="#updates">3. Updates</a><a href="#tool">4. Claude Red</a><a href="#retest">5. Retest</a><a href="#handoff">6. Next decision</a></nav>
+    <p class="local-note">Your checklist stays in this browser when storage is available. Nothing you type here is sent to a server. Do not enter passwords, keys or customer data.</p>
+    <div class="progress"><span id="progress" role="status" aria-live="polite">0 of 6 steps checked</span><button id="reset" class="text-button">Reset checklist</button></div>
+    <section class="step" id="inventory">
+      <div class="step-title"><span class="number">01</span><div><p class="label">Make the work finite</p><h2>Write down what you own.</h2></div></div>
+      <p>List each website, hosting account, code repository and database. Include your domain registrar and email account because they can reset access to everything else.</p>
+      <label for="inventory-notes">System, owner, provider, recovery contact and last verified backup</label>
+      <textarea id="inventory-notes" rows="4" placeholder="Example: company website | owner | hosting provider | recovery contact | backup date"></textarea>
+      <div class="pair"><article><h3>No code access?</h3><p>Use your provider dashboard to record the runtime, CMS and plugin versions. Ask your developer for a source export and a backup restoration plan.</p></article><article><h3>Before changing anything</h3><p>Confirm that a recent backup can be restored. Use a staging copy for changes. If you see signs of an active breach, preserve logs and contact your provider's incident support first.</p></article></div>
+      <label class="check"><input type="checkbox" data-step="1"> I have an owner and backup plan for each system.</label>
+    </section>
+    <section class="step" id="access">
+      <div class="step-title"><span class="number">02</span><div><p class="label">Reduce the most consequential exposure</p><h2>Check who can do what.</h2></div></div>
+      <ul><li>Enable multifactor authentication for hosting, GitHub, email and the domain registrar. Review recovery methods and remove former users.</li><li>Check database tables, storage buckets and callable functions for public access. Public content may be intentional; customer records and privileged actions need explicit controls.</li><li>Keep service credentials on the server. If a private key was exposed, revoke or rotate it at its provider, then update the application and verify it works.</li></ul>
+      <details><summary>Why database permissions need their own check</summary><p>A table can have row-level security while a privileged function still permits an unwanted operation. Review tables, views, storage and functions as separate access paths. Do not apply a blanket SQL command you do not understand.</p></details>
+      <label class="check"><input type="checkbox" data-step="2"> I have reviewed public access and privileged actions, or assigned an owner to verify them.</label>
+    </section>
+    <section class="step" id="updates">
+      <div class="step-title"><span class="number">03</span><div><p class="label">Match the warning to your actual software</p><h2>Update with evidence.</h2></div></div>
+      <p>Use the advisory from the software vendor. Match the affected version and required conditions to your installation. Record whether the affected component is actually deployed.</p>
+      <div class="pair"><article><h3>Managed hosting or WordPress</h3><p>Check the supported PHP/runtime version, CMS, themes and plugins in the provider dashboard. Back up, apply the supported patch, then test login, forms and payments in staging.</p></article><article><h3>A JavaScript repository</h3><p>From the application folder with its lockfile, run the command below. It reads known dependency advisories and sends package metadata to the registry. It does not fix application permissions.</p><pre><code>npm audit --json</code></pre></article></div>
+      <p>Do not run <code>npm audit fix --force</code> as a first response. Review the proposed change, build, test and deploy the verified version.</p>
+      <label class="check"><input type="checkbox" data-step="3"> I have matched the relevant advisories to versions and planned supported patches.</label>
+    </section>
+    <section class="step" id="tool">
+      <div class="step-title"><span class="number">04</span><div><p class="label">Use a repeatable method</p><h2>Start with Claude Red's references.</h2></div></div>
+      <p><a href="https://github.com/SnailSploit/Claude-Red">SnailSploit's Claude Red</a> is an MIT-licensed library of security skill instructions. It is free source material, not a one-click scanner. Compatible assistant access, hosting and some testing tools can have separate costs.</p>
+      <p>Its offensive examples cover advanced techniques. For a first review, read only the API security and reporting references. Use them to organize a bounded review of systems you own.</p>
+      <details id="technical"><summary>Hands-on setup: download a pinned reference copy</summary><p>Run these commands in a new local folder. They download source only. They do not install skills globally or execute the project's installer.</p><pre><code>git clone https://github.com/SnailSploit/Claude-Red.git claude-red-reference
+cd claude-red-reference
+git checkout --detach a8de813edc9f66f60d44cfe42d47750e89d9930b</code></pre><p>Open these files in a text editor:</p><pre><code>Skills/api/offensive-api-security/SKILL.md
+Skills/utility/offensive-reporting/SKILL.md</code></pre><p>The pinned revision makes this guide reproducible. Before adopting a newer revision, review its changes and security policy.</p></details>
+      <h3>A bounded review request</h3><p>Give this to your developer or a compatible assistant, together with a local source copy and the two references. Confirm your provider's privacy terms before uploading private code. Share no live credentials.</p>
+      <pre id="prompt"><code>Review only the local repository I provide and systems I explicitly identify as mine. Start read-only. Use the Claude Red API-security and reporting references to organize the review.
+
+Inventory routes, authentication boundaries, database access paths and dependencies. Prioritize publicly reachable privileged actions and relevant critical advisories. Do not exploit production, extract records, brute-force accounts, send messages or change access.
+
+For each finding, show the file or configuration, evidence, affected version and conditions, likely impact, smallest proposed fix, and a safe retest. Separate confirmed facts from hypotheses and unexamined areas. Attribute the original discovery tool correctly. Prepare changes in staging and report what remains unverified.</code></pre>
+      <button id="copy" class="button">Copy review request</button><span id="copy-status" role="status" aria-live="polite"></span>
+      <label class="check"><input type="checkbox" data-step="4"> I have a bounded review plan and know the tool's limits.</label>
+    </section>
+    <section class="step" id="retest">
+      <div class="step-title"><span class="number">05</span><div><p class="label">Close the loop</p><h2>Prove the fix changed behavior.</h2></div></div>
+      <div class="sequence"><article><span class="label">Before</span><h3>Record the evidence</h3><p>Affected version, permission, source location or a safe unauthorized-access result.</p></article><article><span class="label">Change</span><h3>Apply the smallest fix</h3><p>Patch the component or narrow the permission. Keep a recovery path.</p></article><article><span class="label">After</span><h3>Retest the live release</h3><p>Confirm unauthorized requests are denied and intended users can still complete the workflow.</p></article></div>
+      <p>Save the commit or deployment identifier and test date. A passing local build is useful, but the live site may still be running the old version. A denied request can also come from a hosting gate, so check which layer denied it.</p>
+      <label class="check"><input type="checkbox" data-step="5"> I have before-and-after evidence and know which deployed version was tested.</label>
+    </section>
+    <section class="step" id="handoff">
+      <div class="step-title"><span class="number">06</span><div><p class="label">Spend effort where it changes the risk</p><h2>Make the next decision clear.</h2></div></div>
+      <p>Give your developer or provider one concise record per issue: system, evidence, exposure, owner, proposed fix, verification and due date. Enable dependency alerts and repeat the relevant checks after changes.</p>
+      <label for="next-action">Your next action and owner</label><textarea id="next-action" rows="3" placeholder="Example: hosting administrator verifies database function permissions in staging, then records the live retest."></textarea>
+      <p>If you suspect data theft, unknown administrator accounts or unauthorized payments, escalate to your provider or a qualified incident responder. A checklist does not determine whether a breach occurred.</p>
+      <label class="check"><input type="checkbox" data-step="6"> Every open issue has an owner and a next verification step.</label>
+      <button id="export" class="button">Download my checklist</button>
+    </section>
+    <footer><h2>Situation awareness comes before certainty.</h2><p>Start with the most consequential access, verify the change, and keep the remaining unknowns visible.</p><p class="sources">References: <a href="https://github.com/SnailSploit/Claude-Red/tree/a8de813edc9f66f60d44cfe42d47750e89d9930b">pinned Claude Red source</a> · <a href="https://github.com/SnailSploit/Claude-Red/blob/a8de813edc9f66f60d44cfe42d47750e89d9930b/SECURITY.md">security policy</a> · <a href="https://docs.npmjs.com/cli/v11/commands/npm-audit">npm audit documentation</a> · <a href="https://docs.github.com/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts">Dependabot alerts</a></p><p class="sources">An independent educational guide from CapexLayer. No affiliation or endorsement by the tool's authors is implied. This guide makes no claim that a completed checklist proves a system secure.</p></footer>
+  </main>
+</body>
+</html>
