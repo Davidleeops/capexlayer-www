@@ -2,27 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Start a website security review | CapexLayer</title>
+  <title>Website security fieldbook | CapexLayer</title>
   <meta name="description" content="A practical first security review for website owners: inventory, permissions, updates, evidence and retesting. Includes a bounded Claude Red workflow.">
   <link rel="canonical" href="https://capexlayer.com/security-start/">
-  <link rel="stylesheet" href="../capexlayer-tokens.css"><link rel="stylesheet" href="guide.css">
-  <script src="guide.js" defer></script>
+  <link rel="stylesheet" href="../capexlayer-tokens.css"><link rel="stylesheet" href="guide.css?v=9e4a633896">
+  <script src="guide.js?v=692229d8f9" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to guide</a>
-  <header><a class="wordmark" href="/">CapexLayer</a><span class="label">Practical field guide · October 23, 2026</span></header>
+  <header><a class="wordmark" href="/">CapexLayer</a><span class="edition">THE OWNER’S FIELDBOOK <span>01 / WEBSITE SECURITY</span></span><a class="header-action" href="#handoff">Your review brief ↗</a></header>
   <main id="main">
     <section class="intro" id="start">
-      <p class="label">For the website owner who needs a starting point</p>
-      <h1>Know what is exposed.<br><em>Know what to fix next.</em></h1>
-      <p class="lead">A security scare can leave you with twenty tabs and no clear first step. Start with the systems you own, the access they allow, and a record of what you can actually verify.</p>
-      <div class="actions"><a class="button" href="#inventory">Start the checklist</a><button id="print" class="secondary">Print or save as PDF</button></div>
-      <div class="takeaway"><strong>A clean package scan answers one question.</strong><p>It does not tell you whether a stranger can read your database or trigger a privileged action. Check software versions and access permissions separately.</p></div>
+      <div class="hero-copy"><p class="label">A practical starting point. No security team required.</p>
+      <h1>Turn a security warning<br> into a <em>clear next step.</em></h1>
+      <p class="lead">Know what you own, where access matters, and how to prove a fix worked. Leave with a review brief your developer or hosting provider can act on.</p>
+      <div class="actions"><a class="button" href="#inventory">Build my review brief <span aria-hidden="true">↗</span></a><button id="print" class="secondary">Print fieldbook</button></div>
+      <p class="hero-meta">Free to use · No signup · Your notes stay in this browser</p></div>
+      <aside class="decision-desk" aria-label="Choose your starting point"><p class="label">START WITH YOUR SITUATION</p><h2>What brought you here?</h2>
+      <label for="situation">Choose the closest match</label><select id="situation"><option value="warning">I saw a warning or a vulnerable version</option><option value="access">I found public access I cannot explain</option><option value="incident">I suspect an account or data breach</option></select>
+      <p class="decision-label">YOUR FIRST MOVE</p><p id="first-move" role="status">Record the affected product and version. Match the warning to your installation before changing it.</p><a id="first-link" href="#updates">Check software and versions ↗</a><p class="desk-note">A starting decision, not an automated security assessment.</p></aside>
     </section>
-    <nav aria-label="Guide steps"><a href="#inventory">1. Inventory</a><a href="#access">2. Access</a><a href="#updates">3. Updates</a><a href="#tool">4. Claude Red</a><a href="#retest">5. Retest</a><a href="#handoff">6. Next decision</a></nav>
+    <div class="principle"><span class="label">THE DISTINCTION THAT MATTERS</span><p><strong>Software checks flag known advisories.<br>Permission checks reveal who has access.</strong></p><p>Run both. Then verify the version and behavior on the live release.</p></div>
+    <div class="workspace" id="workspace"><aside class="review-rail"><p class="label">YOUR REVIEW PATH</p>
+    <nav aria-label="Guide steps"><a href="#inventory">1. Inventory</a><a href="#access">2. Access</a><a href="#updates">3. Updates</a><a href="#tool">4. Claude Red</a><a href="#retest">5. Retest</a><a href="#handoff">6. Review brief</a></nav>
+    <div class="rail-progress"><span id="rail-count">0 / 6</span><p>Steps reviewed.<br>This is not a security score.</p></div></aside><div class="workspace-body"><div class="workspace-toolbar"><span id="current-step">01 / Inventory</span><span id="save-status" role="status">Browser-local workbook</span></div>
     <p class="local-note">Your checklist stays in this browser when storage is available. Nothing you type here is sent to a server. Do not enter passwords, keys or customer data.</p>
-    <div class="progress"><span id="progress" role="status" aria-live="polite">0 of 6 steps checked</span><button id="reset" class="text-button">Reset checklist</button></div>
+    <div class="progress"><span id="progress" role="status" aria-live="polite">0 of 6 steps reviewed</span><button id="reset" class="text-button">Reset checklist</button></div>
     <section class="step" id="inventory">
+      <div class="path-picker"><label for="review-path">How do you manage your website?</label><select id="review-path"><option value="owner">Through a hosting or WordPress dashboard</option><option value="code">With a code repository and deployment</option><option value="unsure">I do not know yet</option></select><p id="path-advice">Start with your provider dashboard. You can complete this review without running a command.</p></div>
       <div class="step-title"><span class="number">01</span><div><p class="label">Make the work finite</p><h2>Write down what you own.</h2></div></div>
       <p>List each website, hosting account, code repository and database. Include your domain registrar and email account because they can reset access to everything else.</p>
       <label for="inventory-notes">System, owner, provider, recovery contact and last verified backup</label>
@@ -72,9 +79,12 @@ For each finding, show the file or configuration, evidence, affected version and
       <label for="next-action">Your next action and owner</label><textarea id="next-action" rows="3" placeholder="Example: hosting administrator verifies database function permissions in staging, then records the live retest."></textarea>
       <p>If you suspect data theft, unknown administrator accounts or unauthorized payments, escalate to your provider or a qualified incident responder. A checklist does not determine whether a breach occurred.</p>
       <label class="check"><input type="checkbox" data-step="6"> Every open issue has an owner and a next verification step.</label>
-      <button id="export" class="button">Download my checklist</button>
+      <div class="finding-workspace"><p class="label">EVIDENCE, OWNER, NEXT VERIFICATION</p><h3>Your finding register</h3><p>Record what you can support. An unknown remains unknown until someone verifies it. Use system labels and redacted evidence, never credentials or customer records.</p>
+      <form id="finding-form"><div class="field"><label for="finding-title">What needs attention?</label><input id="finding-title" maxlength="160" placeholder="Example: confirm who can run a database function" required></div><button class="secondary" type="submit">Add finding +</button></form><p id="finding-summary" role="status">No findings recorded. This does not establish that the system is secure.</p><div id="findings"></div></div>
+      <div class="export-desk"><div><p class="label">TAKE THE WORK WITH YOU</p><h3>A brief someone can act on.</h3><p>Your reviewed steps, evidence, owners and open verification tasks in one portable document.</p></div><div class="export-actions"><button id="report" class="button">Download review brief ↗</button><button id="export" class="secondary">Download text checklist</button><button id="export-json" class="text-button">Save workbook data</button></div></div>
     </section>
-    <footer><h2>Situation awareness comes before certainty.</h2><p>Start with the most consequential access, verify the change, and keep the remaining unknowns visible.</p><p class="sources">References: <a href="https://github.com/SnailSploit/Claude-Red/tree/a8de813edc9f66f60d44cfe42d47750e89d9930b">pinned Claude Red source</a> · <a href="https://github.com/SnailSploit/Claude-Red/blob/a8de813edc9f66f60d44cfe42d47750e89d9930b/SECURITY.md">security policy</a> · <a href="https://docs.npmjs.com/cli/v11/commands/npm-audit">npm audit documentation</a> · <a href="https://docs.github.com/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts">Dependabot alerts</a></p><p class="sources">An independent educational guide from CapexLayer. No affiliation or endorsement by the tool's authors is implied. This guide makes no claim that a completed checklist proves a system secure.</p></footer>
+    <div class="step-controls"><button id="previous-step" class="secondary">Previous step</button><span id="step-position">Step 1 of 6</span><button id="next-step" class="button">Next step ↗</button></div></div></div>
+    <footer><p class="label">A USEFUL FIRST PASS</p><h2>Better evidence.<br>A clearer next decision.</h2><p>Start with the most consequential access, verify the change, and keep the remaining unknowns visible.</p><p><a href="https://capexlayer.com/security-start/">capexlayer.com/security-start/</a></p><p class="sources">References: <a href="https://github.com/SnailSploit/Claude-Red/tree/a8de813edc9f66f60d44cfe42d47750e89d9930b">pinned Claude Red source</a> · <a href="https://github.com/SnailSploit/Claude-Red/blob/a8de813edc9f66f60d44cfe42d47750e89d9930b/SECURITY.md">security policy</a> · <a href="https://docs.npmjs.com/cli/v11/commands/npm-audit">npm audit documentation</a> · <a href="https://docs.github.com/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts">Dependabot alerts</a></p><p class="sources">An independent educational guide from CapexLayer. No affiliation or endorsement by the tool's authors is implied. This guide makes no claim that a completed checklist proves a system secure.</p></footer>
   </main>
 </body>
 </html>
