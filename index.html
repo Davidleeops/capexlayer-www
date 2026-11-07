@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CapexLayer | Invitation-only platform and service</title>
+    <title>CapexLayer | Market Intelligence and Revenue Execution</title>
     <meta
       name="description"
-      content="CapexLayer is an invitation-only platform and service for turning market signals into commercial opportunities. Talk to the founder or join the waitlist."
+      content="CapexLayer connects capital movement, operating conditions, technology adoption, and stakeholder priorities to support growth decisions and commercial execution. Inspect a public CapexSignal business case."
     />
+    <link rel="canonical" href="https://capexlayer.com/" />
+    <meta property="og:title" content="CapexLayer | Market Intelligence and Revenue Execution" />
+    <meta property="og:description" content="Where should your next growth investment go? Inspect the evidence, economics, and next decision in a public CapexSignal business case." />
+    <meta property="og:url" content="https://capexlayer.com/" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/capexlayer-site.css" />
     <style>
@@ -202,6 +206,11 @@
         background: rgba(5, 7, 13, 0.18);
       }
 
+      :focus-visible { outline: 3px solid var(--gold-2); outline-offset: 5px; }
+      section[id] { scroll-margin-top: 110px; }
+      .skip-link { position: absolute; left: 16px; top: -100px; z-index: 100; padding: 12px; background: var(--bg); color: var(--text); }
+      .skip-link:focus { top: 12px; }
+
       a {
         color: inherit;
         text-decoration: none;
@@ -275,8 +284,8 @@
 
       .hero {
         position: relative;
-        padding: 92px 0 64px;
-        min-height: calc(100vh - 76px);
+        padding: 68px 0 38px;
+        min-height: auto;
         display: flex;
         align-items: center;
         overflow: visible;
@@ -353,9 +362,11 @@
         background: rgba(5, 7, 13, 0.62);
       }
 
+      .metric a { text-decoration: underline; text-underline-offset: 4px; }
+
       .metric strong {
         display: block;
-        font-size: 2rem;
+        font-size: 1.15rem;
         color: var(--text);
       }
 
@@ -771,7 +782,7 @@
         }
 
         .hero {
-          padding-top: 190px;
+          padding-top: 48px;
           min-height: auto;
         }
 
@@ -783,9 +794,12 @@
           grid-template-columns: 1fr;
         }
       }
+      @media (max-width: 700px) { .path-concierge { display: none; } }
     </style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://capexlayer.com/#organization","name":"CapexLayer","url":"https://capexlayer.com/","description":"Market intelligence and commercial execution for leadership teams evaluating growth decisions.","founder":{"@type":"Person","name":"David Lee","description":"Former operating engineer, PMP-certified professional, and FAA-certified flight instructor."}}</script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <div class="globe-underlay" aria-hidden="true">
       <div class="globe-panel">
         <canvas data-cx-globe aria-label="Rotating gold signal globe"></canvas>
@@ -801,11 +815,11 @@
         <div class="path-concierge-options">
           <a class="path-concierge-link" href="#cash-flow">
             <strong>Funding for cash flow growth</strong>
-            <span>Use the factoring readout to see if financing unlocks profitable growth capacity.</span>
+            <span>Use the factoring readout to test financing cost against added profitable capacity.</span>
           </a>
           <a class="path-concierge-link" href="#qualify" data-qualifier-open>
             <strong>I need the right GTM path</strong>
-            <span>Start with the workshop or $2,500-plus monthly advisory path.</span>
+            <span>Start with a scoped Executive Opportunity Review or monthly advisory.</span>
           </a>
           <a class="path-concierge-link" href="#offers">
             <strong>I need embedded GTM leadership</strong>
@@ -813,7 +827,7 @@
           </a>
           <a class="path-concierge-link" href="#offers">
             <strong>I need the system built</strong>
-            <span>Review the $25,000 to $100,000 AI-agent implementation path.</span>
+            <span>Review the $25,000 to $100,000 revenue system implementation path.</span>
           </a>
         </div>
       </div>
@@ -830,78 +844,65 @@
       <div class="shell nav">
         <a class="brand" href="/">CapexLayer</a>
         <nav class="nav-links" aria-label="Primary navigation">
-          <a href="/newsletters/">Newsletters</a>
-          <a href="#how">How it works</a>
-          <a href="#lanes">Focus lanes</a>
-          <a href="#cash-flow">Funding for Cash Flow Growth</a>
-          <a href="#offers">Offers</a>
-          <a class="button" href="/access/">Request access</a>
+          <a href="/capexsignal/lilly-manufacturing/">Business case</a>
+          <a href="#how">Method</a>
+          <a href="#founder">Founder</a>
+          <a href="/offers/">Engagements</a>
+          <a href="/platform/">Customer login</a>
+          <a class="button" href="/access/#founder">Discuss a decision</a>
         </nav>
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <section class="hero">
         <div class="shell">
-          <div class="eyebrow">Invitation-only platform and service</div>
-          <h1>Turn market signals into qualified revenue opportunities.</h1>
-          <p class="lead">
-            CapexLayer helps founder-led and executive-involved companies sell into complex markets where timing,
-            trust, stakeholders, and proof matter more than generic lead generation. Platform and service access is by invitation after a founder conversation and fit review.
-          </p>
+          <div class="eyebrow">Market intelligence. Commercial judgment. Execution.</div>
+          <h1>Where should your next growth investment go?</h1>
+          <p class="lead">CapexLayer connects capital movement, operating conditions, technology adoption, and stakeholder priorities to help leadership teams identify where demand is forming, test the commercial case, and decide what to do next.</p>
           <div class="cta-row">
-            <a class="button" href="/access/#founder">Talk to the founder</a>
-            <a class="button secondary" href="/access/#waitlist">Join the waitlist</a>
+            <a class="button" href="/capexsignal/lilly-manufacturing/">Review a CapexSignal business case</a>
+            <a class="button secondary" href="/access/#founder">Discuss a strategic opportunity</a>
           </div>
-          <div class="metrics" aria-label="CapexLayer proof metrics">
-            <div class="metric">
-              <strong>504K+</strong>
-              <span>Signals tracked across capital, labor, permit, funding, and market movement.</span>
-            </div>
-            <div class="metric">
-              <strong>100+</strong>
-              <span>Signal classes mapped to account timing and buyer pressure.</span>
-            </div>
-            <div class="metric">
-              <strong>30+</strong>
-              <span>Markets analyzed for timing, pain, stakeholder movement, and revenue action.</span>
-            </div>
-            <div class="metric">
-              <strong>50K+</strong>
-              <span>Verified contacts and account paths used for research and activation.</span>
-            </div>
+          <div class="metrics" aria-label="Inspect the CapexLayer method">
+            <div class="metric"><strong>Source evidence</strong><span>What changed, when it changed, and where the record can be checked.</span></div>
+            <div class="metric"><strong>Economic mechanism</strong><span>How the change could affect revenue, margin, cash flow, or invested capital.</span></div>
+            <div class="metric"><strong>Decision owners</strong><span>Who must validate the need, authorize the work, and own the result.</span></div>
+            <div class="metric"><strong>Defined next step</strong><span>What to pursue, test, defer, or stop. <a href="/capexsignal/lilly-manufacturing/">Inspect the case.</a></span></div>
           </div>
         </div>
       </section>
 
-      <section>
+      <section id="business-case">
         <div class="shell">
-          <h2>Most teams do not need more generic leads.</h2>
-          <p class="section-copy">
-            They need to know who is most likely to buy now, why the timing matters, which stakeholder owns the
-            outcome, what proof earns attention, and what message creates the next useful conversation. CapexLayer
-            builds that bridge between evidence and revenue action.
-          </p>
-          <div class="grid">
-            <article class="card">
-              <h3>Account timing</h3>
-              <p>Find accounts showing expansion, funding, hiring, procurement, operational friction, or market movement.</p>
-            </article>
-            <article class="card">
-              <h3>Stakeholder intelligence</h3>
-              <p>Map the people who own the outcome, remove obstacles, influence the decision, or feel the pain first.</p>
-            </article>
-            <article class="card">
-              <h3>Proof objects</h3>
-              <p>Create a brief, map, readout, video, or business case the buyer can inspect, correct, and act on.</p>
-            </article>
+          <div class="eyebrow">CapexSignal public business case</div>
+          <h2>See the reasoning before you commission the work.</h2>
+          <p class="section-copy">Our project support is confidential in most cases. This public CapexSignal example shows the method through a fully scoped business case: source evidence, assumptions, stakeholder responsibilities, economic sensitivities, alternative explanations, and a defined next decision.</p>
+          <div class="grid two">
+            <article class="card"><h3>From manufacturing investment to a commercial decision</h3><p>Examine Lilly's publicly announced manufacturing investment through the lens of a prospective supplier. Follow the evidence from capital commitment to an opportunity thesis, then test the operating dependencies, buyer path, and conditions required to proceed.</p></article>
+            <article class="card"><h3>What this case demonstrates</h3><p>The quality of the reasoning and the scope of a proposed engagement. It does not establish a customer relationship, a supplier award, access to private information, or a realized commercial result.</p></article>
+          </div>
+          <div class="cta-row"><a class="button" href="/capexsignal/lilly-manufacturing/">Inspect the full case and sources</a></div>
+          <p class="fine-print">Illustrative business case. Public facts and modeled assumptions are identified separately. This example does not represent a disclosed client engagement. Lilly is not presented as a CapexLayer customer or endorser.</p>
+        </div>
+      </section>
+
+      <section id="decisions">
+        <div class="shell">
+          <h2>A market signal matters when it changes a decision.</h2>
+          <p class="section-copy">A funding announcement can indicate demand. It can also describe work your company cannot serve profitably. CapexLayer examines the timing, economics, buying path, and execution constraints before recommending where to commit attention and resources.</p>
+          <div class="grid two">
+            <article class="card"><h3>Capital allocation</h3><p>Test which markets and accounts warrant commercial investment, and what evidence would justify expanding or stopping.</p></article>
+            <article class="card"><h3>Technology adoption</h3><p>Connect a proposed technology to the business decision, operating dependencies, implementation cost, and result that must change.</p></article>
+            <article class="card"><h3>Operating performance</h3><p>Distinguish a faster task from a constraint removed. Test whether added capacity can become saleable output and cash.</p></article>
+            <article class="card"><h3>Growth execution</h3><p>Translate the account thesis into responsible owners, buyer evidence, a specific next action, and a review date.</p></article>
           </div>
         </div>
       </section>
 
       <section id="how">
         <div class="shell">
-          <h2>How CapexLayer turns evidence into motion.</h2>
+          <h2>From an observed change to an accountable next step.</h2>
           <div class="steps">
             <article class="step">
               <div>
@@ -939,9 +940,9 @@
 
       <section id="lanes">
         <div class="shell">
-          <h2>Current proof lanes.</h2>
+          <h2>Where the method applies.</h2>
           <p class="section-copy">
-            These are the lanes currently being proven through live customer and partner conversations. The method applies anywhere the buyer path is complex, political, timing-sensitive, and evidence-driven.
+            These examples describe the kinds of decisions the method is designed to support. Each engagement requires its own evidence, business owner, and acceptance criteria.
           </p>
           <div class="grid two">
             <article class="lane">
@@ -977,24 +978,31 @@
         </div>
       </section>
 
+      <section id="founder">
+        <div class="shell">
+          <div class="eyebrow">Founder</div>
+          <h2>David Lee</h2>
+          <p class="section-copy">David's work connects capital allocation, technology, operating performance, and commercial execution. A former operating engineer, PMP-certified professional, and FAA-certified flight instructor, he brings an operating perspective to the evidence, dependencies, and decisions behind a growth opportunity.</p>
+          <p class="section-copy">Each engagement is scoped around the decision at hand. Prior experience, public-source analysis, proposed work, and measured customer outcomes are distinct forms of evidence.</p>
+          <div class="cta-row"><a class="button secondary" href="/access/#founder">Talk with David</a></div>
+        </div>
+      </section>
+
       <section id="offers">
         <div class="shell">
-          <h2>Activation paths.</h2>
+          <h2>Begin with one material decision.</h2>
           <p class="section-copy">
-            CapexLayer is not a cheap lead-generation retainer. The work starts with a focused workshop, then expands
-            into advisory, embedded GTM leadership, or implementation depending on how much ownership and execution the
-            company needs.
+            Define the question, evidence required, responsible executive, deliverables, timetable, and acceptance criteria before work begins. Continued advisory, embedded leadership, or implementation depends on what the review establishes.
           </p>
           <div class="grid two">
             <article class="offer">
               <span class="offer-kicker">Start here</span>
-              <h3>Flagship Workshop</h3>
-              <strong class="offer-price">$10,000 standard. $5,000 October launch rate.</strong>
+              <h3>Executive Opportunity Review</h3>
+              <strong class="offer-price">$10,000 standard workshop. Scope agreed before work begins.</strong>
               <p>
-                A focused activation workshop that maps the market signal, stakeholder universe, account thesis,
-                proof object, and next revenue motion.
+                A focused review of one market, strategic account, or growth constraint. Receive a sourced opportunity thesis, stakeholder map, economic assumptions, competing explanations, and a recommendation to pursue, test, defer, or stop.
               </p>
-              <span class="offer-note">Best when the company needs the plan, pressure test, and first commercial motion before committing to a larger engagement.</span>
+              <span class="offer-note">The written scope names the sponsor, decision, deliverables, deadline, and acceptance criteria. Review the business case before discussing an engagement.</span>
             </article>
             <article class="offer">
               <span class="offer-kicker">Advisory plus light execution</span>
@@ -1020,7 +1028,7 @@
             </article>
             <article class="offer">
               <span class="offer-kicker">Systems implementation</span>
-              <h3>AI-Agent Revenue System Build</h3>
+              <h3>Revenue System Implementation</h3>
               <strong class="offer-price">$25,000 to $100,000 scoped build.</strong>
               <p>
                 Implementation of the agents, workflows, data layer, dashboards, and operating system needed to execute
@@ -1047,7 +1055,7 @@
                 CapexLayer helps owners model when receivables financing can fund cash flow growth, where it damages margin, and what has to be true for it to increase valuation instead of just adding cost.
               </p>
               <ul>
-                <li>See how much working cash may be unlocked from invoices already waiting to be paid.</li>
+                <li>Estimate the working cash available from invoices already waiting to be paid.</li>
                 <li>Estimate whether the added capacity creates enough gross profit to cover financing cost.</li>
                 <li>Translate the net monthly impact into a directional enterprise value range.</li>
                 <li>Use the readout to decide if a factoring funding path, revenue activation path, or both should be modeled in more detail.</li>
@@ -1115,7 +1123,7 @@
                 </div>
               </div>
               <div class="calc-readout" data-calc-output="readout">
-                If these inputs are directionally right, financing $150,000 in invoices could unlock about $127,500 in working cash and create an estimated $465,000 enterprise value impact if the added work is actually won, delivered, and collected.
+                If these inputs are directionally right, financing $150,000 in invoices could release about $127,500 in working cash and create an estimated $465,000 enterprise value impact if the added work is actually won, delivered, and collected.
               </div>
               <div class="cta-row">
                 <a class="button full" data-calc-output="mailto" href="mailto:david@capexlayer.com?subject=Cash%20Flow%20Growth%20Readout">Email this readout</a>
@@ -1149,8 +1157,8 @@
                     <span>Receivables, working capital, payroll timing, mobilization cost, or delayed customer payments are constraining profitable growth.</span>
                   </button>
                   <button class="path-option" type="button" data-path="workshop" aria-pressed="false">
-                    <strong>I need the $5,000 October workshop</strong>
-                    <span>There is a specific market, territory, account list, or customer segment that needs a signal map, stakeholder map, and proof object.</span>
+                    <strong>I need an Executive Opportunity Review</strong>
+                    <span>There is one market, strategic account, or growth constraint that needs a sourced business case and a defined next decision.</span>
                   </button>
                   <button class="path-option" type="button" data-path="activation" aria-pressed="false">
                     <strong>I need monthly advisory and activation</strong>
@@ -1162,7 +1170,7 @@
                   </button>
                   <button class="path-option" type="button" data-path="agents" aria-pressed="false">
                     <strong>I need the revenue system built</strong>
-                    <span>The need is a $25,000 to $100,000 AI-agent revenue system implementation with workflows, dashboards, data, and execution infrastructure.</span>
+                    <span>The need is a $25,000 to $100,000 revenue system implementation with workflows, dashboards, data, and execution infrastructure.</span>
                   </button>
                 </div>
               </div>
@@ -1211,9 +1219,9 @@
       <section id="demo">
         <div class="shell"><div class="footer-cta">
           <div class="eyebrow">Invitation-only access</div>
-          <h2>Start with the market you want to move.</h2>
-          <p class="section-copy">Talk with founder David Lee about your territory, target accounts, or commercial constraint. If there is a fit, we agree on scope before inviting access. Not ready for a conversation? Join the waitlist and choose whether to receive CapexLayer signals and product updates.</p>
-          <div class="cta-row"><a class="button" href="/access/#founder">Talk to the founder</a><a class="button secondary" href="/access/#waitlist">Join the waitlist</a></div>
+          <h2>Bring one decision that deserves better evidence.</h2>
+          <p class="section-copy">Discuss the market, account, or growth constraint with founder David Lee. If there is a fit, agree on the question, scope, deliverables, and acceptance criteria before work begins. Platform access remains by invitation after fit review. You can also join the waitlist and separately choose whether to receive CapexLayer signals and product updates.</p>
+          <div class="cta-row"><a class="button" href="/access/#founder">Discuss an Executive Opportunity Review</a><a class="button secondary" href="/access/#waitlist">Join the waitlist</a></div>
           <p class="fine-print"><a href="/updates/">Get CapexLayer Signals &amp; Updates</a> · <a href="/newsletters/">Read the editorial newsletters</a></p>
         </div></div>
       </section>
@@ -1272,7 +1280,7 @@
           set("netMonthlyImpact", currency.format(netMonthlyImpact));
           set("evImpact", currency.format(evImpact));
 
-          const readout = `If these inputs are directionally right, financing ${currency.format(invoiceVolume)} in invoices could unlock about ${currency.format(cashUnlocked)} in working cash. If that supports ${currency.format(growthCapacity)} in added monthly revenue capacity, that is a ${number.format(growthLift)} percent revenue lift and an estimated ${currency.format(evImpact)} enterprise value impact at a ${number.format(ebitdaMultiple)}x multiple.`;
+          const readout = `If these inputs are directionally right, financing ${currency.format(invoiceVolume)} in invoices could release about ${currency.format(cashUnlocked)} in working cash. If that supports ${currency.format(growthCapacity)} in added monthly revenue capacity, that is a ${number.format(growthLift)} percent revenue lift and an estimated ${currency.format(evImpact)} enterprise value impact at a ${number.format(ebitdaMultiple)}x multiple.`;
           set("readout", readout);
 
           const mailto = root.querySelector('[data-calc-output="mailto"]');
@@ -1319,7 +1327,7 @@
             readout: "Good fit if receivables, customer payment timing, payroll, mobilization, materials, or equipment cost is holding back profitable growth. The next useful artifact is a factoring funding readout tied to revenue capacity, financing cost, and enterprise value."
           },
           workshop: {
-            subject: "CapexLayer October Workshop Qualification",
+            subject: "CapexLayer Executive Opportunity Review Qualification",
             readout: "Good fit if there is one market, territory, account list, or customer segment where the buyer timing, stakeholder path, and proof object need to be mapped before outreach or sales calls."
           },
           activation: {
@@ -1331,7 +1339,7 @@
             readout: "Good fit if the company needs the $10,000 per month embedded GTM executive path: senior ownership of commercial motion, deal movement, partner coordination, sales process, and execution cadence."
           },
           agents: {
-            subject: "CapexLayer AI-Agent Revenue System Build Qualification",
+            subject: "CapexLayer Revenue System Implementation Qualification",
             readout: "Good fit if the company needs a scoped $25,000 to $100,000 implementation build for agents, workflows, data, dashboards, and the operating system behind the revenue motion."
           }
         };
